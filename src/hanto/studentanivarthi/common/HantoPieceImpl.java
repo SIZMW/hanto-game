@@ -33,7 +33,7 @@ public class HantoPieceImpl implements HantoPiece {
         this.type = type;
     }
 
-    /*
+    /**
      * @see hanto.common.HantoPiece#getColor()
      */
     @Override
@@ -41,11 +41,19 @@ public class HantoPieceImpl implements HantoPiece {
         return color;
     }
 
-    /*
+    /**
      * @see hanto.common.HantoPiece#getType()
      */
     @Override
     public HantoPieceType getType() {
         return type;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "HantoPieceImpl [color=" + color + ", type=" + type + "]";
     }
 }

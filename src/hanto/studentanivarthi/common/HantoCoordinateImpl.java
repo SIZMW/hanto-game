@@ -42,11 +42,17 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         this(coordinate.getX(), coordinate.getY());
     }
 
+    /**
+     * @see hanto.common.HantoCoordinate#getX()
+     */
     @Override
     public int getX() {
         return x;
     }
 
+    /**
+     * @see hanto.common.HantoCoordinate#getY()
+     */
     @Override
     public int getY() {
         return y;
@@ -86,5 +92,13 @@ public class HantoCoordinateImpl implements HantoCoordinate {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
     }
 }
