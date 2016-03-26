@@ -10,10 +10,10 @@
  * Copyright ©2015 Gary F. Pollice
  *******************************************************************************/
 
-package hanto.studentan.alpha;
+package hanto.studentanivarthi.alpha;
 
 import hanto.common.*;
-import hanto.studentan.common.*;
+import hanto.studentanivarthi.common.*;
 
 import static hanto.common.MoveResult.*;
 import static hanto.common.HantoPieceType.*;

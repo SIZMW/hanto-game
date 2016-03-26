@@ -10,7 +10,7 @@
  * Copyright ©2015 Gary F. Pollice
  *******************************************************************************/
 
-package hanto.studentan.common;
+package hanto.studentanivarthi.common;
 
 import hanto.common.HantoCoordinate;
 

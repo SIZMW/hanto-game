@@ -10,7 +10,7 @@
  * Copyright ©2016 Gary F. Pollice
  *******************************************************************************/
 
-package hanto.studentan.beta;
+package hanto.studentanivarthi.beta;
 
 import hanto.common.*;
 
