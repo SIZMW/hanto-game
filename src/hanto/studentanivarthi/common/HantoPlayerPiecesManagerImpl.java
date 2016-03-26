@@ -17,7 +17,7 @@ import hanto.common.HantoPlayerColor;
  *
  * @author Aditya Nivarthi
  */
-public class HantoPlayerPiecesImpl implements HantoPlayerPieceManager {
+public class HantoPlayerPiecesManagerImpl implements HantoPlayerPieceManager {
     private final HantoPlayerColor color;
     private int butterfly;
     private int crab;
@@ -27,7 +27,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieceManager {
     private int sparrow;
 
     /**
-     * Creates a HantoPlayerPiecesImpl instance with the specified counts of
+     * Creates a HantoPlayerPiecesManagerImpl instance with the specified counts of
      * each piece type.
      *
      * @param color
@@ -45,7 +45,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieceManager {
      * @param sparrow
      *            Sparrow count.
      */
-    public HantoPlayerPiecesImpl(HantoPlayerColor color, int butterfly, int crab, int crane,
+    public HantoPlayerPiecesManagerImpl(HantoPlayerColor color, int butterfly, int crab, int crane,
             int dove, int horse, int sparrow) {
         this.color = color;
         this.butterfly = butterfly;

@@ -23,7 +23,7 @@ import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
 import hanto.studentanivarthi.common.HantoPlayerPieceManager;
-import hanto.studentanivarthi.common.HantoPlayerPiecesImpl;
+import hanto.studentanivarthi.common.HantoPlayerPiecesManagerImpl;
 
 /**
  * The implementation of Beta Hanto.
@@ -60,8 +60,8 @@ public class BetaHantoGame implements HantoGame {
     public BetaHantoGame(HantoPlayerColor movesFirst) {
         board = new HashMap<>();
         playerTurn = movesFirst;
-        bluePieces = new HantoPlayerPiecesImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
-        redPieces = new HantoPlayerPiecesImpl(HantoPlayerColor.RED, 1, 0, 0, 0, 0, 5);
+        bluePieces = new HantoPlayerPiecesManagerImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
+        redPieces = new HantoPlayerPiecesManagerImpl(HantoPlayerColor.RED, 1, 0, 0, 0, 0, 5);
     }
 
     /**
