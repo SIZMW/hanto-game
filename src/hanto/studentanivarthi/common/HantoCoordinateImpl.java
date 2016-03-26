@@ -16,7 +16,7 @@ import hanto.common.HantoCoordinate;
  * @version Mar 2, 2016
  */
 public class HantoCoordinateImpl implements HantoCoordinate {
-    final private int x, y;
+    private final int x, y;
 
     /**
      * The only constructor.

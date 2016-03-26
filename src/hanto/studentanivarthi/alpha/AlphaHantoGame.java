@@ -37,7 +37,7 @@ public class AlphaHantoGame implements HantoGame {
     private boolean gameOver = false;
 
     /*
-     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType,
+     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType and
      * hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
      */
     @Override

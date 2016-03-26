@@ -22,7 +22,7 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
-import hanto.studentanivarthi.common.HantoPlayerPieces;
+import hanto.studentanivarthi.common.HantoPlayerPieceManager;
 import hanto.studentanivarthi.common.HantoPlayerPiecesImpl;
 
 /**
@@ -34,11 +34,11 @@ import hanto.studentanivarthi.common.HantoPlayerPiecesImpl;
 public class BetaHantoGame implements HantoGame {
     private final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
-    private Map<HantoCoordinate, HantoPiece> board;
+    private final Map<HantoCoordinate, HantoPiece> board;
     private HantoPlayerColor playerTurn;
 
-    private HantoPlayerPieces bluePieces;
-    private HantoPlayerPieces redPieces;
+    private final HantoPlayerPieceManager bluePieces;
+    private final HantoPlayerPieceManager redPieces;
 
     private HantoCoordinate blueButterfly = null;
     private HantoCoordinate redButterfly = null;
@@ -58,7 +58,6 @@ public class BetaHantoGame implements HantoGame {
      *            The player to move first.
      */
     public BetaHantoGame(HantoPlayerColor movesFirst) {
-        super();
         board = new HashMap<>();
         playerTurn = movesFirst;
         bluePieces = new HantoPlayerPiecesImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
@@ -108,7 +107,7 @@ public class BetaHantoGame implements HantoGame {
     public HantoPiece getPieceAt(HantoCoordinate where) {
         try {
             // Convert to our coordinate implementation
-            HantoCoordinateImpl c = new HantoCoordinateImpl(where.getX(), where.getY());
+            final HantoCoordinateImpl c = new HantoCoordinateImpl(where.getX(), where.getY());
             final HantoPiece piece = board.get(c);
             return piece;
         } catch (NullPointerException e) {
@@ -121,12 +120,12 @@ public class BetaHantoGame implements HantoGame {
      */
     @Override
     public String getPrintableBoard() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for (HantoCoordinate c : board.keySet()) {
             sb.append(c);
             sb.append(": ");
             sb.append(board.get(c));
-            sb.append("\n");
+            sb.append('\n');
         }
         return sb.toString();
     }
@@ -228,7 +227,7 @@ public class BetaHantoGame implements HantoGame {
 
             // Check if location is adjacent to some piece already on the board
             boolean isAdjacentToPiece = false;
-            List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
+            final List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
 
             for (HantoCoordinate e : surroundings) {
                 if (board.containsKey(e) && (board.get(e) != null)) {
@@ -249,7 +248,7 @@ public class BetaHantoGame implements HantoGame {
      * @return a {@link List}&lt;{@link HantoCoordinate}&gt;
      */
     private List<HantoCoordinate> getSurroundingPieces(HantoCoordinate coord) {
-        List<HantoCoordinate> surroundings = new ArrayList<>();
+        final List<HantoCoordinate> surroundings = new ArrayList<>();
         surroundings.add(new HantoCoordinateImpl(coord.getX() + 1, coord.getY()));
         surroundings.add(new HantoCoordinateImpl(coord.getX() - 1, coord.getY()));
         surroundings.add(new HantoCoordinateImpl(coord.getX(), coord.getY() + 1));
@@ -271,8 +270,8 @@ public class BetaHantoGame implements HantoGame {
         boolean redIsOutOfPieces = false;
         MoveResult mr = MoveResult.OK;
 
-        blueIsSurrounded = coordinateIsSurrounded(blueButterfly);
-        redIsSurrounded = coordinateIsSurrounded(redButterfly);
+        blueIsSurrounded = isCoordinateSurrounded(blueButterfly);
+        redIsSurrounded = isCoordinateSurrounded(redButterfly);
         blueIsOutOfPieces = bluePieces.isOutOfPieces();
         redIsOutOfPieces = redPieces.isOutOfPieces();
 
@@ -299,12 +298,12 @@ public class BetaHantoGame implements HantoGame {
      *            The coordinate to check.
      * @return true if surrounded completely, false otherwise
      */
-    private boolean coordinateIsSurrounded(HantoCoordinate coord) {
+    private boolean isCoordinateSurrounded(HantoCoordinate coord) {
         if (coord == null) {
             return false;
         }
 
-        List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
+        final List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
 
         boolean hasEmptyAdjacentSpot = false;
 

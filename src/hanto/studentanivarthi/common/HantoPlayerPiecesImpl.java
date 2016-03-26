@@ -12,13 +12,13 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
 /**
- * The implementation of the {@link HantoPlayerPieces} class to track player
+ * The implementation of the {@link HantoPlayerPieceManager} class to track player
  * pieces remaining.
  *
  * @author Aditya Nivarthi
  */
-public class HantoPlayerPiecesImpl implements HantoPlayerPieces {
-    private HantoPlayerColor color;
+public class HantoPlayerPiecesImpl implements HantoPlayerPieceManager {
+    private final HantoPlayerColor color;
     private int butterfly;
     private int crab;
     private int crane;
@@ -57,7 +57,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieces {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieces#getPlayerColor()
+     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#getPlayerColor()
      */
     @Override
     public HantoPlayerColor getPlayerColor() {
@@ -65,7 +65,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieces {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieces#canPlacePiece()
+     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#canPlacePiece()
      */
     @Override
     public boolean canPlacePiece(HantoPieceType piece) {
@@ -88,7 +88,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieces {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieces#isOutOfPieces()
+     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#isOutOfPieces()
      */
     @Override
     public boolean isOutOfPieces() {
@@ -97,7 +97,7 @@ public class HantoPlayerPiecesImpl implements HantoPlayerPieces {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieces#placePiece()
+     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#placePiece()
      */
     @Override
     public void placePiece(HantoPieceType type) {

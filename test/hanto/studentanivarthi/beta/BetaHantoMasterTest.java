@@ -41,12 +41,20 @@ public class BetaHantoMasterTest {
     class TestHantoCoordinate implements HantoCoordinate {
         private final int x, y;
 
-        public TestHantoCoordinate(int x, int y) {
+        /**
+         * Creates a TestHantoCoordinate instance with the specified x and y.
+         *
+         * @param x
+         *            The x.
+         * @param y
+         *            The y.
+         */
+        TestHantoCoordinate(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
-        /**
+        /*
          * @see hanto.common.HantoCoordinate#getX()
          */
         @Override
@@ -54,7 +62,7 @@ public class BetaHantoMasterTest {
             return x;
         }
 
-        /**
+        /*
          * @see hanto.common.HantoCoordinate#getY()
          */
         @Override
@@ -63,7 +71,7 @@ public class BetaHantoMasterTest {
         }
     }
 
-    private static HantoGameFactory factory;
+    private static HantoGameFactory factory = null;
 
     /**
      * Initialize entities.
@@ -75,6 +83,9 @@ public class BetaHantoMasterTest {
 
     private HantoGame game;
 
+    /**
+     * Setup
+     */
     @Before
     public void setup() {
         // By default, blue moves first.
@@ -121,7 +132,8 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 3
     public void bluePlacesInitialButterflyNotAtOrigin() throws HantoException {
-        game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(2, 1));
+        final MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(2, 1));
+        assertEquals(OK, mr);
     }
 
     /**
@@ -144,7 +156,8 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCrabAtOrigin() throws HantoException {
-        game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 0));
+        final MoveResult mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
     }
 
     /**
@@ -386,7 +399,7 @@ public class BetaHantoMasterTest {
     /**
      * Tests placing a piece where there already is one, and getting an
      * exception.
-     * 
+     *
      * @throws HantoException
      */
     @Test(expected = HantoException.class)
