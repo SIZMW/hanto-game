@@ -22,6 +22,8 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
+import hanto.studentanivarthi.common.HantoPlayerPieces;
+import hanto.studentanivarthi.common.HantoPlayerPiecesImpl;
 
 /**
  * The implementation of Beta Hanto.
@@ -35,9 +37,14 @@ public class BetaHantoGame implements HantoGame {
     private Map<HantoCoordinate, HantoPiece> board;
     private HantoPlayerColor playerTurn;
 
+    private HantoPlayerPieces bluePieces;
+    private HantoPlayerPieces redPieces;
+
     private HantoCoordinate blueButterfly = null;
     private HantoCoordinate redButterfly = null;
 
+    private boolean blueHasPlacedButterfly = false;
+    private boolean redHasPlacedButterfly = false;
     private boolean isGameOver = false;
     private boolean isFirstMove = true;
     private int blueTurnCount = 0;
@@ -54,6 +61,8 @@ public class BetaHantoGame implements HantoGame {
         super();
         board = new HashMap<>();
         playerTurn = movesFirst;
+        bluePieces = new HantoPlayerPiecesImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
+        redPieces = new HantoPlayerPiecesImpl(HantoPlayerColor.RED, 1, 0, 0, 0, 0, 5);
     }
 
     /**
@@ -68,37 +77,28 @@ public class BetaHantoGame implements HantoGame {
             throw new HantoException("You cannot move after the game is finished");
         }
 
-        // Check piece types
-        if ((pieceType != HantoPieceType.BUTTERFLY) && (pieceType != HantoPieceType.SPARROW)) {
-            throw new HantoException("Piece must be a " + HantoPieceType.BUTTERFLY + " or a "
-                    + HantoPieceType.SPARROW);
-        }
+        // // Check piece types
+        // if ((pieceType != HantoPieceType.BUTTERFLY) && (pieceType !=
+        // HantoPieceType.SPARROW)) {
+        // throw new HantoException("Piece must be a " +
+        // HantoPieceType.BUTTERFLY + " or a "
+        // + HantoPieceType.SPARROW);
+        // }
 
         final HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
         final HantoPieceImpl loc = new HantoPieceImpl(playerTurn, pieceType);
 
-        // First move
-        if (isFirstMove) {
-            // Not origin move
-            if (!isCoordinateOrigin(dest)) {
-                throw new HantoException(playerTurn.name() + " did not move at the origin.");
-            }
-
-            isFirstMove = false;
-            placePlayerPiece(dest, loc);
-        } else {
-            // Check if move is valid
-            if (!isMoveValid(dest)) {
-                throw new HantoException(
-                        playerTurn.name() + " cannot place a piece in that location");
-            }
-
-            placePlayerPiece(dest, loc);
+        // Check if move is valid
+        if (!isMoveValid(dest, loc)) {
+            throw new HantoException(playerTurn.name() + " cannot place a piece in that location");
         }
+
+        placePlayerPiece(dest, loc);
 
         // Switch turn and get result
         switchPlayerTurn();
         return getMoveResult();
+
     }
 
     /**
@@ -124,7 +124,7 @@ public class BetaHantoGame implements HantoGame {
         StringBuilder sb = new StringBuilder();
         for (HantoCoordinate c : board.keySet()) {
             sb.append(c);
-            sb.append(":\t");
+            sb.append(": ");
             sb.append(board.get(c));
             sb.append("\n");
         }
@@ -142,13 +142,18 @@ public class BetaHantoGame implements HantoGame {
     private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
         board.put(coord, piece);
 
-        // Save butterfly locations
-        if (piece.getType() == HantoPieceType.BUTTERFLY) {
-            if (piece.getColor() == HantoPlayerColor.BLUE) {
+        if (piece.getColor() == HantoPlayerColor.BLUE) {
+            if (piece.getType() == HantoPieceType.BUTTERFLY) {
                 blueButterfly = coord;
-            } else {
-                redButterfly = coord;
+                blueHasPlacedButterfly = true;
             }
+            bluePieces.placePiece(piece.getType());
+        } else {
+            if (piece.getType() == HantoPieceType.BUTTERFLY) {
+                redButterfly = coord;
+                redHasPlacedButterfly = true;
+            }
+            redPieces.placePiece(piece.getType());
         }
     }
 
@@ -182,34 +187,58 @@ public class BetaHantoGame implements HantoGame {
      *
      * @param coord
      *            The coordinate to check.
+     * @param type
+     *            The piece to check.
      * @return true if valid, false otherwise
      */
-    private boolean isMoveValid(HantoCoordinate coord) {
-        // Piece already in that spot
-        if (board.containsKey(coord) && (board.get(coord) != null)) {
-            return false;
-        }
+    private boolean isMoveValid(HantoCoordinate coord, HantoPiece type) {
+        // Check by whose turn it is
+        if (playerTurn == HantoPlayerColor.BLUE) {
+            if ((!blueHasPlacedButterfly) && (blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY)) {
+                return false;
+            }
 
-        // Check if each player placed butterfly
-        if (((playerTurn == HantoPlayerColor.BLUE)
-                && (blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY))
-                || ((playerTurn == HantoPlayerColor.RED)
-                        && (redTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY))) {
-            return false;
-        }
+            if (!bluePieces.canPlacePiece(type.getType())) {
+                return false;
+            }
+        } else {
+            if ((!redHasPlacedButterfly) && (redTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY)) {
+                return false;
+            }
 
-        // Check if location is adjacent to some piece already on the board
-        boolean isAdjacentToPiece = false;
-        List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
-
-        for (HantoCoordinate e : surroundings) {
-            if (board.containsKey(e) && (board.get(e) != null)) {
-                isAdjacentToPiece = true;
-                break;
+            if (!redPieces.canPlacePiece(type.getType())) {
+                return false;
             }
         }
 
-        return isAdjacentToPiece;
+        // First move
+        if (isFirstMove) {
+            // Not origin move
+            if (!isCoordinateOrigin(coord)) {
+                return false;
+            }
+
+            isFirstMove = false;
+            return true;
+        } else {
+            // Piece already in that spot
+            if (board.containsKey(coord) && (board.get(coord) != null)) {
+                return false;
+            }
+
+            // Check if location is adjacent to some piece already on the board
+            boolean isAdjacentToPiece = false;
+            List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
+
+            for (HantoCoordinate e : surroundings) {
+                if (board.containsKey(e) && (board.get(e) != null)) {
+                    isAdjacentToPiece = true;
+                    break;
+                }
+            }
+
+            return isAdjacentToPiece;
+        }
     }
 
     /**
@@ -238,17 +267,26 @@ public class BetaHantoGame implements HantoGame {
     private MoveResult getMoveResult() {
         boolean blueIsSurrounded = false;
         boolean redIsSurrounded = false;
+        boolean blueIsOutOfPieces = false;
+        boolean redIsOutOfPieces = false;
         MoveResult mr = MoveResult.OK;
 
         blueIsSurrounded = coordinateIsSurrounded(blueButterfly);
         redIsSurrounded = coordinateIsSurrounded(redButterfly);
+        blueIsOutOfPieces = bluePieces.isOutOfPieces();
+        redIsOutOfPieces = redPieces.isOutOfPieces();
 
-        if (blueIsSurrounded && redIsSurrounded) {
+        isGameOver = true;
+        if ((blueIsSurrounded && redIsSurrounded)) {
+            mr = MoveResult.DRAW;
+        } else if (!blueIsSurrounded && !redIsSurrounded && blueIsOutOfPieces && redIsOutOfPieces) {
             mr = MoveResult.DRAW;
         } else if (blueIsSurrounded) {
             mr = MoveResult.RED_WINS;
         } else if (redIsSurrounded) {
             mr = MoveResult.BLUE_WINS;
+        } else {
+            isGameOver = false;
         }
 
         return mr;
