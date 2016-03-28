@@ -89,7 +89,7 @@ public class BetaHantoMasterTest {
     @Before
     public void setup() {
         // By default, blue moves first.
-        game = factory.makeHantoGame(HantoGameID.BETA_HANTO, BLUE);
+        game = factory.makeHantoGame(HantoGameID.BETA_HANTO);
     }
 
     // Helper methods
@@ -346,7 +346,7 @@ public class BetaHantoMasterTest {
             assertEquals(SPARROW, p.getType());
         }
 
-        final MoveResult mr = game.makeMove(SPARROW, null, new TestHantoCoordinate(0, 12));
+        game.makeMove(SPARROW, null, new TestHantoCoordinate(0, 12));
     }
 
     /**
@@ -402,11 +402,27 @@ public class BetaHantoMasterTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class)
+    @Test(expected = HantoException.class) // 16
     public void placePieceInOccupiedSpot() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+    }
+
+    /**
+     * Tests placing red butterfly at the origin as the first move. Game is
+     * created with red being the first player.
+     *
+     * @throws HantoException
+     */
+    @Test // 17
+    public void redStartsAndPlacesInitialButterflyAtOrigin() throws HantoException {
+        game = factory.makeHantoGame(HantoGameID.BETA_HANTO, RED);
+        final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+        final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
     }
 }
