@@ -20,13 +20,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.MoveResult;
+import hanto.studentanivarthi.HantoGameFactory;
 
 /**
  * Test cases for Alpha Hanto
@@ -72,14 +76,24 @@ public class AlphaHantoTest {
         }
     }
 
-    private AlphaHantoGame game;
+    private static HantoGameFactory factory = null;
+
+    /**
+     * Initialize entities.
+     */
+    @BeforeClass
+    public static void initializeClass() {
+        factory = HantoGameFactory.getInstance();
+    }
+
+    private HantoGame game;
 
     /**
      * Setup
      */
     @Before
     public void setup() {
-        game = new AlphaHantoGame();
+        game = factory.makeHantoGame(HantoGameID.ALPHA_HANTO, BLUE);
     }
 
     /**
