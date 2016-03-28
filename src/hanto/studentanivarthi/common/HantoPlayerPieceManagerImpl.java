@@ -9,16 +9,14 @@
 package hanto.studentanivarthi.common;
 
 import hanto.common.HantoPieceType;
-import hanto.common.HantoPlayerColor;
 
 /**
- * The implementation of the {@link HantoPlayerPieceManager} class to track player
- * pieces remaining.
+ * The implementation of the {@link HantoPlayerPieceManager} class to track
+ * player pieces remaining.
  *
  * @author Aditya Nivarthi
  */
 public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
-    private final HantoPlayerColor color;
     private int butterfly;
     private int crab;
     private int crane;
@@ -27,11 +25,9 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
     private int sparrow;
 
     /**
-     * Creates a HantoPlayerPieceManagerImpl instance with the specified counts of
-     * each piece type.
+     * Creates a HantoPlayerPieceManagerImpl instance with the specified counts
+     * of each piece type.
      *
-     * @param color
-     *            The player color.
      * @param butterfly
      *            Butterfly count.
      * @param crab
@@ -45,23 +41,14 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
      * @param sparrow
      *            Sparrow count.
      */
-    public HantoPlayerPieceManagerImpl(HantoPlayerColor color, int butterfly, int crab, int crane,
-            int dove, int horse, int sparrow) {
-        this.color = color;
+    public HantoPlayerPieceManagerImpl(int butterfly, int crab, int crane, int dove, int horse,
+            int sparrow) {
         this.butterfly = butterfly;
         this.crab = crab;
         this.crane = crane;
         this.dove = dove;
         this.horse = horse;
         this.sparrow = sparrow;
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#getPlayerColor()
-     */
-    @Override
-    public HantoPlayerColor getPlayerColor() {
-        return color;
     }
 
     /**

@@ -10,16 +10,6 @@ package hanto.studentanivarthi.common;
 
 import hanto.common.HantoPieceType;
 
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
-
-import hanto.common.HantoPlayerColor;
-
 /**
  * This interface defines the necessary methods for classes that implement
  * keeping track of the restrictions on each player's pieces.
@@ -27,13 +17,6 @@ import hanto.common.HantoPlayerColor;
  * @author Aditya Nivarthi
  */
 public interface HantoPlayerPieceManager {
-
-    /**
-     * Returns the color of this player.
-     *
-     * @return a {@link HantoPlayerColor}
-     */
-    HantoPlayerColor getPlayerColor();
 
     /**
      * Returns whether the piece can be placed for this player. If it can, the

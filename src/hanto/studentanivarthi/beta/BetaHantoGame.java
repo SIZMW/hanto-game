@@ -60,8 +60,8 @@ public class BetaHantoGame implements HantoGame {
     public BetaHantoGame(HantoPlayerColor movesFirst) {
         board = new HashMap<>();
         playerTurn = movesFirst;
-        bluePieces = new HantoPlayerPieceManagerImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
-        redPieces = new HantoPlayerPieceManagerImpl(HantoPlayerColor.RED, 1, 0, 0, 0, 0, 5);
+        bluePieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
+        redPieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
     }
 
     /**
@@ -75,14 +75,6 @@ public class BetaHantoGame implements HantoGame {
         if (isGameOver) {
             throw new HantoException("You cannot move after the game is finished");
         }
-
-        // // Check piece types
-        // if ((pieceType != HantoPieceType.BUTTERFLY) && (pieceType !=
-        // HantoPieceType.SPARROW)) {
-        // throw new HantoException("Piece must be a " +
-        // HantoPieceType.BUTTERFLY + " or a "
-        // + HantoPieceType.SPARROW);
-        // }
 
         final HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
         final HantoPieceImpl loc = new HantoPieceImpl(playerTurn, pieceType);
@@ -107,7 +99,7 @@ public class BetaHantoGame implements HantoGame {
     public HantoPiece getPieceAt(HantoCoordinate where) {
         try {
             // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(where.getX(), where.getY());
+            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
             final HantoPiece piece = board.get(c);
             return piece;
         } catch (NullPointerException e) {
@@ -304,7 +296,6 @@ public class BetaHantoGame implements HantoGame {
         }
 
         final List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
-
         boolean hasEmptyAdjacentSpot = false;
 
         for (HantoCoordinate e : surroundings) {

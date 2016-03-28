@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import hanto.common.HantoPieceType;
-import hanto.common.HantoPlayerColor;
 
 /**
  * Test cases for Hanto player piece manager.
@@ -23,16 +22,16 @@ import hanto.common.HantoPlayerColor;
  * @author Aditya Nivarthi
  */
 public class HantoPlayerPieceManagerImplTest {
-    public HantoPlayerPieceManager manager;
-    public HantoPlayerPieceManager emptyManager;
+    HantoPlayerPieceManager manager;
+    HantoPlayerPieceManager emptyManager;
 
     /**
      * Setup.
      */
     @Before
     public void setup() {
-        manager = new HantoPlayerPieceManagerImpl(HantoPlayerColor.BLUE, 1, 1, 1, 1, 1, 1);
-        emptyManager = new HantoPlayerPieceManagerImpl(HantoPlayerColor.RED, 0, 0, 0, 0, 0, 0);
+        manager = new HantoPlayerPieceManagerImpl(1, 1, 1, 1, 1, 1);
+        emptyManager = new HantoPlayerPieceManagerImpl(0, 0, 0, 0, 0, 0);
     }
 
     /**
