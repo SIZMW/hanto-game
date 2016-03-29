@@ -8,7 +8,6 @@
  *******************************************************************************/
 package hanto.studentanivarthi.beta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +39,8 @@ public class BetaHantoGame implements HantoGame {
     private final HantoPlayerPieceManager bluePieces;
     private final HantoPlayerPieceManager redPieces;
 
-    private HantoCoordinate blueButterfly = null;
-    private HantoCoordinate redButterfly = null;
+    private HantoCoordinateImpl blueButterfly = null;
+    private HantoCoordinateImpl redButterfly = null;
 
     private boolean blueHasPlacedButterfly = false;
     private boolean redHasPlacedButterfly = false;
@@ -135,13 +134,13 @@ public class BetaHantoGame implements HantoGame {
 
         if (piece.getColor() == HantoPlayerColor.BLUE) {
             if (piece.getType() == HantoPieceType.BUTTERFLY) {
-                blueButterfly = coord;
+                blueButterfly = new HantoCoordinateImpl(coord);
                 blueHasPlacedButterfly = true;
             }
             bluePieces.placePiece(piece.getType());
         } else {
             if (piece.getType() == HantoPieceType.BUTTERFLY) {
-                redButterfly = coord;
+                redButterfly = new HantoCoordinateImpl(coord);
                 redHasPlacedButterfly = true;
             }
             redPieces.placePiece(piece.getType());
@@ -170,7 +169,7 @@ public class BetaHantoGame implements HantoGame {
      * @return true if it is the origin, false otherwise
      */
     private boolean isCoordinateOrigin(HantoCoordinate coord) {
-        return (coord.getX() == 0) && (coord.getY() == 0);
+        return coord.getX() == 0 && coord.getY() == 0;
     }
 
     /**
@@ -182,10 +181,10 @@ public class BetaHantoGame implements HantoGame {
      *            The piece to check.
      * @return true if valid, false otherwise
      */
-    private boolean isMoveValid(HantoCoordinate coord, HantoPiece type) {
+    private boolean isMoveValid(HantoCoordinateImpl coord, HantoPieceImpl type) {
         // Check by whose turn it is
         if (playerTurn == HantoPlayerColor.BLUE) {
-            if ((!blueHasPlacedButterfly) && (blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY)) {
+            if (!blueHasPlacedButterfly && blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
                 return false;
             }
 
@@ -193,7 +192,7 @@ public class BetaHantoGame implements HantoGame {
                 return false;
             }
         } else {
-            if ((!redHasPlacedButterfly) && (redTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY)) {
+            if (!redHasPlacedButterfly && redTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
                 return false;
             }
 
@@ -213,16 +212,16 @@ public class BetaHantoGame implements HantoGame {
             return true;
         } else {
             // Piece already in that spot
-            if (board.containsKey(coord) && (board.get(coord) != null)) {
+            if (board.containsKey(coord) && board.get(coord) != null) {
                 return false;
             }
 
             // Check if location is adjacent to some piece already on the board
             boolean isAdjacentToPiece = false;
-            final List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
+            final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
-                if (board.containsKey(e) && (board.get(e) != null)) {
+                if (board.containsKey(e) && board.get(e) != null) {
                     isAdjacentToPiece = true;
                     break;
                 }
@@ -230,24 +229,6 @@ public class BetaHantoGame implements HantoGame {
 
             return isAdjacentToPiece;
         }
-    }
-
-    /**
-     * Returns a list of the surrounding locations given the specified location.
-     *
-     * @param coord
-     *            The location to get the surrounding coordinates for.
-     * @return a {@link List}&lt;{@link HantoCoordinate}&gt;
-     */
-    private List<HantoCoordinate> getSurroundingPieces(HantoCoordinate coord) {
-        final List<HantoCoordinate> surroundings = new ArrayList<>();
-        surroundings.add(new HantoCoordinateImpl(coord.getX() + 1, coord.getY()));
-        surroundings.add(new HantoCoordinateImpl(coord.getX() - 1, coord.getY()));
-        surroundings.add(new HantoCoordinateImpl(coord.getX(), coord.getY() + 1));
-        surroundings.add(new HantoCoordinateImpl(coord.getX(), coord.getY() - 1));
-        surroundings.add(new HantoCoordinateImpl(coord.getX() + 1, coord.getY() - 1));
-        surroundings.add(new HantoCoordinateImpl(coord.getX() - 1, coord.getY() + 1));
-        return surroundings;
     }
 
     /**
@@ -262,13 +243,19 @@ public class BetaHantoGame implements HantoGame {
         boolean redIsOutOfPieces = false;
         MoveResult mr = MoveResult.OK;
 
-        blueIsSurrounded = isCoordinateSurrounded(blueButterfly);
-        redIsSurrounded = isCoordinateSurrounded(redButterfly);
+        if (blueButterfly != null) {
+            blueIsSurrounded = blueButterfly.isCoordinateSurrounded(board);
+        }
+
+        if (redButterfly != null) {
+            redIsSurrounded = redButterfly.isCoordinateSurrounded(board);
+        }
+
         blueIsOutOfPieces = bluePieces.isOutOfPieces();
         redIsOutOfPieces = redPieces.isOutOfPieces();
 
         isGameOver = true;
-        if ((blueIsSurrounded && redIsSurrounded)) {
+        if (blueIsSurrounded && redIsSurrounded) {
             mr = MoveResult.DRAW;
         } else if (!blueIsSurrounded && !redIsSurrounded && blueIsOutOfPieces && redIsOutOfPieces) {
             mr = MoveResult.DRAW;
@@ -281,32 +268,5 @@ public class BetaHantoGame implements HantoGame {
         }
 
         return mr;
-    }
-
-    /**
-     * Returns whether the specified coordinate is completely surrounded.
-     *
-     * @param coord
-     *            The coordinate to check.
-     * @return true if surrounded completely, false otherwise
-     */
-    private boolean isCoordinateSurrounded(HantoCoordinate coord) {
-        if (coord == null) {
-            return false;
-        }
-
-        final List<HantoCoordinate> surroundings = getSurroundingPieces(coord);
-        boolean hasEmptyAdjacentSpot = false;
-
-        for (HantoCoordinate e : surroundings) {
-            if (board.containsKey(e) && (board.get(e) != null)) {
-                hasEmptyAdjacentSpot = false;
-            } else {
-                hasEmptyAdjacentSpot = true;
-                break;
-            }
-        }
-
-        return !hasEmptyAdjacentSpot;
     }
 }

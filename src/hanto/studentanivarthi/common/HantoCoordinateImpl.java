@@ -8,7 +8,12 @@
  *******************************************************************************/
 package hanto.studentanivarthi.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
 
 /**
  * The implementation for my version of Hanto.
@@ -59,14 +64,58 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
+     * Returns a list of the surrounding coordinates around this coordinate.
+     *
+     * @return a {@link List}&lt;{@link HantoCoordinate}&gt;
+     */
+    public List<HantoCoordinate> getSurroundingPieces() {
+        final List<HantoCoordinate> surroundings = new ArrayList<>();
+        surroundings.add(new HantoCoordinateImpl(x + 1, y));
+        surroundings.add(new HantoCoordinateImpl(x - 1, y));
+        surroundings.add(new HantoCoordinateImpl(x, y + 1));
+        surroundings.add(new HantoCoordinateImpl(x, y - 1));
+        surroundings.add(new HantoCoordinateImpl(x + 1, y - 1));
+        surroundings.add(new HantoCoordinateImpl(x - 1, y + 1));
+        return surroundings;
+    }
+
+    /**
+     * Returns whether the specified coordinate is completely surrounded.
+     *
+     * @param board
+     *            The game board of coordinates and the piece in that
+     *            coordinate.
+     * @return true if surrounded completely, false otherwise
+     */
+    public boolean isCoordinateSurrounded(Map<HantoCoordinate, HantoPiece> board) {
+        if (board == null || board.isEmpty()) {
+            return false;
+        }
+
+        final List<HantoCoordinate> surroundings = getSurroundingPieces();
+        boolean hasEmptyAdjacentSpot = false;
+
+        for (HantoCoordinate e : surroundings) {
+            if (board.containsKey(e) && board.get(e) != null) {
+                hasEmptyAdjacentSpot = false;
+            } else {
+                hasEmptyAdjacentSpot = true;
+                break;
+            }
+        }
+
+        return !hasEmptyAdjacentSpot;
+    }
+
+    /**
      * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (prime * result) + x;
-        result = (prime * result) + y;
+        result = prime * result + x;
+        result = prime * result + y;
         return result;
     }
 
