@@ -52,60 +52,59 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#canPlacePiece()
+     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#canPlacePiece()}
      */
     @Override
     public boolean canPlacePiece(HantoPieceType piece) {
         switch (piece) {
             case BUTTERFLY:
-                return (butterfly > 0);
+                return butterfly > 0;
             case CRAB:
-                return (crab > 0);
+                return crab > 0;
             case CRANE:
-                return (crane > 0);
+                return crane > 0;
             case DOVE:
-                return (dove > 0);
+                return dove > 0;
             case HORSE:
-                return (horse > 0);
+                return horse > 0;
             case SPARROW:
-                return (sparrow > 0);
+                return sparrow > 0;
             default:
                 return false;
         }
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#isOutOfPieces()
+     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#isOutOfPieces()}
      */
     @Override
     public boolean isOutOfPieces() {
-        return (butterfly <= 0) && (crab <= 0) && (crane <= 0) && (dove <= 0) && (horse <= 0)
-                && (sparrow <= 0);
+        return butterfly <= 0 && crab <= 0 && crane <= 0 && dove <= 0 && horse <= 0 && sparrow <= 0;
     }
 
     /**
-     * @see hanto.studentanivarthi.common.HantoPlayerPieceManager#placePiece()
+     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#placePiece()}
      */
     @Override
     public void placePiece(HantoPieceType type) {
         switch (type) {
             case BUTTERFLY:
-                butterfly = (butterfly > 0) ? butterfly - 1 : 0;
+                butterfly = butterfly > 0 ? butterfly - 1 : 0;
                 break;
             case CRAB:
-                crab = (crab > 0) ? crab - 1 : 0;
+                crab = crab > 0 ? crab - 1 : 0;
                 break;
             case CRANE:
-                crane = (crane > 0) ? crane - 1 : 0;
+                crane = crane > 0 ? crane - 1 : 0;
                 break;
             case DOVE:
-                dove = (dove > 0) ? dove - 1 : 0;
+                dove = dove > 0 ? dove - 1 : 0;
                 break;
             case HORSE:
-                horse = (horse > 0) ? horse - 1 : 0;
+                horse = horse > 0 ? horse - 1 : 0;
                 break;
             case SPARROW:
-                sparrow = (sparrow > 0) ? sparrow - 1 : 0;
+                sparrow = sparrow > 0 ? sparrow - 1 : 0;
                 break;
             default:
                 break;

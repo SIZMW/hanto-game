@@ -11,6 +11,7 @@ package hanto.studentanivarthi.beta;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
@@ -31,21 +32,48 @@ import hanto.studentanivarthi.common.HantoPlayerPieceManagerImpl;
  * @version Mar 26, 2016
  */
 public class BetaHantoGame implements HantoGame {
+    /**
+     * The number of turns before the {@link HantoPieceType#BUTTERFLY} must be
+     * placed.
+     */
     private final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
+    /**
+     * Game variables.
+     */
     private final Map<HantoCoordinate, HantoPiece> board;
     private HantoPlayerColor playerTurn;
 
+    /**
+     * The managers for keeping track of how many of each {@link HantoPieceType}
+     * each player gets.
+     */
     private final HantoPlayerPieceManager bluePieces;
     private final HantoPlayerPieceManager redPieces;
 
-    private HantoCoordinateImpl blueButterfly = null;
-    private HantoCoordinateImpl redButterfly = null;
+    /**
+     * The locations of each player's {@link HantoPieceType#BUTTERFLY} on the
+     * board for easier access.
+     */
+    private Optional<HantoCoordinateImpl> blueButterfly = Optional.empty();
+    private Optional<HantoCoordinateImpl> redButterfly = Optional.empty();
 
+    /**
+     * Keep track if the {@link HantoPieceType#BUTTERFLY} for each player has
+     * been placed.
+     */
     private boolean blueHasPlacedButterfly = false;
     private boolean redHasPlacedButterfly = false;
+
+    /**
+     * Game state variables.
+     */
     private boolean isGameOver = false;
     private boolean isFirstMove = true;
+
+    /**
+     * The number of turns played by each player.
+     */
     private int blueTurnCount = 0;
     private int redTurnCount = 0;
 
@@ -59,13 +87,45 @@ public class BetaHantoGame implements HantoGame {
     public BetaHantoGame(HantoPlayerColor movesFirst) {
         board = new HashMap<>();
         playerTurn = movesFirst;
+
+        // Set up piece managers based on rule set
         bluePieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
         redPieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
     }
 
     /**
-     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
+     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
+     */
+    @Override
+    public HantoPiece getPieceAt(HantoCoordinate where) {
+        try {
+            // Convert to our coordinate implementation
+            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
+            final HantoPiece piece = board.get(c);
+            return piece;
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    /**
+     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     */
+    @Override
+    public String getPrintableBoard() {
+        final StringBuilder sb = new StringBuilder();
+        for (HantoCoordinate c : board.keySet()) {
+            sb.append(c);
+            sb.append(": ");
+            sb.append(board.get(c));
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType},
+     *      {@link hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
      */
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to)
@@ -83,6 +143,7 @@ public class BetaHantoGame implements HantoGame {
             throw new HantoException(playerTurn.name() + " cannot place a piece in that location");
         }
 
+        // Move is valid, place piece
         placePlayerPiece(dest, loc);
 
         // Switch turn and get result
@@ -92,73 +153,46 @@ public class BetaHantoGame implements HantoGame {
     }
 
     /**
-     * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
-     */
-    @Override
-    public HantoPiece getPieceAt(HantoCoordinate where) {
-        try {
-            // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
-            final HantoPiece piece = board.get(c);
-            return piece;
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-    /**
-     * @see hanto.common.HantoGame#getPrintableBoard()
-     */
-    @Override
-    public String getPrintableBoard() {
-        final StringBuilder sb = new StringBuilder();
-        for (HantoCoordinate c : board.keySet()) {
-            sb.append(c);
-            sb.append(": ");
-            sb.append(board.get(c));
-            sb.append('\n');
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Places the specified piece at the specified coordinate.
+     * Returns the status on the game after a move.
      *
-     * @param coord
-     *            The location to place the piece.
-     * @param piece
-     *            The piece to place.
+     * @return The {@link MoveResult} state of the game.
      */
-    private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
-        board.put(coord, piece);
+    private MoveResult getMoveResult() {
+        boolean blueIsSurrounded = false;
+        boolean redIsSurrounded = false;
+        boolean blueIsOutOfPieces = false;
+        boolean redIsOutOfPieces = false;
+        MoveResult mr = MoveResult.OK;
 
-        if (piece.getColor() == HantoPlayerColor.BLUE) {
-            if (piece.getType() == HantoPieceType.BUTTERFLY) {
-                blueButterfly = new HantoCoordinateImpl(coord);
-                blueHasPlacedButterfly = true;
-            }
-            bluePieces.placePiece(piece.getType());
-        } else {
-            if (piece.getType() == HantoPieceType.BUTTERFLY) {
-                redButterfly = new HantoCoordinateImpl(coord);
-                redHasPlacedButterfly = true;
-            }
-            redPieces.placePiece(piece.getType());
+        // Check if butterfly is surrounded if it has been placed
+        if (blueButterfly.isPresent()) {
+            blueIsSurrounded = blueButterfly.get().isCoordinateSurrounded(board);
         }
-    }
 
-    /**
-     * Switches the player who will make the next move. Updates the number of
-     * turns played for each player.
-     */
-    private void switchPlayerTurn() {
-        if (playerTurn.equals(HantoPlayerColor.BLUE)) {
-            playerTurn = HantoPlayerColor.RED;
-            blueTurnCount++;
-        } else {
-            playerTurn = HantoPlayerColor.BLUE;
-            redTurnCount++;
+        if (redButterfly.isPresent()) {
+            redIsSurrounded = redButterfly.get().isCoordinateSurrounded(board);
         }
+
+        // Check if players are out of pieces
+        blueIsOutOfPieces = bluePieces.isOutOfPieces();
+        redIsOutOfPieces = redPieces.isOutOfPieces();
+
+        isGameOver = true;
+
+        // Determine correct result
+        if (blueIsSurrounded && redIsSurrounded) {
+            mr = MoveResult.DRAW;
+        } else if (!blueIsSurrounded && !redIsSurrounded && blueIsOutOfPieces && redIsOutOfPieces) {
+            mr = MoveResult.DRAW;
+        } else if (blueIsSurrounded) {
+            mr = MoveResult.RED_WINS;
+        } else if (redIsSurrounded) {
+            mr = MoveResult.BLUE_WINS;
+        } else {
+            isGameOver = false;
+        }
+
+        return mr;
     }
 
     /**
@@ -182,7 +216,8 @@ public class BetaHantoGame implements HantoGame {
      * @return true if valid, false otherwise
      */
     private boolean isMoveValid(HantoCoordinateImpl coord, HantoPieceImpl type) {
-        // Check by whose turn it is
+        // Check if butterfly placed and if piece can even be placed for each
+        // player
         if (playerTurn == HantoPlayerColor.BLUE) {
             if (!blueHasPlacedButterfly && blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
                 return false;
@@ -232,41 +267,42 @@ public class BetaHantoGame implements HantoGame {
     }
 
     /**
-     * Returns the status on the game after a move.
+     * Places the specified piece at the specified coordinate.
      *
-     * @return The {@link MoveResult} state of the game.
+     * @param coord
+     *            The location to place the piece.
+     * @param piece
+     *            The piece to place.
      */
-    private MoveResult getMoveResult() {
-        boolean blueIsSurrounded = false;
-        boolean redIsSurrounded = false;
-        boolean blueIsOutOfPieces = false;
-        boolean redIsOutOfPieces = false;
-        MoveResult mr = MoveResult.OK;
+    private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
+        board.put(coord, piece);
 
-        if (blueButterfly != null) {
-            blueIsSurrounded = blueButterfly.isCoordinateSurrounded(board);
-        }
-
-        if (redButterfly != null) {
-            redIsSurrounded = redButterfly.isCoordinateSurrounded(board);
-        }
-
-        blueIsOutOfPieces = bluePieces.isOutOfPieces();
-        redIsOutOfPieces = redPieces.isOutOfPieces();
-
-        isGameOver = true;
-        if (blueIsSurrounded && redIsSurrounded) {
-            mr = MoveResult.DRAW;
-        } else if (!blueIsSurrounded && !redIsSurrounded && blueIsOutOfPieces && redIsOutOfPieces) {
-            mr = MoveResult.DRAW;
-        } else if (blueIsSurrounded) {
-            mr = MoveResult.RED_WINS;
-        } else if (redIsSurrounded) {
-            mr = MoveResult.BLUE_WINS;
+        if (piece.getColor() == HantoPlayerColor.BLUE) {
+            if (piece.getType() == HantoPieceType.BUTTERFLY) {
+                blueButterfly = Optional.of(new HantoCoordinateImpl(coord));
+                blueHasPlacedButterfly = true;
+            }
+            bluePieces.placePiece(piece.getType());
         } else {
-            isGameOver = false;
+            if (piece.getType() == HantoPieceType.BUTTERFLY) {
+                redButterfly = Optional.of(new HantoCoordinateImpl(coord));
+                redHasPlacedButterfly = true;
+            }
+            redPieces.placePiece(piece.getType());
         }
+    }
 
-        return mr;
+    /**
+     * Switches the player who will make the next move. Updates the number of
+     * turns played for each player.
+     */
+    private void switchPlayerTurn() {
+        if (playerTurn.equals(HantoPlayerColor.BLUE)) {
+            playerTurn = HantoPlayerColor.RED;
+            blueTurnCount++;
+        } else {
+            playerTurn = HantoPlayerColor.BLUE;
+            redTurnCount++;
+        }
     }
 }

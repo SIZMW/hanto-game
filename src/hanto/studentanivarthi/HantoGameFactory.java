@@ -25,17 +25,17 @@ public class HantoGameFactory {
     private static final HantoGameFactory instance = new HantoGameFactory();
 
     /**
-     * Default private descriptor.
-     */
-    private HantoGameFactory() {
-        // Empty, but the private constructor is necessary for the singleton.
-    }
-
-    /**
      * @return the instance
      */
     public static HantoGameFactory getInstance() {
         return instance;
+    }
+
+    /**
+     * Default private descriptor.
+     */
+    private HantoGameFactory() {
+        // Empty, but the private constructor is necessary for the singleton.
     }
 
     /**

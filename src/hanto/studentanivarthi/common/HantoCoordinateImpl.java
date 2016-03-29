@@ -24,7 +24,18 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     private final int x, y;
 
     /**
-     * The only constructor.
+     * Copy constructor that creates an instance of HantoCoordinateImpl from an
+     * object that implements HantoCoordinate.
+     *
+     * @param coordinate
+     *            an object that implements the HantoCoordinate interface.
+     */
+    public HantoCoordinateImpl(HantoCoordinate coordinate) {
+        this(coordinate.getX(), coordinate.getY());
+    }
+
+    /**
+     * Creates a HantoCoordinateImpl instance with the specified x and y.
      *
      * @param x
      *            the x-coordinate
@@ -37,30 +48,33 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * Copy constructor that creates an instance of HantoCoordinateImpl from an
-     * object that implements HantoCoordinate.
-     *
-     * @param coordinate
-     *            an object that implements the HantoCoordinate interface.
-     */
-    public HantoCoordinateImpl(HantoCoordinate coordinate) {
-        this(coordinate.getX(), coordinate.getY());
-    }
-
-    /**
-     * @see hanto.common.HantoCoordinate#getX()
+     * @see {@link java.lang.Object#equals(java.lang.Object)}
      */
     @Override
-    public int getX() {
-        return x;
-    }
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
 
-    /**
-     * @see hanto.common.HantoCoordinate#getY()
-     */
-    @Override
-    public int getY() {
-        return y;
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof HantoCoordinateImpl)) {
+            return false;
+        }
+
+        final HantoCoordinateImpl other = (HantoCoordinateImpl) obj;
+
+        if (x != other.x) {
+            return false;
+        }
+
+        if (y != other.y) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -77,6 +91,34 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         surroundings.add(new HantoCoordinateImpl(x + 1, y - 1));
         surroundings.add(new HantoCoordinateImpl(x - 1, y + 1));
         return surroundings;
+    }
+
+    /**
+     * @see {@link hanto.common.HantoCoordinate#getX()}
+     */
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @see {@link hanto.common.HantoCoordinate#getY()}
+     */
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @see {@link java.lang.Object#hashCode()}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
     }
 
     /**
@@ -108,43 +150,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + x;
-        result = prime * result + y;
-        return result;
-    }
-
-    /**
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof HantoCoordinateImpl)) {
-            return false;
-        }
-        final HantoCoordinateImpl other = (HantoCoordinateImpl) obj;
-        if (x != other.x) {
-            return false;
-        }
-        if (y != other.y) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @see java.lang.Object#toString()
+     * @see {@link java.lang.Object#toString()}
      */
     @Override
     public String toString() {

@@ -21,7 +21,7 @@ public class HantoPieceImpl implements HantoPiece {
     private final HantoPieceType type;
 
     /**
-     * Default constructor
+     * Default constructor.
      *
      * @param color
      *            the piece color
@@ -34,7 +34,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see hanto.common.HantoPiece#getColor()
+     * @see {@link hanto.common.HantoPiece#getColor()}
      */
     @Override
     public HantoPlayerColor getColor() {
@@ -42,7 +42,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see hanto.common.HantoPiece#getType()
+     * @see {@link hanto.common.HantoPiece#getType()}
      */
     @Override
     public HantoPieceType getType() {
@@ -50,7 +50,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see {@link java.lang.Object#toString()}
      */
     @Override
     public String toString() {

@@ -5,6 +5,7 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
+
 package hanto.studentanivarthi.beta;
 
 import static hanto.common.HantoPieceType.BUTTERFLY;
@@ -183,7 +184,7 @@ public class BetaHantoMasterTest {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
-            if ((i == 0) || ((i % 2) == 0)) {
+            if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
@@ -207,7 +208,7 @@ public class BetaHantoMasterTest {
             assertEquals(OK, mr);
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
 
-            if ((i == 0) || ((i % 2) == 0)) {
+            if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
@@ -228,7 +229,7 @@ public class BetaHantoMasterTest {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
-            if ((i == 0) || ((i % 2) == 0)) {
+            if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
@@ -255,7 +256,7 @@ public class BetaHantoMasterTest {
             assertEquals(OK, mr);
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
 
-            if ((i == 0) || ((i % 2) == 0)) {
+            if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
@@ -338,7 +339,7 @@ public class BetaHantoMasterTest {
                 assertEquals(MoveResult.DRAW, mr);
             }
 
-            if ((i == 0) || ((i % 2) == 0)) {
+            if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
