@@ -34,7 +34,8 @@ import hanto.studentanivarthi.common.HantoPlayerPieceManagerImpl;
 public class BetaHantoGame implements HantoGame {
     /**
      * The number of turns before the {@link HantoPieceType#BUTTERFLY} must be
-     * placed.
+     * placed. If the {@link HantoPieceType#BUTTERFLY} must be placed by the nth
+     * turn, then this value is (n - 1) so it represents the turn prior.
      */
     private final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
@@ -219,7 +220,7 @@ public class BetaHantoGame implements HantoGame {
         // Check if butterfly placed and if piece can even be placed for each
         // player
         if (playerTurn == HantoPlayerColor.BLUE) {
-            if (!blueHasPlacedButterfly && blueTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
+            if (!blueHasPlacedButterfly && blueTurnCount >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
                 return false;
             }
 
@@ -227,7 +228,7 @@ public class BetaHantoGame implements HantoGame {
                 return false;
             }
         } else {
-            if (!redHasPlacedButterfly && redTurnCount > MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
+            if (!redHasPlacedButterfly && redTurnCount >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
                 return false;
             }
 

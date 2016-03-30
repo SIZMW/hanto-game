@@ -186,21 +186,40 @@ public class BetaHantoMasterTest {
      */
     @Test // 7
     public void bluePlacesThreeSparrowsAndIsValid() throws HantoException {
-        for (int i = 0; i < 5; i++) {
-            final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
-            assertEquals(OK, mr);
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
-            final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
-            // Alternate between checking for a blue or red sparrow
-            if (i == 0 || i % 2 == 0) {
-                assertEquals(BLUE, p.getColor());
-            } else {
-                assertEquals(RED, p.getColor());
-            }
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
 
-            assertEquals(SPARROW, p.getType());
-        }
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -210,25 +229,47 @@ public class BetaHantoMasterTest {
      */
     @Test // 8
     public void redPlacesThreeSparrowsAndIsValid() throws HantoException {
-        // Place blue butterfly first
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
-        for (int i = 1; i < 4; i++) {
-            final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
-            assertEquals(OK, mr);
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
 
-            final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
 
-            // Alternate between checking for a blue or red sparrow
-            if (i == 0 || i % 2 == 0) {
-                assertEquals(BLUE, p.getColor());
-            } else {
-                assertEquals(RED, p.getColor());
-            }
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
-            assertEquals(SPARROW, p.getType());
-        }
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -239,21 +280,58 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 9
     public void bluePlacesFourSparrowsAndFails() throws HantoException {
-        for (int i = 0; i < 9; i++) {
-            final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
-            assertEquals(OK, mr);
+        // Turn 1
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
-            final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
-            // Alternate between checking for a blue or red sparrow
-            if (i == 0 || i % 2 == 0) {
-                assertEquals(BLUE, p.getColor());
-            } else {
-                assertEquals(RED, p.getColor());
-            }
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
 
-            assertEquals(SPARROW, p.getType());
-        }
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 4, fails
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 6));
+        p = game.getPieceAt(makeCoordinate(0, 6));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -264,29 +342,66 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 10
     public void redPlacesFourSparrowsAndFails() throws HantoException {
-        // Place the blue butterfly
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
-        // Check that the piece was placed
-        final HantoPiece pB = game.getPieceAt(makeCoordinate(0, 0));
-        assertEquals(BLUE, pB.getColor());
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
 
-        for (int i = 1; i < 10; i++) {
-            final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
-            assertEquals(OK, mr);
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
 
-            final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
-            // Alternate between checking for a blue or red sparrow
-            if (i == 0 || i % 2 == 0) {
-                assertEquals(BLUE, p.getColor());
-            } else {
-                assertEquals(RED, p.getColor());
-            }
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
 
-            assertEquals(SPARROW, p.getType());
-        }
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 6));
+        p = game.getPieceAt(makeCoordinate(0, 6));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Fails
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 7));
+        p = game.getPieceAt(makeCoordinate(0, 7));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -357,34 +472,87 @@ public class BetaHantoMasterTest {
     @Test(expected = HantoException.class) // 13
     public void attemptToMoveAfterGameEnds() throws HantoException {
         // Place the blue butterfly
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+        assertEquals(OK, mr);
 
         // Place the red butterfly
-        final MoveResult mrR = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
-        assertEquals(OK, mrR);
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
 
-        for (int i = 2; i < 12; i++) {
-            final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
-            final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
 
-            // Check for the OK result, or at the end of the game, the DRAW
-            // result
-            if (i < 11) {
-                assertEquals(OK, mr);
-            } else {
-                assertEquals(MoveResult.DRAW, mr);
-            }
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
 
-            // Alternate between checking for a blue or red sparrow
-            if (i == 0 || i % 2 == 0) {
-                assertEquals(BLUE, p.getColor());
-            } else {
-                assertEquals(RED, p.getColor());
-            }
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
-            assertEquals(SPARROW, p.getType());
-        }
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 6));
+        p = game.getPieceAt(makeCoordinate(0, 6));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 7));
+        p = game.getPieceAt(makeCoordinate(0, 7));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 8));
+        p = game.getPieceAt(makeCoordinate(0, 8));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 9));
+        p = game.getPieceAt(makeCoordinate(0, 9));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 10));
+        p = game.getPieceAt(makeCoordinate(0, 10));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 11));
+        p = game.getPieceAt(makeCoordinate(0, 11));
+
+        assertEquals(MoveResult.DRAW, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
 
         // This should fail
         game.makeMove(SPARROW, null, new TestHantoCoordinate(0, 12));
