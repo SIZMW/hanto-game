@@ -72,7 +72,7 @@ public class HantoCoordinateImplTest {
     }
 
     /**
-     * Test checking if a piece is not surrounded.
+     * Test checking if a piece is not surrounded because the board is empty.
      */
     @Test // 3
     public void testIsCoordinateNotSurroundedEmptyBoard() {
@@ -81,7 +81,7 @@ public class HantoCoordinateImplTest {
     }
 
     /**
-     * Test checking if a piece is not surrounded.
+     * Test checking if a piece is not surrounded because the board is null.
      */
     @Test // 3
     public void testIsCoordinateNotSurroundedNullBoard() {

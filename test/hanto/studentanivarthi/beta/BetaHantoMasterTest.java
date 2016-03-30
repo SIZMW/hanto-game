@@ -107,7 +107,10 @@ public class BetaHantoMasterTest {
     public void bluePlacesInitialButterflyAtOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+
+        // Check the piece
         final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
         assertEquals(BLUE, p.getColor());
         assertEquals(BUTTERFLY, p.getType());
     }
@@ -122,6 +125,7 @@ public class BetaHantoMasterTest {
     public void redPlacesValidButterflyAfterBlue() throws HantoException {
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
+
         final MoveResult mrR = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
         assertEquals(OK, mrR);
     }
@@ -147,6 +151,7 @@ public class BetaHantoMasterTest {
     public void redPlacesInitialCrabNotNextToOrigin() throws HantoException {
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
+
         game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(1, 1));
     }
 
@@ -170,6 +175,7 @@ public class BetaHantoMasterTest {
     public void redPlacesInitialCrabAfterValidBlue() throws HantoException {
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
+
         game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 1));
     }
 
@@ -183,12 +189,16 @@ public class BetaHantoMasterTest {
         for (int i = 0; i < 5; i++) {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
+
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+
+            // Alternate between checking for a blue or red sparrow
             if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
             }
+
             assertEquals(SPARROW, p.getType());
         }
     }
@@ -200,19 +210,23 @@ public class BetaHantoMasterTest {
      */
     @Test // 8
     public void redPlacesThreeSparrowsAndIsValid() throws HantoException {
+        // Place blue butterfly first
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
 
         for (int i = 1; i < 4; i++) {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
+
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
 
+            // Alternate between checking for a blue or red sparrow
             if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
             }
+
             assertEquals(SPARROW, p.getType());
         }
     }
@@ -228,12 +242,16 @@ public class BetaHantoMasterTest {
         for (int i = 0; i < 9; i++) {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
+
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
+
+            // Alternate between checking for a blue or red sparrow
             if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
             }
+
             assertEquals(SPARROW, p.getType());
         }
     }
@@ -246,21 +264,27 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 10
     public void redPlacesFourSparrowsAndFails() throws HantoException {
+        // Place the blue butterfly
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
+
+        // Check that the piece was placed
         final HantoPiece pB = game.getPieceAt(makeCoordinate(0, 0));
         assertEquals(BLUE, pB.getColor());
 
         for (int i = 1; i < 10; i++) {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             assertEquals(OK, mr);
+
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
 
+            // Alternate between checking for a blue or red sparrow
             if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
             }
+
             assertEquals(SPARROW, p.getType());
         }
     }
@@ -275,18 +299,22 @@ public class BetaHantoMasterTest {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
+        // Surround the blue butterfly
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
         assertEquals(MoveResult.RED_WINS, mr);
     }
@@ -301,18 +329,22 @@ public class BetaHantoMasterTest {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
+        // Surround the red butterfly
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
         assertEquals(MoveResult.BLUE_WINS, mr);
     }
@@ -324,8 +356,11 @@ public class BetaHantoMasterTest {
      */
     @Test(expected = HantoException.class) // 13
     public void attemptToMoveAfterGameEnds() throws HantoException {
+        // Place the blue butterfly
         final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mrB);
+
+        // Place the red butterfly
         final MoveResult mrR = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
         assertEquals(OK, mrR);
 
@@ -333,20 +368,25 @@ public class BetaHantoMasterTest {
             final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, i));
             final HantoPiece p = game.getPieceAt(makeCoordinate(0, i));
 
+            // Check for the OK result, or at the end of the game, the DRAW
+            // result
             if (i < 11) {
                 assertEquals(OK, mr);
             } else {
                 assertEquals(MoveResult.DRAW, mr);
             }
 
+            // Alternate between checking for a blue or red sparrow
             if (i == 0 || i % 2 == 0) {
                 assertEquals(BLUE, p.getColor());
             } else {
                 assertEquals(RED, p.getColor());
             }
+
             assertEquals(SPARROW, p.getType());
         }
 
+        // This should fail
         game.makeMove(SPARROW, null, new TestHantoCoordinate(0, 12));
     }
 
@@ -359,6 +399,8 @@ public class BetaHantoMasterTest {
     public void checkPrintableBoard() throws HantoException {
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+
+        // Get the printable board
         assertEquals(
                 "HantoCoordinateImpl [x=0, y=0]: HantoPieceImpl [color=BLUE, type=Butterfly]\n",
                 game.getPrintableBoard());
@@ -373,26 +415,34 @@ public class BetaHantoMasterTest {
     public void blueRedDrawGame() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
+        // Surround both red and blue butterfly pieces, which start next to each
+        // other
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
         assertEquals(OK, mr);
+
         mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
+
+        // The last piece to surround both butterfly pieces
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
         assertEquals(MoveResult.DRAW, mr);
     }
@@ -407,6 +457,8 @@ public class BetaHantoMasterTest {
     public void placePieceInOccupiedSpot() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+
+        // Place on same coordinate
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
     }
@@ -420,9 +472,12 @@ public class BetaHantoMasterTest {
     @Test // 17
     public void redStartsAndPlacesInitialButterflyAtOrigin() throws HantoException {
         game = factory.makeHantoGame(HantoGameID.BETA_HANTO, RED);
+
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
+
         final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
         assertEquals(RED, p.getColor());
         assertEquals(BUTTERFLY, p.getType());
     }
