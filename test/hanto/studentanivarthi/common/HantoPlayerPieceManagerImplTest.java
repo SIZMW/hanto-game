@@ -37,7 +37,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the butterfly can be placed.
      */
-    @Test
+    @Test // 1
     public void checkButterfly() {
         assertTrue(manager.canPlacePiece(HantoPieceType.BUTTERFLY));
     }
@@ -45,7 +45,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the butterfly can be placed with an empty manager.
      */
-    @Test
+    @Test // 2
     public void checkButterflyEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.BUTTERFLY));
     }
@@ -53,7 +53,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the crab can be placed.
      */
-    @Test
+    @Test // 3
     public void checkCrab() {
         assertTrue(manager.canPlacePiece(HantoPieceType.CRAB));
     }
@@ -61,7 +61,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the crab can be placed with an empty manager.
      */
-    @Test
+    @Test // 4
     public void checkCrabEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.CRAB));
     }
@@ -69,7 +69,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the crane can be placed.
      */
-    @Test
+    @Test // 5
     public void checkCrane() {
         assertTrue(manager.canPlacePiece(HantoPieceType.CRANE));
     }
@@ -77,7 +77,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the crane can be placed with an empty manager.
      */
-    @Test
+    @Test // 6
     public void checkCraneEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.CRANE));
     }
@@ -85,7 +85,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the dove can be placed.
      */
-    @Test
+    @Test // 7
     public void checkDove() {
         assertTrue(manager.canPlacePiece(HantoPieceType.DOVE));
     }
@@ -93,7 +93,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the dove can be placed with an empty manager.
      */
-    @Test
+    @Test // 8
     public void checkDoveEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.DOVE));
     }
@@ -101,7 +101,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the horse can be placed.
      */
-    @Test
+    @Test // 9
     public void checkHorse() {
         assertTrue(manager.canPlacePiece(HantoPieceType.HORSE));
     }
@@ -109,7 +109,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the horse can be placed with an empty manager.
      */
-    @Test
+    @Test // 10
     public void checkHorseEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.HORSE));
     }
@@ -117,7 +117,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the sparrow can be placed.
      */
-    @Test
+    @Test // 11
     public void checkSparrow() {
         assertTrue(manager.canPlacePiece(HantoPieceType.SPARROW));
     }
@@ -125,7 +125,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the sparrow can be placed with an empty manager.
      */
-    @Test
+    @Test // 12
     public void checkSparrowEmptyManager() {
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.SPARROW));
     }
@@ -133,7 +133,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the player is out of pieces to play.
      */
-    @Test
+    @Test // 13
     public void checkIsOutOfPieces() {
         assertFalse(manager.isOutOfPieces());
     }
@@ -141,7 +141,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Checks if the empty manager player is out of pieces to play.
      */
-    @Test
+    @Test // 14
     public void checkIsOutOfPiecesEmptyManager() {
         assertTrue(emptyManager.isOutOfPieces());
     }
@@ -149,7 +149,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the butterfly can be placed.
      */
-    @Test
+    @Test // 15
     public void placeAndCheckButterfly() {
         manager.placePiece(HantoPieceType.BUTTERFLY);
         assertTrue(manager.canPlacePiece(HantoPieceType.BUTTERFLY));
@@ -158,7 +158,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the butterfly can be placed from the empty manager.
      */
-    @Test
+    @Test // 16
     public void placeAndCheckButterflyEmptyManager() {
         emptyManager.placePiece(HantoPieceType.BUTTERFLY);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.BUTTERFLY));
@@ -167,7 +167,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the crab can be placed.
      */
-    @Test
+    @Test // 17
     public void placeAndCheckCrab() {
         manager.placePiece(HantoPieceType.CRAB);
         assertTrue(manager.canPlacePiece(HantoPieceType.CRAB));
@@ -176,7 +176,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the crab can be placed from the empty manager.
      */
-    @Test
+    @Test // 18
     public void placeAndCheckCrabEmptyManager() {
         emptyManager.placePiece(HantoPieceType.CRAB);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.CRAB));
@@ -185,7 +185,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the crane can be placed.
      */
-    @Test
+    @Test // 19
     public void placeAndCheckCrane() {
         manager.placePiece(HantoPieceType.CRANE);
         assertTrue(manager.canPlacePiece(HantoPieceType.CRANE));
@@ -194,7 +194,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the crane can be placed from the empty manager.
      */
-    @Test
+    @Test // 20
     public void placeAndCheckCraneEmptyManager() {
         emptyManager.placePiece(HantoPieceType.CRANE);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.CRANE));
@@ -203,7 +203,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the dove can be placed.
      */
-    @Test
+    @Test // 21
     public void placeAndCheckDove() {
         manager.placePiece(HantoPieceType.DOVE);
         assertTrue(manager.canPlacePiece(HantoPieceType.DOVE));
@@ -212,7 +212,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the dove can be placed from the empty manager.
      */
-    @Test
+    @Test // 22
     public void placeAndCheckDoveEmptyManager() {
         emptyManager.placePiece(HantoPieceType.DOVE);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.DOVE));
@@ -221,7 +221,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the horse can be placed.
      */
-    @Test
+    @Test // 23
     public void placeAndCheckHorse() {
         manager.placePiece(HantoPieceType.HORSE);
         assertTrue(manager.canPlacePiece(HantoPieceType.HORSE));
@@ -230,7 +230,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the horse can be placed from the empty manager.
      */
-    @Test
+    @Test // 24
     public void placeAndCheckHorseEmptyManager() {
         emptyManager.placePiece(HantoPieceType.HORSE);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.HORSE));
@@ -239,7 +239,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the sparrow can be placed.
      */
-    @Test
+    @Test // 25
     public void placeAndCheckSparrow() {
         manager.placePiece(HantoPieceType.SPARROW);
         assertTrue(manager.canPlacePiece(HantoPieceType.SPARROW));
@@ -248,7 +248,7 @@ public class HantoPlayerPieceManagerImplTest {
     /**
      * Place and check if the sparrow can be placed from the empty manager.
      */
-    @Test
+    @Test // 26
     public void placeAndCheckSparrowEmptyManager() {
         emptyManager.placePiece(HantoPieceType.SPARROW);
         assertFalse(emptyManager.canPlacePiece(HantoPieceType.SPARROW));

@@ -439,7 +439,7 @@ public class BetaHantoMasterTest {
      *
      * @throws HantoException
      */
-    @Test // 11
+    @Test // 12
     public void blueWinsGame() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
