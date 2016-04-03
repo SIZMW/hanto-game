@@ -6,7 +6,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package hanto.studentanivarthi.common;
+package hanto.studentanivarthi.common.piecemanager;
 
 import hanto.common.HantoPieceType;
 
@@ -52,7 +52,7 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#canPlacePiece()}
+     * @see {@link hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager#canPlacePiece()}
      */
     @Override
     public boolean canPlacePiece(HantoPieceType piece) {
@@ -75,7 +75,7 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#isOutOfPieces()}
+     * @see {@link hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager#isOutOfPieces()}
      */
     @Override
     public boolean isOutOfPieces() {
@@ -83,7 +83,7 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.HantoPlayerPieceManager#placePiece()}
+     * @see {@link hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager#placePiece()}
      */
     @Override
     public void placePiece(HantoPieceType type) {
