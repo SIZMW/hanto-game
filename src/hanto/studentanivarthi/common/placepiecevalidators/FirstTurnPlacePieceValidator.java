@@ -1,3 +1,7 @@
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.common.placepiecevalidators;
 
 import java.util.List;
@@ -7,8 +11,17 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 
+/**
+ * The FirstTurnPlacePieceValidator defines the requirements for placing a piece
+ * within the first turn cycle of the game.
+ *
+ * @author Aditya Nivarthi
+ */
 public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
 
+    /**
+     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
+     */
     @Override
     public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece,
             Map<HantoCoordinate, HantoPiece> board) {
