@@ -29,10 +29,8 @@ public class HantoPieceImpl implements HantoGamePiece {
     /**
      * Copy constructor.
      *
-     * @param color
-     *            the piece color
-     * @param type
-     *            the piece type
+     * @param piece
+     *            the piece to copy
      */
     public HantoPieceImpl(HantoPiece piece) {
         color = piece.getColor();

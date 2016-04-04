@@ -19,7 +19,7 @@ public interface PlacePieceValidator {
     /**
      * Determines if the piece can be placed at the specified coordinate given
      * the current board.
-     * 
+     *
      * @param to
      *            The {@link HantoCoordinate} to place the piece at.
      * @param piece
@@ -28,6 +28,6 @@ public interface PlacePieceValidator {
      *            The current board.
      * @return true if it can be placed, false otherwise
      */
-    public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece,
+    boolean canPlacePiece(HantoCoordinate to, HantoPiece piece,
             Map<HantoCoordinate, HantoPiece> board);
 }

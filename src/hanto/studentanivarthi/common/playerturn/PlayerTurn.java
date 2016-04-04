@@ -23,7 +23,7 @@ public interface PlayerTurn {
      *
      * @return a {@link HantoPlayerColor}
      */
-    public HantoPlayerColor getColor();
+    HantoPlayerColor getColor();
 
     /**
      * Returns this player's butterfly coordinate as an {@link Optional}, to
@@ -31,21 +31,21 @@ public interface PlayerTurn {
      *
      * @return an {@link Optional}&lt;{@link HantoCoordinate}&gt;
      */
-    public Optional<HantoCoordinate> getPlayerButterflyCoordinate();
+    Optional<HantoCoordinate> getPlayerButterflyCoordinate();
 
     /**
      * Returns the player piece manager for this player.
      *
      * @return a {@link HantoPlayerPieceManager}
      */
-    public HantoPlayerPieceManager getPlayerPieceManager();
+    HantoPlayerPieceManager getPlayerPieceManager();
 
     /**
      * Returns the number of turns this player has played.
      *
      * @return an integer
      */
-    public int getTurnCount();
+    int getTurnCount();
 
     /**
      * Sets the player's butterfly location to the specified coordinate.
@@ -53,13 +53,13 @@ public interface PlayerTurn {
      * @param coord
      *            The {@link HantoCoordinate} of the butterfly.
      */
-    public void setPlayerButterflyCoordinate(HantoCoordinate coord);
+    void setPlayerButterflyCoordinate(HantoCoordinate coord);
 
     /**
      * Updates the turn count by the specified amount.
-     * 
+     *
      * @param update
      *            The integer value to update by.
      */
-    public void updateTurnCount(int update);
+    void updateTurnCount(int update);
 }

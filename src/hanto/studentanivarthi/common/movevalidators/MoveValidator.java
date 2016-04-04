@@ -12,7 +12,7 @@ import hanto.common.HantoPiece;
 /**
  * The MoveValidator interface defines the methods that are used for move
  * validation.
- * 
+ *
  * @author Aditya Nivarthi
  */
 public interface MoveValidator {
@@ -28,6 +28,6 @@ public interface MoveValidator {
      *            The current game board.
      * @return true if the move can be made, false otherwise.
      */
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to,
+    boolean canMove(HantoCoordinate from, HantoCoordinate to,
             Map<HantoCoordinate, HantoPiece> board);
 }

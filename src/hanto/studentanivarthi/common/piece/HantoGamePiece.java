@@ -13,7 +13,7 @@ import hanto.common.HantoPiece;
  * The HantoGamePiece interface extends the existing HantoPiece interface in
  * order to add additional methods for determine if a piece is able to move from
  * a coordinate to another coordinate.
- * 
+ *
  * @author Aditya Nivarthi
  */
 public interface HantoGamePiece extends HantoPiece {
@@ -29,6 +29,6 @@ public interface HantoGamePiece extends HantoPiece {
      *            The board with the occupied locations.
      * @return true if able to move, false otherwise.
      */
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to,
+    boolean canMove(HantoCoordinate from, HantoCoordinate to,
             Map<HantoCoordinate, HantoPiece> board);
 }
