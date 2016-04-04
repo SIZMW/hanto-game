@@ -1,3 +1,6 @@
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
 package hanto.studentanivarthi.gamma;
 
 import java.util.HashMap;
@@ -19,6 +22,11 @@ import hanto.studentanivarthi.common.placepiecevalidators.StandardPlacePieceVali
 import hanto.studentanivarthi.common.playerturn.PlayerTurn;
 import hanto.studentanivarthi.common.playerturn.PlayerTurnImpl;
 
+/**
+ * The implementation of Gamma Hanto.
+ *
+ * @author Aditya Nivarthi
+ */
 public class GammaHantoGame implements HantoGame {
     /**
      * The number of turns before the {@link HantoPieceType#BUTTERFLY} must be
@@ -26,7 +34,16 @@ public class GammaHantoGame implements HantoGame {
      * turn, then this value is (n - 1) so it represents the turn prior.
      */
     private final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
+
+    /**
+     * The maximum number of turns that can occur in Gamma Hanto.
+     */
     private final int MAX_TURNS = 20;
+
+    /**
+     * The constant associated with the number of internal turns used for the
+     * first turn cycle (blue goes , red goes, or vice versa).
+     */
     private final int FIRST_TURN = 2;
 
     /**
@@ -39,13 +56,25 @@ public class GammaHantoGame implements HantoGame {
      */
     private final Map<HantoCoordinate, HantoPiece> board;
 
+    /**
+     * Turn related attributes.
+     */
     private PlayerTurn currentTurn;
     private final PlayerTurn blueTurn;
     private final PlayerTurn redTurn;
 
+    /**
+     * Game state variables.
+     */
     private boolean isGameOver = false;
     private boolean isFirstMove = true;
 
+    /**
+     * Creates a GammaHantoGame instance with the specified starting player.
+     *
+     * @param movesFirst
+     *            The {@link HantoPlayerColor} to start.
+     */
     public GammaHantoGame(HantoPlayerColor movesFirst) {
         board = new HashMap<>();
 
@@ -59,19 +88,38 @@ public class GammaHantoGame implements HantoGame {
     }
 
     /**
-     * Switches the player who will make the next move. Updates the number of
-     * turns played for each player.
+     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
      */
-    private void switchPlayerTurn() {
-        currentTurn.updateTurnCount(1);
-
-        if (currentTurn.getColor().equals(HantoPlayerColor.BLUE)) {
-            currentTurn = redTurn;
-        } else {
-            currentTurn = blueTurn;
+    @Override
+    public HantoPiece getPieceAt(HantoCoordinate where) {
+        try {
+            // Convert to our coordinate implementation
+            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
+            final HantoPiece piece = board.get(c);
+            return piece;
+        } catch (NullPointerException e) {
+            return null;
         }
     }
 
+    /**
+     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     */
+    @Override
+    public String getPrintableBoard() {
+        final StringBuilder sb = new StringBuilder();
+        for (HantoCoordinate c : board.keySet()) {
+            sb.append(c);
+            sb.append(": ");
+            sb.append(board.get(c));
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
+     */
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to)
             throws HantoException {
@@ -83,7 +131,8 @@ public class GammaHantoGame implements HantoGame {
         final HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
         final HantoPieceImpl loc = new HantoPieceImpl(currentTurn.getColor(), pieceType);
 
-        if (from == null) { // Place new piece
+        // Place a new piece
+        if (from == null) {
             if (!isPlacePieceValid(dest, loc)) {
                 throw new HantoException(
                         currentTurn.getColor().name() + " cannot place a piece in that location");
@@ -153,43 +202,50 @@ public class GammaHantoGame implements HantoGame {
     }
 
     /**
-     * Places the specified piece at the specified coordinate.
+     * Returns whether the specified coordinate is the origin or not.
      *
      * @param coord
-     *            The location to place the piece.
-     * @param piece
-     *            The piece to place.
+     *            The {@link HantoCoordiante} to check.
+     * @return true if origin, false otherwise
      */
-    private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
-        board.put(coord, piece);
-
-        if (piece.getType() == HantoPieceType.BUTTERFLY) {
-            currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(coord));
-        }
-
-        currentTurn.getPlayerPieceManager().placePiece(piece.getType());
-    }
-
-    private void movePlayerPiece(HantoCoordinate from, HantoCoordinate to, HantoPiece piece) {
-        board.remove(from);
-        board.put(to, piece);
-    }
-
     private boolean isCoordinateOrigin(HantoCoordinate coord) {
         return coord.equals(ORIGIN);
     }
 
+    /**
+     * Determines if a piece can be moved from a coordinate to another
+     * coordinate.
+     *
+     * @param from
+     *            The starting {@link HantoCoordinateImpl}.
+     * @param to
+     *            The destination {@link HantoCoordinateImpl}.
+     * @param type
+     *            The {@link HantoPieceImpl} to move.
+     * @return true if can be moved, false otherwise
+     */
     private boolean isMoveValid(HantoCoordinateImpl from, HantoCoordinateImpl to,
             HantoPieceImpl type) {
         return type.canMove(from, to, board);
     }
 
+    /**
+     * Determines if a piece can be placed at the specified coordinate.
+     *
+     * @param coord
+     *            The {@link HantoCoordinateImpl} to place at.
+     * @param type
+     *            The {@link HantoPieceImpl} to place.
+     * @return true if can be placed, false otherwise
+     */
     private boolean isPlacePieceValid(HantoCoordinateImpl coord, HantoPieceImpl type) {
+        // Check if the butterfly is placed before the fourth turn
         if (!currentTurn.getPlayerButterflyCoordinate().isPresent()
                 && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
             return false;
         }
 
+        // Check if there are remaining pieces of that type to place
         if (!currentTurn.getPlayerPieceManager().canPlacePiece(type.getType())) {
             return false;
         }
@@ -216,32 +272,49 @@ public class GammaHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
+     * Moves the piece from a coordinate to the other coordinate.
+     *
+     * @param from
+     *            The starting {@link HantoCoordinate}.
+     * @param to
+     *            The destination {@link HantoCoordinate}.
+     * @param piece
+     *            The {@link HantoPiece} to move.
      */
-    @Override
-    public HantoPiece getPieceAt(HantoCoordinate where) {
-        try {
-            // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
-            final HantoPiece piece = board.get(c);
-            return piece;
-        } catch (NullPointerException e) {
-            return null;
-        }
+    private void movePlayerPiece(HantoCoordinate from, HantoCoordinate to, HantoPiece piece) {
+        board.remove(from);
+        board.put(to, piece);
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     * Places the specified piece at the specified coordinate.
+     *
+     * @param coord
+     *            The {@link HantoCoordinate} to place the piece.
+     * @param piece
+     *            The {@link HantoPiece} to place.
      */
-    @Override
-    public String getPrintableBoard() {
-        final StringBuilder sb = new StringBuilder();
-        for (HantoCoordinate c : board.keySet()) {
-            sb.append(c);
-            sb.append(": ");
-            sb.append(board.get(c));
-            sb.append('\n');
+    private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
+        board.put(coord, piece);
+
+        if (piece.getType() == HantoPieceType.BUTTERFLY) {
+            currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(coord));
         }
-        return sb.toString();
+
+        currentTurn.getPlayerPieceManager().placePiece(piece.getType());
+    }
+
+    /**
+     * Switches the player who will make the next move. Updates the number of
+     * turns played for each player.
+     */
+    private void switchPlayerTurn() {
+        currentTurn.updateTurnCount(1);
+
+        if (currentTurn.getColor().equals(HantoPlayerColor.BLUE)) {
+            currentTurn = redTurn;
+        } else {
+            currentTurn = blueTurn;
+        }
     }
 }

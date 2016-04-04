@@ -1,11 +1,7 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html Copyright
- * ©2016 Gary F. Pollice
- *******************************************************************************/
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.beta;
 
 import java.util.HashMap;
@@ -150,7 +146,6 @@ public class BetaHantoGame implements HantoGame {
         // Switch turn and get result
         switchPlayerTurn();
         return getMoveResult();
-
     }
 
     /**
@@ -200,7 +195,7 @@ public class BetaHantoGame implements HantoGame {
      * Returns whether the specified coordinate is the origin location.
      *
      * @param coord
-     *            The coordinate to check.
+     *            The {@link HantoCoordinate} to check.
      * @return true if it is the origin, false otherwise
      */
     private boolean isCoordinateOrigin(HantoCoordinate coord) {
@@ -211,9 +206,9 @@ public class BetaHantoGame implements HantoGame {
      * Returns whether the specified coordinate is a valid location to move.
      *
      * @param coord
-     *            The coordinate to check.
+     *            The {@link HantoCoordinateImpl} to check.
      * @param type
-     *            The piece to check.
+     *            The {@link HantoPieceImpl} to check.
      * @return true if valid, false otherwise
      */
     private boolean isMoveValid(HantoCoordinateImpl coord, HantoPieceImpl type) {
@@ -271,9 +266,9 @@ public class BetaHantoGame implements HantoGame {
      * Places the specified piece at the specified coordinate.
      *
      * @param coord
-     *            The location to place the piece.
+     *            The {@link HantoCoordinate} to place the piece.
      * @param piece
-     *            The piece to place.
+     *            The {@link HantoPiece} to place.
      */
     private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
         board.put(coord, piece);

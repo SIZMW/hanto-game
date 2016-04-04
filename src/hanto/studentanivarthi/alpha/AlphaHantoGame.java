@@ -36,9 +36,27 @@ public class AlphaHantoGame implements HantoGame {
     private final HantoPiece redButterfly = new HantoPieceImpl(RED, BUTTERFLY);
     private boolean gameOver = false;
 
-    /*
-     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType and
-     * hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
+    /**
+     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
+     */
+    @Override
+    public HantoPiece getPieceAt(HantoCoordinate coordinate) {
+        final HantoCoordinateImpl where = new HantoCoordinateImpl(coordinate);
+        return where.equals(blueButterflyHex) ? blueButterfly
+                : where.equals(redButterflyHex) ? redButterfly : null;
+    }
+
+    /**
+     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     */
+    @Override
+    public String getPrintableBoard() {
+        return null;
+    }
+
+    /**
+     * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType
+     *      and hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
      */
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate source,
@@ -53,7 +71,7 @@ public class AlphaHantoGame implements HantoGame {
         final HantoCoordinateImpl to = new HantoCoordinateImpl(destination);
 
         if (firstMove) {
-            if ((to.getX() != 0) || (to.getY() != 0)) {
+            if (to.getX() != 0 || to.getY() != 0) {
                 throw new HantoException("Blue did not move Butterfly to origin");
             }
             blueButterflyHex = to;
@@ -78,30 +96,12 @@ public class AlphaHantoGame implements HantoGame {
      * @return true if the coordinate is valid for Red
      */
     private boolean hexIsValidForRed(HantoCoordinateImpl coordinate) {
-        return (coordinate.equals(new HantoCoordinateImpl(0, 1))
+        return coordinate.equals(new HantoCoordinateImpl(0, 1))
                 || coordinate.equals(new HantoCoordinateImpl(1, 0))
                 || coordinate.equals(new HantoCoordinateImpl(1, -1))
                 || coordinate.equals(new HantoCoordinateImpl(0, -1))
                 || coordinate.equals(new HantoCoordinateImpl(-1, 0))
-                || coordinate.equals(new HantoCoordinateImpl(-1, 1)));
-    }
-
-    /*
-     * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
-     */
-    @Override
-    public HantoPiece getPieceAt(HantoCoordinate coordinate) {
-        final HantoCoordinateImpl where = new HantoCoordinateImpl(coordinate);
-        return where.equals(blueButterflyHex) ? blueButterfly
-                : where.equals(redButterflyHex) ? redButterfly : null;
-    }
-
-    /*
-     * @see hanto.common.HantoGame#getPrintableBoard()
-     */
-    @Override
-    public String getPrintableBoard() {
-        return null;
+                || coordinate.equals(new HantoCoordinateImpl(-1, 1));
     }
 
 }
