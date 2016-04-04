@@ -1,10 +1,7 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.common;
 
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ import hanto.studentanivarthi.common.movevalidators.WalkMoveValidator;
 import hanto.studentanivarthi.common.piece.HantoGamePiece;
 
 /**
- * Implementation of the HantoPiece.
+ * Implementation of the {@link HantoPiece}.
  *
  * @version Mar 2,2016
  */
@@ -28,22 +25,6 @@ public class HantoPieceImpl implements HantoGamePiece {
     private final HantoPlayerColor color;
     private final HantoPieceType type;
     private final List<MoveValidator> moveValidators;
-
-    /**
-     * Default constructor.
-     *
-     * @param color
-     *            the piece color
-     * @param type
-     *            the piece type
-     */
-    public HantoPieceImpl(HantoPlayerColor color, HantoPieceType type) {
-        this.color = color;
-        this.type = type;
-        moveValidators = new ArrayList<>();
-
-        addMoveValidators();
-    }
 
     /**
      * Copy constructor.
@@ -56,6 +37,22 @@ public class HantoPieceImpl implements HantoGamePiece {
     public HantoPieceImpl(HantoPiece piece) {
         color = piece.getColor();
         type = piece.getType();
+        moveValidators = new ArrayList<>();
+
+        addMoveValidators();
+    }
+
+    /**
+     * Default constructor.
+     *
+     * @param color
+     *            the piece color
+     * @param type
+     *            the piece type
+     */
+    public HantoPieceImpl(HantoPlayerColor color, HantoPieceType type) {
+        this.color = color;
+        this.type = type;
         moveValidators = new ArrayList<>();
 
         addMoveValidators();
@@ -100,6 +97,9 @@ public class HantoPieceImpl implements HantoGamePiece {
         return "HantoPieceImpl [color=" + color + ", type=" + type + "]";
     }
 
+    /**
+     * Adds the associated validators based on the piece type.
+     */
     private void addMoveValidators() {
         switch (type) {
             case BUTTERFLY:
