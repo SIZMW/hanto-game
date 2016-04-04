@@ -3,9 +3,6 @@
  */
 package hanto.studentanivarthi.gamma;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -15,6 +12,8 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
+import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.BoardImpl;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 import hanto.studentanivarthi.common.placepiecevalidators.FirstTurnPlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator;
@@ -54,7 +53,7 @@ public class GammaHantoGame implements HantoGame {
     /**
      * Game variables.
      */
-    private final Map<HantoCoordinate, HantoPiece> board;
+    private final Board board;
 
     /**
      * Turn related attributes.
@@ -76,7 +75,7 @@ public class GammaHantoGame implements HantoGame {
      *            The {@link HantoPlayerColor} to start.
      */
     public GammaHantoGame(HantoPlayerColor movesFirst) {
-        board = new HashMap<>();
+        board = new BoardImpl();
 
         // Set up piece managers based on rule set
         blueTurn = new PlayerTurnImpl(HantoPlayerColor.BLUE,
@@ -91,15 +90,8 @@ public class GammaHantoGame implements HantoGame {
      * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
      */
     @Override
-    public HantoPiece getPieceAt(HantoCoordinate where) {
-        try {
-            // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
-            final HantoPiece piece = board.get(c);
-            return piece;
-        } catch (NullPointerException e) {
-            return null;
-        }
+    public HantoPiece getPieceAt(HantoCoordinate coordinate) {
+        return board.getPieceAt(coordinate);
     }
 
     /**
@@ -107,14 +99,7 @@ public class GammaHantoGame implements HantoGame {
      */
     @Override
     public String getPrintableBoard() {
-        final StringBuilder sb = new StringBuilder();
-        for (HantoCoordinate c : board.keySet()) {
-            sb.append(c);
-            sb.append(": ");
-            sb.append(board.get(c));
-            sb.append('\n');
-        }
-        return sb.toString();
+        return board.toString();
     }
 
     /**
@@ -282,8 +267,8 @@ public class GammaHantoGame implements HantoGame {
      *            The {@link HantoPiece} to move.
      */
     private void movePlayerPiece(HantoCoordinate from, HantoCoordinate to, HantoPiece piece) {
-        board.remove(from);
-        board.put(to, piece);
+        board.removePieceAt(from);
+        board.placePieceAt(to, piece);
     }
 
     /**
@@ -295,7 +280,7 @@ public class GammaHantoGame implements HantoGame {
      *            The {@link HantoPiece} to place.
      */
     private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
-        board.put(coord, piece);
+        board.placePieceAt(coord, piece);
 
         if (piece.getType() == HantoPieceType.BUTTERFLY) {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(coord));

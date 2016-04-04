@@ -6,12 +6,12 @@ package hanto.studentanivarthi.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentanivarthi.common.board.Board;
 import hanto.studentanivarthi.common.movevalidators.MoveValidator;
 import hanto.studentanivarthi.common.movevalidators.WalkMoveValidator;
 import hanto.studentanivarthi.common.piece.HantoGamePiece;
@@ -60,8 +60,7 @@ public class HantoPieceImpl implements HantoGamePiece {
      * @see {@link hanto.studentanivarthi.common.piece.HantoGamePiece#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to,
-            Map<HantoCoordinate, HantoPiece> board) {
+    public boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board) {
         for (MoveValidator m : moveValidators) {
             if (m.canMove(from, to, board)) {
                 return true;
@@ -96,7 +95,7 @@ public class HantoPieceImpl implements HantoGamePiece {
     }
 
     /**
-     * Adds the associated validators based on the piece type.
+     * Adds the associated validation classes based on the piece type.
      */
     private void addMoveValidators() {
         switch (type) {

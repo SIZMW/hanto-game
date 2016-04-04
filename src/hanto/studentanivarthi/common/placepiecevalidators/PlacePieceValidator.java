@@ -4,10 +4,9 @@
 
 package hanto.studentanivarthi.common.placepiecevalidators;
 
-import java.util.Map;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
+import hanto.studentanivarthi.common.board.Board;
 
 /**
  * The PlacePieceValidator interface defines the methods for piece placement
@@ -25,9 +24,8 @@ public interface PlacePieceValidator {
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param board
-     *            The current board.
+     *            The current game {@link Board}.
      * @return true if it can be placed, false otherwise
      */
-    boolean canPlacePiece(HantoCoordinate to, HantoPiece piece,
-            Map<HantoCoordinate, HantoPiece> board);
+    boolean canPlacePiece(HantoCoordinate to, HantoPiece piece, Board board);
 }

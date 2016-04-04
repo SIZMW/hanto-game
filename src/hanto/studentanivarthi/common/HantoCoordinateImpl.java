@@ -6,10 +6,9 @@ package hanto.studentanivarthi.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoPiece;
+import hanto.studentanivarthi.common.board.Board;
 
 /**
  * The implementation for my version of Hanto.
@@ -24,7 +23,8 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * object that implements HantoCoordinate.
      *
      * @param coordinate
-     *            an object that implements the HantoCoordinate interface.
+     *            an object that implements the {@link HantoCoordinate}
+     *            interface.
      */
     public HantoCoordinateImpl(HantoCoordinate coordinate) {
         this(coordinate.getX(), coordinate.getY());
@@ -121,12 +121,11 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * Returns whether the specified coordinate is completely surrounded.
      *
      * @param board
-     *            The game board of coordinates and the piece in that
-     *            coordinate.
+     *            The game {@link Board} of coordinates.
      * @return true if surrounded completely, false otherwise
      */
-    public boolean isCoordinateSurrounded(Map<HantoCoordinate, HantoPiece> board) {
-        if (board == null || board.isEmpty()) {
+    public boolean isCoordinateSurrounded(Board board) {
+        if (board == null || board.isBoardEmpty()) {
             return false;
         }
 
@@ -134,7 +133,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         boolean hasEmptyAdjacentSpot = false;
 
         for (HantoCoordinate e : surroundings) {
-            if (board.containsKey(e) && board.get(e) != null) {
+            if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
                 hasEmptyAdjacentSpot = false;
             } else {
                 hasEmptyAdjacentSpot = true;

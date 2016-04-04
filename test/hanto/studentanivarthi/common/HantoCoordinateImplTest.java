@@ -13,17 +13,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.BoardImpl;
 
 /**
  * Tests for the {@link HantoCoordinateImpl} class.
@@ -76,26 +75,26 @@ public class HantoCoordinateImplTest {
      */
     @Test // 3
     public void testIsCoordinateNotSurroundedEmptyBoard() {
-        Map<HantoCoordinate, HantoPiece> board = new HashMap<>();
+        Board board = new BoardImpl();
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
     /**
      * Test checking if a piece is not surrounded because the board is null.
      */
-    @Test // 3
+    @Test // 4
     public void testIsCoordinateNotSurroundedNullBoard() {
-        Map<HantoCoordinate, HantoPiece> board = null;
+        Board board = null;
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
     /**
      * Test checking if a piece is not surrounded.
      */
-    @Test // 3
+    @Test // 5
     public void testIsCoordinateNotSurrounded() {
-        Map<HantoCoordinate, HantoPiece> board = new HashMap<>();
-        board.put(new HantoCoordinateImpl(0, 1),
+        Board board = new BoardImpl();
+        board.placePieceAt(new HantoCoordinateImpl(0, 1),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
 
         assertFalse(coordinate.isCoordinateSurrounded(board));
@@ -104,21 +103,21 @@ public class HantoCoordinateImplTest {
     /**
      * Test checking if a piece is surrounded.
      */
-    @Test // 4
+    @Test // 6
     public void testIsCoordinateSurrounded() {
-        Map<HantoCoordinate, HantoPiece> board = new HashMap<>();
+        Board board = new BoardImpl();
 
-        board.put(new HantoCoordinateImpl(0 + 1, 0),
+        board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.put(new HantoCoordinateImpl(0 - 1, 0),
+        board.placePieceAt(new HantoCoordinateImpl(0 - 1, 0),
                 new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
-        board.put(new HantoCoordinateImpl(0, 0 + 1),
+        board.placePieceAt(new HantoCoordinateImpl(0, 0 + 1),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.put(new HantoCoordinateImpl(0, 0 - 1),
+        board.placePieceAt(new HantoCoordinateImpl(0, 0 - 1),
                 new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
-        board.put(new HantoCoordinateImpl(0 + 1, 0 - 1),
+        board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0 - 1),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.put(new HantoCoordinateImpl(0 - 1, 0 + 1),
+        board.placePieceAt(new HantoCoordinateImpl(0 - 1, 0 + 1),
                 new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
 
         assertTrue(coordinate.isCoordinateSurrounded(board));

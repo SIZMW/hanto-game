@@ -5,11 +5,10 @@
 package hanto.studentanivarthi.common.movevalidators;
 
 import java.util.List;
-import java.util.Map;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.board.Board;
 
 /**
  * The WalkMoveValidator is a subset of the move validators that considers
@@ -23,8 +22,7 @@ public class WalkMoveValidator implements MoveValidator {
      * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to,
-            Map<HantoCoordinate, HantoPiece> board) {
+    public boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board) {
         // TODO make this generic for x length walks
         HantoCoordinateImpl src = new HantoCoordinateImpl(from);
         HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
@@ -37,7 +35,7 @@ public class WalkMoveValidator implements MoveValidator {
         }
 
         // Piece in that spot
-        if (board.containsKey(dest) && board.get(dest) != null) {
+        if (board.hasPieceAt(dest) && board.getPieceAt(dest) != null) {
             return false;
         }
 

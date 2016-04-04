@@ -4,9 +4,7 @@
 
 package hanto.studentanivarthi.beta;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
@@ -18,6 +16,8 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
+import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.BoardImpl;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 
@@ -38,7 +38,7 @@ public class BetaHantoGame implements HantoGame {
     /**
      * Game variables.
      */
-    private final Map<HantoCoordinate, HantoPiece> board;
+    private final Board board;
     private HantoPlayerColor playerTurn;
 
     /**
@@ -82,7 +82,7 @@ public class BetaHantoGame implements HantoGame {
      *            The player to move first.
      */
     public BetaHantoGame(HantoPlayerColor movesFirst) {
-        board = new HashMap<>();
+        board = new BoardImpl();
         playerTurn = movesFirst;
 
         // Set up piece managers based on rule set
@@ -98,7 +98,7 @@ public class BetaHantoGame implements HantoGame {
         try {
             // Convert to our coordinate implementation
             final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
-            final HantoPiece piece = board.get(c);
+            final HantoPiece piece = board.getPieceAt(c);
             return piece;
         } catch (NullPointerException e) {
             return null;
@@ -110,14 +110,7 @@ public class BetaHantoGame implements HantoGame {
      */
     @Override
     public String getPrintableBoard() {
-        final StringBuilder sb = new StringBuilder();
-        for (HantoCoordinate c : board.keySet()) {
-            sb.append(c);
-            sb.append(": ");
-            sb.append(board.get(c));
-            sb.append('\n');
-        }
-        return sb.toString();
+        return board.toString();
     }
 
     /**
@@ -243,7 +236,7 @@ public class BetaHantoGame implements HantoGame {
             return true;
         } else {
             // Piece already in that spot
-            if (board.containsKey(coord) && board.get(coord) != null) {
+            if (board.hasPieceAt(coord) && board.getPieceAt(coord) != null) {
                 return false;
             }
 
@@ -252,7 +245,7 @@ public class BetaHantoGame implements HantoGame {
             final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
-                if (board.containsKey(e) && board.get(e) != null) {
+                if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
                     isAdjacentToPiece = true;
                     break;
                 }
@@ -271,7 +264,7 @@ public class BetaHantoGame implements HantoGame {
      *            The {@link HantoPiece} to place.
      */
     private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
-        board.put(coord, piece);
+        board.placePieceAt(coord, piece);
 
         if (piece.getColor() == HantoPlayerColor.BLUE) {
             if (piece.getType() == HantoPieceType.BUTTERFLY) {

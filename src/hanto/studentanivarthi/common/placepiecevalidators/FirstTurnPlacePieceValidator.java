@@ -5,11 +5,11 @@
 package hanto.studentanivarthi.common.placepiecevalidators;
 
 import java.util.List;
-import java.util.Map;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.board.Board;
 
 /**
  * The FirstTurnPlacePieceValidator defines the requirements for placing a piece
@@ -23,12 +23,11 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
      * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece,
-            Map<HantoCoordinate, HantoPiece> board) {
+    public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece, Board board) {
         HantoCoordinateImpl coord = new HantoCoordinateImpl(to);
 
         // Piece already in that spot
-        if (board.containsKey(coord) && board.get(coord) != null) {
+        if (board.hasPieceAt(coord) && board.getPieceAt(coord) != null) {
             return false;
         }
 
@@ -37,7 +36,7 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
         final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
 
         for (HantoCoordinate e : surroundings) {
-            if (board.containsKey(e) && board.get(e) != null) {
+            if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
                 isAdjacentToPiece = true;
                 break;
             }
