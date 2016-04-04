@@ -46,6 +46,22 @@ public class HantoPieceImpl implements HantoGamePiece {
     }
 
     /**
+     * Copy constructor.
+     *
+     * @param color
+     *            the piece color
+     * @param type
+     *            the piece type
+     */
+    public HantoPieceImpl(HantoPiece piece) {
+        color = piece.getColor();
+        type = piece.getType();
+        moveValidators = new ArrayList<>();
+
+        addMoveValidators();
+    }
+
+    /**
      * @see {@link hanto.studentanivarthi.common.piece.HantoGamePiece#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override

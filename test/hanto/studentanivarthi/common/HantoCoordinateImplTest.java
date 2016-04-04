@@ -24,6 +24,8 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.HantoPieceImpl;
 
 /**
  * Tests for the {@link HantoCoordinateImpl} class.

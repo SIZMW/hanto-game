@@ -6,7 +6,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package hanto.studentanivarthi.common;
+package hanto.studentanivarthi.common.piecemanager;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

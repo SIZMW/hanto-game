@@ -22,8 +22,8 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
-import hanto.studentanivarthi.common.HantoPlayerPieceManager;
-import hanto.studentanivarthi.common.HantoPlayerPieceManagerImpl;
+import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
+import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 
 /**
  * The implementation of Beta Hanto.
