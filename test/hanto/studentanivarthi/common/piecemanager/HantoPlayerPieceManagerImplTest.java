@@ -15,8 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import hanto.common.HantoPieceType;
-import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
-import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 
 /**
  * Test cases for Hanto player piece manager.
