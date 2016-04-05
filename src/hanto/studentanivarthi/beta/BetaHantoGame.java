@@ -4,7 +4,7 @@
 
 package hanto.studentanivarthi.beta;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
@@ -235,7 +235,7 @@ public class BetaHantoGame implements HantoGame {
 
             // Check if location is adjacent to some piece already on the board
             boolean isAdjacentToPiece = false;
-            final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
+            final Collection<HantoCoordinate> surroundings = coord.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
                 if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {

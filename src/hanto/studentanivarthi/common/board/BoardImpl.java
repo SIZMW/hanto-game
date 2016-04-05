@@ -4,10 +4,10 @@
 
 package hanto.studentanivarthi.common.board;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,7 +45,7 @@ public class BoardImpl implements Board {
 
         while (!list.isEmpty()) {
             final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
-            final List<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+            final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
                 if (board.containsKey(e) && board.get(e) != null) {

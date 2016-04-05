@@ -4,7 +4,7 @@
 
 package hanto.studentanivarthi.common.placepiecevalidators;
 
-import java.util.List;
+import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
@@ -34,7 +34,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
         }
 
         // Check if location is adjacent to some piece already on the board
-        final List<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
 
         for (HantoCoordinate e : surroundings) {
             if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {

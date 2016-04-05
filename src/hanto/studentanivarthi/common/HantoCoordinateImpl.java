@@ -5,6 +5,7 @@
 package hanto.studentanivarthi.common;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import hanto.common.HantoCoordinate;
@@ -78,7 +79,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      *
      * @return a {@link List}&lt;{@link HantoCoordinate}&gt;
      */
-    public List<HantoCoordinate> getSurroundingPieces() {
+    public Collection<HantoCoordinate> getSurroundingPieces() {
         final List<HantoCoordinate> surroundings = new ArrayList<>();
         surroundings.add(new HantoCoordinateImpl(x + 1, y));
         surroundings.add(new HantoCoordinateImpl(x - 1, y));
@@ -129,7 +130,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
             return false;
         }
 
-        final List<HantoCoordinate> surroundings = getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = getSurroundingPieces();
         boolean hasEmptyAdjacentSpot = false;
 
         for (HantoCoordinate e : surroundings) {

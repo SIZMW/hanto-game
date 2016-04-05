@@ -4,7 +4,7 @@
 
 package hanto.studentanivarthi.common.movevalidators;
 
-import java.util.List;
+import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
@@ -28,7 +28,7 @@ public class WalkMoveValidator implements MoveValidator {
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
-        final List<HantoCoordinate> surroundings = srcCoordImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = srcCoordImpl.getSurroundingPieces();
 
         // Coordinate is not next to the source
         if (!surroundings.contains(destCoordImpl)) {

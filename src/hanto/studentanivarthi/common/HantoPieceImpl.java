@@ -50,7 +50,7 @@ public class HantoPieceImpl implements HantoGamePiece {
      */
     public HantoPieceImpl(HantoPlayerColor color, HantoPieceType pieceType) {
         this.color = color;
-        this.type = pieceType;
+        type = pieceType;
         moveValidators = new ArrayList<>();
 
         addMoveValidators();

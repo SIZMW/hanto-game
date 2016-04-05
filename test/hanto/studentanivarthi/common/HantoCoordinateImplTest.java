@@ -13,6 +13,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
@@ -54,7 +55,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 2
     public void testSurroundingCoordinates() {
-        List<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+        Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
         assertEquals(surroundings.size(), 6);
 
         final List<HantoCoordinate> surr = new ArrayList<>();
