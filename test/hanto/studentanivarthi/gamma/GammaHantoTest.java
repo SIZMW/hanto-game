@@ -1,10 +1,7 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.gamma;
 
 import static hanto.common.HantoPieceType.BUTTERFLY;
@@ -52,8 +49,8 @@ public class GammaHantoTest {
             this.y = y;
         }
 
-        /*
-         * @see hanto.common.HantoCoordinate#getX()
+        /**
+         * @see {@link hanto.common.HantoCoordinate#getX()}
          */
         @Override
         public int getX() {
@@ -61,7 +58,7 @@ public class GammaHantoTest {
         }
 
         /*
-         * @see hanto.common.HantoCoordinate#getY()
+         * @see {@link hanto.common.HantoCoordinate#getY()}
          */
         @Override
         public int getY() {
@@ -70,6 +67,7 @@ public class GammaHantoTest {
     }
 
     private static HantoGameFactory factory = null;
+    private HantoGame game;
 
     /**
      * Initialize entities.
@@ -79,10 +77,8 @@ public class GammaHantoTest {
         factory = HantoGameFactory.getInstance();
     }
 
-    private HantoGame game;
-
     /**
-     * Setup
+     * Setup.
      */
     @Before
     public void setup() {
@@ -103,11 +99,9 @@ public class GammaHantoTest {
     @Test // 1
     public void bluePlacesInitialButterflyAtOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mr);
-
-        // Check the piece
         final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
+        assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
         assertEquals(BUTTERFLY, p.getType());
     }
@@ -120,11 +114,12 @@ public class GammaHantoTest {
      */
     @Test // 2
     public void redPlacesValidButterflyAfterBlue() throws HantoException {
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
 
-        final MoveResult mrR = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
-        assertEquals(OK, mrR);
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
     }
 
     /**
@@ -146,8 +141,8 @@ public class GammaHantoTest {
      */
     @Test(expected = HantoException.class) // 4
     public void redPlacesInitialCrabNotNextToOrigin() throws HantoException {
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
 
         game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(1, 1));
     }
@@ -170,8 +165,8 @@ public class GammaHantoTest {
      */
     @Test(expected = HantoException.class) // 6
     public void redPlacesInitialCrabAfterValidBlue() throws HantoException {
-        final MoveResult mrB = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mrB);
+        final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
 
         game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 1));
     }
@@ -183,6 +178,7 @@ public class GammaHantoTest {
      */
     @Test // 7
     public void bluePlacesThreeSparrowsAndIsValid() throws HantoException {
+        // Turn 1
         MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
@@ -197,6 +193,7 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
+        // Turn 2
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         p = game.getPieceAt(makeCoordinate(0, 1));
 
@@ -211,6 +208,7 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
+        // Turn 3
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
         p = game.getPieceAt(makeCoordinate(0, 2));
 
@@ -220,13 +218,13 @@ public class GammaHantoTest {
     }
 
     /**
-     * Tests placing three red sparrows and blue butterfly and two blue
-     * sparrows.
+     * Tests placing three red sparrows, a blue butterfly and two blue sparrows.
      *
      * @throws HantoException
      */
     @Test // 8
     public void redPlacesThreeSparrowsAndIsValid() throws HantoException {
+        // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
@@ -241,6 +239,7 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
+        // Turn 2
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         p = game.getPieceAt(makeCoordinate(0, 1));
 
@@ -255,6 +254,7 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
+        // Turn 3
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
         p = game.getPieceAt(makeCoordinate(0, 2));
 
@@ -484,7 +484,7 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
-        // Fails
+        // Turn 2, fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
         p = game.getPieceAt(makeCoordinate(0, 2));
     }
@@ -659,7 +659,7 @@ public class GammaHantoTest {
         mr = game.makeMove(SPARROW, makeCoordinate(1, -4), makeCoordinate(1, -3));
         p = game.getPieceAt(makeCoordinate(1, -3));
 
-        // There should be a draw here
+        // Draw game
         assertEquals(MoveResult.DRAW, mr);
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
@@ -819,7 +819,7 @@ public class GammaHantoTest {
         mr = game.makeMove(SPARROW, makeCoordinate(1, -4), makeCoordinate(1, -3));
         p = game.getPieceAt(makeCoordinate(1, -3));
 
-        // There should be a draw here
+        // Draw game
         assertEquals(MoveResult.DRAW, mr);
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
@@ -835,7 +835,7 @@ public class GammaHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class)
+    @Test(expected = HantoException.class) // 19
     public void makeInvalidMoveMakesGameBoardNotContiguous() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -867,7 +867,230 @@ public class GammaHantoTest {
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
 
-        // Fails
+        // Turn 3, fails
         mr = game.makeMove(SPARROW, makeCoordinate(0, 1), makeCoordinate(1, 1));
+    }
+
+    /**
+     * Tests placing red butterfly at the origin as the first move. Game is
+     * created with red being the first player.
+     *
+     * @throws HantoException
+     */
+    @Test // 20
+    public void redStartsAndPlacesInitialButterflyAtOrigin() throws HantoException {
+        game = factory.makeHantoGame(HantoGameID.GAMMA_HANTO, RED);
+
+        // Turn 1
+        final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+    }
+
+    /**
+     * Test the results from the game after both blue and red win by surrounding
+     * each other.
+     *
+     * @throws HantoException
+     */
+    @Test // 21
+    public void blueRedDrawGame() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Surround both red and blue butterfly pieces, which start next to each
+        // other
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        // Turn 5
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -2));
+        assertEquals(OK, mr);
+
+        // Move blue piece to surround the butterflies
+        // Turn 6
+        mr = game.makeMove(SPARROW, makeCoordinate(-1, 2), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Move red piece to surround both the butterflies
+        // Draw game
+        mr = game.makeMove(SPARROW, makeCoordinate(2, -2), makeCoordinate(1, -1));
+        assertEquals(MoveResult.DRAW, mr);
+    }
+
+    /**
+     * Test the results from the game after red wins.
+     *
+     * @throws HantoException
+     */
+    @Test // 22
+    public void redWinsGame() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        // Surround the blue butterfly
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-2, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        // Move red piece closer to blue butterfly
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 1), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Move blue piece closer to blue butterfly
+        // Turn 5
+        mr = game.makeMove(SPARROW, makeCoordinate(-2, 1), makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        // Red wins
+        mr = game.makeMove(SPARROW, makeCoordinate(2, -1), makeCoordinate(1, -1));
+        assertEquals(MoveResult.RED_WINS, mr);
+    }
+
+    /**
+     * Test the results from the game after blue wins.
+     *
+     * @throws HantoException
+     */
+    @Test // 23
+    public void blueWinsGame() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        // Surround the red butterfly
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        // Move blue piece closer to red butterfly
+        // Turn 4
+        mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        // Blue wins
+        mr = game.makeMove(SPARROW, makeCoordinate(-1, 1), makeCoordinate(0, 1));
+        assertEquals(MoveResult.BLUE_WINS, mr);
+    }
+
+    /**
+     * Tests trying to make a piece walk to a location that is not one
+     * coordinate away.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 23
+    public void walkPieceTwoCoordinatesAway() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 3));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Tests trying to make a piece walk to a location that is occupied.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 23
+    public void walkPieceToOccupiedCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Tests trying to make a piece walk and passing a location that is empty as
+     * the source.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 23
+    public void walkPieceFromEmptyCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, -1), makeCoordinate(0, 0));
+        assertEquals(OK, mr);
     }
 }
