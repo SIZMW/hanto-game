@@ -325,7 +325,6 @@ public class GammaHantoTest {
 
         // Turn 4, fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
-        p = game.getPieceAt(makeCoordinate(0, 3));
     }
 
     /**
@@ -391,7 +390,6 @@ public class GammaHantoTest {
 
         // Fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -4));
-        p = game.getPieceAt(makeCoordinate(0, -4));
     }
 
     /**
@@ -407,7 +405,6 @@ public class GammaHantoTest {
 
         // Place on same coordinate
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mr);
     }
 
     /**
@@ -458,7 +455,6 @@ public class GammaHantoTest {
 
         // Fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
-        p = game.getPieceAt(makeCoordinate(0, 2));
     }
 
     /**
@@ -486,7 +482,6 @@ public class GammaHantoTest {
 
         // Turn 2, fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
-        p = game.getPieceAt(makeCoordinate(0, 2));
     }
 
     /**
@@ -826,7 +821,6 @@ public class GammaHantoTest {
 
         // Fails
         mr = game.makeMove(SPARROW, makeCoordinate(1, 2), makeCoordinate(1, 1));
-        p = game.getPieceAt(makeCoordinate(1, 1));
     }
 
     /**
@@ -1041,7 +1035,7 @@ public class GammaHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 23
+    @Test(expected = HantoException.class) // 24
     public void walkPieceTwoCoordinatesAway() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -1052,7 +1046,6 @@ public class GammaHantoTest {
 
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 3));
-        assertEquals(OK, mr);
     }
 
     /**
@@ -1060,7 +1053,7 @@ public class GammaHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 23
+    @Test(expected = HantoException.class) // 25
     public void walkPieceToOccupiedCoordinate() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -1071,7 +1064,6 @@ public class GammaHantoTest {
 
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 1));
-        assertEquals(OK, mr);
     }
 
     /**
@@ -1080,7 +1072,7 @@ public class GammaHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 23
+    @Test(expected = HantoException.class) // 26
     public void walkPieceFromEmptyCoordinate() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -1091,6 +1083,5 @@ public class GammaHantoTest {
 
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, -1), makeCoordinate(0, 0));
-        assertEquals(OK, mr);
     }
 }
