@@ -15,6 +15,14 @@ import hanto.common.HantoPiece;
  */
 public interface Board {
     /**
+     * Returns whether the pieces on the game board are all organized in a
+     * contiguous fashion.
+     *
+     * @return true if contiguous, false otherwise
+     */
+    boolean arePiecesContiguous();
+
+    /**
      * Returns the piece at the specified coordinate.
      *
      * @param coordinate

@@ -15,7 +15,7 @@ import hanto.studentanivarthi.common.HantoPieceImpl;
 /**
  * The BoardImpl class is an implementation of the Board interface for the Hanto
  * game.
- * 
+ *
  * @author Aditya Nivarthi
  */
 public class BoardImpl implements Board {
@@ -26,6 +26,14 @@ public class BoardImpl implements Board {
      */
     public BoardImpl() {
         board = new HashMap<>();
+    }
+
+    /**
+     * @see {@link hanto.studentanivarthi.common.board.Board#arePiecesContiguous()}
+     */
+    @Override
+    public boolean arePiecesContiguous() {
+        return false; // TODO
     }
 
     /**

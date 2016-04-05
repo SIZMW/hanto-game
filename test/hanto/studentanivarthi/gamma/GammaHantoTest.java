@@ -220,7 +220,8 @@ public class GammaHantoTest {
     }
 
     /**
-     * Tests placing three red sparrows and two blue sparrows.
+     * Tests placing three red sparrows and blue butterfly and two blue
+     * sparrows.
      *
      * @throws HantoException
      */
@@ -502,5 +503,329 @@ public class GammaHantoTest {
         assertEquals(
                 "HantoCoordinateImpl [x=0, y=0]: HantoPieceImpl [color=BLUE, type=Butterfly]\n",
                 game.getPrintableBoard());
+    }
+
+    /**
+     * Tests playing the game to 20 moves, where no one wins and it is called a
+     * draw.
+     *
+     * @throws HantoException
+     */
+    @Test // 17
+    public void gameRunsToTwentyMovesAndDraw() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, -1));
+        p = game.getPieceAt(makeCoordinate(0, -1));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        p = game.getPieceAt(makeCoordinate(0, -2));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -3));
+        p = game.getPieceAt(makeCoordinate(0, -3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -4));
+        p = game.getPieceAt(makeCoordinate(0, -4));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 5
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -5));
+        p = game.getPieceAt(makeCoordinate(0, -5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 6
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -6));
+        p = game.getPieceAt(makeCoordinate(0, -6));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 7, start moves
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 5), makeCoordinate(1, 4));
+        p = game.getPieceAt(makeCoordinate(1, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(0, -6), makeCoordinate(1, -6));
+        p = game.getPieceAt(makeCoordinate(1, -6));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 8
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 4), makeCoordinate(1, 3));
+        p = game.getPieceAt(makeCoordinate(1, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -6), makeCoordinate(1, -5));
+        p = game.getPieceAt(makeCoordinate(1, -5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 9
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 3), makeCoordinate(1, 2));
+        p = game.getPieceAt(makeCoordinate(1, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -5), makeCoordinate(1, -4));
+        p = game.getPieceAt(makeCoordinate(1, -4));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 10
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 2), makeCoordinate(1, 1));
+        p = game.getPieceAt(makeCoordinate(1, 1));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -4), makeCoordinate(1, -3));
+        p = game.getPieceAt(makeCoordinate(1, -3));
+
+        // There should be a draw here
+        assertEquals(MoveResult.DRAW, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+    }
+
+    /**
+     * Tests playing the game to 20 moves, where no one wins and it is called a
+     * draw, then trying another move which fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 18
+    public void makeMoveAfterGameEndsInDrawByGoingToTwentyMoves() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, -1));
+        p = game.getPieceAt(makeCoordinate(0, -1));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        p = game.getPieceAt(makeCoordinate(0, -2));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        p = game.getPieceAt(makeCoordinate(0, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -3));
+        p = game.getPieceAt(makeCoordinate(0, -3));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        p = game.getPieceAt(makeCoordinate(0, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -4));
+        p = game.getPieceAt(makeCoordinate(0, -4));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 5
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        p = game.getPieceAt(makeCoordinate(0, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -5));
+        p = game.getPieceAt(makeCoordinate(0, -5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 6
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        p = game.getPieceAt(makeCoordinate(0, 5));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -6));
+        p = game.getPieceAt(makeCoordinate(0, -6));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 7, start moves
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 5), makeCoordinate(1, 4));
+        p = game.getPieceAt(makeCoordinate(1, 4));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(0, -6), makeCoordinate(1, -6));
+        p = game.getPieceAt(makeCoordinate(1, -6));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 8
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 4), makeCoordinate(1, 3));
+        p = game.getPieceAt(makeCoordinate(1, 3));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -6), makeCoordinate(1, -5));
+        p = game.getPieceAt(makeCoordinate(1, -5));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 9
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 3), makeCoordinate(1, 2));
+        p = game.getPieceAt(makeCoordinate(1, 2));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -5), makeCoordinate(1, -4));
+        p = game.getPieceAt(makeCoordinate(1, -4));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Turn 10
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 2), makeCoordinate(1, 1));
+        p = game.getPieceAt(makeCoordinate(1, 1));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -4), makeCoordinate(1, -3));
+        p = game.getPieceAt(makeCoordinate(1, -3));
+
+        // There should be a draw here
+        assertEquals(MoveResult.DRAW, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Fails
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 2), makeCoordinate(1, 1));
+        p = game.getPieceAt(makeCoordinate(1, 1));
     }
 }

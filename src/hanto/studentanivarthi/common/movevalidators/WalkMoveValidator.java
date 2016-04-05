@@ -38,11 +38,6 @@ public class WalkMoveValidator implements MoveValidator {
         if (board.hasPieceAt(dest) && board.getPieceAt(dest) != null) {
             return false;
         }
-
-        // HantoPieceImpl piece = new HantoPieceImpl(board.get(src));
-
-        // TODO finish this method
-
         return true;
     }
 }

@@ -147,8 +147,7 @@ public class GammaHantoGame implements HantoGame {
     private MoveResult getMoveResult() {
         boolean blueIsSurrounded = false;
         boolean redIsSurrounded = false;
-        boolean blueIsOutOfPieces = false;
-        boolean redIsOutOfPieces = false;
+
         MoveResult mr = MoveResult.OK;
 
         // Check if butterfly is surrounded if it has been placed
@@ -162,16 +161,10 @@ public class GammaHantoGame implements HantoGame {
                     .isCoordinateSurrounded(board);
         }
 
-        // Check if players are out of pieces
-        blueIsOutOfPieces = blueTurn.getPlayerPieceManager().isOutOfPieces();
-        redIsOutOfPieces = redTurn.getPlayerPieceManager().isOutOfPieces();
-
         isGameOver = true;
 
         // Determine correct result
         if (blueIsSurrounded && redIsSurrounded) {
-            mr = MoveResult.DRAW;
-        } else if (!blueIsSurrounded && !redIsSurrounded && blueIsOutOfPieces && redIsOutOfPieces) {
             mr = MoveResult.DRAW;
         } else if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_TURNS) {
             mr = MoveResult.DRAW;
