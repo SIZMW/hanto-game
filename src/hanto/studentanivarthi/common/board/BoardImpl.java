@@ -48,7 +48,7 @@ public class BoardImpl implements Board {
             final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
-                if (board.containsKey(e) && board.get(e) != null) {
+                if (hasPieceAt(e)) {
                     if (!visitedCoordinates.contains(e)) {
                         visitedCoordinates.add(e);
                         list.addLast(e);
