@@ -27,7 +27,7 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
         HantoCoordinateImpl coord = new HantoCoordinateImpl(to);
 
         // Piece already in that spot
-        if (board.hasPieceAt(coord) && board.getPieceAt(coord) != null) {
+        if (board.hasPieceAt(coord)) {
             return false;
         }
 

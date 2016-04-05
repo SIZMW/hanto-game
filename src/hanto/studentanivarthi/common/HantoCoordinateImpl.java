@@ -133,7 +133,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         boolean hasEmptyAdjacentSpot = false;
 
         for (HantoCoordinate e : surroundings) {
-            if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
+            if (board.hasPieceAt(e)) {
                 hasEmptyAdjacentSpot = false;
             } else {
                 hasEmptyAdjacentSpot = true;

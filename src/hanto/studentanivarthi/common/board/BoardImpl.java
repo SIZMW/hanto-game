@@ -17,8 +17,8 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.HantoPieceImpl;
 
 /**
- * The BoardImpl class is an implementation of the Board interface for the Hanto
- * game.
+ * The BoardImpl class is an implementation of the {@link Board} interface for
+ * the Hanto game.
  *
  * @author Aditya Nivarthi
  */
@@ -67,8 +67,8 @@ public class BoardImpl implements Board {
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
         try {
             // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(coordinate);
-            final HantoPiece piece = board.get(c);
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            final HantoPiece piece = board.get(coordinateImpl);
             return piece;
         } catch (NullPointerException e) {
             return null;
@@ -81,7 +81,7 @@ public class BoardImpl implements Board {
     @Override
     public boolean hasPieceAt(HantoCoordinate coordinate) {
         HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        return board.containsKey(coordinateImpl);
+        return board.containsKey(coordinateImpl) && board.get(coordinateImpl) != null;
     }
 
     /**
@@ -126,13 +126,13 @@ public class BoardImpl implements Board {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder();
         for (HantoCoordinate c : board.keySet()) {
-            sb.append(c);
-            sb.append(": ");
-            sb.append(board.get(c));
-            sb.append('\n');
+            stringBuilder.append(c);
+            stringBuilder.append(": ");
+            stringBuilder.append(board.get(c));
+            stringBuilder.append('\n');
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 }

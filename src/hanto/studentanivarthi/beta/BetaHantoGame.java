@@ -95,14 +95,7 @@ public class BetaHantoGame implements HantoGame {
      */
     @Override
     public HantoPiece getPieceAt(HantoCoordinate where) {
-        try {
-            // Convert to our coordinate implementation
-            final HantoCoordinateImpl c = new HantoCoordinateImpl(where);
-            final HantoPiece piece = board.getPieceAt(c);
-            return piece;
-        } catch (NullPointerException e) {
-            return null;
-        }
+        return board.getPieceAt(where);
     }
 
     /**
@@ -236,7 +229,7 @@ public class BetaHantoGame implements HantoGame {
             return true;
         } else {
             // Piece already in that spot
-            if (board.hasPieceAt(coord) && board.getPieceAt(coord) != null) {
+            if (board.hasPieceAt(coord)) {
                 return false;
             }
 

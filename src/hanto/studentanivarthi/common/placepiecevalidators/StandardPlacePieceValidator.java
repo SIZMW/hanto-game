@@ -29,7 +29,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
         HantoPieceImpl type = new HantoPieceImpl(piece);
 
         // Piece already in that spot
-        if (board.hasPieceAt(coord) && board.getPieceAt(coord) != null) {
+        if (board.hasPieceAt(coord)) {
             return false;
         }
 

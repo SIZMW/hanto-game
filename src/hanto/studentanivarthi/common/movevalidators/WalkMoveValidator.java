@@ -36,7 +36,7 @@ public class WalkMoveValidator implements MoveValidator {
         }
 
         // Piece in that spot
-        if (board.hasPieceAt(dest) && board.getPieceAt(dest) != null) {
+        if (board.hasPieceAt(dest)) {
             return false;
         }
 
