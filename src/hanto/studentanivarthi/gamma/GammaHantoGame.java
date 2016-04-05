@@ -204,6 +204,10 @@ public class GammaHantoGame implements HantoGame {
      */
     private boolean isMoveValid(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoPieceImpl type) {
+        if (!currentTurn.getPlayerButterflyCoordinate().isPresent()) {
+            return false;
+        }
+
         return type.canMove(src, dest, board);
     }
 

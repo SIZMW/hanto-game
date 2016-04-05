@@ -1084,4 +1084,23 @@ public class GammaHantoTest {
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, -1), makeCoordinate(0, 0));
     }
+
+    /**
+     * Tests trying to make a piece walk without placing the butterfly on the
+     * board.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 27
+    public void walkPieceWithoutPlacingButterfly() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 0), makeCoordinate(0, 1));
+    }
 }
