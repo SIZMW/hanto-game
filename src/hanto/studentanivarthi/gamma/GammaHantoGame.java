@@ -41,7 +41,7 @@ public class GammaHantoGame implements HantoGame {
 
     /**
      * The constant associated with the number of internal turns used for the
-     * first turn cycle (blue goes , red goes, or vice versa).
+     * first turn cycle (blue goes, red goes, or vice versa).
      */
     private final int FIRST_TURN = 2;
 

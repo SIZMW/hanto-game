@@ -828,4 +828,46 @@ public class GammaHantoTest {
         mr = game.makeMove(SPARROW, makeCoordinate(1, 2), makeCoordinate(1, 1));
         p = game.getPieceAt(makeCoordinate(1, 1));
     }
+
+    /**
+     * Tests making a move that is invalid because it makes the board not
+     * contiguous, which throws an exception.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class)
+    public void makeInvalidMoveMakesGameBoardNotContiguous() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, -1));
+        p = game.getPieceAt(makeCoordinate(0, -1));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(BUTTERFLY, p.getType());
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        p = game.getPieceAt(makeCoordinate(0, 1));
+
+        assertEquals(OK, mr);
+        assertEquals(BLUE, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        p = game.getPieceAt(makeCoordinate(0, -2));
+
+        assertEquals(OK, mr);
+        assertEquals(RED, p.getColor());
+        assertEquals(SPARROW, p.getType());
+
+        // Fails
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 1), makeCoordinate(1, 1));
+    }
 }

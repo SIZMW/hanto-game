@@ -73,9 +73,7 @@ public class PlayerTurnImpl implements PlayerTurn {
      */
     @Override
     public void setPlayerButterflyCoordinate(HantoCoordinate coord) {
-        if (coord != null) {
-            butterflyCoordinate = Optional.of(coord);
-        }
+        butterflyCoordinate = Optional.of(coord);
     }
 
     /**

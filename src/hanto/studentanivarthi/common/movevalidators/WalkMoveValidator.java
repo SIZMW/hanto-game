@@ -8,6 +8,7 @@ import java.util.List;
 
 import hanto.common.HantoCoordinate;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.HantoPieceImpl;
 import hanto.studentanivarthi.common.board.Board;
 
 /**
@@ -38,6 +39,20 @@ public class WalkMoveValidator implements MoveValidator {
         if (board.hasPieceAt(dest) && board.getPieceAt(dest) != null) {
             return false;
         }
+
+        // Simulate the move to check continuity in the pieces
+        HantoPieceImpl piece = new HantoPieceImpl(board.removePieceAt(from));
+        board.placePieceAt(to, piece);
+
+        // Fails continuity test
+        if (!board.arePiecesContiguous()) {
+            return false;
+        }
+
+        // Return piece back to original place
+        HantoPieceImpl returnPiece = new HantoPieceImpl(board.removePieceAt(to));
+        board.placePieceAt(from, returnPiece);
+
         return true;
     }
 }

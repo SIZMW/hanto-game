@@ -5,7 +5,11 @@
 package hanto.studentanivarthi.common.board;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
@@ -33,7 +37,27 @@ public class BoardImpl implements Board {
      */
     @Override
     public boolean arePiecesContiguous() {
-        return false; // TODO
+        LinkedList<HantoCoordinate> list = new LinkedList<>();
+        Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
+
+        HantoCoordinate starterCoordinate = board.keySet().iterator().next();
+        list.add(starterCoordinate);
+
+        while (!list.isEmpty()) {
+            HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
+            List<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+
+            for (HantoCoordinate e : surroundings) {
+                if (board.containsKey(e) && board.get(e) != null) {
+                    if (!visitedCoordinates.contains(e)) {
+                        visitedCoordinates.add(e);
+                        list.addLast(e);
+                    }
+                }
+            }
+        }
+
+        return visitedCoordinates.size() == board.keySet().size();
     }
 
     /**
