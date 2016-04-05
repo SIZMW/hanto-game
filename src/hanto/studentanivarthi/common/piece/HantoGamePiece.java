@@ -20,13 +20,13 @@ public interface HantoGamePiece extends HantoPiece {
     /**
      * Returns whether this piece can move to the specified location.
      *
-     * @param from
+     * @param src
      *            The {@link HantoCoordinate} to move from.
-     * @param to
+     * @param dest
      *            The {@link HantoCoordinate} to move to.
      * @param board
      *            The game {@link Board} with the occupied locations.
      * @return true if able to move, false otherwise.
      */
-    boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board);
+    boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board);
 }

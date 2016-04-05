@@ -106,33 +106,33 @@ public class GammaHantoGame implements HantoGame {
      * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
      */
     @Override
-    public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to)
+    public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate src, HantoCoordinate dest)
             throws HantoException {
         // Game already over
         if (isGameOver) {
             throw new HantoException("You cannot move after the game is finished");
         }
 
-        final HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
-        final HantoPieceImpl loc = new HantoPieceImpl(currentTurn.getColor(), pieceType);
+        final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
+        final HantoPieceImpl pieceImpl = new HantoPieceImpl(currentTurn.getColor(), pieceType);
 
         // Place a new piece
-        if (from == null) {
-            if (!isPlacePieceValid(dest, loc)) {
+        if (src == null) {
+            if (!isPlacePieceValid(destCoordImpl, pieceImpl)) {
                 throw new HantoException(
                         currentTurn.getColor().name() + " cannot place a piece in that location");
             }
 
-            placePlayerPiece(dest, loc);
+            placePlayerPiece(destCoordImpl, pieceImpl);
         } else { // Move piece
-            final HantoCoordinateImpl src = new HantoCoordinateImpl(from);
+            final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
 
-            if (!isMoveValid(src, dest, loc)) {
+            if (!isMoveValid(srcCoordImpl, destCoordImpl, pieceImpl)) {
                 throw new HantoException(
                         currentTurn.getColor().name() + " cannot move a piece to that location");
             }
 
-            movePlayerPiece(src, dest, loc);
+            movePlayerPiece(srcCoordImpl, destCoordImpl, pieceImpl);
         }
 
         switchPlayerTurn();
@@ -182,41 +182,41 @@ public class GammaHantoGame implements HantoGame {
     /**
      * Returns whether the specified coordinate is the origin or not.
      *
-     * @param coord
+     * @param coordinate
      *            The {@link HantoCoordiante} to check.
      * @return true if origin, false otherwise
      */
-    private boolean isCoordinateOrigin(HantoCoordinate coord) {
-        return coord.equals(ORIGIN);
+    private boolean isCoordinateOrigin(HantoCoordinate coordinate) {
+        return coordinate.equals(ORIGIN);
     }
 
     /**
      * Determines if a piece can be moved from a coordinate to another
      * coordinate.
      *
-     * @param from
+     * @param src
      *            The starting {@link HantoCoordinateImpl}.
-     * @param to
+     * @param dest
      *            The destination {@link HantoCoordinateImpl}.
      * @param type
      *            The {@link HantoPieceImpl} to move.
      * @return true if can be moved, false otherwise
      */
-    private boolean isMoveValid(HantoCoordinateImpl from, HantoCoordinateImpl to,
+    private boolean isMoveValid(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoPieceImpl type) {
-        return type.canMove(from, to, board);
+        return type.canMove(src, dest, board);
     }
 
     /**
      * Determines if a piece can be placed at the specified coordinate.
      *
-     * @param coord
+     * @param dest
      *            The {@link HantoCoordinateImpl} to place at.
-     * @param type
+     * @param piece
      *            The {@link HantoPieceImpl} to place.
      * @return true if can be placed, false otherwise
      */
-    private boolean isPlacePieceValid(HantoCoordinateImpl coord, HantoPieceImpl type) {
+    private boolean isPlacePieceValid(HantoCoordinateImpl dest, HantoPieceImpl piece) {
         // Check if the butterfly is placed before the fourth turn
         if (!currentTurn.getPlayerButterflyCoordinate().isPresent()
                 && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
@@ -224,14 +224,14 @@ public class GammaHantoGame implements HantoGame {
         }
 
         // Check if there are remaining pieces of that type to place
-        if (!currentTurn.getPlayerPieceManager().canPlacePiece(type.getType())) {
+        if (!currentTurn.getPlayerPieceManager().canPlacePiece(piece.getType())) {
             return false;
         }
 
         // First move
         if (isFirstMove) {
             // Not origin move
-            if (!isCoordinateOrigin(coord)) {
+            if (!isCoordinateOrigin(dest)) {
                 return false;
             }
 
@@ -245,38 +245,38 @@ public class GammaHantoGame implements HantoGame {
                 validator = new StandardPlacePieceValidator();
             }
 
-            return validator.canPlacePiece(coord, type, board);
+            return validator.canPlacePiece(dest, piece, board);
         }
     }
 
     /**
      * Moves the piece from a coordinate to the other coordinate.
      *
-     * @param from
+     * @param src
      *            The starting {@link HantoCoordinate}.
-     * @param to
+     * @param dest
      *            The destination {@link HantoCoordinate}.
      * @param piece
      *            The {@link HantoPiece} to move.
      */
-    private void movePlayerPiece(HantoCoordinate from, HantoCoordinate to, HantoPiece piece) {
-        board.removePieceAt(from);
-        board.placePieceAt(to, piece);
+    private void movePlayerPiece(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece) {
+        board.removePieceAt(src);
+        board.placePieceAt(dest, piece);
     }
 
     /**
      * Places the specified piece at the specified coordinate.
      *
-     * @param coord
+     * @param dest
      *            The {@link HantoCoordinate} to place the piece.
      * @param piece
      *            The {@link HantoPiece} to place.
      */
-    private void placePlayerPiece(HantoCoordinate coord, HantoPiece piece) {
-        board.placePieceAt(coord, piece);
+    private void placePlayerPiece(HantoCoordinate dest, HantoPiece piece) {
+        board.placePieceAt(dest, piece);
 
         if (piece.getType() == HantoPieceType.BUTTERFLY) {
-            currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(coord));
+            currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
 
         currentTurn.getPlayerPieceManager().placePiece(piece.getType());

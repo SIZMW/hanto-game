@@ -18,11 +18,11 @@ public interface HantoPlayerPieceManager {
      * Returns whether the piece can be placed for this player. If it can, the
      * number remaining is decremented.
      *
-     * @param piece
+     * @param pieceType
      *            The {@link HantoPieceType} to check.
      * @return true if it can be placed, false otherwise
      */
-    boolean canPlacePiece(HantoPieceType piece);
+    boolean canPlacePiece(HantoPieceType pieceType);
 
     /**
      * Returns whether the player has any more pieces left to play.
@@ -35,8 +35,8 @@ public interface HantoPlayerPieceManager {
      * Marks the specified piece type as being placed, and lowers the remaining
      * number of that piece.
      *
-     * @param type
+     * @param pieceType
      *            The {@link HantoPieceType} to place.
      */
-    void placePiece(HantoPieceType type);
+    void placePiece(HantoPieceType pieceType);
 }

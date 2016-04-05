@@ -18,13 +18,13 @@ public interface MoveValidator {
      * Determines whether the piece can move from the starting coordinate to the
      * destination coordinate given the current board.
      *
-     * @param from
+     * @param src
      *            The starting {@link HantoCoordinate}.
-     * @param to
+     * @param dest
      *            The destination {@link HantoCoordinate}.
      * @param board
      *            The current game {@link Board}.
      * @return true if the move can be made, false otherwise.
      */
-    boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board);
+    boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board);
 }

@@ -37,15 +37,15 @@ public class BoardImpl implements Board {
      */
     @Override
     public boolean arePiecesContiguous() {
-        LinkedList<HantoCoordinate> list = new LinkedList<>();
-        Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
+        final LinkedList<HantoCoordinate> list = new LinkedList<>();
+        final Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
 
-        HantoCoordinate starterCoordinate = board.keySet().iterator().next();
+        final HantoCoordinate starterCoordinate = board.keySet().iterator().next();
         list.add(starterCoordinate);
 
         while (!list.isEmpty()) {
-            HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
-            List<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+            final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
+            final List<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
 
             for (HantoCoordinate e : surroundings) {
                 if (board.containsKey(e) && board.get(e) != null) {
@@ -80,7 +80,7 @@ public class BoardImpl implements Board {
      */
     @Override
     public boolean hasPieceAt(HantoCoordinate coordinate) {
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         return board.containsKey(coordinateImpl) && board.get(coordinateImpl) != null;
     }
 
@@ -97,8 +97,8 @@ public class BoardImpl implements Board {
      */
     @Override
     public boolean placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
 
         if (hasPieceAt(coordinateImpl)) {
             return false;
@@ -114,7 +114,7 @@ public class BoardImpl implements Board {
     @Override
     public HantoPiece removePieceAt(HantoCoordinate coordinate) throws ClassCastException {
         try {
-            HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
             return board.remove(coordinateImpl);
         } catch (NullPointerException e) {
             return null;

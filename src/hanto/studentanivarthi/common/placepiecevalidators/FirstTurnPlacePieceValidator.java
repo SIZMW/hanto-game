@@ -23,20 +23,20 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
      * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece, Board board) {
-        HantoCoordinateImpl coord = new HantoCoordinateImpl(to);
+    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, Board board) {
+        final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Piece already in that spot
-        if (board.hasPieceAt(coord)) {
+        if (board.hasPieceAt(destCoordImpl)) {
             return false;
         }
 
         // Check if location is adjacent to some piece already on the board
         boolean isAdjacentToPiece = false;
-        final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
+        final List<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
 
-        for (HantoCoordinate e : surroundings) {
-            if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
+        for (HantoCoordinate c : surroundings) {
+            if (board.hasPieceAt(c) && board.getPieceAt(c) != null) {
                 isAdjacentToPiece = true;
                 break;
             }

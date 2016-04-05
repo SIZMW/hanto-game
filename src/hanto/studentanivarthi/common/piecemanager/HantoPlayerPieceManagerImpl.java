@@ -51,8 +51,8 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
      * @see {@link hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager#canPlacePiece()}
      */
     @Override
-    public boolean canPlacePiece(HantoPieceType piece) {
-        switch (piece) {
+    public boolean canPlacePiece(HantoPieceType pieceType) {
+        switch (pieceType) {
             case BUTTERFLY:
                 return butterfly > 0;
             case CRAB:
@@ -82,8 +82,8 @@ public class HantoPlayerPieceManagerImpl implements HantoPlayerPieceManager {
      * @see {@link hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager#placePiece()}
      */
     @Override
-    public void placePiece(HantoPieceType type) {
-        switch (type) {
+    public void placePiece(HantoPieceType pieceType) {
+        switch (pieceType) {
             case BUTTERFLY:
                 butterfly = butterfly > 0 ? butterfly - 1 : 0;
                 break;

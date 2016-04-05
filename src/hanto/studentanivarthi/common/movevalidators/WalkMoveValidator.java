@@ -23,26 +23,26 @@ public class WalkMoveValidator implements MoveValidator {
      * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board) {
+    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board) {
         // TODO make this generic for x length walks
-        HantoCoordinateImpl src = new HantoCoordinateImpl(from);
-        HantoCoordinateImpl dest = new HantoCoordinateImpl(to);
+        final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
+        final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
-        List<HantoCoordinate> surrounding = src.getSurroundingPieces();
+        final List<HantoCoordinate> surroundings = srcCoordImpl.getSurroundingPieces();
 
         // Coordinate is not next to the source
-        if (!surrounding.contains(dest)) {
+        if (!surroundings.contains(destCoordImpl)) {
             return false;
         }
 
         // Piece in that spot
-        if (board.hasPieceAt(dest)) {
+        if (board.hasPieceAt(destCoordImpl)) {
             return false;
         }
 
         // Simulate the move to check continuity in the pieces
-        HantoPieceImpl piece = new HantoPieceImpl(board.removePieceAt(from));
-        board.placePieceAt(to, piece);
+        final HantoPieceImpl srcPieceImpl = new HantoPieceImpl(board.removePieceAt(src));
+        board.placePieceAt(dest, srcPieceImpl);
 
         // Fails continuity test
         if (!board.arePiecesContiguous()) {
@@ -50,8 +50,8 @@ public class WalkMoveValidator implements MoveValidator {
         }
 
         // Return piece back to original place
-        HantoPieceImpl returnPiece = new HantoPieceImpl(board.removePieceAt(to));
-        board.placePieceAt(from, returnPiece);
+        final HantoPieceImpl returnPieceImpl = new HantoPieceImpl(board.removePieceAt(dest));
+        board.placePieceAt(src, returnPieceImpl);
 
         return true;
     }

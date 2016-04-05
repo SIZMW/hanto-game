@@ -24,21 +24,21 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
      * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate to, HantoPiece piece, Board board) {
-        HantoCoordinateImpl coord = new HantoCoordinateImpl(to);
-        HantoPieceImpl type = new HantoPieceImpl(piece);
+    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, Board board) {
+        final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
+        final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
 
         // Piece already in that spot
-        if (board.hasPieceAt(coord)) {
+        if (board.hasPieceAt(destCoordImpl)) {
             return false;
         }
 
         // Check if location is adjacent to some piece already on the board
-        final List<HantoCoordinate> surroundings = coord.getSurroundingPieces();
+        final List<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
 
         for (HantoCoordinate e : surroundings) {
             if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
-                if (!type.getColor().equals(board.getPieceAt(e).getColor())) {
+                if (!pieceImpl.getColor().equals(board.getPieceAt(e).getColor())) {
                     return false;
                 }
             }

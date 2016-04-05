@@ -50,16 +50,16 @@ public interface PlayerTurn {
     /**
      * Sets the player's butterfly location to the specified coordinate.
      *
-     * @param coord
+     * @param coordinate
      *            The {@link HantoCoordinate} of the butterfly.
      */
-    void setPlayerButterflyCoordinate(HantoCoordinate coord);
+    void setPlayerButterflyCoordinate(HantoCoordinate coordinate);
 
     /**
      * Updates the turn count by the specified amount.
      *
-     * @param update
+     * @param delta
      *            The integer value to update by.
      */
-    void updateTurnCount(int update);
+    void updateTurnCount(int delta);
 }

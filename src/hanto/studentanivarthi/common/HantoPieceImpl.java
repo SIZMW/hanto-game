@@ -45,12 +45,12 @@ public class HantoPieceImpl implements HantoGamePiece {
      *
      * @param color
      *            the piece color
-     * @param type
+     * @param pieceType
      *            the piece type
      */
-    public HantoPieceImpl(HantoPlayerColor color, HantoPieceType type) {
+    public HantoPieceImpl(HantoPlayerColor color, HantoPieceType pieceType) {
         this.color = color;
-        this.type = type;
+        this.type = pieceType;
         moveValidators = new ArrayList<>();
 
         addMoveValidators();
@@ -60,9 +60,9 @@ public class HantoPieceImpl implements HantoGamePiece {
      * @see {@link hanto.studentanivarthi.common.piece.HantoGamePiece#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate from, HantoCoordinate to, Board board) {
+    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board) {
         for (MoveValidator m : moveValidators) {
-            if (m.canMove(from, to, board)) {
+            if (m.canMove(src, dest, board)) {
                 return true;
             }
         }
