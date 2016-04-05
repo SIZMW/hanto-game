@@ -55,7 +55,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 2
     public void testSurroundingCoordinates() {
-        Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
         assertEquals(surroundings.size(), 6);
 
         final List<HantoCoordinate> surr = new ArrayList<>();
@@ -76,7 +76,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 3
     public void testIsCoordinateNotSurroundedEmptyBoard() {
-        Board board = new BoardImpl();
+        final Board board = new BoardImpl();
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
@@ -85,7 +85,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 4
     public void testIsCoordinateNotSurroundedNullBoard() {
-        Board board = null;
+        final Board board = null;
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
@@ -94,7 +94,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 5
     public void testIsCoordinateNotSurrounded() {
-        Board board = new BoardImpl();
+        final Board board = new BoardImpl();
         board.placePieceAt(new HantoCoordinateImpl(0, 1),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
 
@@ -106,7 +106,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 6
     public void testIsCoordinateSurrounded() {
-        Board board = new BoardImpl();
+        final Board board = new BoardImpl();
 
         board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));

@@ -23,7 +23,7 @@ import hanto.studentanivarthi.common.HantoPieceImpl;
  * @author Aditya Nivarthi
  */
 public class BoardImpl implements Board {
-    private Map<HantoCoordinate, HantoPiece> board;
+    private final Map<HantoCoordinate, HantoPiece> board;
 
     /**
      * Creates a BoardImpl instance.
