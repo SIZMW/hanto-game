@@ -14,7 +14,7 @@ import java.util.Set;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.HantoPieceImpl;
+import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
  * The BoardImpl class is an implementation of the {@link Board} interface for

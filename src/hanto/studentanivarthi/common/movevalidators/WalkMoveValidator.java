@@ -8,8 +8,8 @@ import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.HantoPieceImpl;
 import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
  * The WalkMoveValidator is a subset of the move validators that considers

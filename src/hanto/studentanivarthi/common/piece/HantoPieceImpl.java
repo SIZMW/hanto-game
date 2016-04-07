@@ -2,7 +2,7 @@
  * This class was created for the Hanto game implementation for CS 4233.
  */
 
-package hanto.studentanivarthi.common;
+package hanto.studentanivarthi.common.piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,6 @@ import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.board.Board;
 import hanto.studentanivarthi.common.movevalidators.MoveValidator;
 import hanto.studentanivarthi.common.movevalidators.WalkMoveValidator;
-import hanto.studentanivarthi.common.piece.HantoGamePiece;
 
 /**
  * Implementation of the {@link HantoPiece}.

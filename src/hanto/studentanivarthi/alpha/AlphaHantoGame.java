@@ -22,7 +22,7 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.HantoPieceImpl;
+import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
  * The implementation of Alpha Hanto.

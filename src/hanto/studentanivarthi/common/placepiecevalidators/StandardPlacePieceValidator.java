@@ -9,8 +9,8 @@ import java.util.Collection;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.HantoPieceImpl;
 import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
  * The StandardPlacePieceValidator defines the requirements to place a piece
