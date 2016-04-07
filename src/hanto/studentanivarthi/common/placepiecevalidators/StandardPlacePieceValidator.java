@@ -37,7 +37,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
         final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
 
         for (HantoCoordinate e : surroundings) {
-            if (board.hasPieceAt(e) && board.getPieceAt(e) != null) {
+            if (board.hasPieceAt(e)) {
                 if (!pieceImpl.getColor().equals(board.getPieceAt(e).getColor())) {
                     return false;
                 }

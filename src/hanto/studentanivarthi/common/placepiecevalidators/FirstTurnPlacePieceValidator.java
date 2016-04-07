@@ -36,7 +36,7 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
         final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
 
         for (HantoCoordinate c : surroundings) {
-            if (board.hasPieceAt(c) && board.getPieceAt(c) != null) {
+            if (board.hasPieceAt(c)) {
                 isAdjacentToPiece = true;
                 break;
             }
