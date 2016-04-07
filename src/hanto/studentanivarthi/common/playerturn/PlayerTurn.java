@@ -4,8 +4,6 @@
 
 package hanto.studentanivarthi.common.playerturn;
 
-import java.util.Optional;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
@@ -26,12 +24,12 @@ public interface PlayerTurn {
     HantoPlayerColor getColor();
 
     /**
-     * Returns this player's butterfly coordinate as an {@link Optional}, to
-     * handle if the butterfly has not been placed.
+     * Returns this player's butterfly coordinate if it exists, or null if it
+     * has not been placed.
      *
-     * @return an {@link Optional}&lt;{@link HantoCoordinate}&gt;
+     * @return a {@link HantoCoordinate}
      */
-    Optional<HantoCoordinate> getPlayerButterflyCoordinate();
+    HantoCoordinate getPlayerButterflyCoordinate();
 
     /**
      * Returns the player piece manager for this player.
@@ -46,6 +44,13 @@ public interface PlayerTurn {
      * @return an integer
      */
     int getTurnCount();
+
+    /**
+     * Returns whether this player has a butterfly placed on the board.
+     *
+     * @return true if butterfly exists, false otherwise
+     */
+    boolean hasButterflyCoordinate();
 
     /**
      * Sets the player's butterfly location to the specified coordinate.

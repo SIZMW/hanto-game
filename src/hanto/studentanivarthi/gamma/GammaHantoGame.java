@@ -151,13 +151,13 @@ public class GammaHantoGame implements HantoGame {
         MoveResult mr = MoveResult.OK;
 
         // Check if butterfly is surrounded if it has been placed
-        if (blueTurn.getPlayerButterflyCoordinate().isPresent()) {
-            blueIsSurrounded = new HantoCoordinateImpl(
-                    blueTurn.getPlayerButterflyCoordinate().get()).isCoordinateSurrounded(board);
+        if (blueTurn.hasButterflyCoordinate()) {
+            blueIsSurrounded = new HantoCoordinateImpl(blueTurn.getPlayerButterflyCoordinate())
+                    .isCoordinateSurrounded(board);
         }
 
-        if (redTurn.getPlayerButterflyCoordinate().isPresent()) {
-            redIsSurrounded = new HantoCoordinateImpl(redTurn.getPlayerButterflyCoordinate().get())
+        if (redTurn.hasButterflyCoordinate()) {
+            redIsSurrounded = new HantoCoordinateImpl(redTurn.getPlayerButterflyCoordinate())
                     .isCoordinateSurrounded(board);
         }
 
@@ -204,7 +204,7 @@ public class GammaHantoGame implements HantoGame {
      */
     private boolean isMoveValid(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoPieceImpl type) {
-        if (!currentTurn.getPlayerButterflyCoordinate().isPresent()) {
+        if (!currentTurn.hasButterflyCoordinate()) {
             return false;
         }
 
@@ -222,7 +222,7 @@ public class GammaHantoGame implements HantoGame {
      */
     private boolean isPlacePieceValid(HantoCoordinateImpl dest, HantoPieceImpl piece) {
         // Check if the butterfly is placed before the fourth turn
-        if (!currentTurn.getPlayerButterflyCoordinate().isPresent()
+        if (!currentTurn.hasButterflyCoordinate()
                 && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
             return false;
         }

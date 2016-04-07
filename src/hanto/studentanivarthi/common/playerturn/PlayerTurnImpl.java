@@ -4,6 +4,7 @@
 
 package hanto.studentanivarthi.common.playerturn;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
@@ -48,8 +49,12 @@ public class PlayerTurnImpl implements PlayerTurn {
      * @see {@link hanto.studentanivarthi.common.playerturn.PlayerTurn#getPlayerButterflyCoordinate()}
      */
     @Override
-    public Optional<HantoCoordinate> getPlayerButterflyCoordinate() {
-        return butterflyCoordinate;
+    public HantoCoordinate getPlayerButterflyCoordinate() {
+        try {
+            return butterflyCoordinate.get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     /**
@@ -58,7 +63,7 @@ public class PlayerTurnImpl implements PlayerTurn {
     @Override
     public HantoPlayerPieceManager getPlayerPieceManager() {
         return pieceManager;
-    }
+    };
 
     /**
      * @see {@link hanto.studentanivarthi.common.playerturn.PlayerTurn#getTurnCount()}
@@ -69,11 +74,23 @@ public class PlayerTurnImpl implements PlayerTurn {
     }
 
     /**
+     * @see {@link hanto.studentanivarthi.common.playerturn.PlayerTurn#hasButterflyCoordinate()}
+     */
+    @Override
+    public boolean hasButterflyCoordinate() {
+        return butterflyCoordinate.isPresent();
+    }
+
+    /**
      * @see {@link hanto.studentanivarthi.common.playerturn.PlayerTurn#setPlayerButterflyCoordinate(hanto.common.HantoCoordinate)}
      */
     @Override
     public void setPlayerButterflyCoordinate(HantoCoordinate coordinate) {
-        butterflyCoordinate = Optional.of(coordinate);
+        try {
+            butterflyCoordinate = Optional.of(coordinate);
+        } catch (NullPointerException e) {
+            butterflyCoordinate = Optional.empty();
+        }
     }
 
     /**
