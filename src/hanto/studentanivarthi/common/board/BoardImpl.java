@@ -100,10 +100,6 @@ public class BoardImpl implements Board {
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
 
-        if (hasPieceAt(coordinateImpl)) {
-            return false;
-        }
-
         board.put(coordinateImpl, pieceImpl);
         return true;
     }

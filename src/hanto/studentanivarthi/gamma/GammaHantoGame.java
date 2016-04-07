@@ -35,9 +35,9 @@ public class GammaHantoGame implements HantoGame {
     private final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
     /**
-     * The maximum number of turns that can occur in Gamma Hanto.
+     * The maximum number of moves that can occur in Gamma Hanto.
      */
-    private final int MAX_TURNS = 20;
+    private final int MAX_MOVES = 40;
 
     /**
      * The constant associated with the number of internal turns used for the
@@ -166,7 +166,7 @@ public class GammaHantoGame implements HantoGame {
         // Determine correct result
         if (blueIsSurrounded && redIsSurrounded) {
             mr = MoveResult.DRAW;
-        } else if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_TURNS) {
+        } else if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_MOVES) {
             mr = MoveResult.DRAW;
         } else if (blueIsSurrounded) {
             mr = MoveResult.RED_WINS;

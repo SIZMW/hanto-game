@@ -61,6 +61,17 @@ public class HantoPieceImpl implements HantoGamePiece {
      */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board) {
+        // Confirm that the piece does exist on the board as requested
+        HantoPiece boardPiece = board.getPieceAt(src);
+        if (boardPiece == null) {
+            return false;
+        }
+
+        if (!boardPiece.getColor().equals(color) || !boardPiece.getType().equals(type)) {
+            return false;
+        }
+
+        // Piece does exist, check validators
         for (MoveValidator m : moveValidators) {
             if (m.canMove(src, dest, board)) {
                 return true;
