@@ -1528,4 +1528,152 @@ public class GammaHantoTest {
 
         mr = game.makeMove(BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(1, -1));
     }
+
+    /**
+     * Tests winning the game on the last move.
+     *
+     * @throws HantoException
+     */
+    @Test // 34
+    public void blueWinsOnLastMove() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -3));
+        assertEquals(OK, mr);
+
+        // Turn 4
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 5
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 6
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -4));
+        assertEquals(OK, mr);
+
+        // Turn 7, moves
+        mr = game.makeMove(SPARROW, makeCoordinate(-1, 1), makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(-1, -2), makeCoordinate(-1, -1));
+        assertEquals(OK, mr);
+
+        // Turn 8
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 9
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 10
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 11
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 12
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 13
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 14
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 15
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 16
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 17
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 18
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Turn 19
+        mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -2), makeCoordinate(1, -3));
+        assertEquals(OK, mr);
+
+        // Turn 20
+        mr = game.makeMove(SPARROW, makeCoordinate(1, 0), makeCoordinate(1, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(1, -3), makeCoordinate(1, -2));
+        assertEquals(MoveResult.BLUE_WINS, mr);
+    }
 }

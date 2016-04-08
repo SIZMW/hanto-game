@@ -144,6 +144,10 @@ public class GammaHantoGame implements HantoGame {
         return getMoveResult();
     }
 
+    public void getBoardPrintBoard() {
+        System.out.println(board.toString());
+    }
+
     /**
      * Returns the status on the game after a move.
      *
@@ -166,19 +170,28 @@ public class GammaHantoGame implements HantoGame {
                     .isCoordinateSurrounded(board);
         }
 
-        isGameOver = true;
-
         // Determine correct result
+        if (blueIsSurrounded) {
+            mr = MoveResult.RED_WINS;
+            isGameOver = true;
+        }
+
+        if (redIsSurrounded) {
+            mr = MoveResult.BLUE_WINS;
+            isGameOver = true;
+        }
+
         if (blueIsSurrounded && redIsSurrounded) {
             mr = MoveResult.DRAW;
-        } else if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_MOVES) {
-            mr = MoveResult.DRAW;
-        } else if (blueIsSurrounded) {
-            mr = MoveResult.RED_WINS;
-        } else if (redIsSurrounded) {
-            mr = MoveResult.BLUE_WINS;
-        } else {
-            isGameOver = false;
+            isGameOver = true;
+        }
+
+        if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_MOVES) {
+            if (mr.equals(MoveResult.OK)) {
+                mr = MoveResult.DRAW;
+            }
+
+            isGameOver = true;
         }
 
         return mr;
