@@ -144,10 +144,6 @@ public class GammaHantoGame implements HantoGame {
         return getMoveResult();
     }
 
-    public void getBoardPrintBoard() {
-        System.out.println(board.toString());
-    }
-
     /**
      * Returns the status on the game after a move.
      *
