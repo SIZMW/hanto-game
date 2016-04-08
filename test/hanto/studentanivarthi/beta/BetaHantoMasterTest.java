@@ -649,4 +649,51 @@ public class BetaHantoMasterTest {
         assertEquals(RED, p.getColor());
         assertEquals(BUTTERFLY, p.getType());
     }
+
+    /**
+     * Test winning the game on the last move of the game.
+     *
+     * @throws HantoException
+     */
+    @Test // 18
+    public void blueWinsOnLastMove() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        // Surround the red butterfly
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        // Add extra moves
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 3));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 4));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 5));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 6));
+        assertEquals(OK, mr);
+
+        // Blue wins
+        mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
+        assertEquals(MoveResult.BLUE_WINS, mr);
+    }
 }
