@@ -1478,4 +1478,54 @@ public class GammaHantoTest {
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), null);
     }
+
+    /**
+     * Tests trying to move a piece from a coordinate to another coordinate, and
+     * there are two pieces on either side of the destination, so there is not
+     * enough space and it should fail.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 32
+    public void movePieceToCoordinateWithoutSufficientSlidingRoom() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        // Turn 3, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(1, -1));
+    }
+
+    /**
+     * Tests trying to move a piece from a coordinate to another coordinate, and
+     * there is one piece on the side of the destination, so there is enough
+     * space and it should move.
+     *
+     * @throws HantoException
+     */
+    @Test // 33
+    public void movePieceToCoordinateWithSufficientSlidingRoom() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(1, -1));
+    }
 }
