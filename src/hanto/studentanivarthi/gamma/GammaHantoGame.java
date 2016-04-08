@@ -113,6 +113,11 @@ public class GammaHantoGame implements HantoGame {
             throw new HantoException("You cannot move after the game is finished");
         }
 
+        if (dest == null) {
+            throw new HantoException(currentTurn.getColor().name()
+                    + " cannot have a destination be a null coordinate.");
+        }
+
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
         final HantoPieceImpl pieceImpl = new HantoPieceImpl(currentTurn.getColor(), pieceType);
 

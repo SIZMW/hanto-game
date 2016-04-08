@@ -66,6 +66,10 @@ public class HantoPieceImpl implements HantoGamePiece {
             return false;
         }
 
+        if (src.equals(dest)) {
+            return false;
+        }
+
         if (!boardPiece.getColor().equals(color) || !boardPiece.getType().equals(type)) {
             return false;
         }

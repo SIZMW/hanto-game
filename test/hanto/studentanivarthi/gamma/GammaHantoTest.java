@@ -1440,4 +1440,42 @@ public class GammaHantoTest {
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, -1));
     }
+
+    /**
+     * Tests trying to move a piece from a coordinate to the same coordinate,
+     * which should fail.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 30
+    public void movePieceFromAndToSameCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 0));
+    }
+
+    /**
+     * Tests trying to move a piece from a coordinate to a null coordinate,
+     * which should fail.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 31
+    public void movePieceToNullCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), null);
+    }
 }
