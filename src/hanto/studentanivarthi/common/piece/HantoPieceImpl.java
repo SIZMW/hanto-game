@@ -12,7 +12,7 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.movevalidators.MoveValidator;
 import hanto.studentanivarthi.common.movevalidators.WalkMoveValidator;
 
@@ -60,7 +60,7 @@ public class HantoPieceImpl implements HantoGamePiece {
      * @see {@link hanto.studentanivarthi.common.piece.HantoGamePiece#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board) {
+    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board) {
         // Confirm that the piece does exist on the board as requested
         HantoPiece boardPiece = board.getPieceAt(new HantoCoordinateImpl(src));
         if (boardPiece == null) {

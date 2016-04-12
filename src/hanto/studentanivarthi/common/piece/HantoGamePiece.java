@@ -6,7 +6,7 @@ package hanto.studentanivarthi.common.piece;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The HantoGamePiece interface extends the existing HantoPiece interface in
@@ -25,8 +25,8 @@ public interface HantoGamePiece extends HantoPiece {
      * @param dest
      *            The {@link HantoCoordinate} to move to.
      * @param board
-     *            The game {@link Board} with the occupied locations.
+     *            The game {@link HantoGameBoard} with the occupied locations.
      * @return true if able to move, false otherwise.
      */
-    boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board);
+    boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board);
 }

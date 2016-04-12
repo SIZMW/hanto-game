@@ -9,7 +9,7 @@ import java.util.Collection;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The FirstTurnPlacePieceValidator defines the requirements for placing a piece
@@ -23,7 +23,7 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
      * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, Board board) {
+    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Piece already in that spot

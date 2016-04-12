@@ -9,7 +9,7 @@ import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
@@ -24,7 +24,7 @@ public class WalkMoveValidator implements MoveValidator {
      * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board) {
+    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board) {
         // TODO Make this generic for x length walks
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
@@ -72,11 +72,11 @@ public class WalkMoveValidator implements MoveValidator {
      * @param dest
      *            The destination {@link HantoCoordinate}.
      * @param board
-     *            The current game {@link Board}.
+     *            The current game {@link HantoGameBoard}.
      * @return true if enough space, false otherwise
      */
     private boolean isThereSpaceToMove(HantoCoordinateImpl src, HantoCoordinateImpl dest,
-            Board board) {
+            HantoGameBoard board) {
         // Get the surrounding coordinates of each coordinate
         final Collection<HantoCoordinate> srcSurroundings = src.getSurroundingPieces();
         final Collection<HantoCoordinate> destSurroundings = dest.getSurroundingPieces();

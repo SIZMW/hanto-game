@@ -5,7 +5,7 @@
 package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The MoveValidator interface defines the methods that are used for move
@@ -23,8 +23,8 @@ public interface MoveValidator {
      * @param dest
      *            The destination {@link HantoCoordinate}.
      * @param board
-     *            The current game {@link Board}.
+     *            The current game {@link HantoGameBoard}.
      * @return true if the move can be made, false otherwise.
      */
-    boolean canMove(HantoCoordinate src, HantoCoordinate dest, Board board);
+    boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board);
 }

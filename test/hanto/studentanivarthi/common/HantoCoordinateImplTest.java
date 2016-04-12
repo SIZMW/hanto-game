@@ -22,8 +22,8 @@ import org.junit.Test;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.studentanivarthi.common.board.Board;
-import hanto.studentanivarthi.common.board.BoardImpl;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
+import hanto.studentanivarthi.common.board.HantoGameBoardImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
@@ -77,7 +77,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 3
     public void testIsCoordinateNotSurroundedEmptyBoard() {
-        final Board board = new BoardImpl();
+        final HantoGameBoard board = new HantoGameBoardImpl();
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
@@ -86,7 +86,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 4
     public void testIsCoordinateNotSurroundedNullBoard() {
-        final Board board = null;
+        final HantoGameBoard board = null;
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
 
@@ -95,7 +95,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 5
     public void testIsCoordinateNotSurrounded() {
-        final Board board = new BoardImpl();
+        final HantoGameBoard board = new HantoGameBoardImpl();
         board.placePieceAt(new HantoCoordinateImpl(0, 1),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
 
@@ -107,7 +107,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 6
     public void testIsCoordinateSurrounded() {
-        final Board board = new BoardImpl();
+        final HantoGameBoard board = new HantoGameBoardImpl();
 
         board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0),
                 new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));

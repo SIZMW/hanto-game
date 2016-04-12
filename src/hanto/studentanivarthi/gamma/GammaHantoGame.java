@@ -11,8 +11,8 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.board.Board;
-import hanto.studentanivarthi.common.board.BoardImpl;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
+import hanto.studentanivarthi.common.board.HantoGameBoardImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 import hanto.studentanivarthi.common.placepiecevalidators.FirstTurnPlacePieceValidator;
@@ -53,7 +53,7 @@ public class GammaHantoGame implements HantoGame {
     /**
      * Game variables.
      */
-    private final Board board;
+    private final HantoGameBoard board;
 
     /**
      * Turn related attributes.
@@ -75,7 +75,7 @@ public class GammaHantoGame implements HantoGame {
      *            The {@link HantoPlayerColor} to start.
      */
     public GammaHantoGame(HantoPlayerColor movesFirst) {
-        board = new BoardImpl();
+        board = new HantoGameBoardImpl();
 
         // Set up piece managers based on rule set
         blueTurn = new PlayerTurnImpl(HantoPlayerColor.BLUE,

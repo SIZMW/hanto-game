@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import hanto.common.HantoCoordinate;
-import hanto.studentanivarthi.common.board.Board;
+import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The implementation for my version of Hanto.
@@ -122,10 +122,10 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * Returns whether the specified coordinate is completely surrounded.
      *
      * @param board
-     *            The game {@link Board} of coordinates.
+     *            The game {@link HantoGameBoard} of coordinates.
      * @return true if surrounded completely, false otherwise
      */
-    public boolean isCoordinateSurrounded(Board board) {
+    public boolean isCoordinateSurrounded(HantoGameBoard board) {
         if (board == null || board.isBoardEmpty()) {
             return false;
         }

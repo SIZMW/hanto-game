@@ -8,12 +8,12 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 
 /**
- * The Board interface defines methods for board implementations for the Hanto
+ * The HantoGameBoard interface defines methods for board implementations for the Hanto
  * game.
  *
  * @author Aditya Nivarthi
  */
-public interface Board {
+public interface HantoGameBoard {
     /**
      * Returns whether the pieces on the game board are all organized in a
      * contiguous fashion.

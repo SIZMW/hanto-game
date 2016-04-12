@@ -17,23 +17,23 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
- * The BoardImpl class is an implementation of the {@link Board} interface for
+ * The HantoGameBoardImpl class is an implementation of the {@link HantoGameBoard} interface for
  * the Hanto game.
  *
  * @author Aditya Nivarthi
  */
-public class BoardImpl implements Board {
+public class HantoGameBoardImpl implements HantoGameBoard {
     private final Map<HantoCoordinate, HantoPiece> board;
 
     /**
-     * Creates a BoardImpl instance.
+     * Creates a HantoGameBoardImpl instance.
      */
-    public BoardImpl() {
+    public HantoGameBoardImpl() {
         board = new HashMap<>();
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#arePiecesContiguous()}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()}
      */
     @Override
     public boolean arePiecesContiguous() {
@@ -61,7 +61,7 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#getPieceAt(hanto.common.HantoCoordinate)}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#getPieceAt(hanto.common.HantoCoordinate)}
      */
     @Override
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
@@ -76,7 +76,7 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#hasPieceAt(hanto.common.HantoCoordinate)}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#hasPieceAt(hanto.common.HantoCoordinate)}
      */
     @Override
     public boolean hasPieceAt(HantoCoordinate coordinate) {
@@ -85,7 +85,7 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#isBoardEmpty()}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#isBoardEmpty()}
      */
     @Override
     public boolean isBoardEmpty() {
@@ -93,7 +93,7 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#placePieceAt(hanto.common.HantoCoordinate, hanto.common.HantoPiece)}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#placePieceAt(hanto.common.HantoCoordinate, hanto.common.HantoPiece)}
      */
     @Override
     public boolean placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
@@ -105,7 +105,7 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.Board#removePieceAt(hanto.common.HantoCoordinate)}
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#removePieceAt(hanto.common.HantoCoordinate)}
      */
     @Override
     public HantoPiece removePieceAt(HantoCoordinate coordinate) throws ClassCastException {
