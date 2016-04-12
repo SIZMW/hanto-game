@@ -19,9 +19,8 @@ import hanto.studentanivarthi.common.piece.HantoPieceImpl;
  * @author Aditya Nivarthi
  */
 public class StandardPlacePieceValidator implements PlacePieceValidator {
-
     /**
-     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
+     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
      */
     @Override
     public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {

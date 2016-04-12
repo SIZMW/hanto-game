@@ -17,8 +17,8 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
- * The HantoGameBoardImpl class is an implementation of the {@link HantoGameBoard} interface for
- * the Hanto game.
+ * The HantoGameBoardImpl class is an implementation of the
+ * {@link HantoGameBoard} interface for the Hanto game.
  *
  * @author Aditya Nivarthi
  */
@@ -39,10 +39,11 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     public boolean arePiecesContiguous() {
         final LinkedList<HantoCoordinate> list = new LinkedList<>();
         final Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
-
         final HantoCoordinate starterCoordinate = board.keySet().iterator().next();
         list.add(starterCoordinate);
 
+        // Try to reach every coordinate in the board using the surroundings of
+        // the previously visited coordinates
         while (!list.isEmpty()) {
             final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
             final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
@@ -57,6 +58,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
             }
         }
 
+        // Make sure we visited all the coordinates that have pieces
         return visitedCoordinates.size() == board.keySet().size();
     }
 
@@ -66,7 +68,6 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     @Override
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
         try {
-            // Convert to our coordinate implementation
             final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
             final HantoPiece piece = board.get(coordinateImpl);
             return piece;
@@ -99,7 +100,6 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     public boolean placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
-
         board.put(coordinateImpl, pieceImpl);
         return true;
     }

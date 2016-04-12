@@ -25,7 +25,6 @@ import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnImpl;
  * The implementation of Beta Hanto.
  *
  * @author Aditya Nivarthi
- * @version Mar 26, 2016
  */
 public class BetaHantoGame implements HantoGame {
     /**

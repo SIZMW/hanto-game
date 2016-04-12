@@ -8,8 +8,8 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 
 /**
- * The HantoGameBoard interface defines methods for board implementations for the Hanto
- * game.
+ * The HantoGameBoard interface defines methods for board implementations for
+ * the Hanto game.
  *
  * @author Aditya Nivarthi
  */

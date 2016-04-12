@@ -28,4 +28,6 @@ public interface PlacePieceValidator {
      * @return true if it can be placed, false otherwise
      */
     boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board);
+
+    // TODO Determine if more methods are needed
 }

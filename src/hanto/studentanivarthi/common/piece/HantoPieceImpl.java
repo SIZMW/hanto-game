@@ -11,7 +11,7 @@ import hanto.common.HantoPlayerColor;
 /**
  * Implementation of the {@link HantoPiece}.
  *
- * @version Mar 2,2016
+ * @author Aditya Nivarthi
  */
 public class HantoPieceImpl implements HantoPiece {
     private final HantoPlayerColor color;
@@ -21,7 +21,7 @@ public class HantoPieceImpl implements HantoPiece {
      * Copy constructor.
      *
      * @param piece
-     *            the piece to copy
+     *            The {@link HantoPiece} to copy from.
      */
     public HantoPieceImpl(HantoPiece piece) {
         color = piece.getColor();
@@ -29,12 +29,12 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * Default constructor.
+     * Creates a HantoPieceImpl instance.
      *
      * @param color
-     *            the piece color
+     *            The {@link HantoPlayerColor} color.
      * @param pieceType
-     *            the piece type
+     *            The {@link HantoPieceType} type.
      */
     public HantoPieceImpl(HantoPlayerColor color, HantoPieceType pieceType) {
         this.color = color;

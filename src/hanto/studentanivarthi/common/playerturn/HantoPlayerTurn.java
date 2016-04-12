@@ -15,7 +15,6 @@ import hanto.common.HantoPlayerColor;
  * @author Aditya Nivarthi
  */
 public interface HantoPlayerTurn {
-
     /**
      * Returns whether the piece can be placed for this player. If it can, the
      * number remaining is decremented.

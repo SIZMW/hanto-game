@@ -29,6 +29,9 @@ public class GammaHantoGame extends AbstractHantoGame {
         super(HantoGameID.GAMMA_HANTO, movesFirst);
     }
 
+    /**
+     * @see {@link hanto.studentanivarthi.common.game.AbstractHantoGame#getMoveResult()}
+     */
     @Override
     protected MoveResult getMoveResult() {
         MoveResult result = super.getMoveResult();

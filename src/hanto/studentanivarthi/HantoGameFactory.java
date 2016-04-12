@@ -72,6 +72,9 @@ public class HantoGameFactory {
             case GAMMA_HANTO:
                 game = new GammaHantoGame(movesFirst);
                 break;
+            case DELTA_HANTO:
+                game = null; // TODO Fix this
+                break;
         }
         return game;
     }

@@ -33,7 +33,9 @@ public interface MoveValidator {
             HantoGameBoard board);
 
     /**
-     * Determines whether the game board is valid after the move was made.
+     * Determines whether the game board is valid after the move was made. This
+     * assumes the move was made successfully in order to return relevant
+     * results.
      *
      * @param src
      *            The starting {@link HantoCoordinate}.

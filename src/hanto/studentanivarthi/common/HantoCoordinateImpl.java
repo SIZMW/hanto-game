@@ -152,4 +152,6 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     public String toString() {
         return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
     }
+
+    // TODO Add distance method
 }

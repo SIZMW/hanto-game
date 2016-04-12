@@ -12,15 +12,14 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
- * The SecondTurnPlacePieceValidator defines the requirements for placing a piece
- * within the first turn cycle of the game.
+ * The SecondTurnPlacePieceValidator defines the requirements for placing a
+ * piece within the first turn cycle of the game.
  *
  * @author Aditya Nivarthi
  */
 public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
-
     /**
-     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, java.util.Map)}
+     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
      */
     @Override
     public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {

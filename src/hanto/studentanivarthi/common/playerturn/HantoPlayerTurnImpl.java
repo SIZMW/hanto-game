@@ -25,13 +25,23 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     private final Map<HantoPieceType, Integer> manager;
 
     /**
-     * Creates a HantoPlayerTurnImpl instance with the specified color and piece
-     * playerTurn.
+     * * Creates a HantoPlayerTurnImpl instance with the specified color and
+     * piece playerTurn.
      *
      * @param color
      *            The {@link HantoPlayerColor} of the player.
-     * @param pieceManager
-     *            The {@link HantoPlayerPieceManager} for this player.
+     * @param butterfly
+     *            The butterfly count.
+     * @param crab
+     *            The crab count.
+     * @param crane
+     *            The crane count.
+     * @param dove
+     *            The dove count.
+     * @param horse
+     *            The horse count.
+     * @param sparrow
+     *            The sparrow count.
      */
     public HantoPlayerTurnImpl(HantoPlayerColor color, int butterfly, int crab, int crane, int dove,
             int horse, int sparrow) {
@@ -48,6 +58,9 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
         manager.put(HantoPieceType.SPARROW, sparrow);
     }
 
+    /**
+     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#canPlacePiece(hanto.common.HantoPieceType)}
+     */
     @Override
     public boolean canPlacePiece(HantoPieceType pieceType) {
         int value = manager.get(pieceType);
@@ -91,7 +104,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerPieceManager#isOutOfPieces()}
+     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#isOutOfPieces()}
      */
     @Override
     public boolean isOutOfPieces() {
@@ -102,12 +115,10 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerPieceManager#placePiece()}
+     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#placePiece()}
      */
     @Override
-    public void placePiece(HantoPieceType pieceType) { // TODO move to player
-                                                       // turn and combine
-                                                       // classes
+    public void placePiece(HantoPieceType pieceType) {
         int value = manager.get(pieceType);
         if (value > 0) {
             manager.put(pieceType, value - 1);

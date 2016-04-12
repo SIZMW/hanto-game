@@ -13,20 +13,20 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
- * The WalkMoveValidator is a subset of the move validators that considers
+ * The WalkMoveValidator is a subset of the {@link MoveValidator} that considers
  * pieces that are able to walk in the game of Hanto.
  *
  * @author Aditya Nivarthi
  */
 public class WalkMoveValidator implements MoveValidator {
-
     /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
+     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
      */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
             HantoGameBoard board) {
         // TODO Make this generic for x length walks
+        // TODO Make this more generic in the future
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
@@ -60,15 +60,13 @@ public class WalkMoveValidator implements MoveValidator {
             return false;
         }
 
-        // TODO Make this more generic in the future
         // Not enough sliding space
-        if (!isThereSpaceToMove(srcCoordImpl, destCoordImpl, board)) {
-            return false;
-        }
-
-        return true;
+        return isThereSpaceToMove(srcCoordImpl, destCoordImpl, board);
     }
 
+    /**
+     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     */
     @Override
     public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
             HantoGameBoard board) {
@@ -87,8 +85,10 @@ public class WalkMoveValidator implements MoveValidator {
      *            The current game {@link HantoGameBoard}.
      * @return true if enough space, false otherwise
      */
-    private boolean isThereSpaceToMove(HantoCoordinateImpl src, HantoCoordinateImpl dest,
+    protected boolean isThereSpaceToMove(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoGameBoard board) {
+        // TODO Make this generic in the future
+
         // Get the surrounding coordinates of each coordinate
         final Collection<HantoCoordinate> srcSurroundings = src.getSurroundingPieces();
         final Collection<HantoCoordinate> destSurroundings = dest.getSurroundingPieces();
@@ -98,8 +98,7 @@ public class WalkMoveValidator implements MoveValidator {
         destSurroundings.remove(src);
 
         // Find the common elements, the coordinates adjacent to both source and
-        // destination (this only works for one hex move)
-        // TODO Make this generic in the future
+        // destination (TODO this only works for one hex move)
         Collection<HantoCoordinate> common = new ArrayList<>(srcSurroundings);
         common.retainAll(destSurroundings);
 
