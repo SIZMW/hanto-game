@@ -18,8 +18,8 @@ import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 import hanto.studentanivarthi.common.placepiecevalidators.FirstTurnPlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.StandardPlacePieceValidator;
-import hanto.studentanivarthi.common.playerturn.PlayerTurn;
-import hanto.studentanivarthi.common.playerturn.PlayerTurnImpl;
+import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
+import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnImpl;
 
 /**
  * The implementation of Gamma Hanto.
@@ -58,9 +58,9 @@ public class GammaHantoGame implements HantoGame {
     /**
      * Turn related attributes.
      */
-    private PlayerTurn currentTurn;
-    private final PlayerTurn blueTurn;
-    private final PlayerTurn redTurn;
+    private HantoPlayerTurn currentTurn;
+    private final HantoPlayerTurn blueTurn;
+    private final HantoPlayerTurn redTurn;
 
     /**
      * Game state variables.
@@ -78,9 +78,9 @@ public class GammaHantoGame implements HantoGame {
         board = new HantoGameBoardImpl();
 
         // Set up piece managers based on rule set
-        blueTurn = new PlayerTurnImpl(HantoPlayerColor.BLUE,
+        blueTurn = new HantoPlayerTurnImpl(HantoPlayerColor.BLUE,
                 new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5));
-        redTurn = new PlayerTurnImpl(HantoPlayerColor.RED,
+        redTurn = new HantoPlayerTurnImpl(HantoPlayerColor.RED,
                 new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5));
 
         currentTurn = movesFirst.equals(HantoPlayerColor.BLUE) ? blueTurn : redTurn;

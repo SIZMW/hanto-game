@@ -4,34 +4,34 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 
-public class PlayerTurnFactory {
-    private static final PlayerTurnFactory instance = new PlayerTurnFactory();
+public class HantoPlayerTurnFactory {
+    private static final HantoPlayerTurnFactory instance = new HantoPlayerTurnFactory();
 
-    public static PlayerTurnFactory getInstance() {
+    public static HantoPlayerTurnFactory getInstance() {
         return instance;
     }
 
-    private PlayerTurnFactory() {
+    private HantoPlayerTurnFactory() {
 
     }
 
-    public PlayerTurn makePlayerTurnInstance(HantoGameID gameID, HantoPlayerColor color) {
-        PlayerTurn playerTurn = null;
+    public HantoPlayerTurn makePlayerTurnInstance(HantoGameID gameID, HantoPlayerColor color) {
+        HantoPlayerTurn playerTurn = null;
         switch (gameID) {
             case ALPHA_HANTO:
-                playerTurn = new PlayerTurnImpl(color,
+                playerTurn = new HantoPlayerTurnImpl(color,
                         new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 0));
                 break;
             case BETA_HANTO:
-                playerTurn = new PlayerTurnImpl(color,
+                playerTurn = new HantoPlayerTurnImpl(color,
                         new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5));
                 break;
             case GAMMA_HANTO:
-                playerTurn = new PlayerTurnImpl(color,
+                playerTurn = new HantoPlayerTurnImpl(color,
                         new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5));
                 break;
             case DELTA_HANTO:
-                playerTurn = new PlayerTurnImpl(color,
+                playerTurn = new HantoPlayerTurnImpl(color,
                         new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5)); // TODO
                                                                             // Fix
                                                                             // this

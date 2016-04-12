@@ -9,12 +9,12 @@ import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
 
 /**
- * The PlayerTurn interface defines the properties of a player turn that need to
+ * The HantoPlayerTurn interface defines the properties of a player turn that need to
  * be stored during the Hanto game.
  *
  * @author Aditya Nivarthi
  */
-public interface PlayerTurn {
+public interface HantoPlayerTurn {
 
     /**
      * Returns the color of the player associated with this turn.
