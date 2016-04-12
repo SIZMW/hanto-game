@@ -17,6 +17,7 @@ import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
 import hanto.studentanivarthi.common.placepiecevalidators.FirstTurnPlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator;
+import hanto.studentanivarthi.common.placepiecevalidators.SecondTurnPlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.StandardPlacePieceValidator;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnImpl;
@@ -43,12 +44,7 @@ public class GammaHantoGame implements HantoGame {
      * The constant associated with the number of internal turns used for the
      * first turn cycle (blue goes, red goes, or vice versa).
      */
-    private final int FIRST_TURN = 2;
-
-    /**
-     * Origin constant.
-     */
-    private final HantoCoordinate ORIGIN = new HantoCoordinateImpl(0, 0);
+    private final int FIRST_TURN_CYCLE = 2;
 
     /**
      * Game variables.
@@ -194,17 +190,6 @@ public class GammaHantoGame implements HantoGame {
     }
 
     /**
-     * Returns whether the specified coordinate is the origin or not.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordiante} to check.
-     * @return true if origin, false otherwise
-     */
-    private boolean isCoordinateOrigin(HantoCoordinate coordinate) {
-        return coordinate.equals(ORIGIN);
-    }
-
-    /**
      * Determines if a piece can be moved from a coordinate to another
      * coordinate.
      *
@@ -246,25 +231,21 @@ public class GammaHantoGame implements HantoGame {
             return false;
         }
 
+        PlacePieceValidator validator;
+
         // First move
         if (isFirstMove) {
-            // Not origin move
-            if (!isCoordinateOrigin(dest)) {
-                return false;
-            }
-
+            validator = new FirstTurnPlacePieceValidator();
             isFirstMove = false;
-            return true;
         } else {
-            PlacePieceValidator validator;
-            if (blueTurn.getTurnCount() + redTurn.getTurnCount() < FIRST_TURN) {
-                validator = new FirstTurnPlacePieceValidator();
+            if (blueTurn.getTurnCount() + redTurn.getTurnCount() < FIRST_TURN_CYCLE) {
+                validator = new SecondTurnPlacePieceValidator();
             } else {
                 validator = new StandardPlacePieceValidator();
             }
-
-            return validator.canPlacePiece(dest, piece, board);
         }
+
+        return validator.canPlacePiece(dest, piece, board);
     }
 
     /**
