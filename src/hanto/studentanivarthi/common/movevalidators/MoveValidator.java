@@ -5,6 +5,7 @@
 package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
@@ -22,9 +23,28 @@ public interface MoveValidator {
      *            The starting {@link HantoCoordinate}.
      * @param dest
      *            The destination {@link HantoCoordinate}.
+     * @param piece
+     *            The {@link HantoPiece} to move.
      * @param board
      *            The current game {@link HantoGameBoard}.
      * @return true if the move can be made, false otherwise.
      */
-    boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board);
+    boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+            HantoGameBoard board);
+
+    /**
+     * Determines whether the game board is valid after the move was made.
+     *
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @param piece
+     *            The {@link HantoPiece} to move.
+     * @param board
+     *            The current game {@link HantoGameBoard}.
+     * @return true if the move can be made, false otherwise.
+     */
+    boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+            HantoGameBoard board);
 }

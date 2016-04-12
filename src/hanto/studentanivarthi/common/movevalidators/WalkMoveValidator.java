@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
-import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
  * The WalkMoveValidator is a subset of the move validators that considers
@@ -24,7 +24,8 @@ public class WalkMoveValidator implements MoveValidator {
      * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, java.util.Map)}
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoGameBoard board) {
+    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+            HantoGameBoard board) {
         // TODO Make this generic for x length walks
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
@@ -36,8 +37,26 @@ public class WalkMoveValidator implements MoveValidator {
             return false;
         }
 
+        // No piece exists to move
+        if (!board.hasPieceAt(new HantoCoordinateImpl(src))) {
+            return false;
+        }
+
         // Piece in that spot
         if (board.hasPieceAt(destCoordImpl)) {
+            return false;
+        }
+
+        // Source and destination are the same
+        if (src.equals(dest)) {
+            return false;
+        }
+
+        final HantoPiece boardPiece = board.getPieceAt(new HantoCoordinateImpl(src));
+
+        // Piece to move is not the same color
+        if (!piece.getColor().equals(boardPiece.getColor())
+                || !piece.getType().equals(boardPiece.getType())) {
             return false;
         }
 
@@ -47,20 +66,13 @@ public class WalkMoveValidator implements MoveValidator {
             return false;
         }
 
-        // Simulate the move to check continuity in the pieces
-        final HantoPieceImpl srcPieceImpl = new HantoPieceImpl(board.removePieceAt(src));
-        board.placePieceAt(dest, srcPieceImpl);
-
-        // Fails continuity test
-        if (!board.arePiecesContiguous()) {
-            return false;
-        }
-
-        // Return piece back to original place
-        final HantoPieceImpl returnPieceImpl = new HantoPieceImpl(board.removePieceAt(dest));
-        board.placePieceAt(src, returnPieceImpl);
-
         return true;
+    }
+
+    @Override
+    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+            HantoGameBoard board) {
+        return board.arePiecesContiguous();
     }
 
     /**
