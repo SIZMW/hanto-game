@@ -35,10 +35,6 @@ public class BetaHantoGame extends AbstractHantoGame {
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate src, HantoCoordinate dest)
             throws HantoException {
-        if (src != null) {
-            throw new HantoException(currentTurn.getColor().name() + " move pieces in this game.");
-        }
-
         return super.makeMove(pieceType, src, dest);
     }
 
@@ -54,7 +50,7 @@ public class BetaHantoGame extends AbstractHantoGame {
                 result = MoveResult.DRAW;
             }
 
-            isGameOver = true;
+            setGameIsOver();
         }
 
         return result;

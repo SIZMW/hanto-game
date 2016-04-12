@@ -41,7 +41,7 @@ public class GammaHantoGame extends AbstractHantoGame {
                 result = MoveResult.DRAW;
             }
 
-            isGameOver = true;
+            setGameIsOver();
         }
 
         return result;

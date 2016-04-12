@@ -98,6 +98,13 @@ public abstract class AbstractHantoGame implements HantoGame {
             throw new HantoException("You cannot move after the game is finished");
         }
 
+        // Resignation
+        if (pieceType == null && src == null && dest == null) {
+            isGameOver = true;
+            return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
+                    : MoveResult.BLUE_WINS;
+        }
+
         // No destination to move to or place piece at
         if (dest == null) {
             throw new HantoException(currentTurn.getColor().name()
@@ -126,8 +133,8 @@ public abstract class AbstractHantoGame implements HantoGame {
         } else {
             // Move piece
             final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
-            final MoveValidator validator = MoveValidatorFactory.getInstance()
-                    .getMoveValidator(pieceImpl.getType());
+            final MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
+                    pieceImpl.getType());
 
             // Preconditions of move
             if (!validateMovePreconditions(srcCoordImpl, destCoordImpl, pieceImpl, validator)) {
@@ -174,17 +181,17 @@ public abstract class AbstractHantoGame implements HantoGame {
         // Determine correct result
         if (blueIsSurrounded) {
             mr = MoveResult.RED_WINS;
-            isGameOver = true;
+            setGameIsOver();
         }
 
         if (redIsSurrounded) {
             mr = MoveResult.BLUE_WINS;
-            isGameOver = true;
+            setGameIsOver();
         }
 
         if (blueIsSurrounded && redIsSurrounded) {
             mr = MoveResult.DRAW;
-            isGameOver = true;
+            setGameIsOver();
         }
 
         return mr;
@@ -292,7 +299,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      */
     protected boolean validatePlacePiecePostConditions(HantoCoordinateImpl dest,
             HantoPieceImpl piece) {
-        return true; // TODO Fix this
+        return true; // TODO Always return true for place piece post condition
     }
 
     /**
@@ -326,5 +333,12 @@ public abstract class AbstractHantoGame implements HantoGame {
         // Update is first move state
         isFirstMove = isFirstMove ? false : false;
         return validator.canPlacePiece(dest, piece, board);
+    }
+
+    /**
+     * Sets the game state to be ended.
+     */
+    protected void setGameIsOver() {
+        isGameOver = true;
     }
 }

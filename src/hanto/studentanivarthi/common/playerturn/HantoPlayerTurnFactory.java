@@ -54,8 +54,7 @@ public class HantoPlayerTurnFactory {
                 playerTurn = new HantoPlayerTurnImpl(color, 1, 0, 0, 0, 0, 5);
                 break;
             case DELTA_HANTO:
-                playerTurn = new HantoPlayerTurnImpl(color, 1, 0, 0, 0, 0, 5);
-                // TODO Change the counts
+                playerTurn = new HantoPlayerTurnImpl(color, 1, 4, 0, 0, 0, 4);
                 break;
             default:
                 break;

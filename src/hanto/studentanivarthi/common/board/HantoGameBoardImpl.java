@@ -4,6 +4,7 @@
 
 package hanto.studentanivarthi.common.board;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -130,5 +131,25 @@ public class HantoGameBoardImpl implements HantoGameBoard {
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#getEmptySurroundingCoordinates(hanto.common.HantoCoordinate)}
+     */
+    @Override
+    public Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate) {
+        Collection<HantoCoordinate> emptySurroundings = new ArrayList<>();
+
+        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingPieces();
+
+        for (HantoCoordinate e : surroundings) {
+            HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);
+            if (!board.containsKey(eImpl)) {
+                emptySurroundings.add(eImpl);
+            }
+        }
+
+        return emptySurroundings;
     }
 }
