@@ -38,11 +38,6 @@ public abstract class AbstractHantoGame implements HantoGame {
     protected final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
     /**
-     * Game variables.
-     */
-    protected final HantoGameBoard board;
-
-    /**
      * Turn related attributes.
      */
     protected HantoPlayerTurn currentTurn;
@@ -52,8 +47,10 @@ public abstract class AbstractHantoGame implements HantoGame {
     /**
      * Game state variables.
      */
+    protected final HantoGameBoard board;
     protected boolean isGameOver = false;
     protected boolean isFirstMove = true;
+    protected HantoGameID id;
 
     /**
      * Creates an {@link AbstractHantoGame} instance.
@@ -65,6 +62,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      *            The {@link HantoPlayerColor} for the player to move first.
      */
     public AbstractHantoGame(HantoGameID id, HantoPlayerColor movesFirst) {
+        this.id = id;
         board = new HantoGameBoardImpl();
         blueTurn = HantoPlayerTurnFactory.getInstance().makePlayerTurnInstance(id,
                 HantoPlayerColor.BLUE);
@@ -294,7 +292,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      */
     protected boolean validatePlacePiecePostConditions(HantoCoordinateImpl dest,
             HantoPieceImpl piece) {
-        return true; // TODO
+        return true; // TODO Fix this
     }
 
     /**
@@ -322,7 +320,7 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         // Get place piece validator from factory
         PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
-                .getPlacePieceValidator(isFirstMove,
+                .getPlacePieceValidator(id, isFirstMove,
                         blueTurn.getTurnCount() + redTurn.getTurnCount());
 
         // Update is first move state
