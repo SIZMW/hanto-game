@@ -194,7 +194,7 @@ public abstract class AbstractHantoGame implements HantoGame {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
 
-        currentTurn.getPlayerPieceManager().placePiece(piece.getType());
+        currentTurn.placePiece(piece.getType());
     }
 
     /**
@@ -237,7 +237,7 @@ public abstract class AbstractHantoGame implements HantoGame {
             return false;
         }
 
-        if (!currentTurn.getPlayerPieceManager().canPlacePiece(piece.getType())) {
+        if (!currentTurn.canPlacePiece(piece.getType())) {
             return false;
         }
 

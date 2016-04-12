@@ -18,8 +18,8 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.board.HantoGameBoardImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
-import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
-import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManagerImpl;
+import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
+import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnImpl;
 
 /**
  * The implementation of Beta Hanto.
@@ -45,8 +45,8 @@ public class BetaHantoGame implements HantoGame {
      * The managers for keeping track of how many of each {@link HantoPieceType}
      * each player gets.
      */
-    private final HantoPlayerPieceManager bluePieces;
-    private final HantoPlayerPieceManager redPieces;
+    private final HantoPlayerTurn bluePieces;
+    private final HantoPlayerTurn redPieces;
 
     /**
      * The locations of each player's {@link HantoPieceType#BUTTERFLY} on the
@@ -86,8 +86,8 @@ public class BetaHantoGame implements HantoGame {
         playerTurn = movesFirst;
 
         // Set up piece managers based on rule set
-        bluePieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
-        redPieces = new HantoPlayerPieceManagerImpl(1, 0, 0, 0, 0, 5);
+        bluePieces = new HantoPlayerTurnImpl(HantoPlayerColor.BLUE, 1, 0, 0, 0, 0, 5);
+        redPieces = new HantoPlayerTurnImpl(HantoPlayerColor.RED, 1, 0, 0, 0, 0, 5);
     }
 
     /**

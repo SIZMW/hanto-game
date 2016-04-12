@@ -4,12 +4,14 @@
 
 package hanto.studentanivarthi.common.playerturn;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
 
 /**
  * The implementation for the HantoPlayerTurn interface.
@@ -18,23 +20,38 @@ import hanto.studentanivarthi.common.piecemanager.HantoPlayerPieceManager;
  */
 public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     private final HantoPlayerColor color;
-    private final HantoPlayerPieceManager pieceManager;
     private int turnCount = 0;
     private Optional<HantoCoordinate> butterflyCoordinate;
+    private final Map<HantoPieceType, Integer> manager;
 
     /**
      * Creates a HantoPlayerTurnImpl instance with the specified color and piece
-     * manager.
+     * playerTurn.
      *
      * @param color
      *            The {@link HantoPlayerColor} of the player.
      * @param pieceManager
      *            The {@link HantoPlayerPieceManager} for this player.
      */
-    public HantoPlayerTurnImpl(HantoPlayerColor color, HantoPlayerPieceManager pieceManager) {
+    public HantoPlayerTurnImpl(HantoPlayerColor color, int butterfly, int crab, int crane, int dove,
+            int horse, int sparrow) {
         this.color = color;
-        this.pieceManager = pieceManager;
         butterflyCoordinate = Optional.empty();
+
+        manager = new HashMap<>();
+
+        manager.put(HantoPieceType.BUTTERFLY, butterfly);
+        manager.put(HantoPieceType.CRAB, crab);
+        manager.put(HantoPieceType.CRANE, crane);
+        manager.put(HantoPieceType.DOVE, dove);
+        manager.put(HantoPieceType.HORSE, horse);
+        manager.put(HantoPieceType.SPARROW, sparrow);
+    }
+
+    @Override
+    public boolean canPlacePiece(HantoPieceType pieceType) {
+        int value = manager.get(pieceType);
+        return value > 0;
     }
 
     /**
@@ -55,14 +72,6 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
         } catch (NoSuchElementException e) {
             return null;
         }
-    }
-
-    /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getPlayerPieceManager()}
-     */
-    @Override
-    public HantoPlayerPieceManager getPlayerPieceManager() {
-        return pieceManager;
     };
 
     /**
@@ -79,6 +88,32 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     @Override
     public boolean hasButterflyCoordinate() {
         return butterflyCoordinate.isPresent();
+    }
+
+    /**
+     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerPieceManager#isOutOfPieces()}
+     */
+    @Override
+    public boolean isOutOfPieces() {
+        return manager.get(HantoPieceType.BUTTERFLY) <= 0 && manager.get(HantoPieceType.CRAB) <= 0
+                && manager.get(HantoPieceType.CRANE) <= 0 && manager.get(HantoPieceType.DOVE) <= 0
+                && manager.get(HantoPieceType.HORSE) <= 0
+                && manager.get(HantoPieceType.SPARROW) <= 0;
+    }
+
+    /**
+     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerPieceManager#placePiece()}
+     */
+    @Override
+    public void placePiece(HantoPieceType pieceType) { // TODO move to player
+                                                       // turn and combine
+                                                       // classes
+        int value = manager.get(pieceType);
+        if (value > 0) {
+            manager.put(pieceType, value - 1);
+        } else {
+            manager.put(pieceType, 0);
+        }
     }
 
     /**
