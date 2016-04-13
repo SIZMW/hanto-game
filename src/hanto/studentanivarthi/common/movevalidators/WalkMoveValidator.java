@@ -18,59 +18,95 @@ import hanto.studentanivarthi.common.board.HantoGameBoard;
  *
  * @author Aditya Nivarthi
  */
-public class WalkMoveValidator implements MoveValidator {
+public class WalkMoveValidator extends AbstractMoveValidator {
+
+    /**
+     * Creates a WalkMoveValidator instance.
+     *
+     * @param distance
+     *            The maximum distance that the piece can travel.
+     */
+    public WalkMoveValidator(int distance) {
+        super(distance);
+    }
+
     /**
      * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
      */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
             HantoGameBoard board) {
-        // TODO Make this generic for x length walks
-        // TODO Make this more generic in the future
+        boolean canMove = super.canMove(src, dest, piece, board);
+        if (!canMove) {
+            return false;
+        }
+
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
-        final Collection<HantoCoordinate> surroundings = srcCoordImpl.getSurroundingPieces();
+        boolean canDoWalkMove = this.canMove(srcCoordImpl, destCoordImpl, board, distance);
+        //
+        // // TODO Make this generic for x length walks
+        // // TODO Make this more generic in the future
+        // final HantoCoordinateImpl srcCoordImpl = new
+        // HantoCoordinateImpl(src);
+        // final HantoCoordinateImpl destCoordImpl = new
+        // HantoCoordinateImpl(dest);
+        //
+        // final Collection<HantoCoordinate> surroundings =
+        // srcCoordImpl.getSurroundingPieces();
+        //
+        // // Coordinate is not next to the source
+        // if (!surroundings.contains(destCoordImpl)) {
+        // return false;
+        // }
+        //
+        // // Not enough sliding space
+        // return isThereSpaceToMove(srcCoordImpl, destCoordImpl, board);
 
-        // Coordinate is not next to the source
-        if (!surroundings.contains(destCoordImpl)) {
-            return false;
-        }
-
-        // No piece exists to move
-        if (!board.hasPieceAt(new HantoCoordinateImpl(src))) {
-            return false;
-        }
-
-        // Piece in that spot
-        if (board.hasPieceAt(destCoordImpl)) {
-            return false;
-        }
-
-        // Source and destination are the same
-        if (src.equals(dest)) {
-            return false;
-        }
-
-        final HantoPiece boardPiece = board.getPieceAt(new HantoCoordinateImpl(src));
-
-        // Piece to move is not the same color
-        if (!piece.getColor().equals(boardPiece.getColor())
-                || !piece.getType().equals(boardPiece.getType())) {
-            return false;
-        }
-
-        // Not enough sliding space
-        return isThereSpaceToMove(srcCoordImpl, destCoordImpl, board);
+        return canDoWalkMove;
     }
 
-    /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
-     */
-    @Override
-    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
-            HantoGameBoard board) {
-        return board.arePiecesContiguous();
+    protected boolean canMove(HantoCoordinateImpl srcCoordImpl, HantoCoordinateImpl destCoordImpl,
+            HantoGameBoard board, int distanceTraveled) {
+        // Pieces must be contiguous at every level
+        if (!board.arePiecesContiguous()) {
+            return false;
+        }
+
+        // Base case, we reached the destination
+        if (srcCoordImpl.equals(destCoordImpl)) {
+            return true;
+        }
+
+        // We have moved more coordinates than the maximum, and have not reached
+        // the destination
+        if (distanceTraveled <= 0) {
+            return false;
+        }
+
+        // Check empty surroundings and proceed to next step of path to
+        // destination
+        final Collection<HantoCoordinate> emptySurroundings = board
+                .getEmptySurroundingCoordinates(srcCoordImpl);
+
+        for (HantoCoordinate e : emptySurroundings) {
+            HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);
+
+            if (isThereSpaceToMove(srcCoordImpl, eImpl, board)) {
+                HantoGameBoard boardCopy = board.clone();
+                HantoPiece piece = boardCopy.removePieceAt(srcCoordImpl);
+                boardCopy.placePieceAt(eImpl, piece);
+
+                boolean hasPathReached = this.canMove(eImpl, destCoordImpl, boardCopy,
+                        distanceTraveled - 1);
+                if (hasPathReached) {
+                    return true;
+                }
+            }
+        }
+
+        return false; // TODO check contiguous simulate moving
     }
 
     /**
@@ -87,8 +123,6 @@ public class WalkMoveValidator implements MoveValidator {
      */
     protected boolean isThereSpaceToMove(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoGameBoard board) {
-        // TODO Make this generic in the future
-
         // Get the surrounding coordinates of each coordinate
         final Collection<HantoCoordinate> srcSurroundings = src.getSurroundingPieces();
         final Collection<HantoCoordinate> destSurroundings = dest.getSurroundingPieces();
@@ -98,7 +132,7 @@ public class WalkMoveValidator implements MoveValidator {
         destSurroundings.remove(src);
 
         // Find the common elements, the coordinates adjacent to both source and
-        // destination (TODO this only works for one hex move)
+        // destination
         Collection<HantoCoordinate> common = new ArrayList<>(srcSurroundings);
         common.retainAll(destSurroundings);
 

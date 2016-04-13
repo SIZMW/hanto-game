@@ -77,7 +77,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     /**
      * Returns a list of the surrounding coordinates around this coordinate.
      *
-     * @return a {@link List}&lt;{@link HantoCoordinate}&gt;
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     public Collection<HantoCoordinate> getSurroundingPieces() {
         final List<HantoCoordinate> surroundings = new ArrayList<>();
@@ -153,5 +153,37 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
     }
 
-    // TODO Add distance method
+    /**
+     * Returns the distance between this coordinate and another coordinate.
+     *
+     * @see <a href=
+     *      "http://keekerdc.com/2011/03/hexagon-grids-coordinate-systems-and-distance-calculations/">
+     *      KeekerDC </a>
+     * @param coordinate
+     *            The {@link HantoCoordinate} to get the distance to.
+     * @return an integer
+     */
+    public int getDistanceTo(HantoCoordinate coordinate) {
+        if (coordinate != null) {
+            HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            int xDist = x - coordinateImpl.getX();
+            int yDist = y - coordinateImpl.getY();
+
+            if (xDist == 0 && yDist == 0) {
+                return 0;
+            }
+
+            int signX = xDist == 0 ? 0 : xDist < 0 ? -1 : 1;
+            int signY = yDist == 0 ? 0 : yDist < 0 ? -1 : 1;
+
+            if (signX == 1 && signY == 1 || signX == -1 && signY == -1) {
+                signY = 0;
+            }
+
+            return 1 + getDistanceTo(new HantoCoordinateImpl(coordinateImpl.getX() + signX,
+                    coordinateImpl.getY() + signY));
+        }
+
+        return 0;
+    }
 }

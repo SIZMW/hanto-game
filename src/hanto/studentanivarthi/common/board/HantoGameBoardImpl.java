@@ -152,4 +152,17 @@ public class HantoGameBoardImpl implements HantoGameBoard {
 
         return emptySurroundings;
     }
+
+    /**
+     * @see {@link java.lang.Object#clone()}
+     */
+    @Override
+    public HantoGameBoard clone() {
+        HantoGameBoard newBoard = new HantoGameBoardImpl();
+        for (HantoCoordinate e : board.keySet()) {
+            newBoard.placePieceAt(e, getPieceAt(e));
+        }
+
+        return newBoard;
+    }
 }

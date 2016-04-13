@@ -78,11 +78,18 @@ public interface HantoGameBoard {
     /**
      * Returns a collection of coordinates surrounding the specified coordinate
      * that do not have a piece occupying them.
-     * 
+     *
      * @param coordinate
      *            The coordinate to get the empty surrounding coordinates
      *            around.
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate);
+
+    /**
+     * Returns a copy of this HantoGameBoard.
+     * 
+     * @return a {@link HantoGameBoard}
+     */
+    HantoGameBoard clone();
 }

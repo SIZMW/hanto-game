@@ -17,6 +17,7 @@ import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
 
@@ -719,5 +720,93 @@ public class DeltaHantoTest {
 
         mr = game.makeMove(null, null, null);
         assertEquals(MoveResult.RED_WINS, mr);
+    }
+
+    /**
+     * Test having the red player resign from the game at will.
+     *
+     * @throws HantoException
+     */
+    @Test // 23
+    public void redResignsFromGame() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(MoveResult.OK, mr);
+
+        mr = game.makeMove(null, null, null);
+        assertEquals(MoveResult.BLUE_WINS, mr);
+    }
+
+    /**
+     * Test having the red player resign from the game at will, and trying to
+     * move after the game is over
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 24
+    public void redResignsFromGameAndBlueTriesToPlayAfterGameEnds() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(MoveResult.OK, mr);
+
+        mr = game.makeMove(null, null, null);
+        assertEquals(MoveResult.BLUE_WINS, mr);
+
+        // Fails
+        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+    }
+
+    /**
+     * Test having the blue butterfly walk one space.
+     *
+     * @throws HantoException
+     */
+    @Test // 25
+    public void blueButterflyWalksOneSpace() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 1));
+        assertEquals(MoveResult.OK, mr);
+    }
+
+    /**
+     * Test having the blue crab walk three spaces.
+     *
+     * @throws HantoException
+     */
+    @Test // 26
+    public void blueCrabWalksThreeSpaces() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 1));
+        assertEquals(MoveResult.OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, -1));
+        assertEquals(MoveResult.OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 1), makeCoordinate(2, 0));
+        HantoPiece p = game.getPieceAt(makeCoordinate(2, 0));
+
+        assertEquals(MoveResult.OK, mr);
+        assertEquals(p.getColor(), HantoPlayerColor.BLUE);
+        assertEquals(p.getType(), HantoPieceType.CRAB);
     }
 }
