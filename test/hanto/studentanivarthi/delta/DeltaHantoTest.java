@@ -139,7 +139,7 @@ public class DeltaHantoTest {
      * @throws HantoException
      */
     @Test(expected = HantoException.class) // 4
-    public void redPlacesInitialCrabNotNextToOrigin() throws HantoException {
+    public void redPlacesInitialButterflyNotNextToOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -808,5 +808,217 @@ public class DeltaHantoTest {
         assertEquals(MoveResult.OK, mr);
         assertEquals(p.getColor(), HantoPlayerColor.BLUE);
         assertEquals(p.getType(), HantoPieceType.CRAB);
+    }
+
+    /**
+     * Test having the blue butterfly walk one space, but there is not
+     * sufficient room, so it fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 27
+    public void blueButterflyWalksOneSpaceAndCannotMove() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(-1, 0));
+    }
+
+    /**
+     * Test making a crab walk to a destination too far away.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 28
+    public void makeBlueCrabWalkTooFarAndFail() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 0), makeCoordinate(10, 0));
+    }
+
+    /**
+     * Test making a crab walk to a destination closer than its maximum walking
+     * distance.
+     *
+     * @throws HantoException
+     */
+    @Test // 29
+    public void makeBlueCrabWalkCloserThanMaximumDistance() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 0), makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Test making a crab walk to a destination that makes the board become not
+     * contiguous.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 30
+    public void makeBlueCrabWalkAndPathMakesBoardNotContiguous() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 0), makeCoordinate(-2, 1));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Test making a crab walk to a destination that is occupied.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 31
+    public void makeBlueCrabWalkToOccupiedCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 0), makeCoordinate(0, 0));
+    }
+
+    /**
+     * Test making a sparrow fly to a destination that is valid.
+     *
+     * @throws HantoException
+     */
+    @Test // 32
+    public void makeBlueSparrowFlyToValidCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-1, 0), makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Test making a sparrow fly to a destination that is too far away.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 33
+    public void makeBlueSparrowFlyTooFarAway() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(4, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-4, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(5, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-5, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(5, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-5, 0), makeCoordinate(6, 1));
+    }
+
+    /**
+     * Test making a sparrow fly to a destination that is occupied.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 34
+    public void makeBlueSparrowFlyToOccupiedCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-1, 0), makeCoordinate(2, 0));
     }
 }

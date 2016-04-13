@@ -696,4 +696,36 @@ public class BetaHantoMasterTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
         assertEquals(MoveResult.BLUE_WINS, mr);
     }
+
+    /**
+     * Test trying to move a butterfly and failing.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 19
+    public void moveButterflyAndFail() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(1, -1));
+    }
+
+    /**
+     * Test trying to move a sparrow and failing.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 20
+    public void moveSparrowAndFail() throws HantoException {
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 0), makeCoordinate(1, -1));
+    }
 }

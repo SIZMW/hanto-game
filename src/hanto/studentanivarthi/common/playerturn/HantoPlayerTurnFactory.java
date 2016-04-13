@@ -44,9 +44,6 @@ public class HantoPlayerTurnFactory {
     public HantoPlayerTurn makePlayerTurnInstance(HantoGameID gameID, HantoPlayerColor color) {
         HantoPlayerTurn playerTurn = null;
         switch (gameID) {
-            case ALPHA_HANTO:
-                playerTurn = new HantoPlayerTurnImpl(color, 1, 0, 0, 0, 0, 0);
-                break;
             case BETA_HANTO:
                 playerTurn = new HantoPlayerTurnImpl(color, 1, 0, 0, 0, 0, 5);
                 break;

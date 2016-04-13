@@ -44,16 +44,20 @@ public class MoveValidatorFactory {
      * @return a {@link MoveValidator}
      */
     public MoveValidator getMoveValidator(HantoGameID id, HantoPieceType pieceType) {
+        MoveValidator validator = null;
         switch (id) {
             case BETA_HANTO:
-                return getBetaHantoMoveValidator(pieceType);
+                validator = getBetaHantoMoveValidator(pieceType);
+                break;
             case GAMMA_HANTO:
-                return getGammaHantoMoveValidator(pieceType);
+                validator = getGammaHantoMoveValidator(pieceType);
+                break;
             case DELTA_HANTO:
-                return getDeltaHantoMoveValidator(pieceType);
-            default:
-                return null; // TODO Returning null move validator
+                validator = getDeltaHantoMoveValidator(pieceType);
+                break;
         }
+
+        return validator;
     }
 
     /**
@@ -65,14 +69,17 @@ public class MoveValidatorFactory {
      * @return a {@link MoveValidator}
      */
     protected MoveValidator getBetaHantoMoveValidator(HantoPieceType pieceType) {
+        MoveValidator validator = null;
         switch (pieceType) {
             case BUTTERFLY:
-                return new NoMoveValidator(0);
+                validator = new NoMoveValidator(0);
+                break;
             case SPARROW:
-                return new NoMoveValidator(0);
-            default:
-                return new NoMoveValidator(0);
+                validator = new NoMoveValidator(0);
+                break;
         }
+
+        return validator;
     }
 
     /**
@@ -84,16 +91,20 @@ public class MoveValidatorFactory {
      * @return a {@link MoveValidator}
      */
     protected MoveValidator getDeltaHantoMoveValidator(HantoPieceType pieceType) {
+        MoveValidator validator = null;
         switch (pieceType) {
             case BUTTERFLY:
-                return new WalkMoveValidator(1);
+                validator = new WalkMoveValidator(1);
+                break;
             case SPARROW:
-                return new FlyMoveValidator(10); // TODO Check distance
+                validator = new FlyMoveValidator(10); // TODO Check distance
+                break;
             case CRAB:
-                return new WalkMoveValidator(3);
-            default:
-                return new WalkMoveValidator(1);
+                validator = new WalkMoveValidator(3);
+                break;
         }
+
+        return validator;
     }
 
     /**
@@ -105,13 +116,16 @@ public class MoveValidatorFactory {
      * @return a {@link MoveValidator}
      */
     protected MoveValidator getGammaHantoMoveValidator(HantoPieceType pieceType) {
+        MoveValidator validator = null;
         switch (pieceType) {
             case BUTTERFLY:
-                return new WalkMoveValidator(1);
+                validator = new WalkMoveValidator(1);
+                break;
             case SPARROW:
-                return new WalkMoveValidator(1);
-            default:
-                return new WalkMoveValidator(1);
+                validator = new WalkMoveValidator(1);
+                break;
         }
+
+        return validator;
     }
 }
