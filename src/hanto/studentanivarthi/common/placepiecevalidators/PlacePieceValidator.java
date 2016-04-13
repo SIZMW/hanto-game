@@ -10,7 +10,7 @@ import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The PlacePieceValidator interface defines the methods for piece placement
- * validators for the Hanto game.
+ * validation for the Hanto game.
  *
  * @author Aditya Nivarthi
  */

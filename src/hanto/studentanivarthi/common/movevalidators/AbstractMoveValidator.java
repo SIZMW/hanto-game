@@ -1,3 +1,7 @@
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
@@ -5,15 +9,30 @@ import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
+/**
+ * This class defines the commonality between different versions of
+ * {@link MoveValidator}s and methods that are shared among the various
+ * implementations.
+ *
+ * @author Aditya Nivarthi
+ */
 public abstract class AbstractMoveValidator implements MoveValidator {
     protected int distance = 0;
 
+    /**
+     * Creates an AbstractMoveValidator instance.
+     *
+     * @param distance
+     *            The maximum distance for this move.
+     */
     public AbstractMoveValidator(int distance) {
         this.distance = distance;
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
@@ -53,7 +72,9 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,

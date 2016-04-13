@@ -24,8 +24,9 @@ import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnFactory;
 
 /**
- * The AbstractHantoGame class defines the commonality between versions of Hanto
- * and methods that are shared among the various implementations.
+ * This class defines the commonality between different versions of
+ * {@link HantoGame}s and methods that are shared among the various
+ * implementations.
  *
  * @author Aditya Nivarthi
  */
@@ -37,27 +38,20 @@ public abstract class AbstractHantoGame implements HantoGame {
      */
     protected final int MAX_TURNS_BEFORE_PLACE_BUTTERFLY = 3;
 
-    /**
-     * Turn related attributes.
-     */
     protected HantoPlayerTurn currentTurn;
     protected final HantoPlayerTurn blueTurn;
     protected final HantoPlayerTurn redTurn;
 
-    /**
-     * Game state variables.
-     */
     protected final HantoGameBoard board;
     protected boolean isGameOver = false;
     protected boolean isFirstMove = true;
     protected HantoGameID id;
 
     /**
-     * Creates an {@link AbstractHantoGame} instance.
+     * Creates an AbstractHantoGame instance.
      *
      * @param id
-     *            The ID of the game type being created, for use with the
-     *            {@link HantoPlayerTurnFactory}.
+     *            The {@link HantoGameID} of the game type being created.
      * @param movesFirst
      *            The {@link HantoPlayerColor} for the player to move first.
      */
@@ -72,7 +66,7 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
+     * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
      */
     @Override
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
@@ -80,7 +74,7 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     * @see hanto.common.HantoGame#getPrintableBoard()
      */
     @Override
     public String getPrintableBoard() {
@@ -88,24 +82,25 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
+     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
      */
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate src, HantoCoordinate dest)
             throws HantoException {
-        // Game is over
+        // Game over
         if (isGameOver) {
             throw new HantoException("You cannot move after the game is finished");
         }
 
         // Resignation
         if (pieceType == null && src == null && dest == null) {
-            isGameOver = true;
+            setGameIsOver();
             return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
                     : MoveResult.BLUE_WINS;
         }
 
-        // No destination to move to or place piece at
+        // No destination specified
         if (dest == null) {
             throw new HantoException(currentTurn.getColor().name()
                     + " cannot have a destination be a null coordinate.");
@@ -117,7 +112,7 @@ public abstract class AbstractHantoGame implements HantoGame {
         // Place a new piece
         if (src == null) {
             // Preconditions of place piece
-            if (!validatePlacePiecePreconditions(destCoordImpl, pieceImpl)) {
+            if (!validatePiecePlacementPreconditions(destCoordImpl, pieceImpl)) {
                 throw new HantoException(
                         currentTurn.getColor().name() + " cannot place a piece in that location");
             }
@@ -126,7 +121,7 @@ public abstract class AbstractHantoGame implements HantoGame {
             placePlayerPiece(destCoordImpl, pieceImpl);
 
             // Post conditions of place piece
-            if (!validatePlacePiecePostConditions(destCoordImpl, pieceImpl)) {
+            if (!validatePiecePlacementPostConditions(destCoordImpl, pieceImpl)) {
                 throw new HantoException(
                         currentTurn.getColor().name() + " cannot place a piece in that location");
             }
@@ -152,12 +147,15 @@ public abstract class AbstractHantoGame implements HantoGame {
             }
         }
 
+        // Switch player
         switchPlayerTurn();
+
+        // Get result
         return getMoveResult();
     }
 
     /**
-     * Returns the status on the game after a move.
+     * Returns the result of the game after a move.
      *
      * @return The {@link MoveResult} state of the game.
      */
@@ -167,7 +165,7 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         MoveResult mr = MoveResult.OK;
 
-        // Check if butterfly is surrounded if it has been placed
+        // Check if either butterfly is surrounded
         if (blueTurn.hasButterflyCoordinate()) {
             blueIsSurrounded = new HantoCoordinateImpl(blueTurn.getPlayerButterflyCoordinate())
                     .isCoordinateSurrounded(board);
@@ -198,7 +196,7 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Moves the piece from a coordinate to the other coordinate.
+     * Moves the piece from a coordinate to another coordinate.
      *
      * @param src
      *            The starting {@link HantoCoordinate}.
@@ -213,7 +211,8 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Places the specified piece at the specified coordinate.
+     * Places the piece at a coordinate. Saves the coordinate to the current
+     * player's instance if the coordinate is for a butterfly.
      *
      * @param dest
      *            The {@link HantoCoordinate} to place the piece.
@@ -223,11 +222,18 @@ public abstract class AbstractHantoGame implements HantoGame {
     protected void placePlayerPiece(HantoCoordinate dest, HantoPiece piece) {
         board.placePieceAt(dest, piece);
 
-        if (piece.getType() == HantoPieceType.BUTTERFLY) {
+        if (piece.getType().equals(HantoPieceType.BUTTERFLY)) {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
 
         currentTurn.placePiece(piece.getType());
+    }
+
+    /**
+     * Sets the game state to be ended.
+     */
+    protected void setGameIsOver() {
+        isGameOver = true;
     }
 
     /**
@@ -245,8 +251,8 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Checks if the move validator for the specified piece type is valid after
-     * the move has been completed.
+     * Validates that the post conditions for a move are met after the move is
+     * made. Calls the move validation class's validation method for validation.
      *
      * @param src
      *            The starting {@link HantoCoordinate}.
@@ -264,8 +270,10 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Checks if the move validator for the specified piece is valid before the
-     * move is made.
+     * Validates that the preconditions for a move are met before the move is
+     * made. Checks if the current player has placed a butterfly before
+     * attempting a move, and calls the move validation class's validation
+     * method for validation.
      *
      * @param src
      *            The starting {@link HantoCoordinate}.
@@ -288,8 +296,9 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Checks if the piece placement action is valid after it has been
-     * completed.
+     * Validates that the post conditions for a piece placement are met after
+     * the placement is made. At the base Hanto class, there are no post
+     * conditions to check.
      *
      * @param dest
      *            The destination {@link HantoCoordinate}.
@@ -297,14 +306,17 @@ public abstract class AbstractHantoGame implements HantoGame {
      *            The {@link HantoPiece} that was placed.
      * @return true if valid, false otherwise
      */
-    protected boolean validatePlacePiecePostConditions(HantoCoordinateImpl dest,
+    protected boolean validatePiecePlacementPostConditions(HantoCoordinateImpl dest,
             HantoPieceImpl piece) {
-        return true; // TODO Always return true for place piece post condition
+        return true; // Nothing needs to happen
     }
 
     /**
-     * Checks if the piece placement action is valid before it has been
-     * completed.
+     * Validates that the preconditions for a piece placement are met before the
+     * placement is made. Checks if the current player has placed a butterfly
+     * before the latest turn possible, if the player has pieces of the required
+     * type to place, and calls the piece placement validation class's
+     * validation method for validation.
      *
      * @param dest
      *            The destination {@link HantoCoordinate}.
@@ -312,7 +324,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      *            The {@link HantoPiece} that was placed.
      * @return true if valid, false otherwise
      */
-    protected boolean validatePlacePiecePreconditions(HantoCoordinateImpl dest,
+    protected boolean validatePiecePlacementPreconditions(HantoCoordinateImpl dest,
             HantoPieceImpl piece) {
         // Check if butterfly has not been placed
         if (!currentTurn.hasButterflyCoordinate()
@@ -333,12 +345,5 @@ public abstract class AbstractHantoGame implements HantoGame {
         // Update is first move state
         isFirstMove = isFirstMove ? false : false;
         return validator.canPlacePiece(dest, piece, board);
-    }
-
-    /**
-     * Sets the game state to be ended.
-     */
-    protected void setGameIsOver() {
-        isGameOver = true;
     }
 }

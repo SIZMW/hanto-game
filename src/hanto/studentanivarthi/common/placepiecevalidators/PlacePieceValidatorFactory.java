@@ -81,6 +81,20 @@ public class PlacePieceValidatorFactory {
     }
 
     /**
+     * Gets the {@link PlacePieceValidator} for {@link DeltaHantoGame}.
+     *
+     * @param isFirstMove
+     *            State of whether it is the first move of the game.
+     * @param totalTurnCount
+     *            The number of turns that happened in the game so far.
+     * @return a {@link PlacePieceValidator}
+     */
+    protected PlacePieceValidator getDeltaHantoPlacePieceValidator(boolean isFirstMove,
+            int totalTurnCount) {
+        return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
+    }
+
+    /**
      * Gets the {@link PlacePieceValidator} for {@link GammaHantoGame}.
      *
      * @param isFirstMove
@@ -98,19 +112,5 @@ public class PlacePieceValidatorFactory {
         } else {
             return new StandardPlacePieceValidator();
         }
-    }
-
-    /**
-     * Gets the {@link PlacePieceValidator} for {@link DeltaHantoGame}.
-     *
-     * @param isFirstMove
-     *            State of whether it is the first move of the game.
-     * @param totalTurnCount
-     *            The number of turns that happened in the game so far.
-     * @return a {@link PlacePieceValidator}
-     */
-    protected PlacePieceValidator getDeltaHantoPlacePieceValidator(boolean isFirstMove,
-            int totalTurnCount) {
-        return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
     }
 }

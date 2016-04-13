@@ -34,7 +34,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()}
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()
      */
     @Override
     public boolean arePiecesContiguous() {
@@ -64,77 +64,20 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#getPieceAt(hanto.common.HantoCoordinate)}
+     * @see java.lang.Object#clone()
      */
     @Override
-    public HantoPiece getPieceAt(HantoCoordinate coordinate) {
-        try {
-            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-            final HantoPiece piece = board.get(coordinateImpl);
-            return piece;
-        } catch (NullPointerException e) {
-            return null;
+    public HantoGameBoard clone() {
+        HantoGameBoard newBoard = new HantoGameBoardImpl();
+        for (HantoCoordinate e : board.keySet()) {
+            newBoard.placePieceAt(e, getPieceAt(e));
         }
+
+        return newBoard;
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#hasPieceAt(hanto.common.HantoCoordinate)}
-     */
-    @Override
-    public boolean hasPieceAt(HantoCoordinate coordinate) {
-        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        return board.containsKey(coordinateImpl) && board.get(coordinateImpl) != null;
-    }
-
-    /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#isBoardEmpty()}
-     */
-    @Override
-    public boolean isBoardEmpty() {
-        return board.isEmpty();
-    }
-
-    /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#placePieceAt(hanto.common.HantoCoordinate, hanto.common.HantoPiece)}
-     */
-    @Override
-    public boolean placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
-        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
-        board.put(coordinateImpl, pieceImpl);
-        return true;
-    }
-
-    /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#removePieceAt(hanto.common.HantoCoordinate)}
-     */
-    @Override
-    public HantoPiece removePieceAt(HantoCoordinate coordinate) throws ClassCastException {
-        try {
-            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-            return board.remove(coordinateImpl);
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-    /**
-     * @see {@link java.lang.Object#toString()}
-     */
-    @Override
-    public String toString() {
-        final StringBuilder stringBuilder = new StringBuilder();
-        for (HantoCoordinate c : board.keySet()) {
-            stringBuilder.append(c);
-            stringBuilder.append(": ");
-            stringBuilder.append(board.get(c));
-            stringBuilder.append('\n');
-        }
-        return stringBuilder.toString();
-    }
-
-    /**
-     * @see {@link hanto.studentanivarthi.common.board.HantoGameBoard#getEmptySurroundingCoordinates(hanto.common.HantoCoordinate)}
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getEmptySurroundingCoordinates(hanto.common.HantoCoordinate)
      */
     @Override
     public Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate) {
@@ -154,15 +97,72 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see {@link java.lang.Object#clone()}
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getPieceAt(hanto.common.HantoCoordinate)
      */
     @Override
-    public HantoGameBoard clone() {
-        HantoGameBoard newBoard = new HantoGameBoardImpl();
-        for (HantoCoordinate e : board.keySet()) {
-            newBoard.placePieceAt(e, getPieceAt(e));
+    public HantoPiece getPieceAt(HantoCoordinate coordinate) {
+        try {
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            final HantoPiece piece = board.get(coordinateImpl);
+            return piece;
+        } catch (NullPointerException e) {
+            return null;
         }
+    }
 
-        return newBoard;
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#hasPieceAt(hanto.common.HantoCoordinate)
+     */
+    @Override
+    public boolean hasPieceAt(HantoCoordinate coordinate) {
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        return board.containsKey(coordinateImpl) && board.get(coordinateImpl) != null;
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#isBoardEmpty()
+     */
+    @Override
+    public boolean isBoardEmpty() {
+        return board.isEmpty();
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#placePieceAt(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoPiece)
+     */
+    @Override
+    public void placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
+        board.put(coordinateImpl, pieceImpl);
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#removePieceAt(hanto.common.HantoCoordinate)
+     */
+    @Override
+    public HantoPiece removePieceAt(HantoCoordinate coordinate) throws ClassCastException {
+        try {
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            return board.remove(coordinateImpl);
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (HantoCoordinate c : board.keySet()) {
+            stringBuilder.append(c);
+            stringBuilder.append(": ");
+            stringBuilder.append(board.get(c));
+            stringBuilder.append('\n');
+        }
+        return stringBuilder.toString();
     }
 }

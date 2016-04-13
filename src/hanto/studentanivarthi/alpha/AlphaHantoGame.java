@@ -37,7 +37,7 @@ public class AlphaHantoGame implements HantoGame {
     private boolean gameOver = false;
 
     /**
-     * @see {@link hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)}
+     * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
      */
     @Override
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
@@ -47,7 +47,7 @@ public class AlphaHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#getPrintableBoard()}
+     * @see hanto.common.HantoGame#getPrintableBoard()
      */
     @Override
     public String getPrintableBoard() {
@@ -55,8 +55,8 @@ public class AlphaHantoGame implements HantoGame {
     }
 
     /**
-     * @see {@link hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType
-     *      and hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)}
+     * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
      */
     @Override
     public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate source,

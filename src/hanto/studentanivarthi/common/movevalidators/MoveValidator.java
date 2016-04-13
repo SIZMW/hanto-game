@@ -45,7 +45,7 @@ public interface MoveValidator {
      *            The {@link HantoPiece} to move.
      * @param board
      *            The current game {@link HantoGameBoard}.
-     * @return true if the move can be made, false otherwise.
+     * @return true if the game board is valid after the move, false otherwise.
      */
     boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
             HantoGameBoard board);

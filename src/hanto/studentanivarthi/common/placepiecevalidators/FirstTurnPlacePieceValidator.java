@@ -10,8 +10,8 @@ import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
- * The FirstTurnPlacePieceValidator defines the requirements for placing a piece
- * for the first turn of the game.
+ * The implementation of the piece placement validation for the first move of
+ * the Hanto game, based on the {@link PlacePieceValidator} interface.
  *
  * @author Aditya Nivarthi
  */
@@ -19,7 +19,9 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
     private final HantoCoordinate ORIGIN = new HantoCoordinateImpl(0, 0);
 
     /**
-     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {

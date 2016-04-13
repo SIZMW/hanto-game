@@ -25,6 +25,24 @@ public interface HantoGameBoard {
     boolean arePiecesContiguous();
 
     /**
+     * Returns a copy of this HantoGameBoard.
+     *
+     * @return a {@link HantoGameBoard}
+     */
+    HantoGameBoard clone();
+
+    /**
+     * Returns a collection of coordinates surrounding the specified coordinate
+     * that do not have a piece occupying them.
+     *
+     * @param coordinate
+     *            The coordinate to get the empty surrounding coordinates
+     *            around.
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
+     */
+    Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate);
+
+    /**
      * Returns the piece at the specified coordinate.
      *
      * @param coordinate
@@ -56,9 +74,8 @@ public interface HantoGameBoard {
      *            The {@link HantoCoordinate} on the board.
      * @param piece
      *            The {@link HantoPiece} to place.
-     * @return true if placed, false otherwise
      */
-    boolean placePieceAt(HantoCoordinate coordinate, HantoPiece piece);
+    void placePieceAt(HantoCoordinate coordinate, HantoPiece piece);
 
     /**
      * Removes the piece at the specified coordinate.
@@ -74,22 +91,4 @@ public interface HantoGameBoard {
      */
     @Override
     String toString();
-
-    /**
-     * Returns a collection of coordinates surrounding the specified coordinate
-     * that do not have a piece occupying them.
-     *
-     * @param coordinate
-     *            The coordinate to get the empty surrounding coordinates
-     *            around.
-     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
-     */
-    Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate);
-
-    /**
-     * Returns a copy of this HantoGameBoard.
-     * 
-     * @return a {@link HantoGameBoard}
-     */
-    HantoGameBoard clone();
 }

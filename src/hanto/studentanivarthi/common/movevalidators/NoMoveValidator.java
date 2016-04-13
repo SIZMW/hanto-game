@@ -5,18 +5,26 @@ import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
- * The NoMoveValidator is a subset of the {@link MoveValidator} that considers
- * pieces that do not move at all.
+ * The implementation of no movement in Hanto, based on the
+ * {@link MoveValidator} interface.
  *
  * @author Aditya Nivarthi
  */
 public class NoMoveValidator extends AbstractMoveValidator {
+    /**
+     * Creates a NoMoveValidator instance.
+     *
+     * @param distance
+     *            The maximum distance for this move.
+     */
     public NoMoveValidator(int distance) {
         super(0);
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,

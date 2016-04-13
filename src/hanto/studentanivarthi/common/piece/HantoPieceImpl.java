@@ -42,7 +42,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see {@link hanto.common.HantoPiece#getColor()}
+     * @see hanto.common.HantoPiece#getColor()
      */
     @Override
     public HantoPlayerColor getColor() {
@@ -50,7 +50,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see {@link hanto.common.HantoPiece#getType()}
+     * @see hanto.common.HantoPiece#getType()
      */
     @Override
     public HantoPieceType getType() {
@@ -58,7 +58,7 @@ public class HantoPieceImpl implements HantoPiece {
     }
 
     /**
-     * @see {@link java.lang.Object#toString()}
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {

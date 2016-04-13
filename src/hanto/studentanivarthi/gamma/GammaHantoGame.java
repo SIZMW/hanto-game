@@ -3,24 +3,25 @@
  */
 package hanto.studentanivarthi.gamma;
 
+import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
 
 /**
- * The implementation of Gamma Hanto.
+ * The implementation of Gamma Hanto, based on the {@link HantoGame} interface.
  *
  * @author Aditya Nivarthi
  */
 public class GammaHantoGame extends AbstractHantoGame {
     /**
-     * The maximum number of moves that can occur in Gamma Hanto.
+     * The maximum number of moves that can be played.
      */
     private final int MAX_MOVES = 40;
 
     /**
-     * Creates a GammaHantoGame instance with the specified starting player.
+     * Creates a GammaHantoGame instance.
      *
      * @param movesFirst
      *            The {@link HantoPlayerColor} to start.
@@ -30,12 +31,13 @@ public class GammaHantoGame extends AbstractHantoGame {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.game.AbstractHantoGame#getMoveResult()}
+     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#getMoveResult()
      */
     @Override
     protected MoveResult getMoveResult() {
         MoveResult result = super.getMoveResult();
 
+        // Check if the maximum number of moves has been exceeded
         if (blueTurn.getTurnCount() + redTurn.getTurnCount() >= MAX_MOVES) {
             if (result.equals(MoveResult.OK)) {
                 result = MoveResult.DRAW;

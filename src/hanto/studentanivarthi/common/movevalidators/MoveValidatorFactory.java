@@ -76,25 +76,6 @@ public class MoveValidatorFactory {
     }
 
     /**
-     * Returns the {@link MoveValidator} associated with {@link GammaHantoGame}.
-     *
-     * @param pieceType
-     *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
-     *            for.
-     * @return a {@link MoveValidator}
-     */
-    protected MoveValidator getGammaHantoMoveValidator(HantoPieceType pieceType) {
-        switch (pieceType) {
-            case BUTTERFLY:
-                return new WalkMoveValidator(1);
-            case SPARROW:
-                return new WalkMoveValidator(1);
-            default:
-                return new WalkMoveValidator(1);
-        }
-    }
-
-    /**
      * Returns the {@link MoveValidator} associated with {@link DeltaHantoGame}.
      *
      * @param pieceType
@@ -110,6 +91,25 @@ public class MoveValidatorFactory {
                 return new FlyMoveValidator(10); // TODO Check distance
             case CRAB:
                 return new WalkMoveValidator(3);
+            default:
+                return new WalkMoveValidator(1);
+        }
+    }
+
+    /**
+     * Returns the {@link MoveValidator} associated with {@link GammaHantoGame}.
+     *
+     * @param pieceType
+     *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
+     *            for.
+     * @return a {@link MoveValidator}
+     */
+    protected MoveValidator getGammaHantoMoveValidator(HantoPieceType pieceType) {
+        switch (pieceType) {
+            case BUTTERFLY:
+                return new WalkMoveValidator(1);
+            case SPARROW:
+                return new WalkMoveValidator(1);
             default:
                 return new WalkMoveValidator(1);
         }

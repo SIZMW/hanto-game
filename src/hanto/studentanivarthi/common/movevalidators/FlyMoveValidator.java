@@ -1,15 +1,36 @@
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
+
 package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
+/**
+ * The implementation of the fly move in Hanto, based on the
+ * {@link MoveValidator} interface.
+ *
+ * @author Aditya Nivarthi
+ */
 public class FlyMoveValidator extends AbstractMoveValidator {
 
+    /**
+     * Creates a FlyMoveValidator instance.
+     *
+     * @param distance
+     *            The maximum distance for this move.
+     */
     public FlyMoveValidator(int distance) {
         super(distance);
     }
 
+    /**
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
     @Override
     public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
             HantoGameBoard board) {
@@ -17,7 +38,9 @@ public class FlyMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate, hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#isMoveValid(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,

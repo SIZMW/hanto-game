@@ -13,14 +13,16 @@ import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
- * The StandardPlacePieceValidator defines the requirements to place a piece
- * during normal play of the Hanto game.
+ * The implementation of the piece placement validation for any standard move of
+ * the Hanto game, based on the {@link PlacePieceValidator} interface.
  *
  * @author Aditya Nivarthi
  */
 public class StandardPlacePieceValidator implements PlacePieceValidator {
     /**
-     * @see {@link hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate, hanto.common.HantoPiece, hanto.studentanivarthi.common.board.HantoGameBoard)}
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
     public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {
@@ -37,6 +39,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
 
         for (HantoCoordinate e : surroundings) {
             if (board.hasPieceAt(e)) {
+                // Check if not adjacent to piece of opposing color
                 if (!pieceImpl.getColor().equals(board.getPieceAt(e).getColor())) {
                     return false;
                 }
