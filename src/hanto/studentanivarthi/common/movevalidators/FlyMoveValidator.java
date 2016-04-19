@@ -11,12 +11,12 @@ import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The implementation of the fly move in Hanto, based on the
- * {@link MoveValidator} interface.
+ * {@link MoveValidator} interface. Passing a value less than 0 for the distance
+ * will give this validator an unlimited fly distance.
  *
  * @author Aditya Nivarthi
  */
 public class FlyMoveValidator extends AbstractMoveValidator {
-
     /**
      * Creates a FlyMoveValidator instance.
      *
@@ -56,6 +56,6 @@ public class FlyMoveValidator extends AbstractMoveValidator {
     @Override
     protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
         // If distance is -1, then unlimited fly distance
-        return distance >= 0 ? src.getDistanceTo(dest) > distance : false;
+        return distance >= 0 ? super.isMoveDistanceTooFar(src, dest) : false;
     }
 }
