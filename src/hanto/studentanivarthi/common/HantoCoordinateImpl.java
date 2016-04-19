@@ -75,6 +75,40 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
+     * Returns the distance between this coordinate and another coordinate.
+     *
+     * @see <a href=
+     *      "http://keekerdc.com/2011/03/hexagon-grids-coordinate-systems-and-distance-calculations/">
+     *      KeekerDC </a>
+     * @param coordinate
+     *            The {@link HantoCoordinate} to get the distance to.
+     * @return an integer
+     */
+    public int getDistanceTo(HantoCoordinate coordinate) {
+        if (coordinate != null) {
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            final int xDist = x - coordinateImpl.getX();
+            final int yDist = y - coordinateImpl.getY();
+
+            if (xDist == 0 && yDist == 0) {
+                return 0;
+            }
+
+            final int signX = xDist == 0 ? 0 : xDist < 0 ? -1 : 1;
+            int signY = yDist == 0 ? 0 : yDist < 0 ? -1 : 1;
+
+            if (signX == 1 && signY == 1 || signX == -1 && signY == -1) {
+                signY = 0;
+            }
+
+            return 1 + getDistanceTo(new HantoCoordinateImpl(coordinateImpl.getX() + signX,
+                    coordinateImpl.getY() + signY));
+        }
+
+        return 0;
+    }
+
+    /**
      * Returns a list of the surrounding coordinates around this coordinate.
      *
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
@@ -151,39 +185,5 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     @Override
     public String toString() {
         return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
-    }
-
-    /**
-     * Returns the distance between this coordinate and another coordinate.
-     *
-     * @see <a href=
-     *      "http://keekerdc.com/2011/03/hexagon-grids-coordinate-systems-and-distance-calculations/">
-     *      KeekerDC </a>
-     * @param coordinate
-     *            The {@link HantoCoordinate} to get the distance to.
-     * @return an integer
-     */
-    public int getDistanceTo(HantoCoordinate coordinate) {
-        if (coordinate != null) {
-            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-            final int xDist = x - coordinateImpl.getX();
-            final int yDist = y - coordinateImpl.getY();
-
-            if (xDist == 0 && yDist == 0) {
-                return 0;
-            }
-
-            final int signX = xDist == 0 ? 0 : xDist < 0 ? -1 : 1;
-            int signY = yDist == 0 ? 0 : yDist < 0 ? -1 : 1;
-
-            if (signX == 1 && signY == 1 || signX == -1 && signY == -1) {
-                signY = 0;
-            }
-
-            return 1 + getDistanceTo(new HantoCoordinateImpl(coordinateImpl.getX() + signX,
-                    coordinateImpl.getY() + signY));
-        }
-
-        return 0;
     }
 }

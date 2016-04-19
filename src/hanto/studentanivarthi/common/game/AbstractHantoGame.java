@@ -161,23 +161,6 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Returns if the player has resigned from the game by passing all null
-     * parameters.
-     *
-     * @param pieceType
-     *            The {@link HantoPieceType} for the move.
-     * @param src
-     *            The starting {@link HantoCoordinate}.
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @return true if resigned, false otherwise
-     */
-    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
-            HantoCoordinate dest) {
-        return pieceType == null && src == null && dest == null;
-    }
-
-    /**
      * Returns the result of the game after a move.
      *
      * @return The {@link MoveResult} state of the game.
@@ -219,6 +202,30 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
+     * Returns if the player has resigned from the game by passing all null
+     * parameters.
+     *
+     * @param pieceType
+     *            The {@link HantoPieceType} for the move.
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return true if resigned, false otherwise
+     */
+    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
+            HantoCoordinate dest) {
+        return pieceType == null && src == null && dest == null;
+    }
+
+    /**
+     * Sets the game state to be ended.
+     */
+    protected void markGameIsOver() {
+        isGameOver = true;
+    }
+
+    /**
      * Moves the piece from a coordinate to another coordinate.
      *
      * @param src
@@ -250,13 +257,6 @@ public abstract class AbstractHantoGame implements HantoGame {
         }
 
         currentTurn.placePiece(piece.getType());
-    }
-
-    /**
-     * Sets the game state to be ended.
-     */
-    protected void markGameIsOver() {
-        isGameOver = true;
     }
 
     /**

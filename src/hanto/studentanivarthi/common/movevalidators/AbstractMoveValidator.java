@@ -72,6 +72,17 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
+    @Override
+    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+            HantoGameBoard board) {
+        return board.arePiecesContiguous();
+    }
+
+    /**
      * Returns whether the source coordinate and destination coordinate are too
      * far apart for the move distance.
      *
@@ -83,16 +94,5 @@ public abstract class AbstractMoveValidator implements MoveValidator {
      */
     protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
         return src.getDistanceTo(dest) > distance;
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
-     *      hanto.studentanivarthi.common.board.HantoGameBoard)
-     */
-    @Override
-    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
-            HantoGameBoard board) {
-        return board.arePiecesContiguous();
     }
 }

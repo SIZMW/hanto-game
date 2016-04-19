@@ -40,16 +40,6 @@ public class BetaHantoGame extends AbstractHantoGame {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasPlayerResigned(hanto.common.HantoPieceType,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
-     */
-    @Override
-    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
-            HantoCoordinate dest) {
-        return false;
-    };
-
-    /**
      * @see hanto.studentanivarthi.common.game.AbstractHantoGame#getMoveResult()
      */
     @Override
@@ -66,5 +56,15 @@ public class BetaHantoGame extends AbstractHantoGame {
         }
 
         return result;
+    };
+
+    /**
+     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasPlayerResigned(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
+     */
+    @Override
+    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
+            HantoCoordinate dest) {
+        return false;
     }
 }
