@@ -158,6 +158,7 @@ public class DeltaHantoTest {
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCraneAtOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(HantoPieceType.CRANE, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
     }
 
     /**
@@ -806,7 +807,7 @@ public class DeltaHantoTest {
         assertEquals(MoveResult.OK, mr);
 
         mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 1), makeCoordinate(2, 0));
-        HantoPiece p = game.getPieceAt(makeCoordinate(2, 0));
+        final HantoPiece p = game.getPieceAt(makeCoordinate(2, 0));
 
         assertEquals(MoveResult.OK, mr);
         assertEquals(p.getColor(), HantoPlayerColor.BLUE);
