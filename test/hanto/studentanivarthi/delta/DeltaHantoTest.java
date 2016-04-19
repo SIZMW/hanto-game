@@ -158,7 +158,6 @@ public class DeltaHantoTest {
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCraneAtOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(HantoPieceType.CRANE, null, makeCoordinate(0, 0));
-        assertEquals(OK, mr);
     }
 
     /**
@@ -965,7 +964,7 @@ public class DeltaHantoTest {
      * @throws HantoException
      */
     @Test // 33
-    public void makeBlueSparrowFlyTooFarAway() throws HantoException {
+    public void makeBlueSparrowFlyFartherAway() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -1058,5 +1057,60 @@ public class DeltaHantoTest {
         assertEquals(OK, mr);
 
         mr = game.makeMove(null, null, makeCoordinate(1, 0));
+    }
+
+    /**
+     * Test having the blue butterfly walk two spaces which fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 37
+    public void blueButterflyWalksTwoSpaces() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, 2));
+    }
+
+    /**
+     * Tests running the game for MAX_RUNS moves, at least to show with some
+     * reason that there is no move limit.
+     *
+     * @throws HantoException
+     */
+    @Test // 38
+    public void runGameToMillionMoves() throws HantoException {
+        final long MAX_RUNS = 1000000;
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        // Run back and forth moves for MAX_RUNS moves
+        for (int i = 0; i < MAX_RUNS; i++) {
+            if (i == 0 || i % 2 == 0) {
+                mr = game.makeMove(SPARROW, makeCoordinate(-1, 0), makeCoordinate(0, -1));
+                assertEquals(OK, mr);
+
+                mr = game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(2, -1));
+                assertEquals(OK, mr);
+            } else {
+                mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(-1, 0));
+                assertEquals(OK, mr);
+
+                mr = game.makeMove(SPARROW, makeCoordinate(2, -1), makeCoordinate(2, 0));
+                assertEquals(OK, mr);
+            }
+        }
     }
 }
