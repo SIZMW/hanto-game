@@ -49,7 +49,7 @@ public class PlacePieceValidatorFactory {
      * @return a {@link PlacePieceValidator}
      */
     public PlacePieceValidator getPlacePieceValidator(HantoGameID gameID, boolean isFirstMove,
-            int totalTurnCount) {
+            long totalTurnCount) {
         switch (gameID) {
             case BETA_HANTO:
                 return getBetaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
@@ -72,7 +72,7 @@ public class PlacePieceValidatorFactory {
      * @return a {@link PlacePieceValidator}
      */
     protected PlacePieceValidator getBetaHantoPlacePieceValidator(boolean isFirstMove,
-            int totalTurnCount) {
+            long totalTurnCount) {
         if (isFirstMove) {
             return new FirstTurnPlacePieceValidator();
         } else {
@@ -90,7 +90,7 @@ public class PlacePieceValidatorFactory {
      * @return a {@link PlacePieceValidator}
      */
     protected PlacePieceValidator getDeltaHantoPlacePieceValidator(boolean isFirstMove,
-            int totalTurnCount) {
+            long totalTurnCount) {
         return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
     }
 
@@ -104,7 +104,7 @@ public class PlacePieceValidatorFactory {
      * @return a {@link PlacePieceValidator}
      */
     protected PlacePieceValidator getGammaHantoPlacePieceValidator(boolean isFirstMove,
-            int totalTurnCount) {
+            long totalTurnCount) {
         if (isFirstMove) {
             return new FirstTurnPlacePieceValidator();
         } else if (totalTurnCount < FIRST_TURN_CYCLE) {

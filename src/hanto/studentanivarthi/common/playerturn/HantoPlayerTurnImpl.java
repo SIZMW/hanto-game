@@ -19,7 +19,7 @@ import hanto.common.HantoPlayerColor;
  */
 public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     private final HantoPlayerColor color;
-    private int turnCount = 0;
+    private long turnCount = 0;
     private Optional<HantoCoordinate> butterflyCoordinate;
     private final Map<HantoPieceType, Integer> manager;
 
@@ -86,7 +86,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
      * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getTurnCount()
      */
     @Override
-    public int getTurnCount() {
+    public long getTurnCount() {
         return turnCount;
     }
 

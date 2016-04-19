@@ -43,9 +43,9 @@ public interface HantoPlayerTurn {
     /**
      * Returns the number of turns this player has played.
      *
-     * @return an integer
+     * @return a long
      */
-    int getTurnCount();
+    long getTurnCount();
 
     /**
      * Returns whether this player has a butterfly placed on the board.
