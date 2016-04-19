@@ -955,11 +955,12 @@ public class DeltaHantoTest {
     }
 
     /**
-     * Test making a sparrow fly to a destination that is too far away.
+     * Test making a sparrow fly to a destination that is 10 spaces away, which
+     * in Delta Hanto is not too far away.
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 33
+    @Test // 33
     public void makeBlueSparrowFlyTooFarAway() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
@@ -998,6 +999,7 @@ public class DeltaHantoTest {
         assertEquals(OK, mr);
 
         mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-5, 0), makeCoordinate(6, 1));
+        assertEquals(OK, mr);
     }
 
     /**
@@ -1020,5 +1022,37 @@ public class DeltaHantoTest {
         assertEquals(OK, mr);
 
         mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-1, 0), makeCoordinate(2, 0));
+    }
+
+    /**
+     * Test making a piece move from and to the same coordinate, which fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 35
+    public void makeMoveToAndFromSameCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(1, 0));
+    }
+
+    /**
+     * Tests passing a null piece type to the move.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 36
+    public void makeMoveWithNullPieceType() throws HantoException {
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(null, null, makeCoordinate(1, 0));
     }
 }

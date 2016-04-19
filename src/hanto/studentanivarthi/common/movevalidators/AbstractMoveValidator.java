@@ -45,8 +45,8 @@ public abstract class AbstractMoveValidator implements MoveValidator {
             return false;
         }
 
-        // Source and destination are too far apart
-        if (srcCoordImpl.getDistanceTo(destCoordImpl) > distance) {
+        // Source is too far from the destination
+        if (isMoveDistanceTooFar(srcCoordImpl, destCoordImpl)) {
             return false;
         }
 
@@ -69,6 +69,20 @@ public abstract class AbstractMoveValidator implements MoveValidator {
         }
 
         return true;
+    }
+
+    /**
+     * Returns whether the source coordinate and destination coordinate are too
+     * far apart for the move distance.
+     * 
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return true if distance is too far, false otherwise
+     */
+    protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
+        return src.getDistanceTo(dest) > distance;
     }
 
     /**

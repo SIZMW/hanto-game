@@ -97,7 +97,7 @@ public class MoveValidatorFactory {
                 validator = new WalkMoveValidator(1);
                 break;
             case SPARROW:
-                validator = new FlyMoveValidator(10); // TODO Check distance
+                validator = new FlyMoveValidator(-1);
                 break;
             case CRAB:
                 validator = new WalkMoveValidator(3);

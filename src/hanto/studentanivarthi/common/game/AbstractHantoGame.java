@@ -94,7 +94,7 @@ public abstract class AbstractHantoGame implements HantoGame {
         }
 
         // Resignation
-        if (pieceType == null && src == null && dest == null) {
+        if (hasPlayerResigned(pieceType, src, dest)) {
             setGameIsOver();
             return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
                     : MoveResult.BLUE_WINS;
@@ -104,6 +104,12 @@ public abstract class AbstractHantoGame implements HantoGame {
         if (dest == null) {
             throw new HantoException(currentTurn.getColor().name()
                     + " cannot have a destination be a null coordinate.");
+        }
+
+        // No piece specified
+        if (pieceType == null) {
+            throw new HantoException(
+                    currentTurn.getColor().name() + " cannot have a piece type be null.");
         }
 
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
@@ -152,6 +158,23 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         // Get result
         return getMoveResult();
+    }
+
+    /**
+     * Returns if the player has resigned from the game by passing all null
+     * parameters.
+     *
+     * @param pieceType
+     *            The {@link HantoPieceType} for the move.
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return
+     */
+    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
+            HantoCoordinate dest) {
+        return pieceType == null && src == null && dest == null;
     }
 
     /**

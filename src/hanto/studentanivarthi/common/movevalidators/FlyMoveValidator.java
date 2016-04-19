@@ -6,6 +6,7 @@ package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
+import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
@@ -48,4 +49,13 @@ public class FlyMoveValidator extends AbstractMoveValidator {
         return board.arePiecesContiguous();
     }
 
+    /**
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#isMoveDistanceTooFar(hanto.studentanivarthi.common.HantoCoordinateImpl,
+     *      hanto.studentanivarthi.common.HantoCoordinateImpl)
+     */
+    @Override
+    protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
+        // If distance is -1, then unlimited fly distance
+        return distance >= 0 ? src.getDistanceTo(dest) > distance : false;
+    }
 }

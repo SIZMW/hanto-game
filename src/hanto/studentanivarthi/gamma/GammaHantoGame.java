@@ -3,8 +3,10 @@
  */
 package hanto.studentanivarthi.gamma;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
@@ -29,6 +31,16 @@ public class GammaHantoGame extends AbstractHantoGame {
     public GammaHantoGame(HantoPlayerColor movesFirst) {
         super(HantoGameID.GAMMA_HANTO, movesFirst);
     }
+
+    /**
+     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasPlayerResigned(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
+     */
+    @Override
+    protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
+            HantoCoordinate dest) {
+        return false;
+    };
 
     /**
      * @see hanto.studentanivarthi.common.game.AbstractHantoGame#getMoveResult()

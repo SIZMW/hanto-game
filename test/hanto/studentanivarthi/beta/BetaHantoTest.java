@@ -33,7 +33,7 @@ import hanto.studentanivarthi.HantoGameFactory;
  *
  * @version Sep 14, 2014
  */
-public class BetaHantoMasterTest {
+public class BetaHantoTest {
     /**
      * Internal class for these test cases.
      *
