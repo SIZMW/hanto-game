@@ -45,7 +45,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see {@link java.lang.Object#equals(java.lang.Object)}
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -125,7 +125,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see {@link hanto.common.HantoCoordinate#getX()}
+     * @see hanto.common.HantoCoordinate#getX()
      */
     @Override
     public int getX() {
@@ -133,7 +133,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see {@link hanto.common.HantoCoordinate#getY()}
+     * @see hanto.common.HantoCoordinate#getY()
      */
     @Override
     public int getY() {
@@ -141,7 +141,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see {@link java.lang.Object#hashCode()}
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -180,7 +180,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * @see {@link java.lang.Object#toString()}
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {

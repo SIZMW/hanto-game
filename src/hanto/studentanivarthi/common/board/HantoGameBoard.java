@@ -87,7 +87,7 @@ public interface HantoGameBoard {
     HantoPiece removePieceAt(HantoCoordinate coordinate);
 
     /**
-     * @see {@link java.lang.Object#toString()}
+     * @see java.lang.Object#toString()
      */
     @Override
     String toString();

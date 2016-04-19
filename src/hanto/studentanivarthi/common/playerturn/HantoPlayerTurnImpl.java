@@ -6,7 +6,6 @@ package hanto.studentanivarthi.common.playerturn;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import hanto.common.HantoCoordinate;
@@ -59,7 +58,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#canPlacePiece(hanto.common.HantoPieceType)}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#canPlacePiece(hanto.common.HantoPieceType)
      */
     @Override
     public boolean canPlacePiece(HantoPieceType pieceType) {
@@ -68,7 +67,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getColor()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getColor()
      */
     @Override
     public HantoPlayerColor getColor() {
@@ -76,19 +75,15 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getPlayerButterflyCoordinate()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getPlayerButterflyCoordinate()
      */
     @Override
     public HantoCoordinate getPlayerButterflyCoordinate() {
-        try {
-            return butterflyCoordinate.get();
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return butterflyCoordinate.get();
     };
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getTurnCount()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#getTurnCount()
      */
     @Override
     public int getTurnCount() {
@@ -96,7 +91,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#hasButterflyCoordinate()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#hasButterflyCoordinate()
      */
     @Override
     public boolean hasButterflyCoordinate() {
@@ -104,7 +99,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#isOutOfPieces()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#isOutOfPieces()
      */
     @Override
     public boolean isOutOfPieces() {
@@ -115,7 +110,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#placePiece()}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#placePiece(hanto.common.HantoPieceType)
      */
     @Override
     public void placePiece(HantoPieceType pieceType) {
@@ -128,7 +123,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#setPlayerButterflyCoordinate(hanto.common.HantoCoordinate)}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#setPlayerButterflyCoordinate(hanto.common.HantoCoordinate)
      */
     @Override
     public void setPlayerButterflyCoordinate(HantoCoordinate coordinate) {
@@ -140,7 +135,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
     }
 
     /**
-     * @see {@link hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#updateTurnCount(int)}
+     * @see hanto.studentanivarthi.common.playerturn.HantoPlayerTurn#updateTurnCount(int)
      */
     @Override
     public void updateTurnCount(int delta) {

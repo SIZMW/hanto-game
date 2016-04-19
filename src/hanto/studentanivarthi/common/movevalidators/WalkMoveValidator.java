@@ -6,6 +6,7 @@ package hanto.studentanivarthi.common.movevalidators;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
@@ -50,7 +51,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Recursive check for walking validation
-        return this.canMove(srcCoordImpl, destCoordImpl, board, distance);
+        return this.canMove(srcCoordImpl, destCoordImpl, board, distance, new ArrayList<>());
     }
 
     /**
@@ -69,10 +70,17 @@ public class WalkMoveValidator extends AbstractMoveValidator {
      *            The current game {@link HantoGameBoard}.
      * @param distanceTraveled
      *            The number of steps made in the recursive calls.
+     * @param previousCoordinates
+     *            The {@link List} of already visited
+     *            {@link HantoCoordinateImpl} locations.
      * @return true if the destination coordinate is reached, false otherwise
      */
     protected boolean canMove(HantoCoordinateImpl srcCoordImpl, HantoCoordinateImpl destCoordImpl,
-            HantoGameBoard board, int distanceTraveled) {
+            HantoGameBoard board, int distanceTraveled,
+            List<HantoCoordinateImpl> previousCoordinates) {
+        // Add current coordinate to previous list
+        previousCoordinates.add(srcCoordImpl);
+
         // Pieces must be contiguous at every level
         if (!board.arePiecesContiguous()) {
             return false;
@@ -97,14 +105,17 @@ public class WalkMoveValidator extends AbstractMoveValidator {
         for (HantoCoordinate e : emptySurroundings) {
             HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);
 
-            // If there is sufficient sliding space to move, continue
-            if (hasSlidingSpaceToMove(srcCoordImpl, eImpl, board)) {
+            // If there is sufficient sliding space to move and the coordinate
+            // is not already been visited
+            if (hasSlidingSpaceToMove(srcCoordImpl, eImpl, board)
+                    && !previousCoordinates.contains(eImpl)) {
                 HantoGameBoard boardCopy = board.copy();
                 HantoPiece piece = boardCopy.removePieceAt(srcCoordImpl);
                 boardCopy.placePieceAt(eImpl, piece);
 
                 boolean hasPathReached = this.canMove(eImpl, destCoordImpl, boardCopy,
-                        distanceTraveled - 1);
+                        distanceTraveled - 1,
+                        new ArrayList<HantoCoordinateImpl>(previousCoordinates));
                 if (hasPathReached) {
                     return true;
                 }
