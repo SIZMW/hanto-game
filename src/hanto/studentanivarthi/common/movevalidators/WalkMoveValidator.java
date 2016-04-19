@@ -99,7 +99,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
 
             // If there is sufficient sliding space to move, continue
             if (hasSlidingSpaceToMove(srcCoordImpl, eImpl, board)) {
-                HantoGameBoard boardCopy = board.clone();
+                HantoGameBoard boardCopy = board.copy();
                 HantoPiece piece = boardCopy.removePieceAt(srcCoordImpl);
                 boardCopy.placePieceAt(eImpl, piece);
 

@@ -64,10 +64,10 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see java.lang.Object#clone()
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#copy()
      */
     @Override
-    public HantoGameBoard clone() {
+    public HantoGameBoard copy() {
         HantoGameBoard newBoard = new HantoGameBoardImpl();
         for (HantoCoordinate e : board.keySet()) {
             newBoard.placePieceAt(e, getPieceAt(e));

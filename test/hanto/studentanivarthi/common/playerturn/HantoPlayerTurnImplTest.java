@@ -16,8 +16,6 @@ import org.junit.Test;
 
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
-import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnImpl;
 
 /**
  * Test cases for Hanto player piece playerTurn.

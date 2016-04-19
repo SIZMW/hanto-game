@@ -37,7 +37,9 @@ public class MoveValidatorFactory {
     /**
      * Returns the {@link MoveValidator} associated with the specified piece
      * type.
-     *
+     * 
+     * @param id
+     *            The {@link HantoGameID} of the game.
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.

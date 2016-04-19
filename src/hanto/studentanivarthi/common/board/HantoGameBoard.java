@@ -29,7 +29,7 @@ public interface HantoGameBoard {
      *
      * @return a {@link HantoGameBoard}
      */
-    HantoGameBoard clone();
+    HantoGameBoard copy();
 
     /**
      * Returns a collection of coordinates surrounding the specified coordinate

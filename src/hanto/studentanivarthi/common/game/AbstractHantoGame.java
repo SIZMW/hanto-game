@@ -95,7 +95,7 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         // Resignation
         if (hasPlayerResigned(pieceType, src, dest)) {
-            setGameIsOver();
+            markGameIsOver();
             return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
                     : MoveResult.BLUE_WINS;
         }
@@ -170,7 +170,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      *            The starting {@link HantoCoordinate}.
      * @param dest
      *            The destination {@link HantoCoordinate}.
-     * @return
+     * @return true if resigned, false otherwise
      */
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
             HantoCoordinate dest) {
@@ -202,17 +202,17 @@ public abstract class AbstractHantoGame implements HantoGame {
         // Determine correct result
         if (blueIsSurrounded) {
             mr = MoveResult.RED_WINS;
-            setGameIsOver();
+            markGameIsOver();
         }
 
         if (redIsSurrounded) {
             mr = MoveResult.BLUE_WINS;
-            setGameIsOver();
+            markGameIsOver();
         }
 
         if (blueIsSurrounded && redIsSurrounded) {
             mr = MoveResult.DRAW;
-            setGameIsOver();
+            markGameIsOver();
         }
 
         return mr;
@@ -255,7 +255,7 @@ public abstract class AbstractHantoGame implements HantoGame {
     /**
      * Sets the game state to be ended.
      */
-    protected void setGameIsOver() {
+    protected void markGameIsOver() {
         isGameOver = true;
     }
 
