@@ -138,7 +138,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
 
         // Find the common coordinates, the coordinates adjacent to both source
         // and destination
-        Collection<HantoCoordinate> common = new ArrayList<>(srcSurroundings);
+        final Collection<HantoCoordinate> common = new ArrayList<>(srcSurroundings);
         common.retainAll(destSurroundings);
 
         // If any of the common adjacent coordinates is empty, then it can move

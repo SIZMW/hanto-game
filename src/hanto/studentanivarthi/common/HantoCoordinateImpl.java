@@ -165,15 +165,15 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      */
     public int getDistanceTo(HantoCoordinate coordinate) {
         if (coordinate != null) {
-            HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-            int xDist = x - coordinateImpl.getX();
-            int yDist = y - coordinateImpl.getY();
+            final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+            final int xDist = x - coordinateImpl.getX();
+            final int yDist = y - coordinateImpl.getY();
 
             if (xDist == 0 && yDist == 0) {
                 return 0;
             }
 
-            int signX = xDist == 0 ? 0 : xDist < 0 ? -1 : 1;
+            final int signX = xDist == 0 ? 0 : xDist < 0 ? -1 : 1;
             int signY = yDist == 0 ? 0 : yDist < 0 ? -1 : 1;
 
             if (signX == 1 && signY == 1 || signX == -1 && signY == -1) {

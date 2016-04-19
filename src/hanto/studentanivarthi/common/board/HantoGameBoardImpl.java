@@ -68,7 +68,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
      */
     @Override
     public HantoGameBoard copy() {
-        HantoGameBoard newBoard = new HantoGameBoardImpl();
+        final HantoGameBoard newBoard = new HantoGameBoardImpl();
         for (HantoCoordinate e : board.keySet()) {
             newBoard.placePieceAt(e, getPieceAt(e));
         }
@@ -81,10 +81,9 @@ public class HantoGameBoardImpl implements HantoGameBoard {
      */
     @Override
     public Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate) {
-        Collection<HantoCoordinate> emptySurroundings = new ArrayList<>();
-
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> emptySurroundings = new ArrayList<>();
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingPieces();
 
         for (HantoCoordinate e : surroundings) {
             HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);

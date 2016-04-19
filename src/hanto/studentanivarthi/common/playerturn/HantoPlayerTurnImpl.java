@@ -63,7 +63,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
      */
     @Override
     public boolean canPlacePiece(HantoPieceType pieceType) {
-        int value = manager.get(pieceType);
+        final int value = manager.get(pieceType);
         return value > 0;
     }
 
@@ -119,7 +119,7 @@ public class HantoPlayerTurnImpl implements HantoPlayerTurn {
      */
     @Override
     public void placePiece(HantoPieceType pieceType) {
-        int value = manager.get(pieceType);
+        final int value = manager.get(pieceType);
         if (value > 0) {
             manager.put(pieceType, value - 1);
         } else {

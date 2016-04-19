@@ -25,7 +25,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
      * @param distance
      *            The maximum distance for this move.
      */
-    public AbstractMoveValidator(int distance) {
+    protected AbstractMoveValidator(int distance) {
         this.distance = distance;
     }
 
@@ -74,7 +74,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     /**
      * Returns whether the source coordinate and destination coordinate are too
      * far apart for the move distance.
-     * 
+     *
      * @param src
      *            The starting {@link HantoCoordinate}.
      * @param dest

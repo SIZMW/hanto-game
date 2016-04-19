@@ -55,7 +55,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      * @param movesFirst
      *            The {@link HantoPlayerColor} for the player to move first.
      */
-    public AbstractHantoGame(HantoGameID id, HantoPlayerColor movesFirst) {
+    protected AbstractHantoGame(HantoGameID id, HantoPlayerColor movesFirst) {
         this.id = id;
         board = new HantoGameBoardImpl();
         blueTurn = HantoPlayerTurnFactory.getInstance().makePlayerTurnInstance(id,
@@ -361,7 +361,7 @@ public abstract class AbstractHantoGame implements HantoGame {
         }
 
         // Get place piece validator from factory
-        PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
+        final PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
                 .getPlacePieceValidator(id, isFirstMove,
                         blueTurn.getTurnCount() + redTurn.getTurnCount());
 
