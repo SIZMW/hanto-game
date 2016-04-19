@@ -1113,4 +1113,148 @@ public class DeltaHantoTest {
             }
         }
     }
+
+    /**
+     * Tests trying to make a piece walk without placing the butterfly on the
+     * board.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 39
+    public void walkPieceWithoutPlacingButterfly() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(SPARROW, makeCoordinate(0, 0), makeCoordinate(0, 1));
+    }
+
+    /**
+     * Tests trying to make a piece walk and passing a location that is empty as
+     * the source.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 40
+    public void walkPieceFromEmptyCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, -1), makeCoordinate(0, 0));
+    }
+
+    /**
+     * Tests trying to move a piece from a coordinate to a null coordinate,
+     * which should fail.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 41
+    public void movePieceToNullCoordinate() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), null);
+    }
+
+    /**
+     * Tests trying to move a piece from a coordinate to another coordinate, and
+     * there are two pieces on either side of the destination, so there is not
+     * enough space and it should fail.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 42
+    public void movePieceToCoordinateWithoutSufficientSlidingRoom() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        // Turn 3, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(1, -1));
+    }
+
+    /**
+     * Tests trying to move a piece from a coordinate to another coordinate, and
+     * there is one piece on the side of the destination, so there is enough
+     * space and it should move.
+     *
+     * @throws HantoException
+     */
+    @Test // 43
+    public void movePieceToCoordinateWithSufficientSlidingRoom() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(1, -1));
+    }
+
+    /**
+     * Tests trying to move the opponent's piece, which fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 44
+    public void movingOpponentPieceAndFailing() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 1), makeCoordinate(-1, 1));
+    }
+
+    /**
+     * Tests trying to move a piece but referencing it with the wrong type,
+     * which fails.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 45
+    public void movingPieceWithWrongTypeAndFailing() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 2, fails
+        mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, -1));
+    }
 }
