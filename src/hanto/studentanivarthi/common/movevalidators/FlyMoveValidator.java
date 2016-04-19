@@ -39,17 +39,6 @@ public class FlyMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#isMoveValid(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
-     *      hanto.studentanivarthi.common.board.HantoGameBoard)
-     */
-    @Override
-    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
-            HantoGameBoard board) {
-        return board.arePiecesContiguous();
-    }
-
-    /**
      * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#isMoveDistanceTooFar(hanto.studentanivarthi.common.HantoCoordinateImpl,
      *      hanto.studentanivarthi.common.HantoCoordinateImpl)
      */

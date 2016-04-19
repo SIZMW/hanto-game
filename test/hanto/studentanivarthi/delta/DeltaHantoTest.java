@@ -1257,4 +1257,68 @@ public class DeltaHantoTest {
         // Turn 2, fails
         mr = game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, -1));
     }
+
+    /**
+     * Tests setting up a similar scenario to the one from the Hanto guide on
+     * walking and always having a connected configuration.
+     *
+     * @throws HantoException
+     */
+    @Test // 46
+    public void testASimilarWalkingScenarioFromHantoGuide() throws HantoException {
+        // Setup
+        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(-2, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(SPARROW, null, makeCoordinate(3, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, -2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(4, -2));
+        assertEquals(OK, mr);
+
+        // Move blue crab
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, -2), makeCoordinate(1, -1));
+        assertEquals(OK, mr);
+
+        // Move red crab
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(4, -2), makeCoordinate(1, -2));
+        assertEquals(OK, mr);
+
+        // Move blue sparrow
+        mr = game.makeMove(SPARROW, makeCoordinate(-2, -1), makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        // Move red sparrow
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(3, -1), makeCoordinate(4, -1));
+        assertEquals(OK, mr);
+
+        // Move blue crab again
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(1, -1), makeCoordinate(4, -2));
+        assertEquals(OK, mr);
+
+        // Move red sparrow again
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(1, -2), makeCoordinate(-1, -1));
+        assertEquals(OK, mr);
+    }
 }
