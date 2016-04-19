@@ -139,8 +139,9 @@ public abstract class AbstractHantoGame implements HantoGame {
 
             // Preconditions of move
             if (!validateMovePreconditions(srcCoordImpl, destCoordImpl, pieceImpl, validator)) {
-                throw new HantoException(
-                        currentTurn.getColor().name() + " cannot move a piece to that location");
+                throw new HantoException(currentTurn.getColor().name()
+                        + " cannot move a piece to that location, according to "
+                        + validator.getClass().getName());
             }
 
             // Move piece
@@ -148,8 +149,9 @@ public abstract class AbstractHantoGame implements HantoGame {
 
             // Post conditions of move
             if (!validateMovePostConditions(srcCoordImpl, destCoordImpl, pieceImpl, validator)) {
-                throw new HantoException(
-                        currentTurn.getColor().name() + " cannot move a piece to that location");
+                throw new HantoException(currentTurn.getColor().name()
+                        + " cannot move a piece to that location, according to "
+                        + validator.getClass().getName());
             }
         }
 
@@ -307,12 +309,15 @@ public abstract class AbstractHantoGame implements HantoGame {
      * @param validator
      *            The {@link MoveValidator} associated with the piece.
      * @return true if valid, false otherwise
+     * @throws HantoException
+     *             If any of the preconditions are not met before the move
+     *             validation.
      */
     protected boolean validateMovePreconditions(HantoCoordinateImpl src, HantoCoordinateImpl dest,
-            HantoPieceImpl piece, MoveValidator validator) {
+            HantoPieceImpl piece, MoveValidator validator) throws HantoException {
         // Cannot move without having placed the butterfly
         if (!currentTurn.hasButterflyCoordinate()) {
-            return false;
+            throw new HantoException("Player has not placed the butterfly on the board yet.");
         }
 
         return validator.canMove(src, dest, piece, board);
@@ -346,18 +351,23 @@ public abstract class AbstractHantoGame implements HantoGame {
      * @param piece
      *            The {@link HantoPiece} that was placed.
      * @return true if valid, false otherwise
+     * @throws HantoException
+     *             If any of the preconditions are not met before the piece
+     *             placement validation.
      */
     protected boolean validatePiecePlacementPreconditions(HantoCoordinateImpl dest,
-            HantoPieceImpl piece) {
+            HantoPieceImpl piece) throws HantoException {
         // Check if butterfly has not been placed
         if (!currentTurn.hasButterflyCoordinate()
                 && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
-            return false;
+            throw new HantoException("Butterfly has not been placed by the "
+                    + (MAX_TURNS_BEFORE_PLACE_BUTTERFLY + 1) + " turn.");
         }
 
         // Check if the player has pieces to place of this type
         if (!currentTurn.canPlacePiece(piece.getType())) {
-            return false;
+            throw new HantoException(
+                    "Player cannot place any more of the " + piece.getType().toString() + "piece.");
         }
 
         // Get place piece validator from factory
