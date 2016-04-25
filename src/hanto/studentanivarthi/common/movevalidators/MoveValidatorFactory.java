@@ -135,8 +135,8 @@ public class MoveValidatorFactory {
                 validator = new WalkMoveValidator(1);
                 break;
             case HORSE:
-                validator = new JumpMoveValidator(-1); // TODO Check this
-                                                       // distance
+                // validator = new JumpMoveValidator(-1);
+                // TODO Check this distance
                 break;
         }
 
