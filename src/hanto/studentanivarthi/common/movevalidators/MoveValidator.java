@@ -33,6 +33,20 @@ public interface MoveValidator {
             HantoGameBoard board);
 
     /**
+     * Determines if the specified piece at the specified coordinate is able to
+     * move at all.
+     * 
+     * @param coordinate
+     *            The {@link HantoCoordinate} of the piece.
+     * @param piece
+     *            The {@link HantoPiece} to move.
+     * @param board
+     *            The current game {@link HantoGameBoard}.
+     * @return true if can move at all, false otherwise
+     */
+    boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece, HantoGameBoard board);
+
+    /**
      * Determines whether the game board is valid after the move was made. This
      * assumes the move was made successfully in order to return relevant
      * results.

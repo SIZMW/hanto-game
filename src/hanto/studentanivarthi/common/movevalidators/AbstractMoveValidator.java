@@ -72,6 +72,17 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
+    @Override
+    public boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+            HantoGameBoard board) {
+        return true;
+    }
+
+    /**
      * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate,
      *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)

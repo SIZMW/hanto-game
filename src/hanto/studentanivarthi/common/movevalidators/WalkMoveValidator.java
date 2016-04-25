@@ -55,6 +55,40 @@ public class WalkMoveValidator extends AbstractMoveValidator {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
+     *      hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
+    @Override
+    public boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+            HantoGameBoard board) {
+        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+
+        // Completely surrounded
+        if (coordinateImpl.isCoordinateSurrounded(board)) {
+            return false;
+        }
+
+        final Collection<HantoCoordinate> emptyNeighbors = board
+                .getEmptySurroundingCoordinates(coordinateImpl);
+
+        // Not enough sliding space
+        if (emptyNeighbors.size() < 2) {
+            return false;
+        }
+
+        // Check if there is sliding space to any neighbor
+        for (HantoCoordinate e : emptyNeighbors) {
+            if (canMove(coordinateImpl, e, piece, board)) {
+                return true;
+            }
+        }
+
+        // No walk can be made anywhere next to the coordinate
+        return false;
+    }
+
+    /**
      * Recursively checks if the walk move can be made. Validates each path that
      * the move can proceed from the source coordinate. It then simulates a
      * movement to the next step, and repeats the validation from the new
@@ -77,7 +111,8 @@ public class WalkMoveValidator extends AbstractMoveValidator {
      */
     protected boolean canMove(HantoCoordinateImpl srcCoordImpl, HantoCoordinateImpl destCoordImpl,
             HantoGameBoard board, int distanceTraveled,
-            List<HantoCoordinateImpl> previousCoordinates) {
+            List<HantoCoordinateImpl> previousCoordinates) { // TODO Make this a
+                                                             // collection
         // Add current coordinate to previous list
         previousCoordinates.add(srcCoordImpl);
 
@@ -93,7 +128,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
 
         // We have moved more coordinates than the maximum, and have not reached
         // the destination
-        if (distanceTraveled <= 0) {
+        if (distanceTraveled <= 0) { // TODO Reverse this count down
             return false;
         }
 

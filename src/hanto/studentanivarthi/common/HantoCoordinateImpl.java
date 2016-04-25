@@ -102,6 +102,39 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
+     * Returns a collection of all the coordinates at the specified distance
+     * away from this coordinate.
+     *
+     * @param distance
+     *            The distance away from the coordinate to get other
+     *            coordinates.
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
+     */
+    public Collection<HantoCoordinate> getCoordinatesAtDistance(int distance) {
+        int x = this.x;
+        int y = this.y;
+        final Collection<HantoCoordinate> coordinates = new ArrayList<>();
+
+        // Iterate over the sides of the hexagon surrounding the coordinate in
+        // question
+        for (int i = 0; i < distance; i++) {
+            // Top right row
+            coordinates.add(new HantoCoordinateImpl(x + i, y + distance - i));
+            // Right side
+            coordinates.add(new HantoCoordinateImpl(x + distance, y - i));
+            // Bottom right row
+            coordinates.add(new HantoCoordinateImpl(x + distance - i, y - distance));
+            // Bottom left row
+            coordinates.add(new HantoCoordinateImpl(x - i, y - distance + i));
+            // Left side
+            coordinates.add(new HantoCoordinateImpl(x - distance, y + i));
+            // Top left row
+            coordinates.add(new HantoCoordinateImpl(x - distance + i, y + distance));
+        }
+        return coordinates;
+    }
+
+    /**
      * Returns the distance between this coordinate and another coordinate.
      *
      * @see <a href=
