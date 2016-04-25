@@ -8,6 +8,7 @@ import hanto.common.HantoGameID;
 import hanto.studentanivarthi.beta.BetaHantoGame;
 import hanto.studentanivarthi.common.movevalidators.MoveValidator;
 import hanto.studentanivarthi.delta.DeltaHantoGame;
+import hanto.studentanivarthi.epsilon.EpsilonHantoGame;
 import hanto.studentanivarthi.gamma.GammaHantoGame;
 
 /**
@@ -57,6 +58,8 @@ public class PlacePieceValidatorFactory {
                 return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
             case DELTA_HANTO:
                 return getDeltaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
+            case EPSILON_HANTO:
+                return getEpsilonHantoPlacePieceValidator(isFirstMove, totalTurnCount);
             default:
                 return null;
         }
@@ -90,6 +93,20 @@ public class PlacePieceValidatorFactory {
      * @return a {@link PlacePieceValidator}
      */
     protected PlacePieceValidator getDeltaHantoPlacePieceValidator(boolean isFirstMove,
+            long totalTurnCount) {
+        return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
+    }
+
+    /**
+     * Gets the {@link PlacePieceValidator} for {@link EpsilonHantoGame}.
+     *
+     * @param isFirstMove
+     *            State of whether it is the first move of the game.
+     * @param totalTurnCount
+     *            The number of turns that happened in the game so far.
+     * @return a {@link PlacePieceValidator}
+     */
+    protected PlacePieceValidator getEpsilonHantoPlacePieceValidator(boolean isFirstMove,
             long totalTurnCount) {
         return getGammaHantoPlacePieceValidator(isFirstMove, totalTurnCount);
     }
