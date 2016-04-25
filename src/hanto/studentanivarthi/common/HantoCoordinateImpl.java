@@ -75,6 +75,33 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
+     * Returns a list of the coordinate locations that are neighbors to both
+     * this coordinate and the specified coordinate.
+     *
+     * @param coordinate
+     *            The coordinate to get common neighbors with.
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
+     */
+    public Collection<HantoCoordinate> getCommonNeighborCoordinates(HantoCoordinate coordinate) {
+        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        // Get the surrounding coordinates of each coordinate
+        final Collection<HantoCoordinate> surroundings = getSurroundingPieces();
+        final Collection<HantoCoordinate> coordinateSurroundings = coordinateImpl
+                .getSurroundingPieces();
+
+        // Remove the source and destination from the opposing list
+        surroundings.remove(coordinate);
+        coordinateSurroundings.remove(this);
+
+        // Find the common coordinates, the coordinates adjacent to both source
+        // and destination
+        final Collection<HantoCoordinate> common = new ArrayList<>(surroundings);
+        common.retainAll(coordinateSurroundings);
+
+        return common;
+    }
+
+    /**
      * Returns the distance between this coordinate and another coordinate.
      *
      * @see <a href=
@@ -114,6 +141,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     public Collection<HantoCoordinate> getSurroundingPieces() {
+        // TODO Rename this method
         final List<HantoCoordinate> surroundings = new ArrayList<>();
         surroundings.add(new HantoCoordinateImpl(x + 1, y));
         surroundings.add(new HantoCoordinateImpl(x - 1, y));
@@ -185,32 +213,5 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     @Override
     public String toString() {
         return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
-    }
-
-    /**
-     * Returns a list of the coordinate locations that are neighbors to both
-     * this coordinate and the specified coordinate.
-     * 
-     * @param coordinate
-     *            The coordinate to get common neighbors with.
-     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
-     */
-    public Collection<HantoCoordinate> getCommonNeighborCoordinates(HantoCoordinate coordinate) {
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        // Get the surrounding coordinates of each coordinate
-        final Collection<HantoCoordinate> surroundings = getSurroundingPieces();
-        final Collection<HantoCoordinate> coordinateSurroundings = coordinateImpl
-                .getSurroundingPieces();
-
-        // Remove the source and destination from the opposing list
-        surroundings.remove(coordinate);
-        coordinateSurroundings.remove(this);
-
-        // Find the common coordinates, the coordinates adjacent to both source
-        // and destination
-        final Collection<HantoCoordinate> common = new ArrayList<>(surroundings);
-        common.retainAll(coordinateSurroundings);
-
-        return common;
     }
 }
