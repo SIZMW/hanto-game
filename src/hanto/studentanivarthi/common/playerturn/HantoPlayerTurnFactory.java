@@ -53,6 +53,9 @@ public class HantoPlayerTurnFactory {
             case DELTA_HANTO:
                 playerTurn = new HantoPlayerTurnImpl(color, 1, 4, 0, 0, 0, 4);
                 break;
+            case EPSILON_HANTO:
+                playerTurn = new HantoPlayerTurnImpl(color, 1, 6, 0, 0, 4, 2);
+                break;
             default:
                 break;
         }
