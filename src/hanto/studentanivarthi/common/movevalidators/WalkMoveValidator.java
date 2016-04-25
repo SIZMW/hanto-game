@@ -139,18 +139,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
      */
     protected boolean hasSlidingSpaceToMove(HantoCoordinateImpl src, HantoCoordinateImpl dest,
             HantoGameBoard board) {
-        // Get the surrounding coordinates of each coordinate
-        final Collection<HantoCoordinate> srcSurroundings = src.getSurroundingPieces();
-        final Collection<HantoCoordinate> destSurroundings = dest.getSurroundingPieces();
-
-        // Remove the source and destination from the opposing list
-        srcSurroundings.remove(dest);
-        destSurroundings.remove(src);
-
-        // Find the common coordinates, the coordinates adjacent to both source
-        // and destination
-        final Collection<HantoCoordinate> common = new ArrayList<>(srcSurroundings);
-        common.retainAll(destSurroundings);
+        final Collection<HantoCoordinate> common = src.getCommonNeighborCoordinates(dest);
 
         // If any of the common adjacent coordinates is empty, then it can move
         for (HantoCoordinate e : common) {
