@@ -212,6 +212,6 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      */
     @Override
     public String toString() {
-        return "HantoCoordinateImpl [x=" + x + ", y=" + y + "]";
+        return "HantoCoordinateImpl [x = " + x + ", y = " + y + "]";
     }
 }

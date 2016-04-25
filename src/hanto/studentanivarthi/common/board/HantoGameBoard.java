@@ -15,7 +15,7 @@ import hanto.common.HantoPiece;
  *
  * @author Aditya Nivarthi
  */
-public interface HantoGameBoard {
+public interface HantoGameBoard { // TODO clean up this interface
     /**
      * Returns whether the pieces on the game board are all organized in a
      * contiguous fashion.
