@@ -4,7 +4,6 @@
 package hanto.studentanivarthi.gamma;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -12,7 +11,8 @@ import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
 
 /**
- * The implementation of Gamma Hanto, based on the {@link HantoGame} interface.
+ * The implementation of Gamma Hanto, based on the {@link AbstractHantoGame}
+ * class.
  *
  * @author Aditya Nivarthi
  */

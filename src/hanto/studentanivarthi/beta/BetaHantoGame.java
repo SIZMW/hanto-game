@@ -6,7 +6,6 @@ package hanto.studentanivarthi.beta;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
-import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -14,7 +13,8 @@ import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
 
 /**
- * The implementation of Beta Hanto, based on the {@link HantoGame} interface.
+ * The implementation of Beta Hanto, based on the {@link AbstractHantoGame}
+ * class.
  *
  * @author Aditya Nivarthi
  */
