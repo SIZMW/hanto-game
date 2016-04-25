@@ -175,12 +175,12 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing three blue sparrows and two red sparrows.
+     * Tests placing two blue sparrows and two red sparrows.
      *
      * @throws HantoException
      */
     @Test // 7
-    public void bluePlacesThreeSparrowsAndIsValid() throws HantoException {
+    public void bluePlacesTwoSparrowsAndIsValid() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
@@ -210,23 +210,15 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
         assertEquals(RED, p.getColor());
         assertEquals(SPARROW, p.getType());
-
-        // Turn 3
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
-        p = game.getPieceAt(makeCoordinate(0, 2));
-
-        assertEquals(OK, mr);
-        assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
     }
 
     /**
-     * Tests placing three red sparrows, a blue butterfly and two blue sparrows.
+     * Tests placing two red sparrows, a blue butterfly and two blue sparrows.
      *
      * @throws HantoException
      */
     @Test // 8
-    public void redPlacesThreeSparrowsAndIsValid() throws HantoException {
+    public void redPlacesTwoSparrowsAndIsValid() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
@@ -264,13 +256,6 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
         assertEquals(SPARROW, p.getType());
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -3));
-        p = game.getPieceAt(makeCoordinate(0, -3));
-
-        assertEquals(OK, mr);
-        assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -282,34 +267,34 @@ public class EpsilonHantoTest {
     @Test(expected = HantoException.class) // 9
     public void bluePlacesFourSparrowsAndFails() throws HantoException {
         // Turn 1
-        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        MoveResult mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
         assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         p = game.getPieceAt(makeCoordinate(0, -1));
 
         assertEquals(OK, mr);
         assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
         // Turn 2
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 1));
         p = game.getPieceAt(makeCoordinate(0, 1));
 
         assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -2));
         p = game.getPieceAt(makeCoordinate(0, -2));
 
         assertEquals(OK, mr);
         assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
         // Turn 3
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
@@ -346,35 +331,35 @@ public class EpsilonHantoTest {
         assertEquals(BLUE, p.getColor());
         assertEquals(BUTTERFLY, p.getType());
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         p = game.getPieceAt(makeCoordinate(0, -1));
 
         assertEquals(OK, mr);
         assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
         // Turn 2
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 1));
         p = game.getPieceAt(makeCoordinate(0, 1));
 
         assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -2));
         p = game.getPieceAt(makeCoordinate(0, -2));
 
         assertEquals(OK, mr);
         assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
         // Turn 3
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, 2));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 2));
         p = game.getPieceAt(makeCoordinate(0, 2));
 
         assertEquals(OK, mr);
         assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
+        assertEquals(HantoPieceType.CRAB, p.getType());
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -3));
         p = game.getPieceAt(makeCoordinate(0, -3));
@@ -596,27 +581,27 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         // Turn 4
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
         assertEquals(OK, mr);
 
         // Turn 5
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 2));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 2));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -2));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, -2));
         assertEquals(OK, mr);
 
         // Move blue piece to surround the butterflies
         // Turn 6
-        mr = game.makeMove(SPARROW, makeCoordinate(-1, 2), makeCoordinate(0, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 2), makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
         // Move red piece to surround both the butterflies
         // Draw game
-        mr = game.makeMove(SPARROW, makeCoordinate(2, -2), makeCoordinate(1, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(2, -2), makeCoordinate(1, -1));
         assertEquals(MoveResult.DRAW, mr);
     }
 
@@ -650,7 +635,7 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         // Turn 4
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
         // Move red piece closer to blue butterfly
@@ -701,7 +686,7 @@ public class EpsilonHantoTest {
         mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
         assertEquals(OK, mr);
 
         // Blue wins
@@ -793,7 +778,7 @@ public class EpsilonHantoTest {
      * @throws HantoException
      */
     @Test // 26
-    public void blueCrabWalksThreeSpaces() throws HantoException {
+    public void blueCrabWalksOneSpace() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -806,8 +791,8 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, -1));
         assertEquals(MoveResult.OK, mr);
 
-        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 1), makeCoordinate(2, 0));
-        final HantoPiece p = game.getPieceAt(makeCoordinate(2, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 1), makeCoordinate(-1, 0));
+        final HantoPiece p = game.getPieceAt(makeCoordinate(-1, 0));
 
         assertEquals(MoveResult.OK, mr);
         assertEquals(p.getColor(), HantoPlayerColor.BLUE);
@@ -959,13 +944,13 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a sparrow fly to a destination that is 10 spaces away, which
-     * in Delta Hanto is not too far away.
+     * Test making a sparrow fly to a destination that is 5 spaces away, which
+     * in Epsilon Hanto is not too far away.
      *
      * @throws HantoException
      */
     @Test // 33
-    public void makeBlueSparrowFlyFartherAway() throws HantoException {
+    public void makeBlueSparrowFlyMaximumDistance() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -981,28 +966,13 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-2, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(3, 0));
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(3, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-3, 0));
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-2, 1));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(4, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-4, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(5, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-5, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(5, 1));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(-5, 0), makeCoordinate(6, 1));
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(3, 0), makeCoordinate(-1, -1));
         assertEquals(OK, mr);
     }
 
@@ -1260,76 +1230,12 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests setting up a similar scenario to the one from the Hanto guide on
-     * walking and always having a connected configuration.
-     *
-     * @throws HantoException
-     */
-    @Test // 46
-    public void testASimilarWalkingScenarioFromHantoGuide() throws HantoException {
-        // Setup
-        MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(2, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-2, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(3, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-2, -1));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(SPARROW, null, makeCoordinate(3, -1));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, -2));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(4, -2));
-        assertEquals(OK, mr);
-
-        // Move blue crab
-        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, -2), makeCoordinate(1, -1));
-        assertEquals(OK, mr);
-
-        // Move red crab
-        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(4, -2), makeCoordinate(1, -2));
-        assertEquals(OK, mr);
-
-        // Move blue sparrow
-        mr = game.makeMove(SPARROW, makeCoordinate(-2, -1), makeCoordinate(0, -1));
-        assertEquals(OK, mr);
-
-        // Move red sparrow
-        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(3, -1), makeCoordinate(4, -1));
-        assertEquals(OK, mr);
-
-        // Move blue crab again
-        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(1, -1), makeCoordinate(4, -2));
-        assertEquals(OK, mr);
-
-        // Move red sparrow again
-        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(1, -2), makeCoordinate(-1, -1));
-        assertEquals(OK, mr);
-    }
-
-    /**
      * Test the results from the game after both blue and red win by surrounding
      * each other, then blue playing a move after the game is over which fails.
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 47
+    @Test(expected = HantoException.class) // 46
     public void blueRedDrawGameAndMakeMoveAfterGameEnds() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -1388,7 +1294,7 @@ public class EpsilonHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 48
+    @Test(expected = HantoException.class) // 47
     public void redWinsGameAndMakeMoveAfterGameEnds() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -1439,7 +1345,7 @@ public class EpsilonHantoTest {
      *
      * @throws HantoException
      */
-    @Test(expected = HantoException.class) // 49
+    @Test(expected = HantoException.class) // 48
     public void blueWinsGameAndMakeMoveAfterGameEnds() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
