@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
+import hanto.common.HantoPlayerColor;
 
 /**
  * The HantoGameBoard interface defines methods for board implementations for
@@ -91,4 +92,13 @@ public interface HantoGameBoard { // TODO clean up this interface
      */
     @Override
     String toString();
+
+    /**
+     * Returns a list of coordinates with pieces of the specified color.
+     * 
+     * @param color
+     *            The {@link HantoPlayerColor} of the pieces to search for.
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
+     */
+    Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color);
 }

@@ -14,6 +14,7 @@ import java.util.Set;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
+import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
@@ -163,5 +164,21 @@ public class HantoGameBoardImpl implements HantoGameBoard {
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getCoordinatesWithPiecesOfColor(hanto.common.HantoPlayerColor)
+     */
+    @Override
+    public Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color) {
+        final Collection<HantoCoordinate> coordinates = new ArrayList<>();
+
+        for (HantoCoordinate e : board.keySet()) {
+            if (board.get(e).getColor().equals(color)) {
+                coordinates.add(e);
+            }
+        }
+
+        return coordinates;
     }
 }

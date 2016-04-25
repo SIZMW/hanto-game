@@ -4,6 +4,8 @@
 
 package hanto.studentanivarthi.common.game;
 
+import java.util.Collection;
+
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -96,9 +98,7 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         // Resignation
         if (hasPlayerResigned(pieceType, src, dest)) {
-            markGameIsOver();
-            return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
-                    : MoveResult.BLUE_WINS;
+            return processResignation();
         }
 
         // No destination specified
@@ -164,6 +164,23 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
+     * Manages ending the game due to resignation.
+     *
+     * @return The result of the game.
+     * @throws HantoException
+     *             If there was a valid move to make but resignation is called
+     */
+    protected MoveResult processResignation() throws HantoException {
+        if (hasValidMove()) {
+            throw new HantoPrematureResignationException();
+        }
+
+        markGameIsOver();
+        return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
+                : MoveResult.BLUE_WINS;
+    }
+
+    /**
      * Returns the result of the game after a move.
      *
      * @return The {@link MoveResult} state of the game.
@@ -220,11 +237,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      */
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
             HantoCoordinate dest) throws HantoPrematureResignationException {
-        if (!hasValidMove()) {
-            return pieceType == null && src == null && dest == null;
-        }
-
-        throw new HantoPrematureResignationException();
+        return pieceType == null && src == null && dest == null;
     }
 
     /**
@@ -233,7 +246,21 @@ public abstract class AbstractHantoGame implements HantoGame {
      * @return true if move existed, false otherwise
      */
     protected boolean hasValidMove() {
-        return false; // TODO This method
+        final Collection<HantoCoordinate> coordinates = board
+                .getCoordinatesWithPiecesOfColor(currentTurn.getColor());
+
+        // Get all the pieces of the current player's color on the board
+        for (HantoCoordinate e : coordinates) {
+            HantoPiece piece = board.getPieceAt(e);
+            MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
+                    piece.getType());
+
+            // If the validator says it can move at all
+            if (validator.canMoveAtAll(e, piece, board)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -382,8 +409,8 @@ public abstract class AbstractHantoGame implements HantoGame {
 
         // Check if the player has pieces to place of this type
         if (!currentTurn.canPlacePiece(piece.getType())) {
-            throw new HantoException(
-                    "Player cannot place any more of the " + piece.getType().toString() + "piece.");
+            throw new HantoException("Player cannot place any more of the "
+                    + piece.getType().toString() + " piece.");
         }
 
         // Get place piece validator from factory

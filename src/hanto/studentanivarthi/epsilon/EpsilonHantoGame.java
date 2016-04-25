@@ -21,6 +21,6 @@ public class EpsilonHantoGame extends AbstractHantoGame {
      *            The {@link HantoPlayerColor} to start.
      */
     public EpsilonHantoGame(HantoPlayerColor movesFirst) {
-        super(HantoGameID.DELTA_HANTO, movesFirst);
+        super(HantoGameID.EPSILON_HANTO, movesFirst);
     }
 }
