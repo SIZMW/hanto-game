@@ -47,7 +47,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
         // the previously visited coordinates
         while (!list.isEmpty()) {
             final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
-            final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+            final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingCoordinates();
 
             for (HantoCoordinate e : surroundings) {
                 if (hasPieceAt(e)) {
@@ -83,7 +83,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     public Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate) {
         final Collection<HantoCoordinate> emptySurroundings = new ArrayList<>();
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
-        final Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingCoordinates();
 
         for (HantoCoordinate e : surroundings) {
             HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);

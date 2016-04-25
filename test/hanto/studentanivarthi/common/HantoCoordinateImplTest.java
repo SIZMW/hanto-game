@@ -56,7 +56,7 @@ public class HantoCoordinateImplTest {
      */
     @Test // 2
     public void testSurroundingCoordinates() {
-        final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingCoordinates();
         assertEquals(surroundings.size(), 6);
 
         final List<HantoCoordinate> surr = new ArrayList<>();

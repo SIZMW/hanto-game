@@ -6,7 +6,6 @@ package hanto.studentanivarthi.common.movevalidators;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
@@ -102,17 +101,16 @@ public class WalkMoveValidator extends AbstractMoveValidator {
      *            The destination {@link HantoCoordinateImpl}.
      * @param board
      *            The current game {@link HantoGameBoard}.
-     * @param distanceTraveled
+     * @param distanceRemaining
      *            The number of steps made in the recursive calls.
      * @param previousCoordinates
-     *            The {@link List} of already visited
+     *            The {Collection List} of already visited
      *            {@link HantoCoordinateImpl} locations.
      * @return true if the destination coordinate is reached, false otherwise
      */
     protected boolean canMove(HantoCoordinateImpl srcCoordImpl, HantoCoordinateImpl destCoordImpl,
-            HantoGameBoard board, int distanceTraveled,
-            List<HantoCoordinateImpl> previousCoordinates) { // TODO Make this a
-                                                             // collection
+            HantoGameBoard board, int distanceRemaining,
+            Collection<HantoCoordinateImpl> previousCoordinates) {
         // Add current coordinate to previous list
         previousCoordinates.add(srcCoordImpl);
 
@@ -128,7 +126,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
 
         // We have moved more coordinates than the maximum, and have not reached
         // the destination
-        if (distanceTraveled <= 0) { // TODO Reverse this count down
+        if (distanceRemaining <= 0) {
             return false;
         }
 
@@ -149,7 +147,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
                 boardCopy.placePieceAt(eImpl, piece);
 
                 boolean hasPathReached = this.canMove(eImpl, destCoordImpl, boardCopy,
-                        distanceTraveled - 1,
+                        distanceRemaining - 1,
                         new ArrayList<HantoCoordinateImpl>(previousCoordinates));
                 if (hasPathReached) {
                     return true;

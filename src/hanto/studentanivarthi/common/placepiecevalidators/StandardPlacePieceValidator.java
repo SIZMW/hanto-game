@@ -35,7 +35,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
         }
 
         // Check if location is adjacent to some piece already on the board
-        final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingCoordinates();
 
         for (HantoCoordinate e : surroundings) {
             if (board.hasPieceAt(e)) {

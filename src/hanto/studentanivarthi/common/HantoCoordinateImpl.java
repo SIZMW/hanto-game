@@ -85,9 +85,9 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     public Collection<HantoCoordinate> getCommonNeighborCoordinates(HantoCoordinate coordinate) {
         HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         // Get the surrounding coordinates of each coordinate
-        final Collection<HantoCoordinate> surroundings = getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = getSurroundingCoordinates();
         final Collection<HantoCoordinate> coordinateSurroundings = coordinateImpl
-                .getSurroundingPieces();
+                .getSurroundingCoordinates();
 
         // Remove the source and destination from the opposing list
         surroundings.remove(coordinate);
@@ -173,8 +173,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      *
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
-    public Collection<HantoCoordinate> getSurroundingPieces() {
-        // TODO Rename this method
+    public Collection<HantoCoordinate> getSurroundingCoordinates() {
         final List<HantoCoordinate> surroundings = new ArrayList<>();
         surroundings.add(new HantoCoordinateImpl(x + 1, y));
         surroundings.add(new HantoCoordinateImpl(x - 1, y));
@@ -225,7 +224,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
             return false;
         }
 
-        final Collection<HantoCoordinate> surroundings = getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = getSurroundingCoordinates();
         boolean hasEmptyAdjacentSpot = false;
 
         for (HantoCoordinate e : surroundings) {

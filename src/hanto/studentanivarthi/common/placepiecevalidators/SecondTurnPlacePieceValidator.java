@@ -34,7 +34,7 @@ public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
 
         // Check if location is adjacent to some piece already on the board
         boolean isAdjacentToPiece = false;
-        final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingPieces();
+        final Collection<HantoCoordinate> surroundings = destCoordImpl.getSurroundingCoordinates();
 
         for (HantoCoordinate c : surroundings) {
             if (board.hasPieceAt(c)) {
