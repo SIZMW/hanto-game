@@ -24,4 +24,12 @@ public class DeltaHantoGame extends AbstractHantoGame {
     public DeltaHantoGame(HantoPlayerColor movesFirst) {
         super(HantoGameID.DELTA_HANTO, movesFirst);
     }
+
+    /**
+     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidMove()
+     */
+    @Override
+    protected boolean hasValidMove() {
+        return false;
+    }
 }

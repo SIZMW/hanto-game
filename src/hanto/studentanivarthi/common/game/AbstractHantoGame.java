@@ -11,6 +11,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
@@ -214,10 +215,25 @@ public abstract class AbstractHantoGame implements HantoGame {
      * @param dest
      *            The destination {@link HantoCoordinate}.
      * @return true if resigned, false otherwise
+     * @throws HantoPrematureResignationException
+     *             If the player resigned and had a valid move.
      */
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
-            HantoCoordinate dest) {
-        return pieceType == null && src == null && dest == null;
+            HantoCoordinate dest) throws HantoPrematureResignationException {
+        if (!hasValidMove()) {
+            return pieceType == null && src == null && dest == null;
+        }
+
+        throw new HantoPrematureResignationException();
+    }
+
+    /**
+     * Returns whether the player had a move that was valid.
+     *
+     * @return true if move existed, false otherwise
+     */
+    protected boolean hasValidMove() {
+        return false; // TODO This method
     }
 
     /**
