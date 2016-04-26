@@ -73,7 +73,7 @@ public enum HantoDirection {
                 srcx += e.getX();
                 srcy += e.getY();
 
-                if (i > dx || i > dy) {
+                if (i > (dx > dy ? dx : dy)) {
                     break whileloop;
                 }
                 i++;

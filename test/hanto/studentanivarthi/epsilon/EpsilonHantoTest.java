@@ -1393,4 +1393,93 @@ public class EpsilonHantoTest {
 
         mr = game.makeMove(null, null, null);
     }
+
+    /**
+     * Test moving the horse by jumping to an empty coordinate.
+     *
+     * @throws HantoException
+     */
+    @Test // 50
+    public void testMoveHorseToEmptyCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, makeCoordinate(-1, 0), makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+    }
+
+    /**
+     * Test moving the horse by jumping to an occupied coordinate.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 51
+    public void testMoveHorseToOccupiedCoordinate() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, makeCoordinate(-1, 0), makeCoordinate(2, 0));
+    }
+
+    /**
+     * Test moving the horse by jumping in an invalid direction.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 52
+    public void testMoveHorseInInvalidDirection() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, makeCoordinate(-1, 0), makeCoordinate(2, -1));
+    }
+
+    /**
+     * Test having the blue player resign from the game at will.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 53
+    public void blueResignsFromGamePrematurelyWithHorse() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(null, null, null);
+    }
 }

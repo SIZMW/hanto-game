@@ -17,6 +17,7 @@ import hanto.studentanivarthi.common.board.HantoGameBoard;
  * @author Aditya Nivarthi
  */
 public class JumpMoveValidator extends AbstractMoveValidator {
+    private static final int MULTIPLIER = 100;
 
     /**
      * Creates a JumpMoveValidator instance.
@@ -65,7 +66,7 @@ public class JumpMoveValidator extends AbstractMoveValidator {
         HantoCoordinate coord = null;
 
         // Look in each direction, moving one step farther every time
-        for (int i = 1; i < Integer.MAX_VALUE; i++) {
+        for (int i = 1; i < board.getNumberOfPieces() * MULTIPLIER; i++) {
             for (HantoDirection e : HantoDirection.values()) {
                 coord = new HantoCoordinateImpl(coordinate.getX() + e.getX() * i,
                         coordinate.getY() + e.getY() * i);

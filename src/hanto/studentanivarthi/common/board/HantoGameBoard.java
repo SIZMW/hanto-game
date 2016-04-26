@@ -95,10 +95,17 @@ public interface HantoGameBoard { // TODO clean up this interface
 
     /**
      * Returns a list of coordinates with pieces of the specified color.
-     * 
+     *
      * @param color
      *            The {@link HantoPlayerColor} of the pieces to search for.
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color);
+
+    /**
+     * Returns the number of pieces currently on the game board.
+     *
+     * @return an integer
+     */
+    int getNumberOfPieces();
 }

@@ -35,6 +35,14 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getNumberOfPieces()
+     */
+    @Override
+    public int getNumberOfPieces() {
+        return board.keySet().size();
+    }
+
+    /**
      * @see hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()
      */
     @Override
