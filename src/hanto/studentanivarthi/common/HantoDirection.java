@@ -64,10 +64,19 @@ public enum HantoDirection {
         int srcx = x1;
         int srcy = y1;
 
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+
         for (HantoDirection e : HantoDirection.values()) {
-            while (srcx != x2 || srcy != y2) {
+            int i = 0;
+            whileloop: while (srcx != x2 || srcy != y2) {
                 srcx += e.getX();
                 srcy += e.getY();
+
+                if (i > dx || i > dy) {
+                    break whileloop;
+                }
+                i++;
             }
 
             if (srcx == x2 && srcy == y2) {
