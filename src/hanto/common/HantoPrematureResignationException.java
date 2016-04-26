@@ -14,8 +14,6 @@ package hanto.common;
  * @version Oct 6, 2014
  */
 public class HantoPrematureResignationException extends HantoException {
-    private static final long serialVersionUID = 1L;
-
     /**
      * Creates a HantoPrematureResignationException instance.
      */

@@ -33,22 +33,28 @@ public enum HantoDirection {
         int dx = x2 - x1;
         int dy = y2 - y1;
 
+        // Iterate over each direction
         for (HantoDirection e : HantoDirection.values()) {
             int i = 0;
-            whileloop: while (srcx != x2 || srcy != y2) {
+
+            // While we have not incremented from the source to the destination
+            while (srcx != x2 || srcy != y2) {
                 srcx += e.getX();
                 srcy += e.getY();
 
+                // Short circuit if we have passed the larger coordinate
                 if (i > (dx > dy ? dx : dy)) {
-                    break whileloop;
+                    break;
                 }
                 i++;
             }
 
+            // If we have reached the destination
             if (srcx == x2 && srcy == y2) {
                 return e;
             }
 
+            // Reset
             srcx = x1;
             srcy = y1;
         }
@@ -57,7 +63,6 @@ public enum HantoDirection {
     }
 
     private int x;
-
     private int y;
 
     /**
