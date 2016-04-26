@@ -327,11 +327,6 @@ public class BetaHantoTest {
 
         // Turn 4, fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 6));
-        p = game.getPieceAt(makeCoordinate(0, 6));
-
-        assertEquals(OK, mr);
-        assertEquals(BLUE, p.getColor());
-        assertEquals(SPARROW, p.getType());
     }
 
     /**
@@ -397,11 +392,6 @@ public class BetaHantoTest {
 
         // Fails
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 7));
-        p = game.getPieceAt(makeCoordinate(0, 7));
-
-        assertEquals(OK, mr);
-        assertEquals(RED, p.getColor());
-        assertEquals(SPARROW, p.getType());
     }
 
     /**

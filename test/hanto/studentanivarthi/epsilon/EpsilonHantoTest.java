@@ -729,6 +729,7 @@ public class EpsilonHantoTest {
         mr = game.makeMove(null, null, null);
     }
 
+    // TODO
     /**
      * Test having the red player resign from the game at will, and trying to
      * move after the game is over
@@ -1245,17 +1246,17 @@ public class EpsilonHantoTest {
         // Surround both red and blue butterfly pieces, which start next to each
         // other
         // Turn 2
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 1));
         assertEquals(OK, mr);
 
         // Turn 3
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 1));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, -1));
         assertEquals(OK, mr);
 
         // Turn 4
@@ -1303,7 +1304,7 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         // Turn 2
-        mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 1));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
@@ -1317,7 +1318,7 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         // Turn 4
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
         // Move red piece closer to blue butterfly
@@ -1357,7 +1358,7 @@ public class EpsilonHantoTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(SPARROW, null, makeCoordinate(1, 1));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 1));
         assertEquals(OK, mr);
 
         // Turn 3
