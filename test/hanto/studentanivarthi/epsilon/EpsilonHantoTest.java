@@ -699,8 +699,8 @@ public class EpsilonHantoTest {
      *
      * @throws HantoException
      */
-    @Test // 22
-    public void blueResignsFromGame() throws HantoException {
+    @Test(expected = HantoException.class) // 22
+    public void blueResignsFromGamePrematurely() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -708,7 +708,6 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         mr = game.makeMove(null, null, null);
-        assertEquals(MoveResult.RED_WINS, mr);
     }
 
     /**
@@ -716,8 +715,8 @@ public class EpsilonHantoTest {
      *
      * @throws HantoException
      */
-    @Test // 23
-    public void redResignsFromGame() throws HantoException {
+    @Test(expected = HantoException.class) // 23
+    public void redResignsFromGamePrematurely() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -728,7 +727,6 @@ public class EpsilonHantoTest {
         assertEquals(MoveResult.OK, mr);
 
         mr = game.makeMove(null, null, null);
-        assertEquals(MoveResult.BLUE_WINS, mr);
     }
 
     /**
