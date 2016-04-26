@@ -103,5 +103,4 @@ public class AlphaHantoGame implements HantoGame {
                 || coordinate.equals(new HantoCoordinateImpl(-1, 0))
                 || coordinate.equals(new HantoCoordinateImpl(-1, 1));
     }
-
 }

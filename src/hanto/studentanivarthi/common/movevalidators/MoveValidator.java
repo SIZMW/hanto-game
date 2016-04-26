@@ -35,7 +35,7 @@ public interface MoveValidator {
     /**
      * Determines if the specified piece at the specified coordinate is able to
      * move at all.
-     * 
+     *
      * @param coordinate
      *            The {@link HantoCoordinate} of the piece.
      * @param piece

@@ -164,23 +164,6 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Manages ending the game due to resignation.
-     *
-     * @return The result of the game.
-     * @throws HantoException
-     *             If there was a valid move to make but resignation is called
-     */
-    protected MoveResult processResignation() throws HantoException {
-        if (hasValidMove()) {
-            throw new HantoPrematureResignationException();
-        }
-
-        markGameIsOver();
-        return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
-                : MoveResult.BLUE_WINS;
-    }
-
-    /**
      * Returns the result of the game after a move.
      *
      * @return The {@link MoveResult} state of the game.
@@ -302,6 +285,23 @@ public abstract class AbstractHantoGame implements HantoGame {
         }
 
         currentTurn.placePiece(piece.getType());
+    }
+
+    /**
+     * Manages ending the game due to resignation.
+     *
+     * @return The result of the game.
+     * @throws HantoException
+     *             If there was a valid move to make but resignation is called
+     */
+    protected MoveResult processResignation() throws HantoException {
+        if (hasValidMove()) {
+            throw new HantoPrematureResignationException();
+        }
+
+        markGameIsOver();
+        return currentTurn.getColor().equals(HantoPlayerColor.BLUE) ? MoveResult.RED_WINS
+                : MoveResult.BLUE_WINS;
     }
 
     /**

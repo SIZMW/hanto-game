@@ -33,6 +33,15 @@ public interface HantoGameBoard { // TODO clean up this interface
     HantoGameBoard copy();
 
     /**
+     * Returns a list of coordinates with pieces of the specified color.
+     *
+     * @param color
+     *            The {@link HantoPlayerColor} of the pieces to search for.
+     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
+     */
+    Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color);
+
+    /**
      * Returns a collection of coordinates surrounding the specified coordinate
      * that do not have a piece occupying them.
      *
@@ -42,6 +51,13 @@ public interface HantoGameBoard { // TODO clean up this interface
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate);
+
+    /**
+     * Returns the number of pieces currently on the game board.
+     *
+     * @return an integer
+     */
+    int getNumberOfPieces();
 
     /**
      * Returns the piece at the specified coordinate.
@@ -92,20 +108,4 @@ public interface HantoGameBoard { // TODO clean up this interface
      */
     @Override
     String toString();
-
-    /**
-     * Returns a list of coordinates with pieces of the specified color.
-     *
-     * @param color
-     *            The {@link HantoPlayerColor} of the pieces to search for.
-     * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
-     */
-    Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color);
-
-    /**
-     * Returns the number of pieces currently on the game board.
-     *
-     * @return an integer
-     */
-    int getNumberOfPieces();
 }

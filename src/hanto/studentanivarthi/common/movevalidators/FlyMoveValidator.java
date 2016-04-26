@@ -57,7 +57,8 @@ public class FlyMoveValidator extends AbstractMoveValidator {
 
             // Check if any of the coordinates are empty
             for (HantoCoordinate e : list) {
-                if (!board.hasPieceAt(e) && canMoveSimulateDirectMove(coordinate, e, piece, board)) {
+                if (!board.hasPieceAt(e)
+                        && canMoveSimulateDirectMove(coordinate, e, piece, board)) {
                     return true;
                 }
             }

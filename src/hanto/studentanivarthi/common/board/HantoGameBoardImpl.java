@@ -35,14 +35,6 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getNumberOfPieces()
-     */
-    @Override
-    public int getNumberOfPieces() {
-        return board.keySet().size();
-    }
-
-    /**
      * @see hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()
      */
     @Override
@@ -86,6 +78,22 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getCoordinatesWithPiecesOfColor(hanto.common.HantoPlayerColor)
+     */
+    @Override
+    public Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color) {
+        final Collection<HantoCoordinate> coordinates = new ArrayList<>();
+
+        for (HantoCoordinate e : board.keySet()) {
+            if (board.get(e).getColor().equals(color)) {
+                coordinates.add(e);
+            }
+        }
+
+        return coordinates;
+    }
+
+    /**
      * @see hanto.studentanivarthi.common.board.HantoGameBoard#getEmptySurroundingCoordinates(hanto.common.HantoCoordinate)
      */
     @Override
@@ -102,6 +110,14 @@ public class HantoGameBoardImpl implements HantoGameBoard {
         }
 
         return emptySurroundings;
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getNumberOfPieces()
+     */
+    @Override
+    public int getNumberOfPieces() {
+        return board.keySet().size();
     }
 
     /**
@@ -172,21 +188,5 @@ public class HantoGameBoardImpl implements HantoGameBoard {
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getCoordinatesWithPiecesOfColor(hanto.common.HantoPlayerColor)
-     */
-    @Override
-    public Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color) {
-        final Collection<HantoCoordinate> coordinates = new ArrayList<>();
-
-        for (HantoCoordinate e : board.keySet()) {
-            if (board.get(e).getColor().equals(color)) {
-                coordinates.add(e);
-            }
-        }
-
-        return coordinates;
     }
 }

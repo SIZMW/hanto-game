@@ -94,29 +94,6 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
-     * Returns whether the source coordinate and destination coordinate are too
-     * far apart for the move distance.
-     *
-     * @param src
-     *            The starting {@link HantoCoordinate}.
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @return true if distance is too far, false otherwise
-     */
-    protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
-        return !isInfiniteDistance() ? src.getDistanceTo(dest) > distance : false;
-    }
-
-    /**
-     * Returns whether the distance for this fly move is infinite or not.
-     *
-     * @return true if infinite, false otherwise
-     */
-    protected boolean isInfiniteDistance() {
-        return distance < 0;
-    }
-
-    /**
      * Determines if the move can actually be made, and if it is valid after
      * being executed. This method is useful for simulating moves that are
      * direct and not continuous.
@@ -148,5 +125,28 @@ public abstract class AbstractMoveValidator implements MoveValidator {
 
         // Check post conditions of simulating move
         return isMoveValid(srcCoordImpl, destCoordImpl, removedPiece, boardCopy);
+    }
+
+    /**
+     * Returns whether the distance for this fly move is infinite or not.
+     *
+     * @return true if infinite, false otherwise
+     */
+    protected boolean isInfiniteDistance() {
+        return distance < 0;
+    }
+
+    /**
+     * Returns whether the source coordinate and destination coordinate are too
+     * far apart for the move distance.
+     *
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return true if distance is too far, false otherwise
+     */
+    protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
+        return !isInfiniteDistance() ? src.getDistanceTo(dest) > distance : false;
     }
 }
