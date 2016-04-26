@@ -700,7 +700,7 @@ public class EpsilonHantoTest {
      * @throws HantoException
      */
     @Test(expected = HantoException.class) // 22
-    public void blueResignsFromGamePrematurely() throws HantoException {
+    public void blueResignsFromGamePrematurelyWithButterfly() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -716,7 +716,7 @@ public class EpsilonHantoTest {
      * @throws HantoException
      */
     @Test(expected = HantoException.class) // 23
-    public void redResignsFromGamePrematurely() throws HantoException {
+    public void redResignsFromGamePrematurelyWithButterfly() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -1381,5 +1381,21 @@ public class EpsilonHantoTest {
 
         // Fails
         mr = game.makeMove(SPARROW, makeCoordinate(0, 1), makeCoordinate(0, 2));
+    }
+
+    /**
+     * Test having the blue player resign from the game at will.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 49
+    public void blueResignsFromGamePrematurelyWithSparrow() throws HantoException {
+        MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(null, null, null);
     }
 }
