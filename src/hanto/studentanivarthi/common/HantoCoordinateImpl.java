@@ -44,6 +44,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         this.y = y;
     }
 
+    // TODO make getNextCoordinateInDirection
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */

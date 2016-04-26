@@ -46,13 +46,35 @@ public class JumpMoveValidator extends AbstractMoveValidator {
             return false;
         }
 
+        HantoDirection direction;
+
         // If the direction to the destination is a valid one
-        if (HantoDirection.getDirectionTo(src.getX(), src.getY(), dest.getX(), dest.getY())
-                .equals(HantoDirection.NONE)) {
+        if ((direction = HantoDirection.getDirectionTo(src.getX(), src.getY(), dest.getX(),
+                dest.getY())).equals(HantoDirection.NONE)) {
             return false;
         }
 
-        return true;
+        int pieces = 0;
+        HantoCoordinateImpl runner = new HantoCoordinateImpl(src);
+
+        // Start checking at next coordinate in that direction
+        runner = new HantoCoordinateImpl(runner.getX() + direction.getX(),
+                runner.getY() + direction.getY());
+
+        // While we have not reached the destination, check if all are occupied
+        while (!runner.equals(dest)) {
+            if (!board.hasPieceAt(runner)) {
+                return false;
+            }
+
+            // Increment
+            pieces++;
+            runner = new HantoCoordinateImpl(runner.getX() + direction.getX(),
+                    runner.getY() + direction.getY());
+        }
+
+        // Jumping over at least one piece
+        return pieces > 0;
     }
 
     /**

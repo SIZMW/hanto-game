@@ -953,19 +953,13 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 0));
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(2, 0));
         assertEquals(OK, mr);
 
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-2, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(3, 0));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-2, 1));
-        assertEquals(OK, mr);
-
-        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(3, 0), makeCoordinate(-1, -1));
+        mr = game.makeMove(HantoPieceType.SPARROW, makeCoordinate(2, 0), makeCoordinate(-1, -1));
         assertEquals(OK, mr);
     }
 
@@ -1481,5 +1475,63 @@ public class EpsilonHantoTest {
         assertEquals(OK, mr);
 
         mr = game.makeMove(null, null, null);
+    }
+
+    /**
+     * Test moving the horse by jumping to an empty coordinate, but over
+     * unoccupied coordinates.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 54
+    public void testMoveHorseToEmptyCoordinateOverEmptySpaces() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(3, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, makeCoordinate(-3, 0), makeCoordinate(4, 0));
+    }
+
+    /**
+     * Test moving the horse by jumping to the coordinate adjacent, without
+     * jumping over any pieces.
+     *
+     * @throws HantoException
+     */
+    @Test(expected = HantoException.class) // 55
+    public void testMoveHorseOverNoSpaces() throws HantoException {
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, makeCoordinate(0, -1), makeCoordinate(1, -1));
     }
 }

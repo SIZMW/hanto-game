@@ -129,7 +129,7 @@ public class MoveValidatorFactory {
                 validator = new WalkMoveValidator(1);
                 break;
             case SPARROW:
-                validator = new FlyMoveValidator(5);
+                validator = new FlyMoveValidator(4);
                 break;
             case CRAB:
                 validator = new WalkMoveValidator(1);
