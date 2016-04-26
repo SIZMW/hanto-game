@@ -729,29 +729,23 @@ public class EpsilonHantoTest {
         mr = game.makeMove(null, null, null);
     }
 
-    // TODO
     /**
-     * Test having the red player resign from the game at will, and trying to
-     * move after the game is over
+     * Test having the red player resign from the game at will.
      *
      * @throws HantoException
      */
     @Test(expected = HantoException.class) // 24
-    public void redResignsFromGameAndBlueTriesToPlayAfterGameEnds() throws HantoException {
+    public void redResignsFromGamePrematurelyWithCrab() throws HantoException {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
         assertEquals(MoveResult.OK, mr);
 
         mr = game.makeMove(null, null, null);
-        assertEquals(MoveResult.BLUE_WINS, mr);
-
-        // Fails
-        mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
     }
 
     /**

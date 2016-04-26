@@ -104,6 +104,49 @@ public abstract class AbstractMoveValidator implements MoveValidator {
      * @return true if distance is too far, false otherwise
      */
     protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
-        return src.getDistanceTo(dest) > distance;
+        return !isInfiniteDistance() ? src.getDistanceTo(dest) > distance : false;
+    }
+
+    /**
+     * Returns whether the distance for this fly move is infinite or not.
+     *
+     * @return true if infinite, false otherwise
+     */
+    protected boolean isInfiniteDistance() {
+        return distance < 0;
+    }
+
+    /**
+     * Determines if the move can actually be made, and if it is valid after
+     * being executed. This method is useful for simulating moves that are
+     * direct and not continuous.
+     *
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @param piece
+     *            The {@link HantoPiece} to move.
+     * @param board
+     *            The current game {@link HantoGameBoard}.
+     * @return true if move can be executed, false otherwise
+     */
+    protected boolean canMoveSimulateDirectMove(HantoCoordinate src, HantoCoordinate dest,
+            HantoPiece piece, HantoGameBoard board) {
+        HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
+        HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
+
+        // Check superclass if can move
+        if (!canMove(srcCoordImpl, destCoordImpl, piece, board)) {
+            return false;
+        }
+
+        // Simulate move
+        HantoGameBoard boardCopy = board.copy();
+        HantoPiece removedPiece = boardCopy.removePieceAt(srcCoordImpl);
+        boardCopy.placePieceAt(destCoordImpl, removedPiece);
+
+        // Check post conditions of simulating move
+        return isMoveValid(srcCoordImpl, destCoordImpl, removedPiece, boardCopy);
     }
 }

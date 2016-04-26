@@ -57,64 +57,12 @@ public class FlyMoveValidator extends AbstractMoveValidator {
 
             // Check if any of the coordinates are empty
             for (HantoCoordinate e : list) {
-                if (!board.hasPieceAt(e) && canMoveSimulateMove(coordinate, e, piece, board)) {
+                if (!board.hasPieceAt(e) && canMoveSimulateDirectMove(coordinate, e, piece, board)) {
                     return true;
                 }
             }
         }
 
         return false;
-    }
-
-    /**
-     * Determines if the move can actually be made, and if it is valid after
-     * being executed.
-     *
-     * @param src
-     *            The starting {@link HantoCoordinate}.
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} to move.
-     * @param board
-     *            The current game {@link HantoGameBoard}.
-     * @return
-     */
-    protected boolean canMoveSimulateMove(HantoCoordinate src, HantoCoordinate dest,
-            HantoPiece piece, HantoGameBoard board) {
-        HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
-        HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
-
-        // Check superclass if can move
-        if (!canMove(srcCoordImpl, destCoordImpl, piece, board)) {
-            return false;
-        }
-
-        // Simulate move
-        HantoGameBoard boardCopy = board.copy();
-        HantoPiece removedPiece = boardCopy.removePieceAt(srcCoordImpl);
-        boardCopy.placePieceAt(destCoordImpl, removedPiece);
-
-        // Check post conditions of simulating move
-        return isMoveValid(srcCoordImpl, destCoordImpl, removedPiece, boardCopy);
-    }
-
-    /**
-     * Returns whether the distance for this fly move is infinite or not.
-     *
-     * @return true if infinite, false otherwise
-     */
-    protected boolean isInfiniteDistance() {
-        return distance < 0;
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#isMoveDistanceTooFar(hanto.studentanivarthi.common.HantoCoordinateImpl,
-     *      hanto.studentanivarthi.common.HantoCoordinateImpl)
-     */
-    @Override
-    protected boolean isMoveDistanceTooFar(HantoCoordinateImpl src, HantoCoordinateImpl dest) {
-        // If distance is -1, then unlimited fly distance
-        return !isInfiniteDistance() ? super.isMoveDistanceTooFar(src, dest) : false;
     }
 }
