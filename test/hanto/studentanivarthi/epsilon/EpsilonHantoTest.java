@@ -25,6 +25,8 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
 // TODO Comments and formatting
+import hanto.studentanivarthi.common.game.HantoValidActionGame;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * Tests for DeltaHantoGame.
@@ -2211,5 +2213,37 @@ public class EpsilonHantoTest {
 
         // Fails
         game.makeMove(null, null, null);
+    }
+
+    /**
+     * Test playing some number of moves by getting a valid move from the game
+     * and playing the valid move.
+     *
+     * @throws HantoException
+     *             If the move fails.
+     */
+    @Test // 63
+    public void playSomeValidMovesFromGame() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn however many
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Turn " + i);
+            System.out.println(game.getPrintableBoard());
+            HantoValidMove move = ((HantoValidActionGame) game).hasValidAction();
+
+            System.out.println("\n" + move);
+            mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
+            assertEquals(OK, mr);
+
+            move = ((HantoValidActionGame) game).hasValidAction();
+            mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
+            assertEquals(OK, mr);
+        }
     }
 }

@@ -61,4 +61,12 @@ public class HantoValidMove {
         return destination;
     }
 
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Piece Type: " + pieceType.name() + ", Source: " + source + ", Destination: "
+                + destination;
+    }
 }
