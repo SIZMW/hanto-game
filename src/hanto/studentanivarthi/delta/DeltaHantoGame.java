@@ -7,6 +7,7 @@ package hanto.studentanivarthi.delta;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of Delta Hanto, based on the {@link AbstractHantoGame}
@@ -29,7 +30,7 @@ public class DeltaHantoGame extends AbstractHantoGame {
      * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidMove()
      */
     @Override
-    protected boolean hasValidAction() {
-        return false;
+    public HantoValidMove hasValidAction() {
+        return null;
     }
 }

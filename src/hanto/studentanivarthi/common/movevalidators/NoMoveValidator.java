@@ -35,15 +35,4 @@ public class NoMoveValidator extends AbstractMoveValidator {
             HantoGameBoard board) {
         return false;
     }
-
-    /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
-     *      hanto.studentanivarthi.common.board.HantoGameBoard)
-     */
-    @Override
-    public boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
-            HantoGameBoard board) {
-        return false;
-    }
 }

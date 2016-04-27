@@ -8,6 +8,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of the piece placement validation for the first move of
@@ -33,8 +34,12 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
-        return !board.hasPieceAt(ORIGIN);
+    public HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+        if (!board.hasPieceAt(ORIGIN)) {
+            return new HantoValidMove(piece.getType(), null, ORIGIN);
+        }
+
+        return null;
     }
 
     /**

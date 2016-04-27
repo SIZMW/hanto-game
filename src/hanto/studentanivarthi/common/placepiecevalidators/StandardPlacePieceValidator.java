@@ -11,6 +11,7 @@ import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of the piece placement validation for any standard move of
@@ -54,7 +55,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+    public HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
         Collection<HantoCoordinate> ownedCoordinates = board
                 .getCoordinatesWithPiecesOfColor(piece.getColor());
 
@@ -63,17 +64,17 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
             Collection<HantoCoordinate> surroundings = new HantoCoordinateImpl(e)
                     .getSurroundingCoordinates();
             if (hasValidCoordinateNextToOwnedPiece(piece, board, surroundings, e)) {
-                return true;
+                return new HantoValidMove(piece.getType(), null, e);
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
      * Determines if there is a valid coordinate to place a piece given the
      * already owned piece and its surrounding coordinates.
-     * 
+     *
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param board
@@ -107,7 +108,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
     /**
      * Determines if any of the common neighbors has a piece of the opposing
      * color.
-     * 
+     *
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param board

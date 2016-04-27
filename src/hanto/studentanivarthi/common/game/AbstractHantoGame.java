@@ -25,6 +25,7 @@ import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidatorFactory;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnFactory;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * This class defines the commonality between different versions of
@@ -33,7 +34,7 @@ import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnFactory;
  *
  * @author Aditya Nivarthi
  */
-public abstract class AbstractHantoGame implements HantoGame {
+public abstract class AbstractHantoGame implements HantoValidActionGame {
     /**
      * The number of turns before the {@link HantoPieceType#BUTTERFLY} must be
      * placed. If the {@link HantoPieceType#BUTTERFLY} must be placed by the nth
@@ -224,21 +225,23 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
-     * Returns whether the player had an valid action that could be made on this
-     * turn.
-     *
-     * @return true if action exists, false otherwise
+     * @see hanto.studentanivarthi.common.game.HantoValidActionGame#hasValidAction()
      */
-    protected boolean hasValidAction() {
-        if (!currentTurn.isOutOfPieces() && hasValidPiecePlacement()) {
-            return true;
+    @Override
+    public HantoValidMove hasValidAction() {
+        if (!currentTurn.isOutOfPieces()) {
+            HantoValidMove placePiece = hasValidPiecePlacement();
+            if (placePiece != null) {
+                return placePiece;
+            }
         }
 
-        if (!hasValidMove()) {
-            return false;
+        HantoValidMove move = hasValidMove();
+        if (move != null) {
+            return move;
         }
 
-        return true;
+        return null;
     }
 
     /**
@@ -246,7 +249,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      *
      * @return true if move existed, false otherwise
      */
-    protected boolean hasValidMove() {
+    protected HantoValidMove hasValidMove() {
         final Collection<HantoCoordinate> coordinates = board
                 .getCoordinatesWithPiecesOfColor(currentTurn.getColor());
 
@@ -256,12 +259,13 @@ public abstract class AbstractHantoGame implements HantoGame {
             MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
                     piece.getType());
 
+            HantoValidMove move = validator.canMoveAtAll(e, piece, board);
             // If the validator says it can move at all
-            if (validator.canMoveAtAll(e, piece, board)) {
-                return true;
+            if (move != null) {
+                return move;
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -269,21 +273,22 @@ public abstract class AbstractHantoGame implements HantoGame {
      *
      * @return true if move existed, false otherwise
      */
-    protected boolean hasValidPiecePlacement() {
+    protected HantoValidMove hasValidPiecePlacement() {
         for (HantoPieceType piece : HantoPieceType.values()) {
             if (currentTurn.canPlacePiece(piece)) {
                 PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
                         .getPlacePieceValidator(id, isFirstMove,
                                 blueTurn.getTurnCount() + redTurn.getTurnCount());
 
-                if (validator.canPlacePieceAtAll(new HantoPieceImpl(currentTurn.getColor(), piece),
-                        board)) {
-                    return true;
+                HantoValidMove placePiece = validator.canPlacePieceAtAll(
+                        new HantoPieceImpl(currentTurn.getColor(), piece), board);
+                if (placePiece != null) {
+                    return placePiece;
                 }
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -340,7 +345,8 @@ public abstract class AbstractHantoGame implements HantoGame {
      *             If there was a valid move to make but resignation is called
      */
     protected MoveResult processResignation() throws HantoException {
-        if (hasValidAction()) {
+        HantoValidMove move = hasValidAction();
+        if (move != null) {
             throw new HantoPrematureResignationException();
         }
 

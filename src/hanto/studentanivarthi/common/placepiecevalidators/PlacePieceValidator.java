@@ -7,6 +7,7 @@ package hanto.studentanivarthi.common.placepiecevalidators;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The PlacePieceValidator interface defines the methods for piece placement
@@ -31,12 +32,12 @@ public interface PlacePieceValidator {
 
     /**
      * Determines if the piece can be placed at all on the board.
-     * 
+     *
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param board
      *            The current game {@link HantoGameBoard}.
-     * @return true if ti can be placed, false otherwise
+     * @return a {@link HantoValidMove} if a move exists, null otherwise
      */
-    boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board);
+    HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board);
 }

@@ -10,6 +10,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of the piece placement validation for the second move of
@@ -53,13 +54,13 @@ public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+    public HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
         for (HantoCoordinate e : ORIGIN.getSurroundingCoordinates()) {
             if (!board.hasPieceAt(e)) {
-                return true;
+                return new HantoValidMove(piece.getType(), null, e);
             }
         }
 
-        return false;
+        return null;
     }
 }

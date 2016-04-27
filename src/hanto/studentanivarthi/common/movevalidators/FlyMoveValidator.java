@@ -10,6 +10,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of the fly move in Hanto, based on the
@@ -46,7 +47,7 @@ public class FlyMoveValidator extends AbstractMoveValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+    public HantoValidMove canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
             HantoGameBoard board) {
         int checkDistance = isInfiniteDistance() ? Integer.MAX_VALUE : distance;
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
@@ -59,11 +60,11 @@ public class FlyMoveValidator extends AbstractMoveValidator {
             for (HantoCoordinate e : list) {
                 if (!board.hasPieceAt(e)
                         && canMoveSimulateDirectMove(coordinate, e, piece, board)) {
-                    return true;
+                    return new HantoValidMove(piece.getType(), coordinate, e);
                 }
             }
         }
 
-        return false;
+        return null;
     }
 }

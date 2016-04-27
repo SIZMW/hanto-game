@@ -8,6 +8,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
+import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * This class defines the commonality between different versions of
@@ -77,9 +78,9 @@ public abstract class AbstractMoveValidator implements MoveValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+    public HantoValidMove canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
             HantoGameBoard board) {
-        return true;
+        return null;
     }
 
     /**
