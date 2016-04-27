@@ -23,6 +23,7 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
+// TODO Comments and formatting
 
 /**
  * Tests for Gamma Hanto.
@@ -57,7 +58,7 @@ public class GammaHantoTest {
             return x;
         }
 
-        /*
+        /**
          * @see {@link hanto.common.HantoCoordinate#getY()}
          */
         @Override
@@ -86,7 +87,15 @@ public class GammaHantoTest {
         game = factory.makeHantoGame(HantoGameID.GAMMA_HANTO);
     }
 
-    // Helper methods
+    /**
+     * Creates a new coordinate with the specified X and Y.
+     *
+     * @param x
+     *            The x coordinate.
+     * @param y
+     *            The y coordinate.
+     * @return a {@link TestHantoCoordinate}
+     */
     private HantoCoordinate makeCoordinate(int x, int y) {
         return new TestHantoCoordinate(x, y);
     }
@@ -95,6 +104,7 @@ public class GammaHantoTest {
      * Tests placing blue butterfly at the origin as the first move.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 1
     public void bluePlacesInitialButterflyAtOrigin() throws HantoException {
@@ -111,6 +121,7 @@ public class GammaHantoTest {
      * origin.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 2
     public void redPlacesValidButterflyAfterBlue() throws HantoException {
@@ -126,6 +137,7 @@ public class GammaHantoTest {
      * Tests placing blue butterfly not at the origin.
      *
      * @throws HantoException
+     *             Since the first move is not at the origin.
      */
     @Test(expected = HantoException.class) // 3
     public void bluePlacesInitialButterflyNotAtOrigin() throws HantoException {
@@ -140,7 +152,7 @@ public class GammaHantoTest {
      * @throws HantoException
      */
     @Test(expected = HantoException.class) // 4
-    public void redPlacesInitialCrabNotNextToOrigin() throws HantoException {
+    public void redPlacesInitialButterflyNotNextToOrigin() throws HantoException {
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 

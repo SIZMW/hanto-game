@@ -59,7 +59,7 @@ public class AlphaHantoTest {
             this.y = y;
         }
 
-        /*
+        /**
          * @see hanto.common.HantoCoordinate#getX()
          */
         @Override
@@ -67,7 +67,7 @@ public class AlphaHantoTest {
             return x;
         }
 
-        /*
+        /**
          * @see hanto.common.HantoCoordinate#getY()
          */
         @Override
@@ -100,6 +100,7 @@ public class AlphaHantoTest {
      * Tests blue making the first move.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 1
     public void blueMakesValidFirstMove() throws HantoException {
@@ -107,9 +108,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red making a valid move.
+     * Tests red making a valid move after blue.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 2
     public void redMakesValidMove() throws HantoException {
@@ -118,9 +120,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests blue making a move not to the origin.
+     * Tests blue making the first move not to the origin.
      *
      * @throws HantoException
+     *             Since the first move is not to the origin.
      */
     @Test(expected = HantoException.class) // 3
     public void blueMovesToNonOrigin() throws HantoException {
@@ -129,9 +132,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests blue trying to place a sparrow.
+     * Tests blue trying to place a sparrow as the first move.
      *
      * @throws HantoException
+     *             Since the sparrow is not part of this game type.
      */
     @Test(expected = HantoException.class) // 4
     public void blueTriesToPlaceSparrow() throws HantoException {
@@ -143,6 +147,7 @@ public class AlphaHantoTest {
      * Tests red trying to place a crab.
      *
      * @throws HantoException
+     *             Since the crab is not part of this game type.
      */
     @Test(expected = HantoException.class) // 5
     public void redTriesToPlaceCrab() throws HantoException {
@@ -153,9 +158,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red placing a butterfly at an invalid location.
+     * Tests red placing a butterfly not next to another piece.
      *
      * @throws HantoException
+     *             Since the board is not contiguous.
      */
     @Test(expected = HantoException.class) // 6
     public void redPlacesButterflyAtInvalidLocation() throws HantoException {
@@ -169,6 +175,7 @@ public class AlphaHantoTest {
      * Tests red placing a butterfly at the origin.
      *
      * @throws HantoException
+     *             Since there is already a piece at the origin.
      */
     @Test(expected = HantoException.class) // 7
     public void redPlacesButterflyAtOrigin() throws HantoException {
@@ -182,6 +189,7 @@ public class AlphaHantoTest {
      * Tests if the butterfly for blue is actually at the origin.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 8
     public void blueButterflyIsAtOrginAfterMove() throws HantoException {
@@ -196,6 +204,7 @@ public class AlphaHantoTest {
      * Tests if the butterfly for red is at the correct location.
      *
      * @throws HantoException
+     *             If the move fails.
      */
     @Test // 9
     public void redButterflyIsAtCorrectPlaceAfterRedMoves() throws HantoException {
@@ -210,6 +219,7 @@ public class AlphaHantoTest {
      * Tests moving after the game is over.
      *
      * @throws HantoException
+     *             Since the game is over.
      */
     @Test(expected = HantoException.class) // 10
     public void attemptToMoveAfterGameEnds() throws HantoException {

@@ -24,6 +24,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
+// TODO Comments and formatting
 
 /**
  * Tests for DeltaHantoGame.
@@ -60,7 +61,7 @@ public class DeltaHantoTest {
             return x;
         }
 
-        /*
+        /**
          * @see {@link hanto.common.HantoCoordinate#getY()}
          */
         @Override
@@ -89,7 +90,15 @@ public class DeltaHantoTest {
         game = factory.makeHantoGame(HantoGameID.DELTA_HANTO);
     }
 
-    // Helper methods
+    /**
+     * Creates a new coordinate with the specified X and Y.
+     *
+     * @param x
+     *            The x coordinate.
+     * @param y
+     *            The y coordinate.
+     * @return a {@link TestHantoCoordinate}
+     */
     private HantoCoordinate makeCoordinate(int x, int y) {
         return new TestHantoCoordinate(x, y);
     }
@@ -101,6 +110,7 @@ public class DeltaHantoTest {
      */
     @Test // 1
     public void bluePlacesInitialButterflyAtOrigin() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
 
@@ -132,6 +142,7 @@ public class DeltaHantoTest {
      */
     @Test(expected = HantoException.class) // 3
     public void bluePlacesInitialButterflyNotAtOrigin() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(2, 1));
         assertEquals(OK, mr);
     }
@@ -144,6 +155,7 @@ public class DeltaHantoTest {
      */
     @Test(expected = HantoException.class) // 4
     public void redPlacesInitialButterflyNotNextToOrigin() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -157,6 +169,7 @@ public class DeltaHantoTest {
      */
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCraneAtOrigin() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(HantoPieceType.CRANE, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
     }
@@ -168,6 +181,7 @@ public class DeltaHantoTest {
      */
     @Test(expected = HantoException.class) // 6
     public void redPlacesInitialCraneAfterValidBlue() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
@@ -403,10 +417,10 @@ public class DeltaHantoTest {
      */
     @Test(expected = HantoException.class) // 13
     public void placePieceInOccupiedSpot() throws HantoException {
+        // Turn 1
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        // Place on same coordinate
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
     }
 
@@ -494,6 +508,7 @@ public class DeltaHantoTest {
      */
     @Test // 16
     public void checkPrintableBoard() throws HantoException {
+        // Turn 1
         final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
