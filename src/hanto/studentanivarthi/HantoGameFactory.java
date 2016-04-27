@@ -80,10 +80,6 @@ public class HantoGameFactory {
             case EPSILON_HANTO:
                 game = new EpsilonHantoGame(movesFirst);
                 break;
-            default:
-                game = new EpsilonHantoGame(movesFirst);
-                break;
-
         }
         return game;
     }
