@@ -21,7 +21,9 @@ This variation focuses on larger restructuring and refactoring of the game, and 
 This variation adds rules to resignation. If a player resigns and there is actually a valid move for them to make, a ```HantoPrematureResignationException``` is thrown. Otherwise, the opponent is declared the winner. Each player can place one (1) ```BUTTERFLY```, two (2) ```SPARROW```, six (6) ```CRAB```, and four (4) ```HORSE``` pieces on the board. ```BUTTERFLY``` pieces can walk one (1) space, ```CRAB``` pieces can walk one (1) space, ```SPARROW``` pieces can fly five (5) spaces, and ```HORSE``` pieces can jump an unlimited number of spaces.
 
 #### Hanto Player
-// TODO
+The Hanto player is a small AI that is able to play a valid game of Hanto. It uses an extension of the ```HantoGame``` interface which adds methods for getting valid moves from the Hanto game, and uses those moves to make moves which are allowed. 
+
+Note: This AI is not terribly smart, it just plays a valid game.
 
 ## Building
 This project can be imported into [Eclipse](https://eclipse.org/downloads/) as a project, which can then be compiled.
