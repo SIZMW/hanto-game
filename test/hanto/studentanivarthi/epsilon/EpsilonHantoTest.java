@@ -2014,10 +2014,202 @@ public class EpsilonHantoTest {
         MoveResult mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 0));
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
         // Turn 2, fails
         mr = game.makeMove(null, null, null);
+    }
+
+    /**
+     * Test resigning when there is not any moves left.
+     *
+     * @throws HantoException
+     *             If the move fails.
+     */
+    @Test // 61
+    public void resignWithNoMovesLeft() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(-2, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(3, -1));
+        assertEquals(OK, mr);
+
+        // Turn 4
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-3, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(4, -2));
+        assertEquals(OK, mr);
+
+        // Turn 5
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-4, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(5, -2));
+        assertEquals(OK, mr);
+
+        // Turn 6
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-5, 3));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(6, -3));
+        assertEquals(OK, mr);
+
+        // Turn 7
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-6, 3));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(7, 3));
+        assertEquals(OK, mr);
+
+        // Turn 8
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-7, 4));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(8, -4));
+        assertEquals(OK, mr);
+
+        // Turn 9
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-8, 4));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(9, -4));
+        assertEquals(OK, mr);
+
+        // Turn 10
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-9, 5));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(10, -5));
+        assertEquals(OK, mr);
+
+        // Turn 11
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-10, 5));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(11, -5));
+        assertEquals(OK, mr);
+
+        // Turn 12
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-11, 6));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(12, -6));
+        assertEquals(OK, mr);
+
+        // Turn 13
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-12, 6));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(13, -6));
+        assertEquals(OK, mr);
+
+        // Resign
+        mr = game.makeMove(null, null, null);
+        assertEquals(MoveResult.RED_WINS, mr);
+    }
+
+    /**
+     * Test resigning when there is not any piece placement positions left.
+     * Resignation fails since the red player can still move, but the piece
+     * placement validation will return false.
+     *
+     * @throws HantoException
+     *             Since the player still has a valid move.
+     */
+    @Test(expected = HantoException.class) // 62
+    public void resignFailsWithNoPiecePlacementsLeft() throws HantoException {
+        // Turn 1
+        MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 2
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 3
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(0, 1), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 4
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(-1, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 5
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(1, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(0, 1), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 6
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(-1, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 7
+        mr = game.makeMove(HantoPieceType.SPARROW, null, makeCoordinate(2, -1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(0, 1), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 8
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(0, 2));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 9
+        mr = game.makeMove(HantoPieceType.HORSE, null, makeCoordinate(2, 0));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(0, 1), makeCoordinate(1, 0));
+        assertEquals(OK, mr);
+
+        // Turn 10
+        mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, 1));
+        assertEquals(OK, mr);
+
+        mr = game.makeMove(HantoPieceType.BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, 1));
+        assertEquals(OK, mr);
+
+        // Turn 11
+        mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(2, 1), makeCoordinate(1, 1));
+        assertEquals(OK, mr);
+
+        // Fails
+        game.makeMove(null, null, null);
     }
 }

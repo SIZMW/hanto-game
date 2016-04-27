@@ -305,6 +305,11 @@ public abstract class AbstractHantoGame implements HantoGame {
      */
     protected void movePlayerPiece(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece) {
         board.removePieceAt(src);
+
+        if (piece.getType().equals(HantoPieceType.BUTTERFLY)) {
+            currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
+        }
+
         board.placePieceAt(dest, piece);
     }
 
