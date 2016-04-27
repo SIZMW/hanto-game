@@ -2,7 +2,7 @@
  * This class was created for the Hanto game implementation for CS 4233.
  */
 
-package hanto.studentanivarthi.common;
+package hanto.studentanivarthi.common.coordinate;
 
 import java.util.ArrayList;
 import java.util.Collection;

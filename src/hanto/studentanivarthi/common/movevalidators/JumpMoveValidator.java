@@ -6,9 +6,9 @@ package hanto.studentanivarthi.common.movevalidators;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
-import hanto.studentanivarthi.common.HantoCoordinateImpl;
-import hanto.studentanivarthi.common.HantoDirection;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
+import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.coordinate.HantoDirection;
 
 /**
  * The implementation of the jump move in Hanto, based on the

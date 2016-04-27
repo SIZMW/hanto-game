@@ -8,8 +8,8 @@ import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
-import hanto.studentanivarthi.common.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
+import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**

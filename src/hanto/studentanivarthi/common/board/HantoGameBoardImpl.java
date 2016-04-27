@@ -15,7 +15,7 @@ import java.util.Set;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPlayerColor;
-import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**

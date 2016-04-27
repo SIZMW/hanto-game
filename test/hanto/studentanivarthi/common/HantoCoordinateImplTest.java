@@ -24,6 +24,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.board.HantoGameBoardImpl;
+import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**

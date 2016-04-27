@@ -21,7 +21,7 @@ import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.MoveResult;
-import hanto.studentanivarthi.common.HantoCoordinateImpl;
+import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**

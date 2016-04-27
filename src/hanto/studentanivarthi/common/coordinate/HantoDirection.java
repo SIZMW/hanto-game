@@ -2,7 +2,7 @@
  * This class was created for the Hanto game implementation for CS 4233.
  */
 
-package hanto.studentanivarthi.common;
+package hanto.studentanivarthi.common.coordinate;
 
 /**
  * This is the implementation of directions on the Hanto game board.
