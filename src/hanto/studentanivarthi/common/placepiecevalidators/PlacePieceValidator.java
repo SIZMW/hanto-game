@@ -28,4 +28,15 @@ public interface PlacePieceValidator {
      * @return true if it can be placed, false otherwise
      */
     boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board);
+
+    /**
+     * Determines if the piece can be placed at all on the board.
+     * 
+     * @param piece
+     *            The {@link HantoPiece} to place.
+     * @param board
+     *            The current game {@link HantoGameBoard}.
+     * @return true if ti can be placed, false otherwise
+     */
+    boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board);
 }

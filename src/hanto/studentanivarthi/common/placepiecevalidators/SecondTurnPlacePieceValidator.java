@@ -18,6 +18,8 @@ import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
  * @author Aditya Nivarthi
  */
 public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
+    private final HantoCoordinateImpl ORIGIN = new HantoCoordinateImpl(0, 0);
+
     /**
      * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
      *      hanto.common.HantoPiece,
@@ -44,5 +46,20 @@ public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
         }
 
         return isAdjacentToPiece;
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePieceAtAll(hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
+    @Override
+    public boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+        for (HantoCoordinate e : ORIGIN.getSurroundingCoordinates()) {
+            if (!board.hasPieceAt(e)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

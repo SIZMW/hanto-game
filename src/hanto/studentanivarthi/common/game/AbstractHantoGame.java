@@ -224,6 +224,24 @@ public abstract class AbstractHantoGame implements HantoGame {
     }
 
     /**
+     * Returns whether the player had an valid action that could be made on this
+     * turn.
+     *
+     * @return true if action exists, false otherwise
+     */
+    protected boolean hasValidAction() {
+        if (!currentTurn.isOutOfPieces() && hasValidPiecePlacement()) {
+            return true;
+        }
+
+        if (!hasValidMove()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Returns whether the player had a move that was valid.
      *
      * @return true if move existed, false otherwise
@@ -243,6 +261,28 @@ public abstract class AbstractHantoGame implements HantoGame {
                 return true;
             }
         }
+        return false;
+    }
+
+    /**
+     * Returns whether the player had a piece placement that was valid.
+     *
+     * @return true if move existed, false otherwise
+     */
+    protected boolean hasValidPiecePlacement() {
+        for (HantoPieceType piece : HantoPieceType.values()) {
+            if (currentTurn.canPlacePiece(piece)) {
+                PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
+                        .getPlacePieceValidator(id, isFirstMove,
+                                blueTurn.getTurnCount() + redTurn.getTurnCount());
+
+                if (validator.canPlacePieceAtAll(new HantoPieceImpl(currentTurn.getColor(), piece),
+                        board)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -295,7 +335,7 @@ public abstract class AbstractHantoGame implements HantoGame {
      *             If there was a valid move to make but resignation is called
      */
     protected MoveResult processResignation() throws HantoException {
-        if (hasValidMove()) {
+        if (hasValidAction()) {
             throw new HantoPrematureResignationException();
         }
 

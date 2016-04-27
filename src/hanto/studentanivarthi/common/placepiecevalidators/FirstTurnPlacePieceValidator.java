@@ -29,6 +29,15 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePieceAtAll(hanto.common.HantoPiece,
+     *      hanto.studentanivarthi.common.board.HantoGameBoard)
+     */
+    @Override
+    public boolean canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+        return !board.hasPieceAt(ORIGIN);
+    }
+
+    /**
      * Returns whether the specified coordinate is the origin or not.
      *
      * @param coordinate

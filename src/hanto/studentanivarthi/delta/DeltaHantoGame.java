@@ -29,7 +29,7 @@ public class DeltaHantoGame extends AbstractHantoGame {
      * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidMove()
      */
     @Override
-    protected boolean hasValidMove() {
+    protected boolean hasValidAction() {
         return false;
     }
 }
