@@ -25,7 +25,7 @@ import hanto.studentanivarthi.common.piece.HantoPieceImpl;
  * @author Aditya Nivarthi
  */
 public class HantoGameBoardImpl implements HantoGameBoard {
-    private final Map<HantoCoordinate, HantoPiece> board;
+    protected final Map<HantoCoordinate, HantoPiece> board;
 
     /**
      * Creates a HantoGameBoardImpl instance.
@@ -35,7 +35,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#arePiecesContiguous()
+     * @see hanto.studentanivarthi.common.board.HantoBoard#arePiecesContiguous()
      */
     @Override
     public boolean arePiecesContiguous() {
@@ -50,18 +50,19 @@ public class HantoGameBoardImpl implements HantoGameBoard {
             final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
             final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingCoordinates();
 
-            for (HantoCoordinate e : surroundings) {
-                if (hasPieceAt(e)) {
-                    if (!visitedCoordinates.contains(e)) {
-                        visitedCoordinates.add(e);
-                        list.addLast(e);
+            // Search all the surroundings
+            for (HantoCoordinate coord : surroundings) {
+                if (hasPieceAt(coord)) {
+                    if (!visitedCoordinates.contains(coord)) {
+                        visitedCoordinates.add(coord);
+                        list.addLast(coord);
                     }
                 }
             }
         }
 
         // Make sure we visited all the coordinates that have pieces
-        return visitedCoordinates.size() == board.keySet().size();
+        return visitedCoordinates.size() == getNumberOfPieces();
     }
 
     /**
@@ -70,8 +71,9 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     @Override
     public HantoGameBoard copy() {
         final HantoGameBoard newBoard = new HantoGameBoardImpl();
-        for (HantoCoordinate e : board.keySet()) {
-            newBoard.placePieceAt(e, getPieceAt(e));
+
+        for (HantoCoordinate coordinate : board.keySet()) {
+            newBoard.placePieceAt(coordinate, getPieceAt(coordinate));
         }
 
         return newBoard;
@@ -84,9 +86,9 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     public Collection<HantoCoordinate> getCoordinatesWithPiecesOfColor(HantoPlayerColor color) {
         final Collection<HantoCoordinate> coordinates = new ArrayList<>();
 
-        for (HantoCoordinate e : board.keySet()) {
-            if (board.get(e).getColor().equals(color)) {
-                coordinates.add(e);
+        for (HantoCoordinate coordinate : board.keySet()) {
+            if (board.get(coordinate).getColor().equals(color)) {
+                coordinates.add(coordinate);
             }
         }
 
@@ -102,10 +104,10 @@ public class HantoGameBoardImpl implements HantoGameBoard {
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         final Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingCoordinates();
 
-        for (HantoCoordinate e : surroundings) {
-            HantoCoordinateImpl eImpl = new HantoCoordinateImpl(e);
-            if (!board.containsKey(eImpl)) {
-                emptySurroundings.add(eImpl);
+        for (HantoCoordinate coord : surroundings) {
+            HantoCoordinateImpl coordImpl = new HantoCoordinateImpl(coord);
+            if (!board.containsKey(coordImpl)) {
+                emptySurroundings.add(coordImpl);
             }
         }
 
@@ -121,7 +123,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#getPieceAt(hanto.common.HantoCoordinate)
+     * @see hanto.studentanivarthi.common.board.HantoBoard#getPieceAt(hanto.common.HantoCoordinate)
      */
     @Override
     public HantoPiece getPieceAt(HantoCoordinate coordinate) {
@@ -135,7 +137,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#hasPieceAt(hanto.common.HantoCoordinate)
+     * @see hanto.studentanivarthi.common.board.HantoBoard#hasPieceAt(hanto.common.HantoCoordinate)
      */
     @Override
     public boolean hasPieceAt(HantoCoordinate coordinate) {
@@ -152,7 +154,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#placePieceAt(hanto.common.HantoCoordinate,
+     * @see hanto.studentanivarthi.common.board.HantoBoard#placePieceAt(hanto.common.HantoCoordinate,
      *      hanto.common.HantoPiece)
      */
     @Override
@@ -163,7 +165,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoGameBoard#removePieceAt(hanto.common.HantoCoordinate)
+     * @see hanto.studentanivarthi.common.board.HantoBoard#removePieceAt(hanto.common.HantoCoordinate)
      */
     @Override
     public HantoPiece removePieceAt(HantoCoordinate coordinate) throws ClassCastException {

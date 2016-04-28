@@ -7,26 +7,18 @@ package hanto.studentanivarthi.common.board;
 import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoPiece;
 import hanto.common.HantoPlayerColor;
 
 /**
- * The HantoGameBoard interface defines methods for board implementations for
- * the Hanto game.
+ * The HantoGameBoard interface defines additional game methods for board
+ * implementations in the Hanto game.
  *
  * @author Aditya Nivarthi
  */
-public interface HantoGameBoard { // TODO clean up this interface
+public interface HantoGameBoard extends HantoBoard {
     /**
-     * Returns whether the pieces on the game board are all organized in a
-     * contiguous fashion.
-     *
-     * @return true if contiguous, false otherwise
-     */
-    boolean arePiecesContiguous();
-
-    /**
-     * Returns a copy of this HantoGameBoard.
+     * Returns a copy of this HantoGameBoard. Creates a new internal board with
+     * the same references to coordinates and pieces.
      *
      * @return a {@link HantoGameBoard}
      */
@@ -60,52 +52,9 @@ public interface HantoGameBoard { // TODO clean up this interface
     int getNumberOfPieces();
 
     /**
-     * Returns the piece at the specified coordinate.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordinate} on the board.
-     * @return a {@link HantoPiece}
-     */
-    HantoPiece getPieceAt(HantoCoordinate coordinate);
-
-    /**
-     * Returns whether there is a piece at the specified coordinate.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordinate} on the board.
-     * @return true if occupied, false otherwise
-     */
-    boolean hasPieceAt(HantoCoordinate coordinate);
-
-    /**
      * Returns if the board is empty.
      *
      * @return true if empty, false otherwise
      */
     boolean isBoardEmpty();
-
-    /**
-     * Places the specified piece at the specified coordinate.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordinate} on the board.
-     * @param piece
-     *            The {@link HantoPiece} to place.
-     */
-    void placePieceAt(HantoCoordinate coordinate, HantoPiece piece);
-
-    /**
-     * Removes the piece at the specified coordinate.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordinate} on the board.
-     * @return true if removed, false otherwise
-     */
-    HantoPiece removePieceAt(HantoCoordinate coordinate);
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    String toString();
 }
