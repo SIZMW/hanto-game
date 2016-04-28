@@ -73,7 +73,7 @@ public class HantoGameBoardImpl implements HantoGameBoard {
         final HantoGameBoard newBoard = new HantoGameBoardImpl();
 
         for (HantoCoordinate coordinate : board.keySet()) {
-            newBoard.placePieceAt(coordinate, getPieceAt(coordinate));
+            newBoard.placePieceAt(getPieceAt(coordinate), coordinate);
         }
 
         return newBoard;
@@ -154,11 +154,11 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoBoard#placePieceAt(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece)
+     * @see hanto.studentanivarthi.common.board.HantoBoard#placePieceAt(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate)
      */
     @Override
-    public void placePieceAt(HantoCoordinate coordinate, HantoPiece piece) {
+    public void placePieceAt(HantoPiece piece, HantoCoordinate coordinate) {
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
         board.put(coordinateImpl, pieceImpl);

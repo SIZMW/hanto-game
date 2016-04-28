@@ -42,13 +42,13 @@ public interface HantoBoard {
 
     /**
      * Places the specified piece at the specified coordinate.
-     *
-     * @param coordinate
-     *            The {@link HantoCoordinate} on the board.
+     * 
      * @param piece
      *            The {@link HantoPiece} to place.
+     * @param coordinate
+     *            The {@link HantoCoordinate} on the board.
      */
-    void placePieceAt(HantoCoordinate coordinate, HantoPiece piece);
+    void placePieceAt(HantoPiece piece, HantoCoordinate coordinate);
 
     /**
      * Removes the piece at the specified coordinate.

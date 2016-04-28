@@ -122,7 +122,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
         // Simulate move
         HantoGameBoard boardCopy = board.copy();
         HantoPiece removedPiece = boardCopy.removePieceAt(srcCoordImpl);
-        boardCopy.placePieceAt(destCoordImpl, removedPiece);
+        boardCopy.placePieceAt(removedPiece, destCoordImpl);
 
         // Check post conditions of simulating move
         return isMoveValid(srcCoordImpl, destCoordImpl, removedPiece, boardCopy);

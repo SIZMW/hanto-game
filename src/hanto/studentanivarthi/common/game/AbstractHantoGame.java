@@ -486,7 +486,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
 
-        board.placePieceAt(dest, piece);
+        board.placePieceAt(piece, dest);
     }
 
     /**
@@ -499,7 +499,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *            The {@link HantoCoordinate} to place the piece.
      */
     protected void placePlayerPiece(HantoPiece piece, HantoCoordinate dest) {
-        board.placePieceAt(dest, piece);
+        board.placePieceAt(piece, dest);
 
         // Store BUTTERFLY
         if (piece.getType().equals(HantoPieceType.BUTTERFLY)) {

@@ -97,8 +97,8 @@ public class HantoCoordinateImplTest {
     @Test // 5
     public void testIsCoordinateNotSurrounded() {
         final HantoGameBoard board = new HantoGameBoardImpl();
-        board.placePieceAt(new HantoCoordinateImpl(0, 1),
-                new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY),
+                new HantoCoordinateImpl(0, 1));
 
         assertFalse(coordinate.isCoordinateSurrounded(board));
     }
@@ -110,18 +110,18 @@ public class HantoCoordinateImplTest {
     public void testIsCoordinateSurrounded() {
         final HantoGameBoard board = new HantoGameBoardImpl();
 
-        board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0),
-                new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.placePieceAt(new HantoCoordinateImpl(0 - 1, 0),
-                new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
-        board.placePieceAt(new HantoCoordinateImpl(0, 0 + 1),
-                new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.placePieceAt(new HantoCoordinateImpl(0, 0 - 1),
-                new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
-        board.placePieceAt(new HantoCoordinateImpl(0 + 1, 0 - 1),
-                new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
-        board.placePieceAt(new HantoCoordinateImpl(0 - 1, 0 + 1),
-                new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0 + 1, 0));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0 - 1, 0));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0, 0 + 1));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0, 0 - 1));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0 + 1, 0 - 1));
+        board.placePieceAt(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW),
+                new HantoCoordinateImpl(0 - 1, 0 + 1));
 
         assertTrue(coordinate.isCoordinateSurrounded(board));
     }

@@ -145,7 +145,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
                     && !previousCoordinates.contains(eImpl)) {
                 HantoGameBoard boardCopy = board.copy();
                 HantoPiece piece = boardCopy.removePieceAt(srcCoordImpl);
-                boardCopy.placePieceAt(eImpl, piece);
+                boardCopy.placePieceAt(piece, eImpl);
 
                 boolean hasPathReached = this.canMove(eImpl, destCoordImpl, boardCopy,
                         distanceRemaining - 1,
