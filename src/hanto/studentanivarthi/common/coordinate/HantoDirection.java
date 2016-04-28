@@ -27,11 +27,12 @@ public enum HantoDirection {
      * @return a {@link HantoDirection}
      */
     public static HantoDirection getDirectionTo(int x1, int y1, int x2, int y2) {
+        HantoCoordinateImpl one = new HantoCoordinateImpl(x1, y1);
+        HantoCoordinateImpl two = new HantoCoordinateImpl(x2, y2);
+        int distance = one.getDistanceTo(two);
+
         int srcx = x1;
         int srcy = y1;
-
-        int dx = x2 - x1;
-        int dy = y2 - y1;
 
         // Iterate over each direction
         for (HantoDirection e : HantoDirection.values()) {
@@ -43,7 +44,7 @@ public enum HantoDirection {
                 srcy += e.getY();
 
                 // Short circuit if we have passed the larger coordinate
-                if (i > (dx > dy ? dx : dy)) {
+                if (i > distance) {// (dx > dy ? dx : dy)) {
                     break;
                 }
                 i++;
