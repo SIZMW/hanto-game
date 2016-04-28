@@ -313,19 +313,23 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
             HantoValidMove move = validator.canMoveAtAll(piece, e, board);
 
-            // Store the move using the previous piece
-            if (!isPreviousNull && piece.getType().equals(previousPieceType)
-                    && e.equals(previousCoordinate)) {
-                reservedMove = new HantoValidMove(move);
-                continue;
-            }
-
             if (move == null) {
                 // If no move is found, keep searching
-            } else if (move.equals(reservedMove)) {
-                continue;
             } else {
-                return move;
+                // Store the move using the previous piece
+                if (!isPreviousNull && piece.getType().equals(previousPieceType)
+                        && e.equals(previousCoordinate)) {
+                    reservedMove = new HantoValidMove(move);
+                    continue;
+                }
+
+                if (move.equals(reservedMove)) {
+                    continue;
+                }
+
+                else {
+                    return move;
+                }
             }
         }
 
