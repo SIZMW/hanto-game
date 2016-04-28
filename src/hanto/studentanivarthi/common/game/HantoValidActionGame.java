@@ -4,7 +4,9 @@
 
 package hanto.studentanivarthi.common.game;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
+import hanto.common.HantoPieceType;
 import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
@@ -20,5 +22,5 @@ public interface HantoValidActionGame extends HantoGame {
      *
      * @return a {@link HantoValidMove} if it exists, null otherwise
      */
-    HantoValidMove hasValidAction();
+    HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate);
 }

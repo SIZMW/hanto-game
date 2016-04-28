@@ -8,8 +8,10 @@
 
 package hanto.studentanivarthi.tournament;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.HantoGameFactory;
 import hanto.studentanivarthi.common.game.HantoValidActionGame;
@@ -25,6 +27,9 @@ public class HantoPlayer implements HantoGamePlayer {
 
     protected HantoValidActionGame game;
     protected boolean amIFirstMove;
+
+    protected HantoPieceType prevPieceType = null;
+    protected HantoCoordinate prevCoordinate = null;
 
     /**
      * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID,
@@ -68,10 +73,14 @@ public class HantoPlayer implements HantoGamePlayer {
             }
         }
 
-        HantoValidMove move = game.hasValidAction();
+        HantoValidMove move = game.hasValidAction(prevPieceType, prevCoordinate);
         if (move != null) {
             try {
                 game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
+
+                prevPieceType = move.getPieceType();
+                prevCoordinate = move.getDestination();
+
                 return new HantoMoveRecord(move.getPieceType(), move.getSource(),
                         move.getDestination());
             } catch (HantoException e) {

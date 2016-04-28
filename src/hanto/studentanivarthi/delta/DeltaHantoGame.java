@@ -4,7 +4,9 @@
 
 package hanto.studentanivarthi.delta;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoGameID;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
 import hanto.studentanivarthi.tournament.HantoValidMove;
@@ -30,7 +32,7 @@ public class DeltaHantoGame extends AbstractHantoGame {
      * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidMove()
      */
     @Override
-    public HantoValidMove hasValidAction() {
+    public HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate) {
         return null;
     }
 }

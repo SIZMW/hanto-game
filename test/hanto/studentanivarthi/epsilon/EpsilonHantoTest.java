@@ -2234,11 +2234,11 @@ public class EpsilonHantoTest {
 
         // Turn however many
         for (int i = 0; i < 10; i++) {
-            HantoValidMove move = ((HantoValidActionGame) game).hasValidAction();
+            HantoValidMove move = ((HantoValidActionGame) game).hasValidAction(null, null);
             mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
             assertEquals(OK, mr);
 
-            move = ((HantoValidActionGame) game).hasValidAction();
+            move = ((HantoValidActionGame) game).hasValidAction(null, null);
             mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
             assertEquals(OK, mr);
         }
