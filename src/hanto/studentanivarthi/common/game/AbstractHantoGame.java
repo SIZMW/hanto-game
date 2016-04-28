@@ -86,6 +86,29 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.game.HantoValidActionGame#hasValidAction(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate)
+     */
+    @Override
+    public HantoValidMove hasValidAction(HantoPieceType previousPieceType,
+            HantoCoordinate previousCoordinate) {
+        // Skip piece placement if no more pieces
+        if (!currentTurn.isOutOfPieces()) {
+            HantoValidMove placePiece = hasValidPiecePlacement();
+            if (placePiece != null) {
+                return placePiece;
+            }
+        }
+
+        HantoValidMove move = hasValidMove(previousPieceType, previousCoordinate);
+        if (move != null) {
+            return move;
+        }
+
+        return null;
+    }
+
+    /**
      * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType,
      *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
      */
@@ -119,42 +142,9 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
         // Place a new piece
         if (src == null) {
-            // Preconditions of place piece
-            if (!validatePiecePlacementPreconditions(destCoordImpl, pieceImpl)) {
-                throw new HantoException(
-                        currentTurn.getColor().name() + " cannot place a piece in that location");
-            }
-
-            // Place piece
-            placePlayerPiece(destCoordImpl, pieceImpl);
-
-            // Post conditions of place piece
-            if (!validatePiecePlacementPostConditions(destCoordImpl, pieceImpl)) {
-                throw new HantoException(
-                        currentTurn.getColor().name() + " cannot place a piece in that location");
-            }
+            doPiecePlacement(pieceImpl, destCoordImpl);
         } else {
-            // Move piece
-            final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
-            final MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
-                    pieceImpl.getType());
-
-            // Preconditions of move
-            if (!validateMovePreconditions(srcCoordImpl, destCoordImpl, pieceImpl, validator)) {
-                throw new HantoException(currentTurn.getColor().name()
-                        + " cannot move a piece to that location, according to "
-                        + validator.getClass().getName());
-            }
-
-            // Move piece
-            movePlayerPiece(srcCoordImpl, destCoordImpl, pieceImpl);
-
-            // Post conditions of move
-            if (!validateMovePostConditions(srcCoordImpl, destCoordImpl, pieceImpl, validator)) {
-                throw new HantoException(currentTurn.getColor().name()
-                        + " cannot move a piece to that location, according to "
-                        + validator.getClass().getName());
-            }
+            doMove(pieceImpl, src, destCoordImpl);
         }
 
         // Switch player
@@ -162,6 +152,73 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
         // Get result
         return getMoveResult();
+    }
+
+    /**
+     * Validates before the move, does the move, and validates after the move.
+     *
+     * @param pieceImpl
+     *            The {@link HantoPieceImpl} to place.
+     * @param src
+     *            The {@link HantoCoordinate} to move from.
+     * @param destCoordImpl
+     *            The {@link HantoCoordinateImpl} to move to.
+     * @throws HantoException
+     *             If the preconditions or post conditions of the move are
+     *             invalid
+     */
+    protected void doMove(HantoPieceImpl pieceImpl, HantoCoordinate src,
+            HantoCoordinateImpl destCoordImpl) throws HantoException {
+        // Move piece
+        final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
+        final MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
+                pieceImpl.getType());
+
+        // Preconditions of move
+        if (!isValidBeforeMove(pieceImpl, srcCoordImpl, destCoordImpl, validator)) {
+            throw new HantoException(currentTurn.getColor().name()
+                    + " cannot move a piece to that location, according to "
+                    + validator.getClass().getName());
+        }
+
+        // Move piece
+        movePlayerPiece(pieceImpl, srcCoordImpl, destCoordImpl);
+
+        // Post conditions of move
+        if (!isValidAfterMove(pieceImpl, srcCoordImpl, destCoordImpl, validator)) {
+            throw new HantoException(currentTurn.getColor().name()
+                    + " cannot move a piece to that location, according to "
+                    + validator.getClass().getName());
+        }
+    }
+
+    /**
+     * Validates before the piece placement, does the piece placement, and
+     * validates after the piece placement.
+     *
+     * @param pieceImpl
+     *            The {@link HantoPieceImpl} to place. The
+     *            {@link HantoCoordinateImpl} to move to.
+     * @throws HantoException
+     *             If the preconditions or post conditions of the piece
+     *             placement are invalid
+     */
+    protected void doPiecePlacement(HantoPieceImpl pieceImpl, HantoCoordinateImpl destCoordImpl)
+            throws HantoException {
+        // Preconditions of place piece
+        if (!isValidBeforePiecePlacement(pieceImpl, destCoordImpl)) {
+            throw new HantoException(
+                    currentTurn.getColor().name() + " cannot place a piece in that location");
+        }
+
+        // Place piece
+        placePlayerPiece(pieceImpl, destCoordImpl);
+
+        // Post conditions of place piece
+        if (!isValidAfterPiecePlacement(pieceImpl, destCoordImpl)) {
+            throw new HantoException(
+                    currentTurn.getColor().name() + " cannot place a piece in that location");
+        }
     }
 
     /**
@@ -217,7 +274,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *            The destination {@link HantoCoordinate}.
      * @return true if resigned, false otherwise
      * @throws HantoPrematureResignationException
-     *             If the player resigned and had a valid move.
+     *             If the player resigned and had a valid move
      */
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
             HantoCoordinate dest) throws HantoPrematureResignationException {
@@ -225,36 +282,25 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.game.HantoValidActionGame#hasValidAction()
-     */
-    @Override
-    public HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate) {
-        if (!currentTurn.isOutOfPieces()) {
-            HantoValidMove placePiece = hasValidPiecePlacement();
-            if (placePiece != null) {
-                return placePiece;
-            }
-        }
-
-        HantoValidMove move = hasValidMove(pieceType, coordinate);
-        if (move != null) {
-            return move;
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns whether the player had a move that was valid.
+     * Determines if the current player has a valid move that can be made, and
+     * if so, returns a move object. If not, returns null. A piece and
+     * coordinate can be passed in for the previous move to find an move
+     * different from the last move.
      *
-     * @return true if move existed, false otherwise
+     * @param previousPieceType
+     *            The {@link HantoPieceType} type in the previous action.
+     * @param previousCoordinate
+     *            The {@link HantoCoordinate} in the previous action.
+     * @return a {@link HantoValidMove}, or null if no action is found
      */
-    protected HantoValidMove hasValidMove(HantoPieceType pieceType, HantoCoordinate coordinate) {
+    protected HantoValidMove hasValidMove(HantoPieceType previousPieceType,
+            HantoCoordinate previousCoordinate) {
         final Collection<HantoCoordinate> coordinates = board
                 .getCoordinatesWithPiecesOfColor(currentTurn.getColor());
         HantoValidMove reservedMove = null;
 
-        boolean isPreviousNull = pieceType == null || coordinate == null;
+        // Check if previous is null
+        boolean isPreviousNull = previousPieceType == null || previousCoordinate == null;
 
         // Get all the pieces of the current player's color on the board
         for (HantoCoordinate e : coordinates) {
@@ -264,12 +310,15 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
             HantoValidMove move = validator.canMoveAtAll(e, piece, board);
 
-            if (!isPreviousNull && piece.getType().equals(pieceType) && e.equals(coordinate)) {
+            // Store the move using the previous piece
+            if (!isPreviousNull && piece.getType().equals(previousPieceType)
+                    && e.equals(previousCoordinate)) {
                 reservedMove = new HantoValidMove(move);
                 continue;
             }
 
             if (move == null) {
+                // If no move is found, keep searching
             } else if (move.equals(reservedMove)) {
                 continue;
             } else {
@@ -277,13 +326,16 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             }
         }
 
+        // Return the move with the same piece again, or null if nothing was
+        // found
         return reservedMove;
     }
 
     /**
-     * Returns whether the player had a piece placement that was valid.
+     * Determines if the current player has a valid move that can be made, and
+     * if so, returns a move object. If not, returns null.
      *
-     * @return true if move existed, false otherwise
+     * @return a {@link HantoValidMove}, or null if no action is found
      */
     protected HantoValidMove hasValidPiecePlacement() {
         for (HantoPieceType piece : HantoPieceType.values()) {
@@ -294,6 +346,8 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
                 HantoValidMove placePiece = validator.canPlacePieceAtAll(
                         new HantoPieceImpl(currentTurn.getColor(), piece), board);
+
+                // If placement is found, return
                 if (placePiece != null) {
                     return placePiece;
                 }
@@ -301,6 +355,110 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
         }
 
         return null;
+    }
+
+    /**
+     * Validates that the post conditions for a move are met after the move is
+     * made. Calls the move validation class's validation method for validation.
+     *
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @param piece
+     *            The {@link HantoPiece} that was moved.
+     * @param validator
+     *            The {@link MoveValidator} associated with the piece.
+     * @return true if valid, false otherwise
+     */
+    protected boolean isValidAfterMove(HantoPieceImpl piece, HantoCoordinateImpl src,
+            HantoCoordinateImpl dest, MoveValidator validator) {
+        return validator.isMoveValid(src, dest, piece, board);
+    }
+
+    /**
+     * Validates that the post conditions for a piece placement are met after
+     * the placement is made. At the base Hanto class, there are no post
+     * conditions to check.
+     *
+     * @param piece
+     *            The {@link HantoPiece} that was placed.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return true if valid, false otherwise
+     */
+    protected boolean isValidAfterPiecePlacement(HantoPieceImpl piece, HantoCoordinateImpl dest) {
+        return true; // Nothing needs to happen
+    }
+
+    /**
+     * Validates that the preconditions for a move are met before the move is
+     * made. Checks if the current player has placed a butterfly before
+     * attempting a move, and calls the move validation class's validation
+     * method for validation.
+     *
+     * @param piece
+     *            The {@link HantoPiece} that was moved.
+     * @param src
+     *            The starting {@link HantoCoordinate}.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @param validator
+     *            The {@link MoveValidator} associated with the piece.
+     * @return true if valid, false otherwise
+     * @throws HantoException
+     *             If any of the preconditions are not met before the move
+     *             validation.
+     */
+    protected boolean isValidBeforeMove(HantoPieceImpl piece, HantoCoordinateImpl src,
+            HantoCoordinateImpl dest, MoveValidator validator) throws HantoException {
+        // Cannot move without having placed the butterfly
+        if (!currentTurn.hasButterflyCoordinate()) {
+            throw new HantoException("Player has not placed the butterfly on the board yet.");
+        }
+
+        return validator.canMove(src, dest, piece, board);
+    }
+
+    /**
+     * Validates that the preconditions for a piece placement are met before the
+     * placement is made. Checks if the current player has placed a butterfly
+     * before the latest turn possible, if the player has pieces of the required
+     * type to place, and calls the piece placement validation class's
+     * validation method for validation.
+     *
+     * @param piece
+     *            The {@link HantoPiece} that was placed.
+     * @param dest
+     *            The destination {@link HantoCoordinate}.
+     * @return true if valid, false otherwise
+     * @throws HantoException
+     *             If any of the preconditions are not met before the piece
+     *             placement validation.
+     */
+    protected boolean isValidBeforePiecePlacement(HantoPieceImpl piece, HantoCoordinateImpl dest)
+            throws HantoException {
+        // Check if butterfly has not been placed
+        if (!currentTurn.hasButterflyCoordinate()
+                && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
+            throw new HantoException("Butterfly has not been placed by the "
+                    + (MAX_TURNS_BEFORE_PLACE_BUTTERFLY + 1) + " turn.");
+        }
+
+        // Check if the player has pieces to place of this type
+        if (!currentTurn.canPlacePiece(piece.getType())) {
+            throw new HantoException("Player cannot place any more of the "
+                    + piece.getType().toString() + " piece.");
+        }
+
+        // Get place piece validator from factory
+        final PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
+                .getPlacePieceValidator(id, isFirstMove,
+                        blueTurn.getTurnCount() + redTurn.getTurnCount());
+
+        // Update if is the first move
+        isFirstMove = isFirstMove ? false : false;
+        return validator.canPlacePiece(dest, piece, board);
     }
 
     /**
@@ -313,16 +471,17 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
     /**
      * Moves the piece from a coordinate to another coordinate.
      *
+     * @param piece
+     *            The {@link HantoPiece} to move.
      * @param src
      *            The starting {@link HantoCoordinate}.
      * @param dest
      *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} to move.
      */
-    protected void movePlayerPiece(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece) {
+    protected void movePlayerPiece(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest) {
         board.removePieceAt(src);
 
+        // Store BUTTERFLY
         if (piece.getType().equals(HantoPieceType.BUTTERFLY)) {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
@@ -334,14 +493,15 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * Places the piece at a coordinate. Saves the coordinate to the current
      * player's instance if the coordinate is for a butterfly.
      *
-     * @param dest
-     *            The {@link HantoCoordinate} to place the piece.
      * @param piece
      *            The {@link HantoPiece} to place.
+     * @param dest
+     *            The {@link HantoCoordinate} to place the piece.
      */
-    protected void placePlayerPiece(HantoCoordinate dest, HantoPiece piece) {
+    protected void placePlayerPiece(HantoPiece piece, HantoCoordinate dest) {
         board.placePieceAt(dest, piece);
 
+        // Store BUTTERFLY
         if (piece.getType().equals(HantoPieceType.BUTTERFLY)) {
             currentTurn.setPlayerButterflyCoordinate(new HantoCoordinateImpl(dest));
         }
@@ -357,6 +517,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *             If there was a valid move to make but resignation is called
      */
     protected MoveResult processResignation() throws HantoException {
+        // Try to find a valid action
         HantoValidMove move = hasValidAction(null, null);
         if (move != null) {
             throw new HantoPrematureResignationException();
@@ -379,110 +540,5 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
         } else {
             currentTurn = blueTurn;
         }
-    }
-
-    /**
-     * Validates that the post conditions for a move are met after the move is
-     * made. Calls the move validation class's validation method for validation.
-     *
-     * @param src
-     *            The starting {@link HantoCoordinate}.
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} that was moved.
-     * @param validator
-     *            The {@link MoveValidator} associated with the piece.
-     * @return true if valid, false otherwise
-     */
-    protected boolean validateMovePostConditions(HantoCoordinateImpl src, HantoCoordinateImpl dest,
-            HantoPieceImpl piece, MoveValidator validator) {
-        return validator.isMoveValid(src, dest, piece, board);
-    }
-
-    /**
-     * Validates that the preconditions for a move are met before the move is
-     * made. Checks if the current player has placed a butterfly before
-     * attempting a move, and calls the move validation class's validation
-     * method for validation.
-     *
-     * @param src
-     *            The starting {@link HantoCoordinate}.
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} that was moved.
-     * @param validator
-     *            The {@link MoveValidator} associated with the piece.
-     * @return true if valid, false otherwise
-     * @throws HantoException
-     *             If any of the preconditions are not met before the move
-     *             validation.
-     */
-    protected boolean validateMovePreconditions(HantoCoordinateImpl src, HantoCoordinateImpl dest,
-            HantoPieceImpl piece, MoveValidator validator) throws HantoException {
-        // Cannot move without having placed the butterfly
-        if (!currentTurn.hasButterflyCoordinate()) {
-            throw new HantoException("Player has not placed the butterfly on the board yet.");
-        }
-
-        return validator.canMove(src, dest, piece, board);
-    }
-
-    /**
-     * Validates that the post conditions for a piece placement are met after
-     * the placement is made. At the base Hanto class, there are no post
-     * conditions to check.
-     *
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} that was placed.
-     * @return true if valid, false otherwise
-     */
-    protected boolean validatePiecePlacementPostConditions(HantoCoordinateImpl dest,
-            HantoPieceImpl piece) {
-        return true; // Nothing needs to happen
-    }
-
-    /**
-     * Validates that the preconditions for a piece placement are met before the
-     * placement is made. Checks if the current player has placed a butterfly
-     * before the latest turn possible, if the player has pieces of the required
-     * type to place, and calls the piece placement validation class's
-     * validation method for validation.
-     *
-     * @param dest
-     *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} that was placed.
-     * @return true if valid, false otherwise
-     * @throws HantoException
-     *             If any of the preconditions are not met before the piece
-     *             placement validation.
-     */
-    protected boolean validatePiecePlacementPreconditions(HantoCoordinateImpl dest,
-            HantoPieceImpl piece) throws HantoException {
-        // Check if butterfly has not been placed
-        if (!currentTurn.hasButterflyCoordinate()
-                && currentTurn.getTurnCount() >= MAX_TURNS_BEFORE_PLACE_BUTTERFLY) {
-            throw new HantoException("Butterfly has not been placed by the "
-                    + (MAX_TURNS_BEFORE_PLACE_BUTTERFLY + 1) + " turn.");
-        }
-
-        // Check if the player has pieces to place of this type
-        if (!currentTurn.canPlacePiece(piece.getType())) {
-            throw new HantoException("Player cannot place any more of the "
-                    + piece.getType().toString() + " piece.");
-        }
-
-        // Get place piece validator from factory
-        final PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
-                .getPlacePieceValidator(id, isFirstMove,
-                        blueTurn.getTurnCount() + redTurn.getTurnCount());
-
-        // Update is first move state
-        isFirstMove = isFirstMove ? false : false;
-        return validator.canPlacePiece(dest, piece, board);
     }
 }

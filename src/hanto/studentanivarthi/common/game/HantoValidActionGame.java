@@ -17,10 +17,17 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
  */
 public interface HantoValidActionGame extends HantoGame {
     /**
-     * Returns a valid move or piece placement action if one exists for the
-     * current player, or null if none exist.
+     * Determines if the current player has a valid action that can be made, and
+     * if so, returns a move object. If not, returns null. A piece and
+     * coordinate can be passed in for the previous action to find an action
+     * different from the last action.
      *
-     * @return a {@link HantoValidMove} if it exists, null otherwise
+     * @param previousPieceType
+     *            The {@link HantoPieceType} type in the previous action.
+     * @param previousCoordinate
+     *            The {@link HantoCoordinate} in the previous action.
+     * @return a {@link HantoValidMove}, or null if no action is found
      */
-    HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate);
+    HantoValidMove hasValidAction(HantoPieceType previousPieceType,
+            HantoCoordinate previousCoordinate);
 }
