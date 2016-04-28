@@ -35,6 +35,18 @@ public class HantoValidMove {
     }
 
     /**
+     * Creates a HantoValidMove instance from the other instance.
+     *
+     * @param move
+     *            The other {@link HantoValidMove.
+     */
+    public HantoValidMove(HantoValidMove move) {
+        pieceType = move.getPieceType();
+        source = move.getSource();
+        destination = move.getDestination();
+    }
+
+    /**
      * Returns the piece type.
      *
      * @return a {@link HantoPieceType}
@@ -59,6 +71,56 @@ public class HantoValidMove {
      */
     public HantoCoordinate getDestination() {
         return destination;
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (destination == null ? 0 : destination.hashCode());
+        result = prime * result + (pieceType == null ? 0 : pieceType.hashCode());
+        result = prime * result + (source == null ? 0 : source.hashCode());
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        HantoValidMove other = (HantoValidMove) obj;
+
+        if (destination == null) {
+            if (other.destination != null) {
+                return false;
+            }
+        } else if (!destination.equals(other.destination)) {
+            return false;
+        }
+        if (pieceType != other.pieceType) {
+            return false;
+        }
+        if (source == null) {
+            if (other.source != null) {
+                return false;
+            }
+        } else if (!source.equals(other.source)) {
+            return false;
+        }
+        return true;
     }
 
     /**
