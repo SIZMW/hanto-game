@@ -20,12 +20,12 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
     private final HantoCoordinate ORIGIN = new HantoCoordinateImpl(0, 0);
 
     /**
-     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {
+    public boolean canPlacePiece(HantoPiece piece, HantoCoordinate dest, HantoGameBoard board) {
         return isCoordinateOrigin(new HantoCoordinateImpl(dest));
     }
 
@@ -43,11 +43,12 @@ public class FirstTurnPlacePieceValidator implements PlacePieceValidator {
     }
 
     /**
-     * Returns whether the specified coordinate is the origin or not.
+     * Returns whether the specified coordinate is the origin on the board or
+     * not.
      *
      * @param coordinate
-     *            The {@link HantoCoordiante} to check.
-     * @return true if origin, false otherwise
+     *            The coordinate to verify against the origin.
+     * @return true if it is the origin, false otherwise
      */
     private boolean isCoordinateOrigin(HantoCoordinate coordinate) {
         return coordinate.equals(ORIGIN);

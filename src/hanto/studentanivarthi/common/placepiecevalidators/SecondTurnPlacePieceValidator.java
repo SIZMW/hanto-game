@@ -22,12 +22,12 @@ public class SecondTurnPlacePieceValidator implements PlacePieceValidator {
     private final HantoCoordinateImpl ORIGIN = new HantoCoordinateImpl(0, 0);
 
     /**
-     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {
+    public boolean canPlacePiece(HantoPiece piece, HantoCoordinate dest, HantoGameBoard board) {
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Piece already in that spot

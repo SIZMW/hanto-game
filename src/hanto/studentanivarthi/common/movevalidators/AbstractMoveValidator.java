@@ -12,7 +12,7 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * This class defines the commonality between different versions of
- * {@link MoveValidator}s and methods that are shared among the various
+ * {@link MoveValidator} and methods that are shared among the various
  * implementations.
  *
  * @author Aditya Nivarthi
@@ -31,12 +31,12 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMove(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+    public boolean canMove(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest,
             HantoGameBoard board) {
         final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
@@ -73,23 +73,23 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#canMoveAtAll(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public HantoValidMove canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+    public HantoValidMove canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
         return null;
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.MoveValidator#isMoveValid(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean isMoveValid(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+    public boolean isMoveValid(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest,
             HantoGameBoard board) {
         return board.arePiecesContiguous();
     }
@@ -115,7 +115,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
         HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Check superclass if can move
-        if (!canMove(srcCoordImpl, destCoordImpl, piece, board)) {
+        if (!canMove(piece, srcCoordImpl, destCoordImpl, board)) {
             return false;
         }
 
@@ -125,7 +125,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
         boardCopy.placePieceAt(removedPiece, destCoordImpl);
 
         // Check post conditions of simulating move
-        return isMoveValid(srcCoordImpl, destCoordImpl, removedPiece, boardCopy);
+        return isMoveValid(removedPiece, srcCoordImpl, destCoordImpl, boardCopy);
     }
 
     /**

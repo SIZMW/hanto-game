@@ -29,7 +29,7 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * This class defines the commonality between different versions of
- * {@link HantoGame}s and methods that are shared among the various
+ * {@link HantoGame} and methods that are shared among the various
  * implementations.
  *
  * @author Aditya Nivarthi
@@ -160,9 +160,9 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param pieceImpl
      *            The {@link HantoPieceImpl} to place.
      * @param src
-     *            The {@link HantoCoordinate} to move from.
+     *            The starting {@link HantoCoordinate}.
      * @param destCoordImpl
-     *            The {@link HantoCoordinateImpl} to move to.
+     *            The destination {@link HantoCoordinateImpl}.
      * @throws HantoException
      *             If the preconditions or post conditions of the move are
      *             invalid
@@ -199,6 +199,8 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param pieceImpl
      *            The {@link HantoPieceImpl} to place. The
      *            {@link HantoCoordinateImpl} to move to.
+     * @param destCoordImpl
+     *            The destination {@link HantoCoordinateImpl}.
      * @throws HantoException
      *             If the preconditions or post conditions of the piece
      *             placement are invalid
@@ -290,7 +292,8 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param previousPieceType
      *            The {@link HantoPieceType} type in the previous action.
      * @param previousCoordinate
-     *            The {@link HantoCoordinate} in the previous action.
+     *            The destination {@link HantoCoordinate} in the previous
+     *            action.
      * @return a {@link HantoValidMove}, or null if no action is found
      */
     protected HantoValidMove hasValidMove(HantoPieceType previousPieceType,
@@ -308,7 +311,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
                     piece.getType());
 
-            HantoValidMove move = validator.canMoveAtAll(e, piece, board);
+            HantoValidMove move = validator.canMoveAtAll(piece, e, board);
 
             // Store the move using the previous piece
             if (!isPreviousNull && piece.getType().equals(previousPieceType)
@@ -361,19 +364,19 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * Validates that the post conditions for a move are met after the move is
      * made. Calls the move validation class's validation method for validation.
      *
+     * @param piece
+     *            The {@link HantoPiece} that was moved.
      * @param src
      *            The starting {@link HantoCoordinate}.
      * @param dest
      *            The destination {@link HantoCoordinate}.
-     * @param piece
-     *            The {@link HantoPiece} that was moved.
      * @param validator
      *            The {@link MoveValidator} associated with the piece.
      * @return true if valid, false otherwise
      */
     protected boolean isValidAfterMove(HantoPieceImpl piece, HantoCoordinateImpl src,
             HantoCoordinateImpl dest, MoveValidator validator) {
-        return validator.isMoveValid(src, dest, piece, board);
+        return validator.isMoveValid(piece, src, dest, board);
     }
 
     /**
@@ -417,7 +420,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             throw new HantoException("Player has not placed the butterfly on the board yet.");
         }
 
-        return validator.canMove(src, dest, piece, board);
+        return validator.canMove(piece, src, dest, board);
     }
 
     /**
@@ -458,7 +461,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
         // Update if is the first move
         isFirstMove = isFirstMove ? false : false;
-        return validator.canPlacePiece(dest, piece, board);
+        return validator.canPlacePiece(piece, dest, board);
     }
 
     /**
@@ -496,7 +499,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param dest
-     *            The {@link HantoCoordinate} to place the piece.
+     *            The destination {@link HantoCoordinate}.
      */
     protected void placePlayerPiece(HantoPiece piece, HantoCoordinate dest) {
         board.placePieceAt(piece, dest);

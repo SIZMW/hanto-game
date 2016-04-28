@@ -1,6 +1,7 @@
 /**
  * This class was created for the Hanto game implementation for CS 4233.
  */
+
 package hanto.studentanivarthi.gamma;
 
 import hanto.common.HantoCoordinate;

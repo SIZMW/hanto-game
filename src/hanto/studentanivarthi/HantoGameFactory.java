@@ -1,10 +1,6 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
 
 package hanto.studentanivarthi;
 
@@ -18,36 +14,36 @@ import hanto.studentanivarthi.epsilon.EpsilonHantoGame;
 import hanto.studentanivarthi.gamma.GammaHantoGame;
 
 /**
- * This is a singleton class that provides a factory to create an instance of
- * any version of a Hanto game.
+ * The HantoGameFactory class is a singleton class that creates
+ * {@link HantoGame} instances based on the game ID and player color.
  *
- * @author gpollice
- * @version Feb 5, 2013
+ * @author Aditya Nivarthi
  */
 public class HantoGameFactory {
     private static final HantoGameFactory instance = new HantoGameFactory();
 
     /**
-     * @return the instance
+     * Returns the instance of the HantoGameFactory.
+     *
+     * @return a HantoGameFactory
      */
     public static HantoGameFactory getInstance() {
         return instance;
     }
 
     /**
-     * Default private descriptor.
+     * Creates a HantoGameFactory instance.
      */
     private HantoGameFactory() {
-        // Empty, but the private constructor is necessary for the singleton.
     }
 
     /**
-     * Create the specified Hanto game version with the Blue player moving
+     * Creates the specified Hanto game version with the BLUE player moving
      * first.
      *
      * @param gameId
-     *            the version desired.
-     * @return the game instance
+     *            The {@link HantoGameID} ID.
+     * @return a {@link HantoGame}
      */
     public HantoGame makeHantoGame(HantoGameID gameId) {
         return makeHantoGame(gameId, HantoPlayerColor.BLUE);
@@ -57,10 +53,10 @@ public class HantoGameFactory {
      * Factory method that returns the appropriately configured Hanto game.
      *
      * @param gameId
-     *            the version desired.
+     *            The {@link HantoGameID} ID.
      * @param movesFirst
-     *            the player color that moves first
-     * @return the game instance
+     *            The {@link HantoPlayerColor} of the player who moves first.
+     * @return a {@link HantoGame}
      */
     public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
         HantoGame game = null;

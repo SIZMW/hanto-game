@@ -21,12 +21,12 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
  */
 public class StandardPlacePieceValidator implements PlacePieceValidator {
     /**
-     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator#canPlacePiece(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board) {
+    public boolean canPlacePiece(HantoPiece piece, HantoCoordinate dest, HantoGameBoard board) {
         final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
         final HantoPieceImpl pieceImpl = new HantoPieceImpl(piece);
 
@@ -68,7 +68,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
             // Find valid empty coordinate in surroundings
             for (HantoCoordinate s : surroundings) {
                 if (!board.hasPieceAt(s)) {
-                    if (canPlacePiece(s, piece, board)) {
+                    if (canPlacePiece(piece, s, board)) {
                         return new HantoValidMove(piece.getType(), null, s);
                     }
                 }

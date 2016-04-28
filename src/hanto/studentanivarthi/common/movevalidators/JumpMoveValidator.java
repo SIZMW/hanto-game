@@ -32,15 +32,15 @@ public class JumpMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+    public boolean canMove(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest,
             HantoGameBoard board) {
         // Get superclass return value
-        boolean canMove = super.canMove(src, dest, piece, board);
+        boolean canMove = super.canMove(piece, src, dest, board);
 
         // Short circuit
         if (!canMove) {
@@ -79,12 +79,12 @@ public class JumpMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public HantoValidMove canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+    public HantoValidMove canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
         HantoCoordinate coord = null;
 

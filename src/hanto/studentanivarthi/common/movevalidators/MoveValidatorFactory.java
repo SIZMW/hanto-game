@@ -13,7 +13,7 @@ import hanto.studentanivarthi.gamma.GammaHantoGame;
 
 /**
  * The MoveValidatorFactory class is a singleton class that creates
- * {@link MoveValidator}s based on the piece type that is being moved.
+ * {@link MoveValidator} instances based on the piece type that is being moved.
  *
  * @author Aditya Nivarthi
  */

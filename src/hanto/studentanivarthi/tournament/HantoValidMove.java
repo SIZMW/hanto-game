@@ -35,7 +35,7 @@ public class HantoValidMove {
     }
 
     /**
-     * Creates a HantoValidMove instance from the other instance.
+     * Creates a HantoValidMove instance from an other instance.
      *
      * @param move
      *            The other {@link HantoValidMove.
@@ -44,46 +44,6 @@ public class HantoValidMove {
         pieceType = move.getPieceType();
         source = move.getSource();
         destination = move.getDestination();
-    }
-
-    /**
-     * Returns the piece type.
-     *
-     * @return a {@link HantoPieceType}
-     */
-    public HantoPieceType getPieceType() {
-        return pieceType;
-    }
-
-    /**
-     * Returns the source coordinate.
-     *
-     * @return a {@link HantoCoordinate}
-     */
-    public HantoCoordinate getSource() {
-        return source;
-    }
-
-    /**
-     * Returns the destination coordinate.
-     *
-     * @return a {@link HantoCoordinate}
-     */
-    public HantoCoordinate getDestination() {
-        return destination;
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (destination == null ? 0 : destination.hashCode());
-        result = prime * result + (pieceType == null ? 0 : pieceType.hashCode());
-        result = prime * result + (source == null ? 0 : source.hashCode());
-        return result;
     }
 
     /**
@@ -121,6 +81,46 @@ public class HantoValidMove {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns the destination coordinate.
+     *
+     * @return a {@link HantoCoordinate}
+     */
+    public HantoCoordinate getDestination() {
+        return destination;
+    }
+
+    /**
+     * Returns the piece type.
+     *
+     * @return a {@link HantoPieceType}
+     */
+    public HantoPieceType getPieceType() {
+        return pieceType;
+    }
+
+    /**
+     * Returns the source coordinate.
+     *
+     * @return a {@link HantoCoordinate}
+     */
+    public HantoCoordinate getSource() {
+        return source;
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (destination == null ? 0 : destination.hashCode());
+        result = prime * result + (pieceType == null ? 0 : pieceType.hashCode());
+        result = prime * result + (source == null ? 0 : source.hashCode());
+        return result;
     }
 
     /**

@@ -9,7 +9,8 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
 /**
- * Implementation of the {@link HantoPiece}.
+ * The HantoPieceImpl class is an implementation of the {@link HantoPiece}
+ * interface for the Hanto game.
  *
  * @author Aditya Nivarthi
  */
@@ -18,10 +19,10 @@ public class HantoPieceImpl implements HantoPiece {
     private final HantoPieceType type;
 
     /**
-     * Copy constructor.
+     * Creates a HantoPieceImpl instance from another {@link HantoPiece}.
      *
      * @param piece
-     *            The {@link HantoPiece} to copy from.
+     *            The other {@link HantoPiece}.
      */
     public HantoPieceImpl(HantoPiece piece) {
         color = piece.getColor();
@@ -62,6 +63,6 @@ public class HantoPieceImpl implements HantoPiece {
      */
     @Override
     public String toString() {
-        return "HantoPieceImpl [color=" + color + ", type=" + type + "]";
+        return "HantoPieceImpl [color = " + color + ", type = " + type + "]";
     }
 }

@@ -582,7 +582,7 @@ public class DeltaHantoTest {
 
         // Get the printable board
         assertEquals(
-                "HantoCoordinateImpl [x = 0, y = 0]: HantoPieceImpl [color=BLUE, type=Butterfly]\n",
+                "HantoCoordinateImpl [x = 0, y = 0]: HantoPieceImpl [color = BLUE, type = Butterfly]\n",
                 game.getPrintableBoard());
     }
 

@@ -10,7 +10,8 @@
 
 package hanto.tournament;
 
-import hanto.common.*;
+import hanto.common.HantoCoordinate;
+import hanto.common.HantoPieceType;
 
 /**
  * This class is a data structure that records the move by a

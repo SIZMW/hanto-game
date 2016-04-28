@@ -25,7 +25,8 @@ public interface HantoValidActionGame extends HantoGame {
      * @param previousPieceType
      *            The {@link HantoPieceType} type in the previous action.
      * @param previousCoordinate
-     *            The {@link HantoCoordinate} in the previous action.
+     *            The destination {@link HantoCoordinate} in the previous
+     *            action.
      * @return a {@link HantoValidMove}, or null if no action is found
      */
     HantoValidMove hasValidAction(HantoPieceType previousPieceType,

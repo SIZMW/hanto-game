@@ -10,7 +10,8 @@
 
 package hanto.tournament;
 
-import hanto.common.*;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPlayerColor;
 
 /**
  * <p>

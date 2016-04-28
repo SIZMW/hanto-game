@@ -19,16 +19,16 @@ public interface PlacePieceValidator {
     /**
      * Determines if the piece can be placed at the specified coordinate given
      * the current board.
-     *
-     * @param dest
-     *            The {@link HantoCoordinate} to place the piece at.
+     * 
      * @param piece
      *            The {@link HantoPiece} to place.
+     * @param dest
+     *            The {@link HantoCoordinate} to place the piece at.
      * @param board
      *            The current game {@link HantoGameBoard}.
      * @return true if it can be placed, false otherwise
      */
-    boolean canPlacePiece(HantoCoordinate dest, HantoPiece piece, HantoGameBoard board);
+    boolean canPlacePiece(HantoPiece piece, HantoCoordinate dest, HantoGameBoard board);
 
     /**
      * Determines if the piece can be placed at all on the board.

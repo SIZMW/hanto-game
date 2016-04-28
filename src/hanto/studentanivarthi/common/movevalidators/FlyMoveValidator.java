@@ -31,23 +31,12 @@ public class FlyMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
-            HantoGameBoard board) {
-        return super.canMove(src, dest, piece, board);
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMoveAtAll(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoPiece,
-     *      hanto.studentanivarthi.common.board.HantoGameBoard)
-     */
-    @Override
-    public HantoValidMove canMoveAtAll(HantoCoordinate coordinate, HantoPiece piece,
+    public HantoValidMove canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
         int checkDistance = isInfiniteDistance() ? Integer.MAX_VALUE : distance;
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);

@@ -29,7 +29,8 @@ public class DeltaHantoGame extends AbstractHantoGame {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidMove()
+     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#hasValidAction(hanto.common.HantoPieceType,
+     *      hanto.common.HantoCoordinate)
      */
     @Override
     public HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate) {

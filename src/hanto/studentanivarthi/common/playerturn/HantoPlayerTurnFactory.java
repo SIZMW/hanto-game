@@ -9,7 +9,7 @@ import hanto.common.HantoPlayerColor;
 
 /**
  * The HantoPlayerTurnFactory class is a singleton class that creates
- * {@link HantoPlayerTurn}s based on the game ID and player color.
+ * {@link HantoPlayerTurn} instances based on the game ID and player color.
  *
  * @author Aditya Nivarthi
  */

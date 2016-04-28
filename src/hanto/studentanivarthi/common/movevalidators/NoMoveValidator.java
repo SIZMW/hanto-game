@@ -26,12 +26,12 @@ public class NoMoveValidator extends AbstractMoveValidator {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoCoordinate,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoPiece,
+     * @see hanto.studentanivarthi.common.movevalidators.AbstractMoveValidator#canMove(hanto.common.HantoPiece,
+     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate,
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public boolean canMove(HantoCoordinate src, HantoCoordinate dest, HantoPiece piece,
+    public boolean canMove(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest,
             HantoGameBoard board) {
         return false;
     }
