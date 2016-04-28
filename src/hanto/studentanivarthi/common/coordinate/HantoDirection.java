@@ -12,57 +12,6 @@ package hanto.studentanivarthi.common.coordinate;
 public enum HantoDirection {
     N(0, 1), NE(1, 0), SE(1, -1), S(0, -1), SW(-1, 0), NW(-1, 1), NONE(0, 0);
 
-    /**
-     * Returns the direction from the first set of coordinates (x, y) to the
-     * second set of coordinates (x, y).
-     *
-     * @param x1
-     *            The X coordinate of the first coordinate.
-     * @param y1
-     *            The Y coordinate of the first coordinate.
-     * @param x2
-     *            The X coordinate of the second coordinate.
-     * @param y2
-     *            The Y coordinate of the second coordinate.
-     * @return a {@link HantoDirection}
-     */
-    public static HantoDirection getDirectionTo(int x1, int y1, int x2, int y2) {
-        HantoCoordinateImpl one = new HantoCoordinateImpl(x1, y1);
-        HantoCoordinateImpl two = new HantoCoordinateImpl(x2, y2);
-        int distance = one.getDistanceTo(two);
-
-        int srcx = x1;
-        int srcy = y1;
-
-        // Iterate over each direction
-        for (HantoDirection e : HantoDirection.values()) {
-            int i = 0;
-
-            // While we have not incremented from the source to the destination
-            while (srcx != x2 || srcy != y2) {
-                srcx += e.getX();
-                srcy += e.getY();
-
-                // Short circuit if we have passed the larger coordinate
-                if (i > distance) {// (dx > dy ? dx : dy)) {
-                    break;
-                }
-                i++;
-            }
-
-            // If we have reached the destination
-            if (srcx == x2 && srcy == y2) {
-                return e;
-            }
-
-            // Reset
-            srcx = x1;
-            srcy = y1;
-        }
-
-        return NONE;
-    }
-
     private int x;
     private int y;
 

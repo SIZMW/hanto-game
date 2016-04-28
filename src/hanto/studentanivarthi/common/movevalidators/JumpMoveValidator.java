@@ -47,11 +47,11 @@ public class JumpMoveValidator extends AbstractMoveValidator {
             return false;
         }
 
+        HantoCoordinateImpl srcImpl = new HantoCoordinateImpl(src);
         HantoDirection direction;
 
         // If the direction to the destination is a valid one
-        if ((direction = HantoDirection.getDirectionTo(src.getX(), src.getY(), dest.getX(),
-                dest.getY())).equals(HantoDirection.NONE)) {
+        if ((direction = srcImpl.getDirectionTo(dest)).equals(HantoDirection.NONE)) {
             return false;
         }
 

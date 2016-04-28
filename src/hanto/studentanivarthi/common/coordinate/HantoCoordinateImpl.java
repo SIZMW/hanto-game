@@ -12,20 +12,20 @@ import hanto.common.HantoCoordinate;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
- * The implementation for my version of Hanto.
+ * The HantoCoordinateImpl class is an implementation of the
+ * {@link HantoCoordinate} interface for the Hanto game.
  *
- * @version Mar 2, 2016
+ * @author Aditya Nivarthi
  */
 public class HantoCoordinateImpl implements HantoCoordinate {
     private final int x, y;
 
     /**
-     * Copy constructor that creates an instance of HantoCoordinateImpl from an
-     * object that implements HantoCoordinate.
+     * Creates a HantoCoordinateImpl instance from another
+     * {@link HantoCoordinate}.
      *
      * @param coordinate
-     *            an object that implements the {@link HantoCoordinate}
-     *            interface.
+     *            The other {@link HantoCoordinate}.
      */
     public HantoCoordinateImpl(HantoCoordinate coordinate) {
         this(coordinate.getX(), coordinate.getY());
@@ -35,16 +35,15 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * Creates a HantoCoordinateImpl instance with the specified x and y.
      *
      * @param x
-     *            the x-coordinate
+     *            The x coordinate.
      * @param y
-     *            the y-coordinate
+     *            The y coordinate.
      */
     public HantoCoordinateImpl(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    // TODO make getNextCoordinateInDirection
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -136,11 +135,57 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
+     * Returns the direction from this coordinate to the other coordinate.
+     *
+     * @param coordinate
+     *            The {@link HantoCoordinate} to get the direction to.
+     * @return a {@link HantoDirection}
+     */
+    public HantoDirection getDirectionTo(HantoCoordinate coordinate) {
+        int distance = getDistanceTo(coordinate);
+        int starterX = getX();
+        int starterY = getY();
+
+        // Iterate through all directions
+        for (HantoDirection direction : HantoDirection.values()) {
+            int totalDistance = 0;
+
+            // While we have not reached either the x or y coordinate of the
+            // other coordinate
+            while (starterX != coordinate.getX() || starterY != coordinate.getY()) {
+                starterX += direction.getX();
+                starterY += direction.getY();
+
+                // If we have traveled farther than the coordinate
+                if (totalDistance > distance) {
+                    break;
+                }
+
+                totalDistance++;
+            }
+
+            // If we reached the coordinate
+            if (starterX == coordinate.getX() && starterY == coordinate.getY()) {
+                return direction;
+            }
+
+            // Reset
+            starterX = getX();
+            starterY = getY();
+        }
+
+        return HantoDirection.NONE;
+    }
+
+    /**
      * Returns the distance between this coordinate and another coordinate.
      *
      * @see <a href=
      *      "http://keekerdc.com/2011/03/hexagon-grids-coordinate-systems-and-distance-calculations/">
      *      KeekerDC </a>
+     * @see <a href=
+     *      "https://github.com/dantrue25/Hanto/blob/master/src/hanto/studentdbtrue/common/HantoCoordinateImpl.java">
+     *      GitHub Hanto </a>
      * @param coordinate
      *            The {@link HantoCoordinate} to get the distance to.
      * @return an integer
