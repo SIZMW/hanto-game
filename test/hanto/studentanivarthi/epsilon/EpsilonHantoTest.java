@@ -29,7 +29,7 @@ import hanto.studentanivarthi.common.game.HantoValidActionGame;
 import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
- * Tests for DeltaHantoGame.
+ * Tests for EpsilonHantoGame.
  *
  * @author Aditya Nivarthi
  */

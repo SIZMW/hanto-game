@@ -38,7 +38,6 @@ public class HantoPlayer implements HantoGamePlayer {
                         opponentsMove.getTo());
             } catch (HantoException e) {
                 System.err.println("ANIVARTHI: Opponent move failed.");
-                e.printStackTrace();
             }
         }
 
@@ -56,7 +55,6 @@ public class HantoPlayer implements HantoGamePlayer {
                         move.getDestination());
             } catch (HantoException e) {
                 System.err.println("ANIVARTHI: My move failed.");
-                e.printStackTrace();
             }
         }
 
