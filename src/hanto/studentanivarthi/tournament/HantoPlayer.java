@@ -32,13 +32,14 @@ public class HantoPlayer implements HantoGamePlayer {
      */
     @Override
     public void startGame(HantoGameID version, HantoPlayerColor myColor, boolean doIMoveFirst) {
-        System.out.println("startGame");
+        System.out.println("ANIVARTHI Start Game: " + myColor.name() + " First: " + doIMoveFirst);
         amIFirstMove = doIMoveFirst;
 
         HantoPlayerColor starterColor = doIMoveFirst ? myColor
                 : myColor.equals(HantoPlayerColor.BLUE) ? HantoPlayerColor.RED
                         : HantoPlayerColor.BLUE;
-        HantoGameFactory.getInstance().makeHantoGame(version, starterColor);
+        game = (HantoValidActionGame) HantoGameFactory.getInstance().makeHantoGame(version,
+                starterColor);
     }
 
     /**
@@ -52,8 +53,18 @@ public class HantoPlayer implements HantoGamePlayer {
                 game.makeMove(opponentsMove.getPiece(), opponentsMove.getFrom(),
                         opponentsMove.getTo());
             } catch (HantoException e) {
-                System.out.println("Opponent move failed.");
+                System.out.println("ANIVARTHI Opponent move failed.");
+                System.out.println(opponentsMove.getPiece() + " " + opponentsMove.getFrom() + " "
+                        + opponentsMove.getTo());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                System.out.println(game.getPrintableBoard());
                 e.printStackTrace();
+                System.exit(1);
             }
         }
 
