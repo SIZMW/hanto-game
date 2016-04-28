@@ -2129,13 +2129,14 @@ public class EpsilonHantoTest {
 
     /**
      * Test resigning when there is not any piece placement positions left.
-     * Resignation fails since the red player can still move, but the piece
-     * placement validation will return false.
+     * Resignation will be allowed because the red player cannot move the
+     * butterfly any more since there is not enough walking space, and cannot
+     * place any pieces since it will be next to an opponent's piece.
      *
      * @throws HantoException
-     *             Since the player still has a valid move.
+     *             If the move fails
      */
-    @Test(expected = HantoException.class) // 62
+    @Test // 62
     public void resignFailsWithNoPiecePlacementsLeft() throws HantoException {
         // Turn 1
         MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null, makeCoordinate(0, 0));
@@ -2233,11 +2234,7 @@ public class EpsilonHantoTest {
 
         // Turn however many
         for (int i = 0; i < 10; i++) {
-            System.out.println("Turn " + i);
-            System.out.println(game.getPrintableBoard());
             HantoValidMove move = ((HantoValidActionGame) game).hasValidAction();
-
-            System.out.println("\n" + move);
             mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
             assertEquals(OK, mr);
 
