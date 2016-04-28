@@ -1,12 +1,6 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html Copyright
- * ©2015 Gary F. Pollice
- *******************************************************************************/
-
+/**
+ * This class was created for the Hanto game implementation for CS 4233.
+ */
 package hanto.studentanivarthi.alpha;
 
 import static hanto.common.HantoPieceType.BUTTERFLY;
@@ -25,9 +19,9 @@ import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
 
 /**
- * The implementation of Alpha Hanto.
+ * The implementation of Alpha Hanto, based on the {@link HantoGame} interface.
  *
- * @version Mar 2, 2016
+ * @author Aditya Nivarthi
  */
 public class AlphaHantoGame implements HantoGame {
     private boolean firstMove = true;
@@ -65,19 +59,19 @@ public class AlphaHantoGame implements HantoGame {
             throw new HantoException("You cannot move after the game is finished");
         }
         if (pieceType != BUTTERFLY) {
-            throw new HantoException("Only Butterflies are valid in Alpha Hanto");
+            throw new HantoException("Only BUTTERFLY pieces are valid in Alpha Hanto");
         }
 
         final HantoCoordinateImpl to = new HantoCoordinateImpl(destination);
 
         if (firstMove) {
             if (to.getX() != 0 || to.getY() != 0) {
-                throw new HantoException("Blue did not move Butterfly to origin");
+                throw new HantoException("BLUE did not move BUTTERFLY to origin");
             }
             blueButterflyHex = to;
         } else {
-            if (!hexIsValidForRed(to)) {
-                throw new HantoException("Red cannot place a piece in that hex");
+            if (!isCoordinateValidForRed(to)) {
+                throw new HantoException("RED cannot place a piece in that coordinate");
             }
             redButterflyHex = to;
             gameOver = true;
@@ -89,13 +83,13 @@ public class AlphaHantoGame implements HantoGame {
     }
 
     /**
-     * Check to make sure that the hex is valid for the Red player
+     * Returns whether the coordinate is valid for RED.
      *
      * @param coordinate
-     *            the coordinate to check
-     * @return true if the coordinate is valid for Red
+     *            The {@link HantoCoordinateImpl} to check.
+     * @return true if the coordinate is valid for RED, false otherwise
      */
-    private boolean hexIsValidForRed(HantoCoordinateImpl coordinate) {
+    protected boolean isCoordinateValidForRed(HantoCoordinateImpl coordinate) {
         return coordinate.equals(new HantoCoordinateImpl(0, 1))
                 || coordinate.equals(new HantoCoordinateImpl(1, 0))
                 || coordinate.equals(new HantoCoordinateImpl(1, -1))

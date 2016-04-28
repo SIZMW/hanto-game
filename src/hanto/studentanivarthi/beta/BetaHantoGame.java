@@ -23,7 +23,7 @@ public class BetaHantoGame extends AbstractHantoGame {
      * Creates a BetaHantoGame instance.
      *
      * @param movesFirst
-     *            The player to move first.
+     *            The {@link HantoPlayerColor} to move first.
      */
     public BetaHantoGame(HantoPlayerColor movesFirst) {
         super(HantoGameID.BETA_HANTO, movesFirst);
@@ -65,6 +65,7 @@ public class BetaHantoGame extends AbstractHantoGame {
     @Override
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
             HantoCoordinate dest) {
+        // No resignation allowed
         return false;
     }
 }
