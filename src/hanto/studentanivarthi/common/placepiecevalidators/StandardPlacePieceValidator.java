@@ -13,7 +13,7 @@ import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.piece.HantoPieceImpl;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * The implementation of the piece placement validation for any standard move of
@@ -57,7 +57,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
+    public HantoValidAction canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
         // Get all of the same color pieces
         Collection<HantoCoordinate> ownedCoordinates = board
                 .getCoordinatesWithPiecesOfColor(piece.getColor());
@@ -71,7 +71,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
             for (HantoCoordinate s : surroundings) {
                 if (!board.hasPieceAt(s)) {
                     if (canPlacePiece(piece, s, board)) {
-                        return new HantoValidMove(piece.getType(), null, s);
+                        return new HantoValidAction(piece.getType(), null, s);
                     }
                 }
             }

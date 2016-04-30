@@ -26,7 +26,7 @@ import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
 // TODO Comments and formatting
 import hanto.studentanivarthi.common.game.HantoValidActionGame;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * Tests for EpsilonHantoGame.
@@ -2234,7 +2234,7 @@ public class EpsilonHantoTest {
 
         // Turn however many
         for (int i = 0; i < 10; i++) {
-            HantoValidMove move = ((HantoValidActionGame) game).hasValidAction(null, null);
+            HantoValidAction move = ((HantoValidActionGame) game).hasValidAction(null, null);
             mr = game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
             assertEquals(OK, mr);
 

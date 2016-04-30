@@ -9,7 +9,7 @@ package hanto.studentanivarthi.common.game;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
 import hanto.common.HantoPieceType;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * This interface extends the {@link HantoGame} interface to add methods usable
@@ -29,8 +29,8 @@ public interface HantoValidActionGame extends HantoGame {
      * @param previousCoordinate
      *            The destination {@link HantoCoordinate} in the previous
      *            action.
-     * @return a {@link HantoValidMove}, or null if no action is found
+     * @return a {@link HantoValidAction}, or null if no action is found
      */
-    HantoValidMove hasValidAction(HantoPieceType previousPieceType,
+    HantoValidAction hasValidAction(HantoPieceType previousPieceType,
             HantoCoordinate previousCoordinate);
 }

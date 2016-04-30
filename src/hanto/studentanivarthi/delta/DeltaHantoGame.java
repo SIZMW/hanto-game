@@ -11,7 +11,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentanivarthi.common.game.AbstractHantoGame;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * The implementation of Delta Hanto, based on the {@link AbstractHantoGame}
@@ -35,7 +35,7 @@ public class DeltaHantoGame extends AbstractHantoGame {
      *      hanto.common.HantoCoordinate)
      */
     @Override
-    public HantoValidMove hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate) {
+    public HantoValidAction hasValidAction(HantoPieceType pieceType, HantoCoordinate coordinate) {
         return null;
     }
 }

@@ -13,7 +13,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * The implementation of the walk move in Hanto, based on the
@@ -61,7 +61,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public HantoValidMove canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
+    public HantoValidAction canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
         HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
 
@@ -81,7 +81,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
         // Check if there is sliding space to any neighbor
         for (HantoCoordinate e : emptyNeighbors) {
             if (canMove(piece, coordinateImpl, e, board)) {
-                return new HantoValidMove(piece.getType(), coordinate, e);
+                return new HantoValidAction(piece.getType(), coordinate, e);
             }
         }
 

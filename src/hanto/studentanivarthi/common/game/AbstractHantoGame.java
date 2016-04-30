@@ -27,7 +27,7 @@ import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidator;
 import hanto.studentanivarthi.common.placepiecevalidators.PlacePieceValidatorFactory;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurn;
 import hanto.studentanivarthi.common.playerturn.HantoPlayerTurnFactory;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * This class defines the commonality between different versions of
@@ -92,17 +92,17 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *      hanto.common.HantoCoordinate)
      */
     @Override
-    public HantoValidMove hasValidAction(HantoPieceType previousPieceType,
+    public HantoValidAction hasValidAction(HantoPieceType previousPieceType,
             HantoCoordinate previousCoordinate) {
         // Skip piece placement if no more pieces
         if (!currentTurn.isOutOfPieces()) {
-            HantoValidMove placePiece = hasValidPiecePlacement();
+            HantoValidAction placePiece = hasValidPiecePlacement();
             if (placePiece != null) {
                 return placePiece;
             }
         }
 
-        HantoValidMove move = hasValidMove(previousPieceType, previousCoordinate);
+        HantoValidAction move = hasValidMove(previousPieceType, previousCoordinate);
         if (move != null) {
             return move;
         }
@@ -296,13 +296,13 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param previousCoordinate
      *            The destination {@link HantoCoordinate} in the previous
      *            action.
-     * @return a {@link HantoValidMove}, or null if no action is found
+     * @return a {@link HantoValidAction}, or null if no action is found
      */
-    protected HantoValidMove hasValidMove(HantoPieceType previousPieceType,
+    protected HantoValidAction hasValidMove(HantoPieceType previousPieceType,
             HantoCoordinate previousCoordinate) {
         final Collection<HantoCoordinate> coordinates = board
                 .getCoordinatesWithPiecesOfColor(currentTurn.getColor());
-        HantoValidMove reservedMove = null;
+        HantoValidAction reservedMove = null;
 
         // Check if previous is null
         boolean isPreviousNull = previousPieceType == null || previousCoordinate == null;
@@ -313,7 +313,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             MoveValidator validator = MoveValidatorFactory.getInstance().getMoveValidator(id,
                     piece.getType());
 
-            HantoValidMove move = validator.canMoveAtAll(piece, e, board);
+            HantoValidAction move = validator.canMoveAtAll(piece, e, board);
 
             if (move == null) {
                 // If no move is found, keep searching
@@ -321,7 +321,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
                 // Store the move using the previous piece
                 if (!isPreviousNull && piece.getType().equals(previousPieceType)
                         && e.equals(previousCoordinate)) {
-                    reservedMove = new HantoValidMove(move);
+                    reservedMove = new HantoValidAction(move);
                     continue;
                 }
 
@@ -344,16 +344,16 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * Determines if the current player has a valid move that can be made, and
      * if so, returns a move object. If not, returns null.
      *
-     * @return a {@link HantoValidMove}, or null if no action is found
+     * @return a {@link HantoValidAction}, or null if no action is found
      */
-    protected HantoValidMove hasValidPiecePlacement() {
+    protected HantoValidAction hasValidPiecePlacement() {
         for (HantoPieceType piece : HantoPieceType.values()) {
             if (currentTurn.canPlacePiece(piece)) {
                 PlacePieceValidator validator = PlacePieceValidatorFactory.getInstance()
                         .getPlacePieceValidator(id, isFirstMove,
                                 blueTurn.getTurnCount() + redTurn.getTurnCount());
 
-                HantoValidMove placePiece = validator.canPlacePieceAtAll(
+                HantoValidAction placePiece = validator.canPlacePieceAtAll(
                         new HantoPieceImpl(currentTurn.getColor(), piece), board);
 
                 // If placement is found, return
@@ -527,7 +527,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      */
     protected MoveResult processResignation() throws HantoException {
         // Try to find a valid action
-        HantoValidMove move = hasValidAction(null, null);
+        HantoValidAction move = hasValidAction(null, null);
         if (move != null) {
             throw new HantoPrematureResignationException();
         }

@@ -11,7 +11,7 @@ import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 import hanto.studentanivarthi.common.coordinate.HantoDirection;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * The implementation of the jump move in Hanto, based on the
@@ -86,7 +86,7 @@ public class JumpMoveValidator extends AbstractMoveValidator {
      *      hanto.studentanivarthi.common.board.HantoGameBoard)
      */
     @Override
-    public HantoValidMove canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
+    public HantoValidAction canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
         HantoCoordinate coord = null;
 
@@ -99,7 +99,7 @@ public class JumpMoveValidator extends AbstractMoveValidator {
                 // Check if empty and simulate move
                 if (!board.hasPieceAt(coord)
                         && canMoveSimulateDirectMove(coordinate, coord, piece, board)) {
-                    return new HantoValidMove(piece.getType(), coordinate, coord);
+                    return new HantoValidAction(piece.getType(), coordinate, coord);
                 }
             }
         }

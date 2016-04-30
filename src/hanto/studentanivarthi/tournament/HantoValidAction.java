@@ -10,17 +10,18 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 
 /**
- * This class is a container for holding a valid move that the player can make.
+ * The HantoValidAction class is a container for holding a valid move that the
+ * player can make.
  *
  * @author Aditya Nivarthi
  */
-public class HantoValidMove {
+public class HantoValidAction {
     protected HantoPieceType pieceType;
     protected HantoCoordinate source;
     protected HantoCoordinate destination;
 
     /**
-     * Creates a HantoValidMove instance.
+     * Creates a HantoValidAction instance.
      *
      * @param pieceType
      *            The {@link HantoPieceType} of the piece.
@@ -29,7 +30,7 @@ public class HantoValidMove {
      * @param destination
      *            The destination {@link HantoCoordinate}.
      */
-    public HantoValidMove(HantoPieceType pieceType, HantoCoordinate source,
+    public HantoValidAction(HantoPieceType pieceType, HantoCoordinate source,
             HantoCoordinate destination) {
         this.pieceType = pieceType;
         this.source = source;
@@ -37,12 +38,12 @@ public class HantoValidMove {
     }
 
     /**
-     * Creates a HantoValidMove instance from an other instance.
+     * Creates a HantoValidAction instance from an other instance.
      *
      * @param move
-     *            The other {@link HantoValidMove.
+     *            The other {@link HantoValidAction.
      */
-    public HantoValidMove(HantoValidMove move) {
+    public HantoValidAction(HantoValidAction move) {
         pieceType = move.getPieceType();
         source = move.getSource();
         destination = move.getDestination();
@@ -63,7 +64,7 @@ public class HantoValidMove {
             return false;
         }
 
-        HantoValidMove other = (HantoValidMove) obj;
+        HantoValidAction other = (HantoValidAction) obj;
 
         if (destination == null) {
             if (other.destination != null) {

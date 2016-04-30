@@ -9,7 +9,7 @@ package hanto.studentanivarthi.common.placepiecevalidators;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.studentanivarthi.common.board.HantoGameBoard;
-import hanto.studentanivarthi.tournament.HantoValidMove;
+import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
  * The PlacePieceValidator interface defines the methods for piece placement
@@ -39,7 +39,7 @@ public interface PlacePieceValidator {
      *            The {@link HantoPiece} to place.
      * @param board
      *            The current game {@link HantoGameBoard}.
-     * @return a {@link HantoValidMove} if a move exists, null otherwise
+     * @return a {@link HantoValidAction} if a move exists, null otherwise
      */
-    HantoValidMove canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board);
+    HantoValidAction canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board);
 }

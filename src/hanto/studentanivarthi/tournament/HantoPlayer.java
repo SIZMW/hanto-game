@@ -44,7 +44,7 @@ public class HantoPlayer implements HantoGamePlayer {
         }
 
         // Get move to do from game
-        HantoValidMove move = game.hasValidAction(prevPieceType, prevCoordinate);
+        HantoValidAction move = game.hasValidAction(prevPieceType, prevCoordinate);
         if (move != null) {
             try {
                 game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());

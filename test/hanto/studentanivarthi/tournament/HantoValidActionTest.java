@@ -17,19 +17,19 @@ import hanto.common.HantoPieceType;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 
 /**
- * Tests for HantoValidMove.
+ * Tests for HantoValidAction.
  *
  * @author Aditya Nivarthi
  */
-public class HantoValidMoveTest {
-    private HantoValidMove move;
+public class HantoValidActionTest {
+    private HantoValidAction move;
 
     /**
      * Setup.
      */
     @Before
     public void setup() {
-        move = new HantoValidMove(HantoPieceType.BUTTERFLY, new HantoCoordinateImpl(0, 0),
+        move = new HantoValidAction(HantoPieceType.BUTTERFLY, new HantoCoordinateImpl(0, 0),
                 new HantoCoordinateImpl(0, 0));
     }
 
@@ -38,7 +38,7 @@ public class HantoValidMoveTest {
      */
     @Test // 1
     public void testEqualsOnSameObjects() {
-        HantoValidMove move2 = new HantoValidMove(HantoPieceType.BUTTERFLY,
+        HantoValidAction move2 = new HantoValidAction(HantoPieceType.BUTTERFLY,
                 new HantoCoordinateImpl(0, 0), new HantoCoordinateImpl(0, 0));
 
         assertEquals(move, move2);
@@ -49,7 +49,7 @@ public class HantoValidMoveTest {
      */
     @Test // 2
     public void testEqualsOnObjectWithNullFields() {
-        HantoValidMove move2 = new HantoValidMove(null, null, null);
+        HantoValidAction move2 = new HantoValidAction(null, null, null);
 
         assertNotEquals(move, move2);
         assertNotEquals(move2, move);
@@ -60,7 +60,7 @@ public class HantoValidMoveTest {
      */
     @Test // 3
     public void testEqualsOnObjectWithSameReference() {
-        HantoValidMove move2 = move;
+        HantoValidAction move2 = move;
 
         assertEquals(move, move2);
         assertEquals(move2, move);
@@ -81,7 +81,7 @@ public class HantoValidMoveTest {
      */
     @Test // 5
     public void testEqualsDifferentPieceTypes() {
-        HantoValidMove move2 = new HantoValidMove(HantoPieceType.CRAB,
+        HantoValidAction move2 = new HantoValidAction(HantoPieceType.CRAB,
                 new HantoCoordinateImpl(0, 0), new HantoCoordinateImpl(0, 0));
 
         assertNotEquals(move, move2);
@@ -92,7 +92,7 @@ public class HantoValidMoveTest {
      */
     @Test // 6
     public void testEqualsDifferentSources() {
-        HantoValidMove move2 = new HantoValidMove(HantoPieceType.BUTTERFLY,
+        HantoValidAction move2 = new HantoValidAction(HantoPieceType.BUTTERFLY,
                 new HantoCoordinateImpl(1, 0), new HantoCoordinateImpl(0, 0));
 
         assertNotEquals(move, move2);
@@ -103,7 +103,7 @@ public class HantoValidMoveTest {
      */
     @Test // 7
     public void testEqualsDifferentDestinations() {
-        HantoValidMove move2 = new HantoValidMove(HantoPieceType.BUTTERFLY,
+        HantoValidAction move2 = new HantoValidAction(HantoPieceType.BUTTERFLY,
                 new HantoCoordinateImpl(0, 0), new HantoCoordinateImpl(1, 0));
 
         assertNotEquals(move, move2);
@@ -114,7 +114,7 @@ public class HantoValidMoveTest {
      */
     @Test // 8
     public void testEqualsWithNullSource() {
-        HantoValidMove move2 = new HantoValidMove(HantoPieceType.BUTTERFLY, null,
+        HantoValidAction move2 = new HantoValidAction(HantoPieceType.BUTTERFLY, null,
                 new HantoCoordinateImpl(0, 0));
 
         assertNotEquals(move2, move);
@@ -135,7 +135,7 @@ public class HantoValidMoveTest {
      */
     @Test // 10
     public void testHashCodeWithHashMap() {
-        Map<HantoValidMove, Integer> map = new HashMap<>();
+        Map<HantoValidAction, Integer> map = new HashMap<>();
         map.put(move, 1);
 
         assertEquals(map.get(move), new Integer(1));
