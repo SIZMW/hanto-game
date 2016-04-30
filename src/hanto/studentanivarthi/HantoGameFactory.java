@@ -58,7 +58,7 @@ public class HantoGameFactory {
      *            The {@link HantoGameID} ID.
      * @param movesFirst
      *            The {@link HantoPlayerColor} of the player who moves first.
-     * @return a {@link HantoGame}
+     * @return a {@link HantoGame}, or null if the game ID does not match.
      */
     public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
         HantoGame game = null;
@@ -77,6 +77,8 @@ public class HantoGameFactory {
                 break;
             case EPSILON_HANTO:
                 game = new EpsilonHantoGame(movesFirst);
+                break;
+            default:
                 break;
         }
         return game;

@@ -46,7 +46,7 @@ public class MoveValidatorFactory {
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.
-     * @return a {@link MoveValidator}
+     * @return a {@link MoveValidator}, or null if the game ID does not match
      */
     public MoveValidator getMoveValidator(HantoGameID id, HantoPieceType pieceType) {
         MoveValidator validator = null;
@@ -63,6 +63,8 @@ public class MoveValidatorFactory {
             case EPSILON_HANTO:
                 validator = getEpsilonHantoMoveValidator(pieceType);
                 break;
+            default:
+                break;
         }
 
         return validator;
@@ -74,7 +76,7 @@ public class MoveValidatorFactory {
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.
-     * @return a {@link MoveValidator}
+     * @return a {@link MoveValidator}, or null if the piece type does not match
      */
     protected MoveValidator getBetaHantoMoveValidator(HantoPieceType pieceType) {
         MoveValidator validator = null;
@@ -84,6 +86,8 @@ public class MoveValidatorFactory {
                 break;
             case SPARROW:
                 validator = new NoMoveValidator(0);
+                break;
+            default:
                 break;
         }
 
@@ -96,7 +100,7 @@ public class MoveValidatorFactory {
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.
-     * @return a {@link MoveValidator}
+     * @return a {@link MoveValidator}, or null if the piece type does not match
      */
     protected MoveValidator getDeltaHantoMoveValidator(HantoPieceType pieceType) {
         MoveValidator validator = null;
@@ -110,6 +114,8 @@ public class MoveValidatorFactory {
             case CRAB:
                 validator = new WalkMoveValidator(3);
                 break;
+            default:
+                break;
         }
 
         return validator;
@@ -122,7 +128,7 @@ public class MoveValidatorFactory {
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.
-     * @return a {@link MoveValidator}
+     * @return a {@link MoveValidator}, or null if the piece type does not match
      */
     protected MoveValidator getEpsilonHantoMoveValidator(HantoPieceType pieceType) {
         MoveValidator validator = null;
@@ -139,6 +145,8 @@ public class MoveValidatorFactory {
             case HORSE:
                 validator = new JumpMoveValidator(0);
                 break;
+            default:
+                break;
         }
 
         return validator;
@@ -150,7 +158,7 @@ public class MoveValidatorFactory {
      * @param pieceType
      *            The {@link HantoPieceType} to retrieve {@link MoveValidator}s
      *            for.
-     * @return a {@link MoveValidator}
+     * @return a {@link MoveValidator}, or null if the piece type does not match
      */
     protected MoveValidator getGammaHantoMoveValidator(HantoPieceType pieceType) {
         MoveValidator validator = null;
@@ -160,6 +168,8 @@ public class MoveValidatorFactory {
                 break;
             case SPARROW:
                 validator = new WalkMoveValidator(1);
+                break;
+            default:
                 break;
         }
 
