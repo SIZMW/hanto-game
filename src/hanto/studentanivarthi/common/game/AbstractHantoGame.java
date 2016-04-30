@@ -167,7 +167,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *            The destination {@link HantoCoordinateImpl}.
      * @throws HantoException
      *             If the preconditions or post conditions of the move are
-     *             invalid
+     *             invalid.
      */
     protected void doMove(HantoPieceImpl pieceImpl, HantoCoordinate src,
             HantoCoordinateImpl destCoordImpl) throws HantoException {
@@ -205,7 +205,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *            The destination {@link HantoCoordinateImpl}.
      * @throws HantoException
      *             If the preconditions or post conditions of the piece
-     *             placement are invalid
+     *             placement are invalid.
      */
     protected void doPiecePlacement(HantoPieceImpl pieceImpl, HantoCoordinateImpl destCoordImpl)
             throws HantoException {
@@ -523,7 +523,7 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      *
      * @return The result of the game.
      * @throws HantoException
-     *             If there was a valid move to make but resignation is called
+     *             If there was a valid move to make but resignation is called.
      */
     protected MoveResult processResignation() throws HantoException {
         // Try to find a valid action
