@@ -238,13 +238,13 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
 
         // Check if either butterfly is surrounded
         if (blueTurn.hasButterflyCoordinate()) {
-            blueIsSurrounded = new HantoCoordinateImpl(blueTurn.getPlayerButterflyCoordinate())
-                    .isCoordinateSurrounded(board);
+            blueIsSurrounded = board.isCoordinateSurrounded(
+                    new HantoCoordinateImpl(blueTurn.getPlayerButterflyCoordinate()));
         }
 
         if (redTurn.hasButterflyCoordinate()) {
-            redIsSurrounded = new HantoCoordinateImpl(redTurn.getPlayerButterflyCoordinate())
-                    .isCoordinateSurrounded(board);
+            redIsSurrounded = board.isCoordinateSurrounded(
+                    new HantoCoordinateImpl(redTurn.getPlayerButterflyCoordinate()));
         }
 
         // Determine correct result

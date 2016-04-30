@@ -59,4 +59,13 @@ public interface HantoGameBoard extends HantoBoard {
      * @return true if empty, false otherwise
      */
     boolean isBoardEmpty();
+
+    /**
+     * Returns whether the specified coordinate is completely surrounded.
+     *
+     * @param coordinate
+     *            The {@link HantoCoordinate} on the board.
+     * @return true if surrounded completely, false otherwise
+     */
+    boolean isCoordinateSurrounded(HantoCoordinate coordinate);
 }

@@ -37,37 +37,6 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoBoard#isBoardContiguous()
-     */
-    @Override
-    public boolean isBoardContiguous() {
-        final LinkedList<HantoCoordinate> list = new LinkedList<>();
-        final Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
-        final HantoCoordinate starterCoordinate = board.keySet().iterator().next();
-        list.add(starterCoordinate);
-
-        // Try to reach every coordinate in the board using the surroundings of
-        // the previously visited coordinates
-        while (!list.isEmpty()) {
-            final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
-            final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingCoordinates();
-
-            // Search all the surroundings
-            for (HantoCoordinate coord : surroundings) {
-                if (hasPieceAt(coord)) {
-                    if (!visitedCoordinates.contains(coord)) {
-                        visitedCoordinates.add(coord);
-                        list.addLast(coord);
-                    }
-                }
-            }
-        }
-
-        // Make sure we visited all the coordinates that have pieces
-        return visitedCoordinates.size() == getNumberOfPieces();
-    }
-
-    /**
      * @see hanto.studentanivarthi.common.board.HantoGameBoard#copy()
      */
     @Override
@@ -148,11 +117,67 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
+     * @see hanto.studentanivarthi.common.board.HantoBoard#isBoardContiguous()
+     */
+    @Override
+    public boolean isBoardContiguous() {
+        final LinkedList<HantoCoordinate> list = new LinkedList<>();
+        final Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
+        final HantoCoordinate starterCoordinate = board.keySet().iterator().next();
+        list.add(starterCoordinate);
+
+        // Try to reach every coordinate in the board using the surroundings of
+        // the previously visited coordinates
+        while (!list.isEmpty()) {
+            final HantoCoordinateImpl coordinate = new HantoCoordinateImpl(list.removeFirst());
+            final Collection<HantoCoordinate> surroundings = coordinate.getSurroundingCoordinates();
+
+            // Search all the surroundings
+            for (HantoCoordinate coord : surroundings) {
+                if (hasPieceAt(coord)) {
+                    if (!visitedCoordinates.contains(coord)) {
+                        visitedCoordinates.add(coord);
+                        list.addLast(coord);
+                    }
+                }
+            }
+        }
+
+        // Make sure we visited all the coordinates that have pieces
+        return visitedCoordinates.size() == getNumberOfPieces();
+    }
+
+    /**
      * @see hanto.studentanivarthi.common.board.HantoGameBoard#isBoardEmpty()
      */
     @Override
     public boolean isBoardEmpty() {
         return board.isEmpty();
+    }
+
+    /**
+     * @see hanto.studentanivarthi.common.board.HantoBoard#isCoordinateSurrounded(hanto.common.HantoCoordinate)
+     */
+    @Override
+    public boolean isCoordinateSurrounded(HantoCoordinate coordinate) {
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        if (isBoardEmpty()) {
+            return false;
+        }
+
+        final Collection<HantoCoordinate> surroundings = coordinateImpl.getSurroundingCoordinates();
+        boolean hasEmptyAdjacentSpot = false;
+
+        for (HantoCoordinate e : surroundings) {
+            if (hasPieceAt(e)) {
+                hasEmptyAdjacentSpot = false;
+            } else {
+                hasEmptyAdjacentSpot = true;
+                break;
+            }
+        }
+
+        return !hasEmptyAdjacentSpot;
     }
 
     /**

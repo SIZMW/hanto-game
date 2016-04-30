@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 import hanto.common.HantoCoordinate;
-import hanto.studentanivarthi.common.board.HantoGameBoard;
 
 /**
  * The HantoCoordinateImpl class is an implementation of the
@@ -259,33 +258,6 @@ public class HantoCoordinateImpl implements HantoCoordinate {
         result = prime * result + x;
         result = prime * result + y;
         return result;
-    }
-
-    /**
-     * Returns whether the specified coordinate is completely surrounded.
-     *
-     * @param board
-     *            The game {@link HantoGameBoard} of coordinates.
-     * @return true if surrounded completely, false otherwise
-     */
-    public boolean isCoordinateSurrounded(HantoGameBoard board) {
-        if (board == null || board.isBoardEmpty()) {
-            return false;
-        }
-
-        final Collection<HantoCoordinate> surroundings = getSurroundingCoordinates();
-        boolean hasEmptyAdjacentSpot = false;
-
-        for (HantoCoordinate e : surroundings) {
-            if (board.hasPieceAt(e)) {
-                hasEmptyAdjacentSpot = false;
-            } else {
-                hasEmptyAdjacentSpot = true;
-                break;
-            }
-        }
-
-        return !hasEmptyAdjacentSpot;
     }
 
     /**

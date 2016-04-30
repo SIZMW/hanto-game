@@ -66,7 +66,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
 
         // Completely surrounded
-        if (coordinateImpl.isCoordinateSurrounded(board)) {
+        if (board.isCoordinateSurrounded(coordinateImpl)) {
             return null;
         }
 
