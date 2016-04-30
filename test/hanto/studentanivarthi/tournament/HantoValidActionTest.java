@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.tournament;
 
@@ -17,7 +19,7 @@ import hanto.common.HantoPieceType;
 import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 
 /**
- * Tests for HantoValidAction.
+ * Tests for {@link HantoValidAction}.
  *
  * @author Aditya Nivarthi
  */

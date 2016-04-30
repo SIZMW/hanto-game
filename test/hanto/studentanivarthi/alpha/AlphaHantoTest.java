@@ -1,11 +1,8 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html Copyright
- * ©2015 Gary F. Pollice
- *******************************************************************************/
+/************************************************************************
+ * This class was created for the Hanto game implementation for CS 4233.
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.alpha;
 
@@ -33,9 +30,9 @@ import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
 
 /**
- * Test cases for Alpha Hanto
+ * Test cases for Alpha Hanto.
  *
- * @version Mar 2, 2016
+ * @author Aditya Nivarthi
  */
 public class AlphaHantoTest {
     /**
@@ -89,7 +86,7 @@ public class AlphaHantoTest {
     private HantoGame game;
 
     /**
-     * Setup
+     * Setup.
      */
     @Before
     public void setup() {
@@ -97,7 +94,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests blue making the first move.
+     * Tests blue making the first move with the BUTTERFLY.
      *
      * @throws HantoException
      *             If the move fails.
@@ -108,7 +105,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red making a valid move after blue.
+     * Tests red making a valid move after blue with the BUTTERFLY.
      *
      * @throws HantoException
      *             If the move fails.
@@ -120,7 +117,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests blue making the first move not to the origin.
+     * Tests blue making the first move not to the origin with the BUTTERFLY.
      *
      * @throws HantoException
      *             Since the first move is not to the origin.
@@ -132,10 +129,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests blue trying to place a sparrow as the first move.
+     * Tests blue trying to place a SPARROW as the first move.
      *
      * @throws HantoException
-     *             Since the sparrow is not part of this game type.
+     *             Since the SPARROW is not part of this game type.
      */
     @Test(expected = HantoException.class) // 4
     public void blueTriesToPlaceSparrow() throws HantoException {
@@ -144,10 +141,10 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red trying to place a crab.
+     * Tests red trying to place a CRAB.
      *
      * @throws HantoException
-     *             Since the crab is not part of this game type.
+     *             Since the CRAB is not part of this game type.
      */
     @Test(expected = HantoException.class) // 5
     public void redTriesToPlaceCrab() throws HantoException {
@@ -158,7 +155,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red placing a butterfly not next to another piece.
+     * Tests red placing a BUTTERFLY not next to another piece.
      *
      * @throws HantoException
      *             Since the board is not contiguous.
@@ -172,7 +169,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests red placing a butterfly at the origin.
+     * Tests red placing a BUTTERFLY at the origin.
      *
      * @throws HantoException
      *             Since there is already a piece at the origin.
@@ -186,7 +183,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests if the butterfly for blue is actually at the origin.
+     * Tests if the BUTTERFLY for blue is actually at the origin.
      *
      * @throws HantoException
      *             If the move fails.
@@ -201,7 +198,7 @@ public class AlphaHantoTest {
     }
 
     /**
-     * Tests if the butterfly for red is at the correct location.
+     * Tests if the BUTTERFLY for red is at the correct location.
      *
      * @throws HantoException
      *             If the move fails.

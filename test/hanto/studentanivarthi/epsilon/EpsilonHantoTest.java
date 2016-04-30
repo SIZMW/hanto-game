@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.epsilon;
 
@@ -29,7 +31,7 @@ import hanto.studentanivarthi.common.game.HantoValidActionGame;
 import hanto.studentanivarthi.tournament.HantoValidAction;
 
 /**
- * Tests for EpsilonHantoGame.
+ * Tests for Epsilon Hanto.
  *
  * @author Aditya Nivarthi
  */
@@ -88,7 +90,7 @@ public class EpsilonHantoTest {
      */
     @Before
     public void setup() {
-        // By default, blue moves first.
+        // By default, BLUE moves first.
         game = factory.makeHantoGame(HantoGameID.EPSILON_HANTO);
     }
 
@@ -106,7 +108,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing blue butterfly at the origin as the first move.
+     * Tests placing a BLUE BUTTERFLY at the origin as the first move.
      *
      * @throws HantoException
      *             If the move fails.
@@ -122,7 +124,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing red butterfly next to the blue butterfly which is at the
+     * Tests placing a RED BUTTERFLY next to the BLUE BUTTERFLY which is at the
      * origin.
      *
      * @throws HantoException
@@ -138,7 +140,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing blue butterfly not at the origin.
+     * Tests placing a BLUE BUTTERFLY not at the origin.
      *
      * @throws HantoException
      *             Since the first move is not at the origin.
@@ -150,7 +152,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing red butterfly not next to the blue butterfly, which is at
+     * Tests placing a RED BUTTERFLY not next to the BLUE BUTTERFLY, which is at
      * the origin.
      *
      * @throws HantoException
@@ -165,10 +167,10 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing blue crane in this variation of Hanto.
+     * Tests placing BLUE CRANE in this variation of Hanto.
      *
      * @throws HantoException
-     *             Since the crane is not part of this game type.
+     *             Since the CRANE is not part of this game type.
      */
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCraneAtOrigin() throws HantoException {
@@ -177,10 +179,10 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing a red crane after blue in this variation of Hanto.
+     * Tests placing a RED CRANE after BLUE in this variation of Hanto.
      *
      * @throws HantoException
-     *             Since the crane is not part of this game type.
+     *             Since the CRANE is not part of this game type.
      */
     @Test(expected = HantoException.class) // 6
     public void redPlacesInitialCraneNextToOrigin() throws HantoException {
@@ -191,7 +193,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing two blue sparrows and two red sparrows.
+     * Tests placing two BLUE SPARROWs and two RED SPARROWs.
      *
      * @throws HantoException
      *             If the move fails.
@@ -230,7 +232,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing two red sparrows, a blue butterfly and two blue sparrows.
+     * Tests placing two RED SPARROWs, a BLUE BUTTERFLY and two BLUE SPARROWs.
      *
      * @throws HantoException
      *             If the move fails.
@@ -277,12 +279,12 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing two crabs and one sparrow for both blue and red, and then
-     * another sparrow for blue, which throws an exception since the blue
-     * butterfly was not placed by the fourth turn.
+     * Tests placing two CRABs and one SPARROW for both BLUE and RED, and then
+     * another SPARROW for BLUE, which throws an exception since the BLUE
+     * BUTTERFLY was not placed by the fourth turn.
      *
      * @throws HantoException
-     *             Since the butterfly was not placed by the fourth turn.
+     *             Since the BUTTERFLY was not placed by the fourth turn.
      */
     @Test(expected = HantoException.class) // 9
     public void bluePlacesFourCrabsAndFails() throws HantoException {
@@ -336,12 +338,12 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing a butterfly for blue, two crabs and one sparrow for both
-     * blue and red, and then another sparrow for red, which throws an exception
-     * since the red butterfly was not placed by the fourth turn.
+     * Tests placing a BUTTERFLY for BLUE, two CRABs and one SPARROW for both
+     * BLUE and RED, and then another SPARROW for RED, which throws an exception
+     * since the RED BUTTERFLY was not placed by the fourth turn.
      *
      * @throws HantoException
-     *             Since the butterfly was not placed by the fourth turn.
+     *             Since the BUTTERFLY was not placed by the fourth turn.
      */
     @Test(expected = HantoException.class) // 10
     public void redPlacesFourSparrowsAndFails() throws HantoException {
@@ -403,7 +405,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test the results from the game after both blue and red win by surrounding
+     * Test the results from the game after both BLUE and RED win by surrounding
      * each other.
      *
      * @throws HantoException
@@ -446,19 +448,19 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(2, -2));
         assertEquals(OK, mr);
 
-        // Move blue piece to surround the butterflies
+        // Move BLUE piece to surround the butterflies
         // Turn 6
         mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(-1, 2), makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
-        // Move red piece to surround both the butterflies
+        // Move RED piece to surround both the butterflies
         // Draw game
         mr = game.makeMove(HantoPieceType.CRAB, makeCoordinate(2, -2), makeCoordinate(1, -1));
         assertEquals(MoveResult.DRAW, mr);
     }
 
     /**
-     * Test the results from the game after red wins.
+     * Test the results from the game after RED wins.
      *
      * @throws HantoException
      *             If the move fails.
@@ -490,11 +492,11 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
-        // Move red piece closer to blue butterfly
+        // Move RED piece closer to BLUE BUTTERFLY
         mr = game.makeMove(SPARROW, makeCoordinate(1, 1), makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
-        // Move blue piece closer to blue butterfly
+        // Move BLUE piece closer to BLUE BUTTERFLY
         // Turn 5
         mr = game.makeMove(SPARROW, makeCoordinate(-2, 1), makeCoordinate(-1, 0));
         assertEquals(OK, mr);
@@ -505,7 +507,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test the results from the game after blue wins.
+     * Test the results from the game after BLUE wins.
      *
      * @throws HantoException
      *             If the move fails.
@@ -533,7 +535,7 @@ public class EpsilonHantoTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
         assertEquals(OK, mr);
 
-        // Move blue piece closer to red butterfly
+        // Move BLUE piece closer to RED BUTTERFLY
         // Turn 4
         mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
         assertEquals(OK, mr);
@@ -563,7 +565,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests the print out of the game board after placing one butterfly.
+     * Tests the print out of the game board after placing one BUTTERFLY.
      *
      * @throws HantoException
      *             If the move fails.
@@ -580,8 +582,8 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests placing red butterfly at the origin as the first move. Game is
-     * created with red being the first player.
+     * Tests placing RED BUTTERFLY at the origin as the first move. Game is
+     * created with RED being the first player.
      *
      * @throws HantoException
      *             If the move fails.
@@ -722,8 +724,8 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue player resign from the game at will, only placing a
-     * butterfly.
+     * Test having the BLUE player resign from the game at will, only placing a
+     * BUTTERFLY.
      *
      * @throws HantoException
      *             Since the player had a valid move but resigned anyway.
@@ -742,8 +744,8 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the red player resign from the game at will, only placing a
-     * butterfly.
+     * Test having the RED player resign from the game at will, only placing a
+     * BUTTERFLY.
      *
      * @throws HantoException
      *             Since the player had a valid move but resigned anyway.
@@ -766,8 +768,8 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the red player resign from the game at will, only placing a
-     * crab.
+     * Test having the RED player resign from the game at will, only placing a
+     * CRAB.
      *
      * @throws HantoException
      */
@@ -789,7 +791,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue butterfly walk one space.
+     * Test having the BLUE BUTTERFLY walk one space.
      *
      * @throws HantoException
      *             If the move fails.
@@ -809,7 +811,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue crab walk one space.
+     * Test having the BLUE CRAB walk one space.
      *
      * @throws HantoException
      *             If the move fails.
@@ -840,7 +842,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue butterfly walk one space, but there is not
+     * Test having the BLUE BUTTERFLY walk one space, but there is not
      * sufficient room, so it fails.
      *
      * @throws HantoException
@@ -874,7 +876,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a crab walk to a destination too far away.
+     * Test making a CRAB walk to a destination too far away.
      *
      * @throws HantoException
      *             Since the destination is too far away.
@@ -900,7 +902,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a crab walk to a destination closer than its maximum walking
+     * Test making a CRAB walk to a destination closer than its maximum walking
      * distance. This is the same as walking one space since there is no other
      * distance to test.
      *
@@ -929,7 +931,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a crab walk to a destination that makes the board become not
+     * Test making a CRAB walk to a destination that makes the board become not
      * contiguous.
      *
      * @throws HantoException
@@ -956,7 +958,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a crab walk to a destination that is occupied.
+     * Test making a CRAB walk to a destination that is occupied.
      *
      * @throws HantoException
      *             Since the destination is occupied.
@@ -982,7 +984,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a sparrow fly to a destination that is valid.
+     * Test making a SPARROW fly to a destination that is valid.
      *
      * @throws HantoException
      *             If the move fails.
@@ -1009,7 +1011,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a sparrow fly to a destination that is the maximum distance
+     * Test making a SPARROW fly to a destination that is the maximum distance
      * away.
      *
      * @throws HantoException
@@ -1040,7 +1042,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test making a sparrow fly to a destination that is occupied.
+     * Test making a SPARROW fly to a destination that is occupied.
      *
      * @throws HantoException
      *             Since the destination is occupied.
@@ -1105,7 +1107,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue butterfly walk two spaces which fails.
+     * Test having the BLUE BUTTERFLY walk two spaces which fails.
      *
      * @throws HantoException
      *             Since the piece cannot walk that far.
@@ -1166,11 +1168,11 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Tests trying to make a piece walk without placing the butterfly on the
+     * Tests trying to make a piece walk without placing the BUTTERFLY on the
      * board.
      *
      * @throws HantoException
-     *             Since the butterfly is not on the board.
+     *             Since the BUTTERFLY is not on the board.
      */
     @Test(expected = HantoException.class) // 38
     public void walkPieceWithoutPlacingButterfly() throws HantoException {
@@ -1317,8 +1319,8 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test the results from the game after both blue and red win by surrounding
-     * each other, then blue playing a move after the game is over which fails.
+     * Test the results from the game after both BLUE and RED win by surrounding
+     * each other, then BLUE playing a move after the game is over which fails.
      *
      * @throws HantoException
      *             Since the game is already over.
@@ -1360,12 +1362,12 @@ public class EpsilonHantoTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, -2));
         assertEquals(OK, mr);
 
-        // Move blue piece to surround the butterflies
+        // Move BLUE piece to surround the butterflies
         // Turn 6
         mr = game.makeMove(SPARROW, makeCoordinate(-1, 2), makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
-        // Move red piece to surround both the butterflies
+        // Move RED piece to surround both the butterflies
         // Draw game
         mr = game.makeMove(SPARROW, makeCoordinate(2, -2), makeCoordinate(1, -1));
         assertEquals(MoveResult.DRAW, mr);
@@ -1375,7 +1377,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test the results from the game after red wins, and make a move after the
+     * Test the results from the game after RED wins, and make a move after the
      * game ends, which fails.
      *
      * @throws HantoException
@@ -1408,11 +1410,11 @@ public class EpsilonHantoTest {
         mr = game.makeMove(HantoPieceType.CRAB, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
-        // Move red piece closer to blue butterfly
+        // Move RED piece closer to BLUE BUTTERFLY
         mr = game.makeMove(SPARROW, makeCoordinate(1, 1), makeCoordinate(0, 1));
         assertEquals(OK, mr);
 
-        // Move blue piece closer to blue butterfly
+        // Move BLUE piece closer to BLUE BUTTERFLY
         // Turn 5
         mr = game.makeMove(SPARROW, makeCoordinate(-2, 1), makeCoordinate(-1, 0));
         assertEquals(OK, mr);
@@ -1426,7 +1428,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test the results from the game after blue wins, and make a move after the
+     * Test the results from the game after BLUE wins, and make a move after the
      * game ends which fails.
      *
      * @throws HantoException
@@ -1455,7 +1457,7 @@ public class EpsilonHantoTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(2, -1));
         assertEquals(OK, mr);
 
-        // Move blue piece closer to red butterfly
+        // Move BLUE piece closer to RED BUTTERFLY
         // Turn 4
         mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
         assertEquals(OK, mr);
@@ -1472,7 +1474,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue player resign from the game at will.
+     * Test having the BLUE player resign from the game at will.
      *
      * @throws HantoException
      *             Since the player had a valid move, but resigned anyway.
@@ -1491,7 +1493,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test moving the horse by jumping to an empty coordinate.
+     * Test moving the HORSE by jumping to an empty coordinate.
      *
      * @throws HantoException
      *             If the move fails.
@@ -1518,7 +1520,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test moving the horse by jumping to an occupied coordinate.
+     * Test moving the HORSE by jumping to an occupied coordinate.
      *
      * @throws HantoException
      *             Since the destination is occupied.
@@ -1544,7 +1546,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test moving the horse by jumping in an invalid direction.
+     * Test moving the HORSE by jumping in an invalid direction.
      *
      * @throws HantoException
      *             Since the jump does not go in one consistent direction.
@@ -1570,7 +1572,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test having the blue player resign from the game at will.
+     * Test having the BLUE player resign from the game at will.
      *
      * @throws HantoException
      *             Since the player had a valid move but resigned anyway.
@@ -1596,7 +1598,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test moving the horse by jumping to an empty coordinate, but over
+     * Test moving the HORSE by jumping to an empty coordinate, but over
      * unoccupied coordinates.
      *
      * @throws HantoException
@@ -1637,7 +1639,7 @@ public class EpsilonHantoTest {
     }
 
     /**
-     * Test moving the horse by jumping to the coordinate adjacent, without
+     * Test moving the HORSE by jumping to the coordinate adjacent, without
      * jumping over any pieces.
      *
      * @throws HantoException
@@ -1665,7 +1667,7 @@ public class EpsilonHantoTest {
 
     /**
      * Test resigning after placing all the pieces, but checking if there is a
-     * move and calling the sparrow validation class.
+     * move and calling the SPARROW validation class.
      *
      * @throws HantoException
      *             Since there are still moves that can be made.
@@ -1769,7 +1771,7 @@ public class EpsilonHantoTest {
 
     /**
      * Test resigning after placing all the pieces, but checking if there is a
-     * move and calling the sparrow validation class.
+     * move and calling the SPARROW validation class.
      *
      * @throws HantoException
      *             Since there are still moves that can be made.
@@ -1873,7 +1875,7 @@ public class EpsilonHantoTest {
 
     /**
      * Test resigning after placing all the pieces, but checking if there is a
-     * move and calling the sparrow validation class.
+     * move and calling the SPARROW validation class.
      *
      * @throws HantoException
      *             Since there are still moves that can be made.
@@ -2129,12 +2131,12 @@ public class EpsilonHantoTest {
 
     /**
      * Test resigning when there is not any piece placement positions left.
-     * Resignation will be allowed because the red player cannot move the
-     * butterfly any more since there is not enough walking space, and cannot
+     * Resignation will be allowed because the RED player cannot move the
+     * BUTTERFLY any more since there is not enough walking space, and cannot
      * place any pieces since it will be next to an opponent's piece.
      *
      * @throws HantoException
-     *             If the move fails
+     *             If the move fails.
      */
     @Test // 62
     public void resignFailsWithNoPiecePlacementsLeft() throws HantoException {

@@ -1,10 +1,8 @@
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design. The
- * course was taken at Worcester Polytechnic Institute. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/************************************************************************
+ * This class was created for the Hanto game implementation for CS 4233.
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.playerturn;
 
@@ -18,7 +16,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
 /**
- * Test cases for Hanto player piece playerTurn.
+ * Test cases for {@link HantoPlayerTurnImpl}.
  *
  * @author Aditya Nivarthi
  */
@@ -36,7 +34,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the butterfly can be placed.
+     * Checks if the BUTTERFLY can be placed.
      */
     @Test // 1
     public void checkButterfly() {
@@ -44,7 +42,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the butterfly can be placed with an empty playerTurn.
+     * Checks if the BUTTERFLY can be placed with an empty playerTurn.
      */
     @Test // 2
     public void checkButterflyEmptyManager() {
@@ -52,7 +50,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the crab can be placed.
+     * Checks if the CRAB can be placed.
      */
     @Test // 3
     public void checkCrab() {
@@ -60,7 +58,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the crab can be placed with an empty playerTurn.
+     * Checks if the CRAB can be placed with an empty playerTurn.
      */
     @Test // 4
     public void checkCrabEmptyManager() {
@@ -68,7 +66,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the crane can be placed.
+     * Checks if the CRANE can be placed.
      */
     @Test // 5
     public void checkCrane() {
@@ -76,7 +74,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the crane can be placed with an empty playerTurn.
+     * Checks if the CRANE can be placed with an empty playerTurn.
      */
     @Test // 6
     public void checkCraneEmptyManager() {
@@ -84,7 +82,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the dove can be placed.
+     * Checks if the DOVE can be placed.
      */
     @Test // 7
     public void checkDove() {
@@ -92,7 +90,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the dove can be placed with an empty playerTurn.
+     * Checks if the DOVE can be placed with an empty playerTurn.
      */
     @Test // 8
     public void checkDoveEmptyManager() {
@@ -100,7 +98,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the horse can be placed.
+     * Checks if the HORSE can be placed.
      */
     @Test // 9
     public void checkHorse() {
@@ -108,7 +106,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the horse can be placed with an empty playerTurn.
+     * Checks if the HORSE can be placed with an empty playerTurn.
      */
     @Test // 10
     public void checkHorseEmptyManager() {
@@ -116,7 +114,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the sparrow can be placed.
+     * Checks if the SPARROW can be placed.
      */
     @Test // 11
     public void checkSparrow() {
@@ -124,7 +122,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Checks if the sparrow can be placed with an empty playerTurn.
+     * Checks if the SPARROW can be placed with an empty playerTurn.
      */
     @Test // 12
     public void checkSparrowEmptyManager() {
@@ -148,7 +146,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the butterfly can be placed.
+     * Place and check if the BUTTERFLY can be placed.
      */
     @Test // 15
     public void placeAndCheckButterfly() {
@@ -157,7 +155,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the butterfly can be placed from the empty playerTurn.
+     * Place and check if the BUTTERFLY can be placed from the empty playerTurn.
      */
     @Test // 16
     public void placeAndCheckButterflyEmptyManager() {
@@ -166,7 +164,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the crab can be placed.
+     * Place and check if the CRAB can be placed.
      */
     @Test // 17
     public void placeAndCheckCrab() {
@@ -175,7 +173,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the crab can be placed from the empty playerTurn.
+     * Place and check if the CRAB can be placed from the empty playerTurn.
      */
     @Test // 18
     public void placeAndCheckCrabEmptyManager() {
@@ -184,7 +182,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the crane can be placed.
+     * Place and check if the CRANE can be placed.
      */
     @Test // 19
     public void placeAndCheckCrane() {
@@ -193,7 +191,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the crane can be placed from the empty playerTurn.
+     * Place and check if the CRANE can be placed from the empty playerTurn.
      */
     @Test // 20
     public void placeAndCheckCraneEmptyManager() {
@@ -202,7 +200,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the dove can be placed.
+     * Place and check if the DOVE can be placed.
      */
     @Test // 21
     public void placeAndCheckDove() {
@@ -211,7 +209,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the dove can be placed from the empty playerTurn.
+     * Place and check if the DOVE can be placed from the empty playerTurn.
      */
     @Test // 22
     public void placeAndCheckDoveEmptyManager() {
@@ -220,7 +218,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the horse can be placed.
+     * Place and check if the HORSE can be placed.
      */
     @Test // 23
     public void placeAndCheckHorse() {
@@ -229,7 +227,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the horse can be placed from the empty playerTurn.
+     * Place and check if the HORSE can be placed from the empty playerTurn.
      */
     @Test // 24
     public void placeAndCheckHorseEmptyManager() {
@@ -238,7 +236,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the sparrow can be placed.
+     * Place and check if the SPARROW can be placed.
      */
     @Test // 25
     public void placeAndCheckSparrow() {
@@ -247,7 +245,7 @@ public class HantoPlayerTurnImplTest {
     }
 
     /**
-     * Place and check if the sparrow can be placed from the empty playerTurn.
+     * Place and check if the SPARROW can be placed from the empty playerTurn.
      */
     @Test // 26
     public void placeAndCheckSparrowEmptyManager() {

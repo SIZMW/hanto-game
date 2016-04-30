@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.tournament;
 
@@ -74,6 +76,7 @@ public class HantoPlayerTest {
         HantoMoveRecord record = null;
         MoveResult mr = null;
 
+        // Run for a set count of moves, or until the game ends
         for (int i = 0; i < MOVE_COUNT; i++) {
             record = one.makeMove(record);
             mr = game.makeMove(record.getPiece(), record.getFrom(), record.getTo());

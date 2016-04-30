@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.beta;
 
@@ -23,12 +25,11 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.MoveResult;
 import hanto.studentanivarthi.HantoGameFactory;
-// TODO Comments and formatting
 
 /**
  * Test cases for Beta Hanto.
  *
- * @version Sep 14, 2014
+ * @author Aditya Nivarthi
  */
 public class BetaHantoTest {
     /**
@@ -82,11 +83,11 @@ public class BetaHantoTest {
     private HantoGame game;
 
     /**
-     * Setup
+     * Setup.
      */
     @Before
     public void setup() {
-        // By default, blue moves first.
+        // By default, BLUE moves first.
         game = factory.makeHantoGame(HantoGameID.BETA_HANTO);
     }
 
@@ -104,7 +105,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing blue butterfly at the origin as the first move.
+     * Tests placing a BLUE BUTTERFLY at the origin as the first move.
      *
      * @throws HantoException
      *             If the move fails.
@@ -122,7 +123,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing red butterfly next to the blue butterfly which is at the
+     * Tests placing a RED BUTTERFLY next to the BLUE BUTTERFLY which is at the
      * origin.
      *
      * @throws HantoException
@@ -138,7 +139,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing blue butterfly not at the origin.
+     * Tests placing a BLUE BUTTERFLY not at the origin.
      *
      * @throws HantoException
      *             Since the first move is not at the origin.
@@ -150,7 +151,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing red butterfly not next to the blue butterfly, which is at
+     * Tests placing a RED BUTTERFLY not next to the BLUE BUTTERFLY, which is at
      * the origin.
      *
      * @throws HantoException
@@ -165,10 +166,10 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing blue crab in this variation of Hanto.
+     * Tests placing a BLUE CRAB in this variation of Hanto.
      *
      * @throws HantoException
-     *             Since the crab is not part of this game type.
+     *             Since the CRAB is not part of this game type.
      */
     @Test(expected = HantoException.class) // 5
     public void bluePlacesInitialCrabAtOrigin() throws HantoException {
@@ -177,10 +178,10 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing a red crab in this variation of Hanto.
+     * Tests placing a RED CRAB in this variation of Hanto.
      *
      * @throws HantoException
-     *             Since the crab is not part of this game type.
+     *             Since the CRAB is not part of this game type.
      */
     @Test(expected = HantoException.class) // 6
     public void redPlacesInitialCrabAfterValidBlue() throws HantoException {
@@ -191,7 +192,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing three blue sparrows and two red sparrows.
+     * Tests placing three BLUE SPARROWs and two RED SPARROWs.
      *
      * @throws HantoException
      *             If the move fails.
@@ -235,7 +236,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing three red sparrows and two blue sparrows.
+     * Tests placing three RED SPARROWs and two BLUE SPARROWs.
      *
      * @throws HantoException
      *             If the move fails.
@@ -286,11 +287,11 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing four blue sparrows and three red sparrows, which throws an
-     * exception since the blue butterfly was not placed by the fourth turn.
+     * Tests placing four BLUE SPARROWs and three RED SPARROWs, which throws an
+     * exception since the BLUE BUTTERFLY was not placed by the fourth turn.
      *
      * @throws HantoException
-     *             Since the butterfly was not placed by the fourth turn.
+     *             Since the BUTTERFLY was not placed by the fourth turn.
      */
     @Test(expected = HantoException.class) // 9
     public void bluePlacesFourSparrowsAndFails() throws HantoException {
@@ -344,11 +345,11 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing four red sparrows and three blue sparrows, which throws an
-     * exception since the red butterfly was not placed by the fourth turn.
+     * Tests placing four RED SPARROWs and three BLUE SPARROWs, which throws an
+     * exception since the RED BUTTERFLY was not placed by the fourth turn.
      *
      * @throws HantoException
-     *             Since the butterfly was not placed by the fourth turn.
+     *             Since the BUTTERFLY was not placed by the fourth turn.
      */
     @Test(expected = HantoException.class) // 10
     public void redPlacesFourSparrowsAndFails() throws HantoException {
@@ -410,7 +411,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Test the results from the game after red wins.
+     * Test the results from the game after RED wins.
      *
      * @throws HantoException
      *             If the move fails.
@@ -420,7 +421,7 @@ public class BetaHantoTest {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        // Surround the blue butterfly
+        // Surround the BLUE BUTTERFLY
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
@@ -441,7 +442,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Test the results from the game after blue wins.
+     * Test the results from the game after BLUE wins.
      *
      * @throws HantoException
      *             If the move fails.
@@ -451,7 +452,7 @@ public class BetaHantoTest {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        // Surround the red butterfly
+        // Surround the RED BUTTERFLY
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
@@ -472,7 +473,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Test the results from the game after both blue and red win.
+     * Test the results from the game after both BLUE and RED win.
      *
      * @throws HantoException
      *             If the move fails.
@@ -485,7 +486,7 @@ public class BetaHantoTest {
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
-        // Surround both red and blue butterfly pieces, which start next to each
+        // Surround both RED and BLUE BUTTERFLY pieces, which start next to each
         // other
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, 1));
         assertEquals(OK, mr);
@@ -508,7 +509,7 @@ public class BetaHantoTest {
         mr = game.makeMove(SPARROW, null, makeCoordinate(0, -1));
         assertEquals(OK, mr);
 
-        // The last piece to surround both butterfly pieces
+        // The last piece to surround both BUTTERFLY pieces
         mr = game.makeMove(SPARROW, null, makeCoordinate(1, -1));
         assertEquals(MoveResult.DRAW, mr);
     }
@@ -524,7 +525,7 @@ public class BetaHantoTest {
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        // Surround the red butterfly
+        // Surround the RED BUTTERFLY
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
         assertEquals(OK, mr);
 
@@ -569,12 +570,12 @@ public class BetaHantoTest {
      */
     @Test(expected = HantoException.class) // 15
     public void attemptToMoveAfterGameEnds() throws HantoException {
-        // Place the blue butterfly
+        // Place the BLUE BUTTERFLY
         MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
         HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
         assertEquals(OK, mr);
 
-        // Place the red butterfly
+        // Place the RED BUTTERFLY
         mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
         p = game.getPieceAt(makeCoordinate(0, 1));
 
@@ -674,7 +675,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Test trying to move a butterfly and failing.
+     * Test trying to move a BUTTERFLY and failing.
      *
      * @throws HantoException
      *             Since moves are not allowed in this game type.
@@ -691,7 +692,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Test trying to move a sparrow and failing.
+     * Test trying to move a SPARROW and failing.
      *
      * @throws HantoException
      *             Since moves are not allowed in this game type.
@@ -708,7 +709,7 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests the print out of the game board after placing one butterfly.
+     * Tests the print out of the game board after placing one BUTTERFLY.
      *
      * @throws HantoException
      *             If the move fails.
@@ -725,8 +726,8 @@ public class BetaHantoTest {
     }
 
     /**
-     * Tests placing red butterfly at the origin as the first move. Game is
-     * created with red being the first player.
+     * Tests placing a RED BUTTERFLY at the origin as the first move. Game is
+     * created with RED being the first player.
      *
      * @throws HantoException
      *             If the move fails.
