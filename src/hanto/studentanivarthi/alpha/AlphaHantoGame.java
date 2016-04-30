@@ -1,6 +1,9 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
+
 package hanto.studentanivarthi.alpha;
 
 import static hanto.common.HantoPieceType.BUTTERFLY;

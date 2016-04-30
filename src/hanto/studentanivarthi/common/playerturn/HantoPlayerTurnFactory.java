@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.playerturn;
 
@@ -8,7 +10,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
 
 /**
- * The HantoPlayerTurnFactory class is a singleton class that creates
+ * The HantoPlayerTurnFactory is a singleton that creates
  * {@link HantoPlayerTurn} instances based on the game ID and player color.
  *
  * @author Aditya Nivarthi

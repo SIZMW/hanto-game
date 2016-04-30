@@ -24,6 +24,9 @@ import hanto.studentanivarthi.common.coordinate.HantoCoordinateImpl;
 public class HantoValidMoveTest {
     private HantoValidMove move;
 
+    /**
+     * Setup.
+     */
     @Before
     public void setup() {
         move = new HantoValidMove(HantoPieceType.BUTTERFLY, new HantoCoordinateImpl(0, 0),

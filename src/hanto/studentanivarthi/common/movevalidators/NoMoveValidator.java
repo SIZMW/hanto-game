@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.movevalidators;
 
@@ -19,7 +21,8 @@ public class NoMoveValidator extends AbstractMoveValidator {
      * Creates a NoMoveValidator instance.
      *
      * @param distance
-     *            The maximum distance for this move.
+     *            The maximum distance for this move. This distance is ignored,
+     *            as the piece cannot move at all.
      */
     public NoMoveValidator(int distance) {
         super(0);

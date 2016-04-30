@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.coordinate;
 
@@ -10,7 +12,34 @@ package hanto.studentanivarthi.common.coordinate;
  * @author Aditya Nivarthi
  */
 public enum HantoDirection {
-    N(0, 1), NE(1, 0), SE(1, -1), S(0, -1), SW(-1, 0), NW(-1, 1), NONE(0, 0);
+    /**
+     * The direction for vertically above.
+     */
+    N(0, 1),
+    /**
+     * The direction for vertically rising and horizontally to the right.
+     */
+    NE(1, 0),
+    /**
+     * The direction for vertically descending and horizontally to the right.
+     */
+    SE(1, -1),
+    /**
+     * The direction for vertically below.
+     */
+    S(0, -1),
+    /**
+     * The direction for vertically descending and horizontally to the left.
+     */
+    SW(-1, 0),
+    /**
+     * The direction for vertically rising and horizontally to the left.
+     */
+    NW(-1, 1),
+    /**
+     * The result for no consistent direction.
+     */
+    NONE(0, 0);
 
     private int x;
     private int y;

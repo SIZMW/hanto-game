@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.coordinate;
 
@@ -135,7 +137,8 @@ public class HantoCoordinateImpl implements HantoCoordinate {
     }
 
     /**
-     * Returns the direction from this coordinate to the other coordinate.
+     * Returns the direction from this coordinate to the other coordinate. If no
+     * consistent direction is found, {@link HantoDirection#NONE} is returned.
      *
      * @param coordinate
      *            The {@link HantoCoordinate} to get the direction to.

@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.movevalidators;
 
@@ -24,7 +26,7 @@ public class JumpMoveValidator extends AbstractMoveValidator {
      * Creates a JumpMoveValidator instance.
      *
      * @param distance
-     *            The maximum distance for this move. The distance is not used,
+     *            The maximum distance for this move. This distance is ignored,
      *            as there is no limit on the jump distance.
      */
     public JumpMoveValidator(int distance) {

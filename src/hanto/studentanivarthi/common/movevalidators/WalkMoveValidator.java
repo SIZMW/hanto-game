@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.movevalidators;
 
@@ -20,7 +22,6 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
  * @author Aditya Nivarthi
  */
 public class WalkMoveValidator extends AbstractMoveValidator {
-
     /**
      * Creates a WalkMoveValidator instance.
      *

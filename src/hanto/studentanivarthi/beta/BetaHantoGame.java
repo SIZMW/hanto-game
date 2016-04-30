@@ -1,11 +1,12 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.beta;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoException;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -27,16 +28,6 @@ public class BetaHantoGame extends AbstractHantoGame {
      */
     public BetaHantoGame(HantoPlayerColor movesFirst) {
         super(HantoGameID.BETA_HANTO, movesFirst);
-    }
-
-    /**
-     * @see hanto.studentanivarthi.common.game.AbstractHantoGame#makeMove(hanto.common.HantoPieceType,
-     *      hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
-     */
-    @Override
-    public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate src, HantoCoordinate dest)
-            throws HantoException {
-        return super.makeMove(pieceType, src, dest);
     }
 
     /**

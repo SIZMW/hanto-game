@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.board;
 
@@ -38,8 +40,8 @@ public interface HantoGameBoard extends HantoBoard {
      * that do not have a piece occupying them.
      *
      * @param coordinate
-     *            The coordinate to get the empty surrounding coordinates
-     *            around.
+     *            The {@link HantoCoordinate} to get the empty surrounding
+     *            coordinates around.
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     Collection<HantoCoordinate> getEmptySurroundingCoordinates(HantoCoordinate coordinate);

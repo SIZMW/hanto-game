@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi;
 
@@ -14,8 +16,8 @@ import hanto.studentanivarthi.epsilon.EpsilonHantoGame;
 import hanto.studentanivarthi.gamma.GammaHantoGame;
 
 /**
- * The HantoGameFactory class is a singleton class that creates
- * {@link HantoGame} instances based on the game ID and player color.
+ * The HantoGameFactory is a singleton that creates {@link HantoGame} instances
+ * based on the game ID and player color.
  *
  * @author Aditya Nivarthi
  */

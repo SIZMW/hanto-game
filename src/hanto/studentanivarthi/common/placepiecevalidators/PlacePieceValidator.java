@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.placepiecevalidators;
 
@@ -19,7 +21,7 @@ public interface PlacePieceValidator {
     /**
      * Determines if the piece can be placed at the specified coordinate given
      * the current board.
-     * 
+     *
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param dest

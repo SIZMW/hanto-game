@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.placepiecevalidators;
 
@@ -12,8 +14,8 @@ import hanto.studentanivarthi.epsilon.EpsilonHantoGame;
 import hanto.studentanivarthi.gamma.GammaHantoGame;
 
 /**
- * The MoveValidatorFactory class is a singleton class that creates
- * {@link MoveValidator} instances based on the piece type that is being moved.
+ * The MoveValidatorFactory is a singleton that creates {@link MoveValidator}
+ * instances based on the piece type that is being moved.
  *
  * @author Aditya Nivarthi
  */

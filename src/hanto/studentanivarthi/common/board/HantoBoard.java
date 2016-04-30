@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.board;
 
@@ -42,7 +44,7 @@ public interface HantoBoard {
 
     /**
      * Places the specified piece at the specified coordinate.
-     * 
+     *
      * @param piece
      *            The {@link HantoPiece} to place.
      * @param coordinate

@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.playerturn;
 
@@ -13,7 +15,8 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
 /**
- * The implementation for the HantoPlayerTurn interface.
+ * The HantoPlayerTurnImpl class is the implementation of the
+ * {@link HantoPlayerTurn} interface for the Hanto game.
  *
  * @author Aditya Nivarthi
  */

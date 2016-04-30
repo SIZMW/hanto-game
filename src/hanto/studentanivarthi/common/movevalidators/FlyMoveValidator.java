@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.movevalidators;
 
@@ -14,8 +16,7 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
 
 /**
  * The implementation of the fly move in Hanto, based on the
- * {@link MoveValidator} interface. Passing a value less than 0 for the distance
- * will give this validator an unlimited fly distance.
+ * {@link MoveValidator} interface.
  *
  * @author Aditya Nivarthi
  */
@@ -24,7 +25,8 @@ public class FlyMoveValidator extends AbstractMoveValidator {
      * Creates a FlyMoveValidator instance.
      *
      * @param distance
-     *            The maximum distance for this move.
+     *            The maximum distance for this move. If this value is < 0, the
+     *            move distance is infinite.
      */
     public FlyMoveValidator(int distance) {
         super(distance);

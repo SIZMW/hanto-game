@@ -1,6 +1,8 @@
-/**
+/************************************************************************
  * This class was created for the Hanto game implementation for CS 4233.
- */
+ *
+ * @author Aditya Nivarthi
+ ************************************************************************/
 
 package hanto.studentanivarthi.common.movevalidators;
 
@@ -18,13 +20,18 @@ import hanto.studentanivarthi.tournament.HantoValidMove;
  * @author Aditya Nivarthi
  */
 public abstract class AbstractMoveValidator implements MoveValidator {
+    /**
+     * The maximum distance for the move. If this value is < 0, the move
+     * distance is infinite.
+     */
     protected int distance = 0;
 
     /**
      * Creates an AbstractMoveValidator instance.
      *
      * @param distance
-     *            The maximum distance for this move.
+     *            The maximum distance for this move. If this value is < 0, the
+     *            move distance is infinite.
      */
     protected AbstractMoveValidator(int distance) {
         this.distance = distance;
