@@ -85,7 +85,7 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     public Collection<HantoCoordinate> getCommonNeighborCoordinates(HantoCoordinate coordinate) {
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
         // Get the surrounding coordinates of each coordinate
         final Collection<HantoCoordinate> surroundings = getSurroundingCoordinates();
         final Collection<HantoCoordinate> coordinateSurroundings = coordinateImpl
@@ -113,8 +113,8 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * @return a {@link Collection}&lt;{@link HantoCoordinate}&gt;
      */
     public Collection<HantoCoordinate> getCoordinatesAtDistance(int distance) {
-        int x = this.x;
-        int y = this.y;
+        final int x = this.x;
+        final int y = this.y;
         final Collection<HantoCoordinate> coordinates = new ArrayList<>();
 
         // Iterate over the sides of the hexagon surrounding the coordinate in
@@ -145,9 +145,9 @@ public class HantoCoordinateImpl implements HantoCoordinate {
      * @return a {@link HantoDirection}
      */
     public HantoDirection getDirectionTo(HantoCoordinate coordinate) {
-        int distance = getDistanceTo(coordinate);
-        int starterX = getX();
-        int starterY = getY();
+        final int distance = getDistanceTo(coordinate);
+        int starterX = x;
+        int starterY = y;
 
         // Iterate through all directions
         for (HantoDirection direction : HantoDirection.values()) {
@@ -173,8 +173,8 @@ public class HantoCoordinateImpl implements HantoCoordinate {
             }
 
             // Reset
-            starterX = getX();
-            starterY = getY();
+            starterX = x;
+            starterY = y;
         }
 
         return HantoDirection.NONE;

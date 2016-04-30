@@ -22,7 +22,7 @@ public interface HantoBoard {
      *
      * @return true if contiguous, false otherwise
      */
-    boolean arePiecesContiguous();
+    boolean isBoardContiguous();
 
     /**
      * Returns the piece at the specified coordinate.

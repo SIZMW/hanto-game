@@ -44,7 +44,7 @@ public class HantoPlayer implements HantoGamePlayer {
         }
 
         // Get move to do from game
-        HantoValidAction move = game.hasValidAction(prevPieceType, prevCoordinate);
+        final HantoValidAction move = game.hasValidAction(prevPieceType, prevCoordinate);
         if (move != null) {
             try {
                 game.makeMove(move.getPieceType(), move.getSource(), move.getDestination());
@@ -74,7 +74,7 @@ public class HantoPlayer implements HantoGamePlayer {
         amIFirstMove = doIMoveFirst;
 
         // Get starting color
-        HantoPlayerColor starterColor = doIMoveFirst ? myColor
+        final HantoPlayerColor starterColor = doIMoveFirst ? myColor
                 : myColor.equals(HantoPlayerColor.BLUE) ? HantoPlayerColor.RED
                         : HantoPlayerColor.BLUE;
 

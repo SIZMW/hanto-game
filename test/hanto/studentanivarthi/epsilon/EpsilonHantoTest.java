@@ -1986,7 +1986,7 @@ public class EpsilonHantoTest {
     @Test(expected = HantoException.class) // 58
     public void resignOnFirstMove() throws HantoException {
         // Turn 1, fails
-        MoveResult mr = game.makeMove(null, null, null);
+        final MoveResult mr = game.makeMove(null, null, null);
         assertEquals(OK, mr);
     }
 

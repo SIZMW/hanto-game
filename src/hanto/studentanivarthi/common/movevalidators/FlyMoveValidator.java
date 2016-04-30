@@ -40,7 +40,7 @@ public class FlyMoveValidator extends AbstractMoveValidator {
     @Override
     public HantoValidAction canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
-        int checkDistance = isInfiniteDistance() ? Integer.MAX_VALUE : distance;
+        final int checkDistance = isInfiniteDistance() ? Integer.MAX_VALUE : distance;
         final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
 
         // Get ring of coordinates at each distance

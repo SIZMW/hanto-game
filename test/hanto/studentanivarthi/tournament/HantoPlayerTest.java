@@ -28,7 +28,7 @@ import hanto.tournament.HantoMoveRecord;
 public class HantoPlayerTest {
     private static HantoGameFactory factory = null;
     private HantoGame game;
-    private final static int MOVE_COUNT = 1000;
+    private static final int MOVE_COUNT = 1000;
 
     /**
      * Initialize entities.
@@ -67,8 +67,8 @@ public class HantoPlayerTest {
      */
     @Test // 1
     public void playSomeValidMovesFromGame() throws HantoException {
-        HantoPlayer one = new HantoPlayer();
-        HantoPlayer two = new HantoPlayer();
+        final HantoPlayer one = new HantoPlayer();
+        final HantoPlayer two = new HantoPlayer();
 
         one.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
         two.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.RED, false);

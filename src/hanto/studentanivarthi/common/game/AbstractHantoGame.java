@@ -96,13 +96,13 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
             HantoCoordinate previousCoordinate) {
         // Skip piece placement if no more pieces
         if (!currentTurn.isOutOfPieces()) {
-            HantoValidAction placePiece = hasValidPiecePlacement();
+            final HantoValidAction placePiece = hasValidPiecePlacement();
             if (placePiece != null) {
                 return placePiece;
             }
         }
 
-        HantoValidAction move = hasValidMove(previousPieceType, previousCoordinate);
+        final HantoValidAction move = hasValidMove(previousPieceType, previousCoordinate);
         if (move != null) {
             return move;
         }
@@ -277,11 +277,9 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * @param dest
      *            The destination {@link HantoCoordinate}.
      * @return true if resigned, false otherwise
-     * @throws HantoPrematureResignationException
-     *             If the player resigned and had a valid move
      */
     protected boolean hasPlayerResigned(HantoPieceType pieceType, HantoCoordinate src,
-            HantoCoordinate dest) throws HantoPrematureResignationException {
+            HantoCoordinate dest) {
         return pieceType == null && src == null && dest == null;
     }
 
@@ -522,12 +520,12 @@ public abstract class AbstractHantoGame implements HantoValidActionGame {
      * Manages ending the game due to resignation.
      *
      * @return The result of the game.
-     * @throws HantoException
+     * @throws HantoPrematureResignationException
      *             If there was a valid move to make but resignation is called.
      */
-    protected MoveResult processResignation() throws HantoException {
+    protected MoveResult processResignation() throws HantoPrematureResignationException {
         // Try to find a valid action
-        HantoValidAction move = hasValidAction(null, null);
+        final HantoValidAction move = hasValidAction(null, null);
         if (move != null) {
             throw new HantoPrematureResignationException();
         }

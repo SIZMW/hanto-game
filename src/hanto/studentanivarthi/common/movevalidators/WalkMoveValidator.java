@@ -63,7 +63,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
     @Override
     public HantoValidAction canMoveAtAll(HantoPiece piece, HantoCoordinate coordinate,
             HantoGameBoard board) {
-        HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
+        final HantoCoordinateImpl coordinateImpl = new HantoCoordinateImpl(coordinate);
 
         // Completely surrounded
         if (coordinateImpl.isCoordinateSurrounded(board)) {
@@ -117,7 +117,7 @@ public class WalkMoveValidator extends AbstractMoveValidator {
         previousCoordinates.add(srcCoordImpl);
 
         // Pieces must be contiguous at every level
-        if (!board.arePiecesContiguous()) {
+        if (!board.isBoardContiguous()) {
             return false;
         }
 

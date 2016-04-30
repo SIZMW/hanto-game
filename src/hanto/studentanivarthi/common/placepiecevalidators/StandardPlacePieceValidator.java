@@ -59,7 +59,7 @@ public class StandardPlacePieceValidator implements PlacePieceValidator {
     @Override
     public HantoValidAction canPlacePieceAtAll(HantoPiece piece, HantoGameBoard board) {
         // Get all of the same color pieces
-        Collection<HantoCoordinate> ownedCoordinates = board
+        final Collection<HantoCoordinate> ownedCoordinates = board
                 .getCoordinatesWithPiecesOfColor(piece.getColor());
 
         // Check surroundings around owned pieces for empty coordinates

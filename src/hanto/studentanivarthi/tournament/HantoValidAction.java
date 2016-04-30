@@ -64,7 +64,7 @@ public class HantoValidAction {
             return false;
         }
 
-        HantoValidAction other = (HantoValidAction) obj;
+        final HantoValidAction other = (HantoValidAction) obj;
 
         if (destination == null) {
             if (other.destination != null) {

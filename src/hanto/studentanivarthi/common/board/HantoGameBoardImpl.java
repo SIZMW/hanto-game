@@ -37,10 +37,10 @@ public class HantoGameBoardImpl implements HantoGameBoard {
     }
 
     /**
-     * @see hanto.studentanivarthi.common.board.HantoBoard#arePiecesContiguous()
+     * @see hanto.studentanivarthi.common.board.HantoBoard#isBoardContiguous()
      */
     @Override
-    public boolean arePiecesContiguous() {
+    public boolean isBoardContiguous() {
         final LinkedList<HantoCoordinate> list = new LinkedList<>();
         final Set<HantoCoordinate> visitedCoordinates = new HashSet<>();
         final HantoCoordinate starterCoordinate = board.keySet().iterator().next();

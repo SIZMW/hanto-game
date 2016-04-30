@@ -98,7 +98,7 @@ public abstract class AbstractMoveValidator implements MoveValidator {
     @Override
     public boolean isMoveValid(HantoPiece piece, HantoCoordinate src, HantoCoordinate dest,
             HantoGameBoard board) {
-        return board.arePiecesContiguous();
+        return board.isBoardContiguous();
     }
 
     /**
@@ -118,8 +118,8 @@ public abstract class AbstractMoveValidator implements MoveValidator {
      */
     protected boolean canMoveSimulateDirectMove(HantoCoordinate src, HantoCoordinate dest,
             HantoPiece piece, HantoGameBoard board) {
-        HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
-        HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
+        final HantoCoordinateImpl srcCoordImpl = new HantoCoordinateImpl(src);
+        final HantoCoordinateImpl destCoordImpl = new HantoCoordinateImpl(dest);
 
         // Check superclass if can move
         if (!canMove(piece, srcCoordImpl, destCoordImpl, board)) {
@@ -127,8 +127,8 @@ public abstract class AbstractMoveValidator implements MoveValidator {
         }
 
         // Simulate move
-        HantoGameBoard boardCopy = board.copy();
-        HantoPiece removedPiece = boardCopy.removePieceAt(srcCoordImpl);
+        final HantoGameBoard boardCopy = board.copy();
+        final HantoPiece removedPiece = boardCopy.removePieceAt(srcCoordImpl);
         boardCopy.placePieceAt(removedPiece, destCoordImpl);
 
         // Check post conditions of simulating move
